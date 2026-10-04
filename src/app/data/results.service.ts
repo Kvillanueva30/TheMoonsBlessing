@@ -8,7 +8,6 @@ import { assetUrl } from './asset-url';
 export interface ResultsData {
   headline: { en: string; es: string; note?: string };
   reveals: { kingdom: { en: string; es: string; note?: string }; kingdomIntro: string | null };
-  landing: { tagline: string; cta: string };
   [key: string]: unknown;
 }
 

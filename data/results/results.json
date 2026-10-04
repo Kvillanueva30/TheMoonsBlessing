@@ -87,11 +87,8 @@
     "todo": "TODO: definir como se calcula, como se nombra en pantalla y que textos narrativos acompañan a cada valor.",
     "constraint": "Este eje NO debe describir bondad o maldad. Ver el caso de Alden en lore-rules.json."
   },
-  "landing": {
-    "tagline": "The Moon remembers the night you were born.",
-    "cta": "Begin",
-    "nameConfig": "TODO: el nombre de la experiencia NO esta decidido. Debe vivir en un unico archivo de configuracion. Nombre provisional del proyecto: madar-ritual."
-  },
+  "landing": null,
+  "landingNote": "El copy de marca del landing (nombre, frase principal y texto del boton) vive en src/app/core/config/experience.config.ts, no aqui. Es branding, no lore, y asi el heroe se ve sin esperar a la red.",
   "todo": [
     "TODO: escribir el texto de 'remained-manskling'.",
     "TODO: definir textos por reino para la pantalla de reino.",

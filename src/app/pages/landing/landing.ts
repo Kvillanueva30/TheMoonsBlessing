@@ -1,19 +1,18 @@
 import { Component, inject, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
-import { ResultsService } from '../../data/results.service';
 import { MoonService } from '../../core/services/moon.service';
-import { EXPERIENCE_NAME } from '../../core/config/experience.config';
+import { CTA_LABEL, EXPERIENCE_NAME, EXPERIENCE_TAGLINE } from '../../core/config/experience.config';
 
 @Component({
   selector: 'app-landing',
-  imports: [RouterLink, AsyncPipe],
+  imports: [RouterLink],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
 export class LandingPage implements AfterViewInit {
-  protected readonly results = inject(ResultsService).results;
   protected readonly name = EXPERIENCE_NAME;
+  protected readonly tagline = EXPERIENCE_TAGLINE;
+  protected readonly cta = CTA_LABEL;
 
   /**
    * Fase lunar del día actual, para que la luna del landing cambie sola.
@@ -25,59 +24,92 @@ export class LandingPage implements AfterViewInit {
   protected readonly todayPhase = inject(MoonService).getPhaseId(toCalendarDate(new Date()));
 
   ngAfterViewInit(): void {
-    this.initMotes();
+    this.initStars();
   }
 
-  private initMotes(): void {
-    // Partículas/estrellas suaves, estilo Between adaptado.
-    const canvas = document.getElementById('motes') as HTMLCanvasElement | null;
+  /**
+   * Campo de estrellas.
+   *
+   * Antes esto eran partículas cálidas que subían, y se leía como polen o
+   * chispas, no como cielo. Una estrella no se desplaza: solo parpadea. Aquí
+   * hay varias temperaturas de color, y solo las más brillantes llevan halo.
+   */
+  private initStars(): void {
+    const canvas = document.getElementById('stars') as HTMLCanvasElement | null;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const resize = () => {
+    interface Star {
+      x: number;
+      y: number;
+      r: number;
+      base: number;
+      speed: number;
+      phase: number;
+      color: string;
+      halo: boolean;
+    }
+
+    let stars: Star[] = [];
+
+    const pickColor = (): string => {
+      const roll = Math.random();
+      // La mayoría blanco-azules, algunas cálidas, muy pocas anaranjadas.
+      if (roll < 0.62) return '#eef2ff';
+      if (roll < 0.88) return '#fff6e2';
+      if (roll < 0.97) return '#ffe2bd';
+      return '#ffc79a';
+    };
+
+    const build = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      // Una estrella cada ~3400 px², con tope para pantallas enormes.
+      const count = Math.min(460, Math.round((canvas.width * canvas.height) / 3400));
+      stars = Array.from({ length: count }, () => {
+        // El exponente reparta el peso hacia las pequeñas, como el cielo real.
+        const r = Math.random() ** 2.6 * 1.5 + 0.32;
+        return {
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r,
+          base: 0.28 + Math.random() * 0.62,
+          speed: 0.0004 + Math.random() * 0.0011,
+          phase: Math.random() * Math.PI * 2,
+          color: pickColor(),
+          halo: r > 1.05,
+        };
+      });
     };
-    window.addEventListener('resize', resize, { passive: true });
-    resize();
 
-    const N = Math.min(90, Math.round((window.innerWidth * window.innerHeight) / 26000));
-    const motes = Array.from({ length: N }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      r: Math.random() * 1.5 + 0.4,
-      a: Math.random(),
-      s: Math.random() * 0.22 + 0.05,
-      d: Math.random() * Math.PI * 2,
-      golden: Math.random() < 0.24,
-    }));
+    window.addEventListener('resize', build, { passive: true });
+    build();
 
     const draw = (t: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const m of motes) {
-        m.y -= m.s;
-        m.d += 0.008;
-        if (m.y < -6) {
-          m.y = canvas.height + 6;
-          m.x = Math.random() * canvas.width;
+      for (const s of stars) {
+        // Parpadeo lento y desincronizado. Sin movimiento vertical.
+        const alpha = s.base * (0.72 + 0.28 * Math.sin(t * s.speed + s.phase));
+        if (s.halo) {
+          const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
+          const hex = Math.round(alpha * 90)
+            .toString(16)
+            .padStart(2, '0');
+          g.addColorStop(0, `${s.color}${hex}`);
+          g.addColorStop(1, `${s.color}00`);
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r * 5, 0, Math.PI * 2);
+          ctx.fill();
         }
-        const tw = 0.32 + 0.68 * (0.5 + 0.5 * Math.sin(t * 0.0011 + m.d * 2.4));
-        const x = m.x + Math.sin(m.d) * 15;
-        const al = m.a * tw;
-        const color = m.golden ? '201,146,47' : '240,217,168';
-        const g = ctx.createRadialGradient(x, m.y, 0, x, m.y, m.r * 7);
-        g.addColorStop(0, `rgba(${color},${al * 0.5})`);
-        g.addColorStop(1, `rgba(${color},0)`);
-        ctx.fillStyle = g;
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = alpha;
         ctx.beginPath();
-        ctx.arc(x, m.y, m.r * 7, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = `rgba(255,252,244,${al})`;
-        ctx.beginPath();
-        ctx.arc(x, m.y, m.r, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
+      ctx.globalAlpha = 1;
       requestAnimationFrame(draw);
     };
 

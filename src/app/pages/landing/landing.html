@@ -1,33 +1,24 @@
 <main class="landing">
-  <canvas id="motes"></canvas>
-  <div class="aurora" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
+  <canvas id="stars"></canvas>
+  <div class="nebula" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
   <section class="stage">
+    <!-- Elemento dominante de la portada: la luna, con la fase del día real -->
     <div class="moon" [class]="'moon phase-' + todayPhase" aria-hidden="true">
       <span class="moon-shadow"></span>
     </div>
 
-    <p class="eyebrow">{{ name }}</p>
-
-    @if (results | async; as r) {
-      <h1 class="title">{{ r.landing.tagline }}</h1>
-    } @else {
-      <h1 class="title">The Moon remembers the night you were born.</h1>
-    }
+    <h1 class="title">{{ name }}</h1>
+    <p class="tagline">{{ tagline }}</p>
 
     <div class="cta-row">
-      <a class="btn" routerLink="/birth-date">Comenzar</a>
-    </div>
-
-    <div class="book">
-      <p class="book-tagline">«Una bendición puede ser un regalo… o una condena.»</p>
-      <div class="meta-row">
-        <div class="meta">Autora<b>Karla Villanueva</b></div>
-        <div class="meta">Género<b>Fantasía épica · Juvenil</b></div>
-        <div class="meta">Editorial<b>D'McPherson</b></div>
-        <div class="meta">ISBN<b>9962141699</b></div>
-      </div>
+      <a class="btn" routerLink="/birth-date">{{ cta }}</a>
     </div>
   </section>
+
+  <footer class="credit">
+    <span class="credit-label">Autora</span>
+    <span class="credit-name">Karla Villanueva</span>
+  </footer>
 </main>
