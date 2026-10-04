@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MoonService, MoonPhaseId } from '../../core/services/moon.service';
+import { MoonPhaseResult, MoonService } from '../../core/services/moon.service';
 
 @Component({
   selector: 'app-moon-reveal',
@@ -12,21 +12,28 @@ export class MoonRevealPage {
   private readonly route = inject(ActivatedRoute);
   private readonly moon = inject(MoonService);
 
-  phase: MoonPhaseId | null = null;
+  phase: MoonPhaseResult | null = null;
 
   constructor() {
     this.route.queryParamMap.subscribe((params) => {
-      const y = Number(params.get('y'));
-      const m = Number(params.get('m'));
-      const d = Number(params.get('d'));
-      if (y && m && d) {
-        this.phase = this.moon.getPhase(new Date(y, m - 1, d));
+      const year = Number(params.get('y'));
+      const month = Number(params.get('m'));
+      const day = Number(params.get('d'));
+      // Se pasan las partes del calendario tal cual, sin construir un Date:
+      // el servicio evalua a 12:00 UTC y asi el resultado no depende de la
+      // zona horaria de quien visita.
+      if (year && month && day) {
+        this.phase = this.moon.getPhase({ year, month, day });
       }
     });
   }
 
+  get phaseId(): MoonPhaseResult['id'] | null {
+    return this.phase?.id ?? null;
+  }
+
   get phaseLabel(): string {
-    switch (this.phase) {
+    switch (this.phaseId) {
       case 'new-moon':
         return 'Luna Nueva';
       case 'waxing-crescent':
