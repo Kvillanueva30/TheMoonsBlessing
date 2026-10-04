@@ -9,7 +9,28 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% -10%, #1a1a2e 0%, var(--madar-bg) 60%);
+  background: radial-gradient(ellipse at 50% -10%, #1a1a2e 0%, #05060a 60%);
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
+    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.7) 1px, transparent 2px),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.5) 1px, transparent 2px),
+    radial-gradient(circle at 90% 60%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.7) 1px, transparent 2px);
+  background-size: 200% 200%;
+  animation: twinkle 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
 
 .moon {
@@ -25,6 +46,12 @@
     0 0 60px rgba(232, 230, 240, 0.25),
     0 0 180px rgba(139, 127, 212, 0.18);
   opacity: 0.9;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
 }
 
 .content {
@@ -36,7 +63,7 @@
 }
 
 .eyebrow {
-  color: var(--madar-accent);
+  color: #f5c76a;
   text-transform: uppercase;
   letter-spacing: 0.35em;
   font-size: 0.75rem;
@@ -53,20 +80,22 @@ h1 {
 .begin {
   display: inline-block;
   padding: 0.75rem 2.5rem;
-  border: 1px solid var(--madar-accent-dim);
+  border: 1px solid rgba(245, 199, 106, 0.6);
   border-radius: 999px;
-  color: var(--madar-text);
+  color: #f5c76a;
   text-decoration: none;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-size: 0.8rem;
   transition:
     border-color 0.3s ease,
-    background-color 0.3s ease;
+    background-color 0.3s ease,
+    transform 0.3s ease;
 
   &:hover,
   &:focus-visible {
-    border-color: var(--madar-accent);
-    background-color: rgba(139, 127, 212, 0.08);
+    border-color: #f5c76a;
+    background-color: rgba(245, 199, 106, 0.08);
+    transform: translateY(-2px);
   }
 }

@@ -12,6 +12,27 @@
   color: #e8e6f0;
   text-align: center;
   padding: 2rem;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
+    radial-gradient(circle at 35% 55%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
+    radial-gradient(circle at 55% 15%, rgba(255, 255, 255, 0.7) 1px, transparent 2px),
+    radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.5) 1px, transparent 2px),
+    radial-gradient(circle at 95% 65%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
+    radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
+    radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.7) 1px, transparent 2px);
+  animation: twinkle 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
 .moon-glow {
@@ -22,8 +43,14 @@
   width: 260px;
   height: 260px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 230, 240, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(245, 199, 106, 0.15) 0%, transparent 70%);
   filter: blur(8px);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.1); }
 }
 
 .content {
@@ -37,7 +64,7 @@
   text-transform: uppercase;
   letter-spacing: 0.3em;
   font-size: 0.75rem;
-  color: #8b7fd4;
+  color: #f5c76a;
   margin-bottom: 0.5rem;
 }
 
@@ -69,7 +96,7 @@ label {
 
 select {
   background: rgba(11, 13, 20, 0.9);
-  border: 1px solid rgba(139, 127, 212, 0.3);
+  border: 1px solid rgba(245, 199, 106, 0.3);
   border-radius: 8px;
   color: #e8e6f0;
   padding: 0.5rem 0.7rem;
@@ -82,9 +109,9 @@ select {
   margin-top: 1rem;
   padding: 0.8rem 2rem;
   border-radius: 999px;
-  border: 1px solid rgba(139, 127, 212, 0.5);
+  border: 1px solid rgba(245, 199, 106, 0.6);
   background: transparent;
-  color: #e8e6f0;
+  color: #f5c76a;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-size: 0.8rem;
@@ -92,7 +119,8 @@ select {
   transition: all 0.3s ease;
 
   &:hover {
-    background: rgba(139, 127, 212, 0.12);
-    border-color: #8b7fd4;
+    background: rgba(245, 199, 106, 0.12);
+    border-color: #f5c76a;
+    transform: translateY(-2px);
   }
 }
