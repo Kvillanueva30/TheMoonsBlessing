@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MoonPhaseResult, MoonService } from '../../core/services/moon.service';
+import { MoonPhasesService } from '../../data/moon-phases.service';
 
 @Component({
   selector: 'app-moon-reveal',
@@ -11,6 +12,7 @@ import { MoonPhaseResult, MoonService } from '../../core/services/moon.service';
 export class MoonRevealPage {
   private readonly route = inject(ActivatedRoute);
   private readonly moon = inject(MoonService);
+  private readonly moonPhases = inject(MoonPhasesService);
 
   phase: MoonPhaseResult | null = null;
 
@@ -20,7 +22,7 @@ export class MoonRevealPage {
       const month = Number(params.get('m'));
       const day = Number(params.get('d'));
       // Se pasan las partes del calendario tal cual, sin construir un Date:
-      // el servicio evalua a 12:00 UTC y asi el resultado no depende de la
+      // el servicio evalúa a 12:00 UTC y así el resultado no depende de la
       // zona horaria de quien visita.
       if (year && month && day) {
         this.phase = this.moon.getPhase({ year, month, day });
@@ -32,26 +34,8 @@ export class MoonRevealPage {
     return this.phase?.id ?? null;
   }
 
-  get phaseLabel(): string {
-    switch (this.phaseId) {
-      case 'new-moon':
-        return 'Luna Nueva';
-      case 'waxing-crescent':
-        return 'Luna Creciente';
-      case 'first-quarter':
-        return 'Cuarto Creciente';
-      case 'waxing-gibbous':
-        return 'Gibosa Creciente';
-      case 'full-moon':
-        return 'Luna Llena';
-      case 'waning-gibbous':
-        return 'Gibosa Menguante';
-      case 'last-quarter':
-        return 'Cuarto Menguante';
-      case 'waning-crescent':
-        return 'Luna Creciente Menguante';
-      default:
-        return '???';
-    }
+  /** El nombre de la fase sale del archivo de datos, no del componente. */
+  get phaseLabel(): string | null {
+    return this.phaseId ? this.moonPhases.labelFor(this.phaseId) : null;
   }
 }

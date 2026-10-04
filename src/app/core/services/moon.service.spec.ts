@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { MoonPhaseId, MoonService } from './moon.service';
+import { MOON_PHASE_IDS, MoonPhaseId, MoonService } from './moon.service';
+import moonPhases from '../../../../data/moon/moon-phases.json';
 
 /**
  * Valores de referencia evaluados a las 12:00 UTC del día indicado.
@@ -102,6 +103,33 @@ describe('MoonService', () => {
       expect(illumination).toBeGreaterThanOrEqual(0);
       expect(illumination).toBeLessThanOrEqual(1);
     }
+  });
+
+  describe('coherencia con los datos de lore', () => {
+    it('las ocho fases del algoritmo son las mismas que define moon-phases.json', () => {
+      // El algoritmo necesita la lista de fases de forma sincrona, asi que la
+      // tiene en su propio dominio. El archivo de datos define las mismas ocho.
+      // Si una cambia y la otra no, el motor devolveria fases sin nombre.
+      const dataIds = moonPhases.phases.map((phase) => phase.id);
+      expect(dataIds).toEqual([...MOON_PHASE_IDS]);
+    });
+
+    it('toda fase del algoritmo tiene nombre en español e inglés', () => {
+      for (const id of MOON_PHASE_IDS) {
+        const record = moonPhases.phases.find((phase) => phase.id === id);
+        expect(record, `falta ${id} en moon-phases.json`).toBeTruthy();
+        expect(record?.name.es, `falta el nombre es de ${id}`).toBeTruthy();
+        expect(record?.name.en, `falta el nombre en de ${id}`).toBeTruthy();
+      }
+    });
+
+    it('ninguna fase trae texto narrativo inventado', () => {
+      // El brief dice que el texto de la luna se definira despues. Mientras
+      // tanto deben seguir en null, no rellenados con una guess.
+      for (const phase of moonPhases.phases) {
+        expect(phase.narrative, `${phase.id} tiene narrativa ya escrita`).toBeNull();
+      }
+    });
   });
 
   describe('independencia de la zona horaria', () => {

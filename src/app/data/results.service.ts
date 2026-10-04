@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
+import { assetUrl } from './asset-url';
 
 // Acceso a los textos de resultado en data/results/results.json.
 // Las páginas leen de aquí; no hardcodean lore.
@@ -15,7 +16,7 @@ export interface ResultsData {
 export class ResultsService {
   private readonly http = inject(HttpClient);
   private readonly results$ = this.http
-    .get<ResultsData>('/data/results/results.json')
+    .get<ResultsData>(assetUrl('data/results/results.json'))
     .pipe(shareReplay(1));
 
   get results(): Observable<ResultsData> {
