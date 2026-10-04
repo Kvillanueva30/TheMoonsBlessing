@@ -1,0 +1,104 @@
+{
+  "id": "bastia",
+  "name": "Bastia",
+  "type": "cazut-exclusive",
+  "typeStatus": "confirmed",
+  "typeNote": "El brief lo declara explícitamente: 'Reino Cazut'.",
+  "founder": {
+    "name": "Silas",
+    "title": "Primer rey"
+  },
+  "essence": {
+    "en": "Fight for what you consider just, even when obsession can corrupt it.",
+    "es": "Luchar por aquello que consideras justo, incluso cuando la obsesión puede corromperlo."
+  },
+  "archetype": "Protagonista-antagonista",
+  "archetypeNote": "Silas no nacio pensando 'quiero ser malvado'. Su tragedia es que originalmente queria ser el rey perfecto y creia sinceramente en sus ideales. Su problema es que termina creyendo que tener razon le da derecho a destruir aquello que considera injusto. Concepto: una persona que creia en la igualdad, pero no podia aceptar ser tratada como menos.",
+  "conceptualInspirations": [
+    {
+      "name": "Slytherin",
+      "source": "Harry Potter",
+      "note": "Referencia conceptual únicamente. NO copiar el personaje."
+    },
+    {
+      "name": "Edmund",
+      "source": "Narnia",
+      "note": "Referencia conceptual únicamente. NO copiar el personaje."
+    },
+    {
+      "name": "Bayezid y Selim",
+      "source": "Historia de Sultan",
+      "note": "Referencia conceptual de rivalidad y celos familiares o politicos. NO copiar la historia."
+    }
+  ],
+  "values": [
+    "independencia",
+    "fuerza",
+    "aventura",
+    "confianza",
+    "competencia",
+    "franqueza",
+    "protección",
+    "ambición",
+    "justicia",
+    "igualdad",
+    "liderazgo"
+  ],
+  "shadows": [
+    { "from": "confianza", "to": "orgullo" },
+    { "from": "competencia", "to": "envidia" },
+    { "from": "justicia", "to": "resentimiento" },
+    { "from": "igualdad", "to": "obsesión" },
+    { "from": "fuerza", "to": "dominación" },
+    { "from": "independencia", "to": "egoísmo" },
+    { "from": "liderazgo", "to": "control" }
+  ],
+  "guardrail": "Bastia NO es el reino malo. Silas es un protagonista-antagonista, no un villano plano. Y su luz es alta.",
+  "lightDarkness": {
+    "founderAffinity": "high-light",
+    "note": "La Diosa Luna consideraba secretamente a Silas uno de sus favoritos. Veia en el una enorme cantidad de luz, incluso mas que en Lucius. tenia grandes expectativas sobre el. Silas nunca supo esto. Esta luz NO se convierte en bondad: se convierte en resentimiento cuando cree que la distribucion entre los reinos es injusta."
+  },
+  "history": [
+    {
+      "id": "silas-youth",
+      "title": "Silas de joven",
+      "text": "Silas era el mejor amigo de Lucius. Para Lucius era praticamente un hermano mayor. Era alegre, extrovertido, aventurero, fuerte, protector, impulsivo y atrevido. Le gustaba proteger a Lucius. Admiraba profundamente a su madre, que era cazadora. Le gustaba demostrar su fuerza. Solia meterse en problemas y arrastrar a Lucius con el. Era directo y normalmente no se arrepentia de sus decisiones."
+    },
+    {
+      "id": "mothers-death",
+      "title": "La muerte de su madre",
+      "text": "La muerte de su madre provoca un cambio profundo. Silas comienza a deteriorarse."
+    },
+    {
+      "id": "resentment",
+      "title": "Resentimiento y cálculo",
+      "text": "Silas comienza a considerar injusta la distribucion entre los reinos. Se vuelve calculador, egoista, envidioso, resentido y competitivo. Empieza a pensar que merece lo mismo que Lucius. Tambien empieza a sentirse amenazado por la transformacion de Lucius, que habia sido un nino timido y ahora se estaba convirtiendo en alguien fuerte."
+    },
+    {
+      "id": "the-plan",
+      "title": "El plan",
+      "text": "Silas crea un plan para eliminar Diubaks de ciertos reinos. Su razonamiento es que algunos reinos tienen demasiados Diubaks mientras otros tienen muy pocos. Se alia con Ross, Halik y Tarik. Su objetivo es atacar los reinos que considera favorecidos, entre ellos Ederian, Tralan y Xorian."
+    },
+    {
+      "id": "the-war",
+      "title": "La guerra",
+      "text": "El plan provoca una guerra. Durante la guerra muere Halik. La Diosa Luna se enfurece. Despues de la muerte y de la guerra, varios reinos son maldecidos."
+    }
+  ],
+  "war": {
+    "involved": true,
+    "role": "Reino que lideraba la guerra. No consta en el brief que Bastia fuera uno de los reinos atacados ni uno de los maldecidos.",
+    "note": "El brief no especifica si Bastia fue maldecido tras la guerra. NO inventar."
+  },
+  "ceremony": {
+    "status": "undefined",
+    "description": null,
+    "moonPhaseRule": "Se realiza bajo la misma fase lunar que estaba presente cuando la persona nació.",
+    "todo": "TODO: definir la ceremonia propia de Bastia. Dado que es un reino Cazut, la ceremonia no crea la maldicion: la maldicion se hereda. Definir que ocurre en la ceremonia."
+  },
+  "todo": [
+    "TODO: definir la ceremonia de Bastia.",
+    "TODO: confirmar si Bastia fue maldecido despues de la guerra.",
+    "TODO: definir el desenlace personal de Silas tras la guerra."
+  ]
+}

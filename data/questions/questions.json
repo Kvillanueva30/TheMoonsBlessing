@@ -1,0 +1,54 @@
+{
+  "$comment": "Banco de preguntas. VACIO A PROPOSITO. El brief NO define ninguna pregunta concreta, solo las reglas de diseno. Este archivo contiene el esquema y un ejemplo de formato marcado como NO LORE, mas las reglas que el motor debe respetar.",
+  "version": "0.1.0",
+  "status": "pending-content",
+  "schema": {
+    "id": "Identificador unico y estable. No renumerar.",
+    "text": "Texto del dilema, en el tono del universo. Se muestra al usuario tal cual.",
+    "choices": "Lista de opciones. Cada opcion es una respuesta con valores internos, nunca una etiqueta psicologica.",
+    "choices[].id": "Identificador unico de la opcion.",
+    "choices[].text": "Texto de la opcion tal como lo ve el usuario.",
+    "choices[].kingdomAffinity": "Puntuacion por reino. Claves: ederian, bastia, tralan, xorian, tradia, helia. Valores negativos permitidos.",
+    "choices[].traits": "Puntuacion por rasgo. Claves tomadas de data/traits/traits.json.",
+    "choices[].lightDarkness": "Opcional. Desplazamiento en el eje luz/oscuridad. NO es moralidad."
+  },
+  "nonUniformRule": "No todas las preguntas necesitan tocar las mismas categorias. Una pregunta puede no mover afinidad de reino y solo mover traits, o al reves.",
+  "hiddenScoringRule": "El usuario NUNCA ve puntuaciones, pesos, nombres de reino ni nombres de rasgo. La UI no renderiza afinidades ni scores.",
+  "designRules": [
+    "Preguntar mediante dilemas y situaciones, nunca mediante 'eres valiente?' o 'te gusta la naturaleza?'.",
+    "Las situaciones deben pertenecer al mundo de Madar.",
+    "Cada respuesta debe representar valores, no etiquetas.",
+    "Un reino NO debe ser adivinable por inspection directa de la pregunta."
+  ],
+  "questions": [
+    {
+      "id": "EXAMPLE-ONLY-DO-NOT-SHIP",
+      "$warning": "Este NO es lore. Es un ejemplo de formato tomado de la seccion 21 del brief para demostrar el formato de puntuacion. ELIMINAR o reemplazar antes de publicar.",
+      "text": "Has entrenado durante meses para conseguir algo. Finalmente aparece alguien que lo consigue antes que tu. Que haces?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "(texto de opcion pendiente)",
+          "kingdomAffinity": {
+            "ederian": 2,
+            "bastia": 1,
+            "tralan": 0,
+            "xorian": -1,
+            "tradia": 1,
+            "helia": 2
+          },
+          "traits": {
+            "competitiveness": 2,
+            "resilience": 1
+          }
+        }
+      ]
+    }
+  ],
+  "todo": [
+    "TODO: escribir el banco real de preguntas. NO existe ninguna pregunta canon todavia.",
+    "TODO: decidir cuantas preguntas componen la experiencia. El brief no da un numero.",
+    "TODO: decidir si las preguntas varian por reino una vez revelado, o si el banco es comun. El brief no lo define.",
+    "TODO: eliminar el marcador EXAMPLE-ONLY-DO-NOT-SHIP."
+  ]
+}

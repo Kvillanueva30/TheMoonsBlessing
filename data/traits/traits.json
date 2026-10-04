@@ -1,0 +1,31 @@
+{
+  "$comment": "Catalogo de rasgos. Los rasgos son INDEPENDIENTES del reino: no pertenecen a ningun reino y no tienen signo moral. Editado desde el brief, seccion 23.",
+  "version": "0.1.0",
+  "independenceRule": "Los traits no deben asignarse a reinos. Un reino alto en un trait no implica nada sobre el reino. Los rasgos se acumulan por respuestas y se muestran en el resultado final.",
+  "namingWarning": "El brief escribe 'strategicThinking' y 'attachment' en camelCase, mientras el resto usa minusculas sin separador. Se conservan EXACTAMENTE como el brief los indica. NO normalizar sin confirmacion.",
+  "traits": [
+    { "id": "courage", "label": { "en": "Courage", "es": "Valentia" } },
+    { "id": "loyalty", "label": { "en": "Loyalty", "es": "Lealtad" } },
+    { "id": "ambition", "label": { "en": "Ambition", "es": "Ambicion" } },
+    { "id": "empathy", "label": { "en": "Empathy", "es": "Empatia" } },
+    { "id": "independence", "label": { "en": "Independence", "es": "Independencia" } },
+    { "id": "curiosity", "label": { "en": "Curiosity", "es": "Curiosidad" } },
+    { "id": "discipline", "label": { "en": "Discipline", "es": "Disciplina" } },
+    { "id": "adaptability", "label": { "en": "Adaptability", "es": "Adaptabilidad" } },
+    { "id": "competitiveness", "label": { "en": "Competitiveness", "es": "Competitividad" } },
+    { "id": "patience", "label": { "en": "Patience", "es": "Paciencia" } },
+    { "id": "protection", "label": { "en": "Protection", "es": "Proteccion" } },
+    { "id": "leadership", "label": { "en": "Leadership", "es": "Liderazgo" } },
+    { "id": "selflessness", "label": { "en": "Selflessness", "es": "Altruismo" } },
+    { "id": "fear", "label": { "en": "Fear", "es": "Miedo" } },
+    { "id": "impulsiveness", "label": { "en": "Impulsiveness", "es": "Impulsividad" } },
+    { "id": "strategicThinking", "label": { "en": "Strategic thinking", "es": "Pensamiento estrategico" } },
+    { "id": "attachment", "label": { "en": "Attachment", "es": "Apego" } },
+    { "id": "resilience", "label": { "en": "Resilience", "es": "Resiliencia" } }
+  ],
+  "axisNote": "Estos rasgos son la dimension 'Character' del resultado. Son distintos de la dimension 'Nature' (Manskling, Diubak, Cazut) y de la dimension 'Light/Darkness'. Un rasgo oscuro como 'fear' o 'impulsiveness' NO implica TResultado negativo, igual que un reino Cazut NO implica maldad. Ver el principio de luz y oscuridad en data/lore-rules.json.",
+  "todo": [
+    "TODO: decidir cuantos rasgos se muestran en el resultado final y como se eligen.",
+    "TODO: definir si los rasgos tienen polaridad moral o son solo descriptivos. El brief NO establece polaridad; no la asumas."
+  ]
+}

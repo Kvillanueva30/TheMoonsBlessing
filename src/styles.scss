@@ -1,0 +1,42 @@
+// Estilos globales de la experiencia.
+//
+// TODO: el sistema visual definitivo todavia no esta definido. La paleta y la
+// tipografia son marcadores provisionales. Ver AGENTS.md, seccion de estetica:
+// dark fantasy, lunar, cinematografica, sobria. Nada de UI corporativa.
+
+:root {
+  // Marcadores provisionales. Reemplazar cuando se defina la identidad visual.
+  --madar-bg: #05060a;
+  --madar-bg-elevated: #0b0d14;
+  --madar-text: #e8e6f0;
+  --madar-text-dim: #9a96ad;
+  --madar-accent: #8b7fd4;
+  --madar-accent-dim: #4a4270;
+
+  --madar-space-xs: 0.5rem;
+  --madar-space-sm: 1rem;
+  --madar-space-md: 2rem;
+  --madar-space-lg: 4rem;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--madar-bg);
+  color: var(--madar-text);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

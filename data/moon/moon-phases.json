@@ -1,0 +1,68 @@
+{
+  "$comment": "Fases lunares. El CALCULO de la fase debe hacerse con un algoritmo astronomico real o una libreria fiable, nunca con una lista manual de fechas. Este archivo solo contiene la presentacion narrativa de cada fase.",
+  "version": "0.1.0",
+  "calculationRule": {
+    "method": "algorithm",
+    "forbidden": "Lista manual de fechas o atajos por rango de fechas.",
+    "reference": "Mes sinódico de 29.530588853 días. Puede tomarse como época una luna nueva conocida y derivar la fase a partir de ahí.",
+    "implementationTodo": "TODO: elegir e integrar la libreria o implementar el algoritmo en core/services. Ver seccion 34, punto 9."
+  },
+  "ceremonyRule": "La ceremonia de los 16 anos se realiza bajo la misma fase lunar que estaba presente cuando la persona nacio. Esta regla SI esta confirmada por el brief.",
+  "narrativeStatus": "PENDIENTE. El brief dice explicitamente: 'El texto final sera definido posteriormente.' Todos los textos narrativos de abajo son marcadores de posicion vacios. NO escribir(copy) texto definitivo aqui sin autorizacion.",
+  "phases": [
+    {
+      "id": "new-moon",
+      "name": { "en": "New Moon", "es": "Luna Nueva" },
+      "narrative": null,
+      "ceremonyNote": null
+    },
+    {
+      "id": "waxing-crescent",
+      "name": { "en": "Waxing Crescent", "es": "Luna Creciente" },
+      "narrative": null,
+      "ceremonyNote": null
+    },
+    {
+      "id": "first-quarter",
+      "name": { "en": "First Quarter", "es": "Cuarto Creciente" },
+      "narrative": null,
+      "ceremonyNote": null
+    },
+    {
+      "id": "waxing-gibbous",
+      "name": { "en": "Waxing Gibbous", "es": "Gibosa Creciente" },
+      "narrative": null,
+      "ceremonyNote": null
+    },
+    {
+      "id": "full-moon",
+      "name": { "en": "Full Moon", "es": "Luna Llena" },
+      "narrative": null,
+      "ceremonyNote": null
+    },
+    {
+      "id": "waning-gibbous",
+      "name": { "en": "Waning Gibbous", "es": "Gibosa Menguante" },
+      "narrative": null,
+      "ceremonyNote": null
+    },
+    {
+      "id": "last-quarter",
+      "name": { "en": "Last Quarter", "es": "Cuarto Menguante" },
+      "narrative": null,
+      "ceremonyNote": null
+    },
+    {
+      "id": "waning-crescent",
+      "name": { "en": "Waning Crescent", "es": "Luna Creciente Menguante" },
+      "narrative": null,
+      "ceremonyNote": null
+    }
+  ],
+  "todo": [
+    "TODO: el brief NO define si el universo Madar tiene 8 fases lunares o un sistema distinto. Las 8 fases son la convencion astronomica estandar usada como estructura provisional. NO presentar como canon confirmado.",
+    "TODO: escribir los textos narrativos de cada fase.",
+    "TODO: definir que implica cada fase en la ceremonia de cada reino.",
+    "TODO: la frase de arranque de la landing 'The Moon remembers the night you were born.' aparece en el primer brief. Ver src/app/core/config de la experiencia."
+  ]
+}

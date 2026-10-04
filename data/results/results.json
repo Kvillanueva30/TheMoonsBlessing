@@ -1,0 +1,101 @@
+{
+  "$comment": "Textos de resultado. Almacena naturaleza, origen, afinidad y caracter. NO contiene resultados hardcodeados por reino en los componentes: la UI lee de aqui.",
+  "version": "0.1.0",
+  "axes": {
+    "KINGDOM": "Reino, resuelto por afinidad. Ver kingdomsAffinity.",
+    "MOON": "Fase lunar de nacimiento. Ver moon/moon-phases.json.",
+    "NATURE": "Manskling, Diubak o Cazut. Ver data/lore-rules.json para la politica vigente.",
+    "ORIGIN": "Como se origino esa naturaleza. Ver origins.",
+    "AFFINITY": "Eje Luz / Oscuridad. NO es moralidad.",
+    "CHARACTER": "Rasgos dominantes. Ver traits/traits.json."
+  },
+  "headline": {
+    "en": "THE MOON HAS REVEALED YOUR NATURE",
+    "es": "LA LUNA HA REVELADO TU NATURALEZA",
+    "note": "Confirmado en el brief. Es el encabezado del resultado final."
+  },
+  "natures": [
+    {
+      "id": "manskling",
+      "label": { "en": "Manskling", "es": "Manskling" },
+      "definition": "Persona que permanece Manskling. No recibio una transformacion.",
+      "loreRule": "Todos comienzan siendo Manskling. No fueron bendecidos ni maldecidos."
+    },
+    {
+      "id": "diubak-transformed",
+      "label": { "en": "Diubak - Transformed", "es": "Diubak - Transformado" },
+      "definition": "Manskling que recibio la bendicion de la Diosa Luna y se transformo durante la ceremonia.",
+      "originId": "manskling-to-diubak"
+    },
+    {
+      "id": "diubak-lineage",
+      "label": { "en": "Diubak - Lineage", "es": "Diubak - Linaje" },
+      "definition": "Persona que pertenece a una linea Diubak. Los primeros Diubaks fueron creados por la Diosa Luna y sus descendientes heredan esta naturaleza.",
+      "originId": "diubak-by-lineage"
+    },
+    {
+      "id": "cazut",
+      "label": { "en": "Cazut", "es": "Cazut" },
+      "definition": "Persona perteneciente a una linea maldita. Los primeros Cazuts surgieron como consecuencia de una maldicion, que luego se transmitio mediante el linaje.",
+      "originId": "cazut-by-birth"
+    }
+  ],
+  "origins": [
+    {
+      "id": "manskling-to-diubak",
+      "label": { "en": "Manskling > Diubak", "es": "Manskling > Diubak" },
+      "narrative": {
+        "en": "You were born Manskling. But when the Moon called, your body answered. You became Diubak.",
+        "es": "Naciste Manskling. Pero cuando la Luna llamo, tu cuerpo respondio. Te convertiste en Diubak."
+      }
+    },
+    {
+      "id": "diubak-by-lineage",
+      "label": { "en": "Diubak by lineage", "es": "Diubak por linaje" },
+      "narrative": {
+        "en": "The Moon did not change you. Your blood already carried the legacy of the first Diubaks.",
+        "es": "La Luna no te cambio. Tu sangre ya cargaba con la herencia de los primeros Diubaks."
+      }
+    },
+    {
+      "id": "cazut-by-birth",
+      "label": { "en": "Inherited", "es": "Heredado" },
+      "narrative": {
+        "en": "The curse was never placed upon you. It was inherited.",
+        "es": "La maldicion nunca fue puesta sobre ti. Fue heredada."
+      }
+    },
+    {
+      "id": "remained-manskling",
+      "label": { "en": "Manskling", "es": "Manskling" },
+      "narrative": null,
+      "todo": "TODO: el brief NO proporciona el texto narrativo para el caso en que la persona permanece Manskling. NO inventar."
+    }
+  ],
+  "reveals": {
+    "kingdom": {
+      "en": "Your choices have revealed where you belong.",
+      "es": "Tus decisiones han revelado donde perteneces.",
+      "note": "Confirmado en el brief."
+    },
+    "kingdomIntro": null,
+    "todo": "TODO: escribir el texto que introduce la ceremonia, especifico por reino. El brief establece que cada reino tiene la suya."
+  },
+  "lightDarknessAxis": {
+    "values": ["light", "darkness"],
+    "note": "El brief NO define nombres, textos ni umbrales para este eje. Solo establece que luz y oscuridad son complementarias y que la naturaleza NO determina la moralidad.",
+    "todo": "TODO: definir como se calcula, como se nombra en pantalla y que textos narrativos acompañan a cada valor.",
+    "constraint": "Este eje NO debe describir bondad o maldad. Ver el caso de Alden en lore-rules.json."
+  },
+  "landing": {
+    "tagline": "The Moon remembers the night you were born.",
+    "cta": "Begin",
+    "nameConfig": "TODO: el nombre de la experiencia NO esta decidido. Debe vivir en un unico archivo de configuracion. Nombre provisional del proyecto: madar-ritual."
+  },
+  "todo": [
+    "TODO: escribir el texto de 'remained-manskling'.",
+    "TODO: definir textos por reino para la pantalla de reino.",
+    "TODO: definir el eje luz/oscuridad por completo.",
+    "TODO: definir el nombre definitivo de la experiencia."
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "tradia",
+  "name": "Tradia",
+  "type": "cazut-exclusive",
+  "typeStatus": "confirmed",
+  "typeNote": "El brief lo declara explícitamente: 'Reino Cazut'. Aclaracion: en la seccion 16 el encabezado dice 'Primer rey: Halik' y a continuacion describe a Halik y Tarik como los gemelos.",
+  "founder": {
+    "name": "Halik",
+    "title": "Primer rey"
+  },
+  "essence": {
+    "en": "Protect and solve through intelligence.",
+    "es": "Proteger y resolver mediante inteligencia."
+  },
+  "essenceQuote": "Si no puedo ser el más fuerte, seré aquel sin quien los demás no puedan avanzar.",
+  "founders": [
+    {
+      "name": "Halik",
+      "role": "Primer rey de Tradia",
+      "summary": "El hermano intelectual. No busca competir fisicamente."
+    },
+    {
+      "name": "Tarik",
+      "role": "Hermano gemelo de Halik. Fundador de Helia.",
+      "summary": "Siempre fue el segundo de Silas. Ver el archivo helia.json."
+    }
+  ],
+  "conceptualInspirations": [],
+  "values": [
+    "inteligencia",
+    "estrategia",
+    "curiosidad",
+    "disciplina",
+    "observación",
+    "planificación",
+    "conocimiento",
+    "autocontrol",
+    "protección"
+  ],
+  "shadows": [
+    { "from": "inteligencia", "to": "manipulación" },
+    { "from": "planificación", "to": "control" },
+    { "from": "autocontrol", "to": "represión" },
+    { "from": "observación", "to": "distanciamiento" },
+    { "from": "protección", "to": "interferencia" },
+    { "from": "conocimiento", "to": "arrogancia" },
+    { "from": "prudencia", "to": "inacción" }
+  ],
+  "guardrail": "Tradia NO es el reino de los sabios Bondados. Halik sigue a Silas en la guerra, y su inteligencia puede volverse manipulación.",
+  "lightDarkness": {
+    "founderAffinity": "unconfirmed",
+    "note": "El brief no define la afinidad de Halik con la luz o la oscuridad. NO inventar."
+  },
+  "history": [
+    {
+      "id": "the-twins",
+      "title": "Los gemelos",
+      "text": "Halik y Tarik son hermanos gemelos y son muy diferentes."
+    },
+    {
+      "id": "halik-mind",
+      "title": "Halik",
+      "text": "Halik es el hermano intelectual. No busca competir fisicamente. Mantiene su mente constantemente ocupada. Evita especialmente el contacto fisico innecesario, las peleas y las demostraciones de fuerza. Su principal herramienta es la inteligencia. Ayuda a Silas a planificar. Analiza, piensa y disena estrategias."
+    },
+    {
+      "id": "halik-and-tarik",
+      "title": "La relacion entre los hermanos",
+      "text": "Halik observa a su hermano entrenar constantemente. Tarik se mata entrenando dia y noche para intentar superar a Silas, pero nunca lo consigue. Halik entiende perfectamente el problema: Tarik esta intentando convertirse en Silas. Halik intenta compensar esa debilidad. Piensa que, aunque el no pueda proteger a su hermano mediante la fuerza, puede protegerlo utilizando su inteligencia."
+    },
+    {
+      "id": "following-silas",
+      "title": "Por que sigue a Silas",
+      "text": "Halik sigue a Silas durante la guerra porque esta siguiendo a Tarik, no a Silas."
+    },
+    {
+      "id": "chain",
+      "title": "La cadena",
+      "text": "Silas sigue a nadie. Tarik sigue a Silas. Halik sigue a Tarik. La cadena queda establecida asi: Silas, Tarik, Halik."
+    },
+    {
+      "id": "death",
+      "title": "La muerte de Halik",
+      "text": "Durante la guerra, Lucius mata a Halik. La muerte enfurece a Tarik. Tarik quiere atacar, pero Silas lo detiene para evitar que pierda el control y muera tambien. Despues de la muerte de Halik, Tarik se jura vengar a su hermano."
+    }
+  ],
+  "war": {
+    "involved": true,
+    "role": "Halik se alio con Silas, Tarik y Ross, y ayudo a planificar el ataque a los reinos considerados favorecidos.",
+    "note": "Halik muere durante la guerra a manos de Lucius."
+  },
+  "ceremony": {
+    "status": "undefined",
+    "description": null,
+    "moonPhaseRule": "Se realiza bajo la misma fase lunar que estaba presente cuando la persona nació.",
+    "todo": "TODO: definir la ceremonia propia de Tradia. Halik muere durante la guerra, por lo que la continuidad de Tradia despues de la guerra no esta definida. NO inventar."
+  },
+  "todo": [
+    "TODO: definir la ceremonia de Tradia.",
+    "TODO: definir quien hereda o continua Tradia tras la muerte de Halik.",
+    "TODO: confirmar si Halik fue uno de los reinos maldecidos despues de la guerra."
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "xorian",
+  "name": "Xorian",
+  "type": "cazut-exclusive",
+  "typeStatus": "confirmed",
+  "typeNote": "El brief lo declara explícitamente: 'Reino Cazut'.",
+  "founder": {
+    "name": "Deron",
+    "title": "Primer rey"
+  },
+  "essence": {
+    "en": "Not every conflict deserves to become your conflict.",
+    "es": "No todo conflicto merece convertirse en tu conflicto."
+  },
+  "centralContradiction": "Para proteger la paz terminó aislándose del mundo.",
+  "conceptualInspirations": [
+    {
+      "name": "Hufflepuff",
+      "source": "Harry Potter",
+      "note": "Referencia conceptual únicamente. NO copiar el personaje."
+    },
+    {
+      "name": "Cordialidad de Divergente",
+      "source": "Divergente",
+      "note": "Referencia conceptual únicamente."
+    },
+    {
+      "name": "Lucy",
+      "source": "Narnia",
+      "note": "Referencia conceptual únicamente. NO copiar el personaje."
+    }
+  ],
+  "values": [
+    "naturaleza",
+    "paz",
+    "paciencia",
+    "comunidad",
+    "moderación",
+    "protección",
+    "gratitud",
+    "estabilidad",
+    "armonía",
+    "respeto por la vida"
+  ],
+  "shadows": [
+    { "from": "paz", "to": "pasividad" },
+    { "from": "moderación", "to": "conformismo" },
+    { "from": "prudencia", "to": "aislamiento" },
+    { "from": "observación", "to": "indiferencia" },
+    { "from": "protección", "to": "sobreprotección" },
+    { "from": "armonía", "to": "evitar conflictos" },
+    { "from": "estabilidad", "to": "miedo al cambio" }
+  ],
+  "guardrail": "Xorian NO es el reino bueno ni el pacífico por excelencia. Su acceso es el aislamiento. Ederian, Bastia, Tralan, Tradia y Helia tambien tienen sombras.",
+  "lightDarkness": {
+    "founderAffinity": "unconfirmed",
+    "note": "El brief no define la afinidad de Deron con la luz o la oscuridad. NO inventar."
+  },
+  "history": [
+    {
+      "id": "deron-personality",
+      "title": "Deron",
+      "text": "Deron no era especialmente cercano a Silas y Lucius. Era mas amigo de los hermanos Halik y Tarik. Es relajado, centrado, tranquilo, observador, conectado con la naturaleza, poco interesado en ambiciones y poco interesado en guerras. Su familia le enseño a valorar lo que tiene y cuidar aquello que lo rodea."
+    },
+    {
+      "id": "conflict-with-silas",
+      "title": "Conflicto con Silas",
+      "text": "Deron solia discutir con Silas. Consideraba que Silas era demasiado atrevido y que siempre terminaba metiendo a los demas en problemas. Rechazaba especialmente la caza como actividad de demostracion de poder. Le molestaba que algunas personas sonaran con convertirse en cazadores, y Silas era uno de ellos. A pesar de esto, Deron comenzo a pasar mas tiempo con el grupo. Sin embargo, siempre se mantuvo como observador."
+    },
+    {
+      "id": "the-deception",
+      "title": "El engaño",
+      "text": "Ross engaña a Deron junto a Lucius, lo que permite que Silas, Tarik y Halik tengan el camino mas facil."
+    },
+    {
+      "id": "neutrality",
+      "title": "Neutralidad",
+      "text": "Xorian fue el unico reino que no intervino. Deron y su reino se limitaron a observar. Su posicion fue esencialmente: esta guerra no es nuestra."
+    },
+    {
+      "id": "closing-walls",
+      "title": "El cierre de muros",
+      "text": "Despues de la guerra, Xorian cerro sus muros. Se aislo del resto de los reinos y se mantuvo alejado."
+    }
+  ],
+  "war": {
+    "involved": false,
+    "role": "Unico reino que no intervino. Fue objetivo del plan de Silas, pero Deron se opuso.",
+    "note": "Aun asi Ross lo engaño, lo que abre la posibilidad de que Silas creyera que participaba. NO inventar como se desarrollo exactamente."
+  },
+  "ceremony": {
+    "status": "undefined",
+    "description": null,
+    "moonPhaseRule": "Se realiza bajo la misma fase lunar que estaba presente cuando la persona nació.",
+    "todo": "TODO: definir la ceremonia propia de Xorian. Dado el aislamiento del reino, la ceremonia podria ser distinta. NO inventar."
+  },
+  "todo": [
+    "TODO: definir la ceremonia de Xorian.",
+    "TODO: confirmar si el cierre de muros ocurrio antes o despues de la muerte de Halik.",
+    "TODO: definir la afinidad de luz/oscuridad de Deron."
+  ]
+}

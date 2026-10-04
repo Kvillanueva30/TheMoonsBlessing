@@ -1,0 +1,193 @@
+{
+  "$comment": "Reglas del universo y decisiones pendientes. Este archivo es la fuente de verdad sobre lo que el motor puede y no puede decidir. Ningun componente debe reimplementar estas reglas.",
+  "version": "0.1.0",
+  "status": "DRAFT",
+  "statusNote": "Contiene decisiones PENDIENTES de confirmacion por la autora. El motor debe respetar 'default' en las politicas no resueltas y NO debe inventar la regla que falta.",
+
+  "fundamentalPrinciple": {
+    "id": "light-darkness-not-morality",
+    "statement": {
+      "en": "Light does not automatically mean goodness. Darkness does not automatically mean evil.",
+      "es": "La luz no significa automaticamente bondad. La oscuridad no significa automaticamente maldad."
+    },
+    "complementarity": "Para que exista luz debe existir oscuridad y viceversa. Son eixos complementarios, no una escala de bondad.",
+    "referenceCase": {
+      "character": "Alden",
+      "facts": "Alden pertenece a una linea Cazut y es principe de un reino Cazut, y tiene un corazon noble. Es el caso canonico que demuestra que ser Cazut no implica maldad.",
+      "note": "El brief menciona a Alden como ejemplo de este principio, pero NO define su reino, su historia ni su papel en la guerra. NO inventar."
+    },
+    "forbiddenEquations": [
+      "Diubak = bueno",
+      "Cazut = malo",
+      "Manskling = neutral moralmente"
+    ],
+    "separateAxes": {
+      "Nature": ["Manskling", "Diubak", "Cazut"],
+      "LightDarkness": "Afinidad conceptual con la luz o la oscuridad. No es moralidad.",
+      "Character": "Rasgos de personalidad derivados de las elecciones."
+    },
+    "implementationConstraint": "El motor debe calcular estos tres ejes de forma independiente. No puede derivar uno a partir de otro. Un resultado con nature=cazut, character=noble y lightDarkness=light debe ser tan valido como nature=diubak, character=cruel y lightDarkness=darkness."
+  },
+
+  "natureRules": {
+    "originOfAll": "Todos comienzan siendo Manskling. No fueron bendecidos ni maldecidos.",
+    "diubak": {
+      "transformed": {
+        "id": "manskling-to-diubak",
+        "rule": "Un Manskling puede recibir la bendicion de la Diosa Luna durante la ceremonia de los 16 anos. Si su cuerpo cambia como consecuencia de la ceremonia, Manskling se convierte en Diubak."
+      },
+      "lineage": {
+        "id": "diubak-by-lineage",
+        "rule": "Los primeros Diubaks fueron creados por la Diosa Luna. Sus descendientes heredan esta naturaleza. Una persona puede ser Diubak por sangre sin haber pasado por la transformacion en la ceremonia."
+      }
+    },
+    "cazut": {
+      "rule": "Los Cazuts NO se crean mediante la ceremonia de los 16 anos. Los primeros Cazuts surgieron como consecuencia de una maldicion. Posteriormente la condicion se transmitio mediante el linaje, asi que una persona puede ser Cazut por nacimiento."
+    }
+  },
+
+  "ceremonyRules": {
+    "age": 16,
+    "moonCondition": "La ceremonia se realiza bajo la misma fase lunar que estaba presente cuando la persona nacio.",
+    "noUniversalCeremony": "La ceremonia NO es identica en todos los reinos. Cada reino tiene su propia tradicion. NO construir una ceremonia universal.",
+    "implementationRule": "La arquitectura debe permitir definir una ceremonia distinta por reino. Existe una estructura generica 'ceremony/awakening' preparada para personalizarse.",
+    "status": "Ninguna ceremonia por reino esta definida. Ver ceremonies.json pendiente."
+  },
+
+  "policies": {
+    "kingdomSelection": {
+      "rule": "El usuario NUNCA selecciona su reino. El reino se determina por afinidad acumulada a partir de las respuestas a las preguntas.",
+      "hardcoded": false
+    },
+    "hiddenScoring": {
+      "rule": "El usuario nunca ve puntuaciones, pesos, nombres de reino ni nombres de rasgo asociados a sus respuestas.",
+      "hardcoded": false
+    },
+    "kingdomToNature": {
+      "status": "UNRESOLVED",
+      "pendingId": "P-002",
+      "statementA": {
+        "source": "Primer brief, seccion 7 'Regla especial de los Cazuts'",
+        "text": "Si el usuario pertenece a uno de los reinos exclusivamente Cazut, su naturaleza debe respetar el lore. No debe existir una situacion donde el usuario termine como Manskling o Diubak simplemente por obtener determinadas respuestas. El sistema debe considerar primero las reglas de reino/linaje."
+      },
+      "statementB": {
+        "source": "Segundo brief, seccion 7 'Posibles resultados'",
+        "text": "IMPORTANTE: El reino NO debe determinar automaticamente la naturaleza. El reino y la naturaleza son dos dimensiones diferentes."
+      },
+      "conflict": "Las dos afirmaciones se contradicen en el caso de un reino Cazut exclusivo. No son equivalentes: la A prohibe que el reino Cazut produzca otra naturaleza, y la B prohibe que el reino determine la naturaleza.",
+      "possibleReconciliation": {
+        "reading": "B puede referirse a la arquitectura (no codificar 'if (reino es cazut) naturaleza = cazut' como logica inline) mientras A describe el comportamiento del lore.",
+        "status": "ESPECULACION. NO implementar como hecho. Requiere confirmacion."
+      },
+      "default": "statementA",
+      "defaultNote": "Se elige A como default porque la A fue marcada como regla especial e inviolable del lore y porque el cazut se hereda por sangre, no por asignacion de reino. Si un reino es Cazut exclusivo, la naturaleza se resuelve por linaje y no por respuestas. ESTE DEFAULT ES PROVISIONAL Y REQUIERE CONFIRMACION DE LA AUTORA."
+    },
+    "evaluationOrder": {
+      "rule": "El orden de evaluacion es: fecha de nacimiento, fase lunar, respuestas, afinidad de reino, reino, reglas de linaje y naturaleza, traits, resultado final.",
+      "note": "Este orden responde a la exigencia de considerar primero las reglas de reino y linaje. Depende de resolver P-002."
+    }
+  },
+
+  "pendingDecisions": [
+    {
+      "id": "P-001",
+      "title": "Distribucion Manskling / Diubak entre los seis reinos",
+      "severity": "blocking",
+      "problem": "El brief declara a nivel general que 3 reinos son mixtos y 3 son Cazut exclusivos. Pero al leer cada reino, los tipos declarados son: Ederian mixto, Bastia Cazut, Tralan Cazut, Xorian Cazut, Tradia Cazut y Helia sin tipo declarado. Eso da 1 mixto y 4 Cazut, no 3 y 3.",
+      "explicitDeclarations": {
+        "ederian": "mixto (declarado explicitamente)",
+        "bastia": "cazut (declarado explicitamente)",
+        "tralan": "cazut (declarado explicitamente)",
+        "xorian": "cazut (declarado explicitamente)",
+        "tradia": "cazut (declarado explicitamente)",
+        "helia": "sin declarar"
+      },
+      "consequence": "No se puede determinar el reparto 3/3. El tipo de Helia queda en null y marcado como unconfirmed.",
+      "theBriefAlsoWarns": "El brief advierte de que una descripcion previa sobre la distribucion entre Ederian y Bastia quedo expresada de forma contradictoria y que NO se debe asumir una version.",
+      "instruction": "NO hardcodear el reparto 3/3. NO asumir el tipo de Helia. Esperar confirmacion de la autora.",
+      "affectedFiles": ["data/kingdoms/helia.json", "data/lore-rules.json"]
+    },
+    {
+      "id": "P-002",
+      "title": "El reino Cazut obligatorio determina la naturaleza?",
+      "severity": "blocking",
+      "problem": "Ver policies.kingdomToNature. Las afirmaciones A y B del brief se contradicen directamente.",
+      "instruction": "Aplicar el default declarado en policies.kingdomToNature hasta que la autora confirme. Dejar la politica aislada en un unico punto del motor para que el cambio sea trivial.",
+      "affectedFiles": ["data/lore-rules.json", "core (logica de naturaleza)"]
+    },
+    {
+      "id": "P-003",
+      "title": "¿El universo tiene 8 fases lunares?",
+      "severity": "non-blocking",
+      "problem": "El brief nunca define el sistema de fases lunares. moon-phases.json usa las 8 fases astronomicas estandar como estructura provisional.",
+      "instruction": "No presentar las 8 fases como canon confirmado. Mantener la estructura abierta a cambios.",
+      "affectedFiles": ["data/moon/moon-phases.json"]
+    },
+    {
+      "id": "P-004",
+      "title": "¿Cuantas preguntas tiene la experiencia?",
+      "severity": "non-blocking",
+      "problem": "El brief no da un numero de preguntas y no define ninguna pregunta concreta.",
+      "instruction": "El banco de preguntas esta vacio a proposito. El motor debe aceptar cualquier numero. No mostrar barras de progreso tipo 'Pregunta 4 de 20' salvo necesidad.",
+      "affectedFiles": ["data/questions/questions.json"]
+    },
+    {
+      "id": "P-005",
+      "title": "¿Las preguntas varian despues de revelar el reino?",
+      "severity": "non-blocking",
+      "problem": "El flujo del brief muestra 'preguntas' antes de 'reino', pero no define si existe un set de preguntas adicional ya con el reino conocido.",
+      "instruction": "Implementar solo el set comun de preguntas. No construir la variante por reino hasta que se defina.",
+      "affectedFiles": ["data/questions/questions.json", "core (motor)"]
+    },
+    {
+      "id": "P-006",
+      "title": "Textos narrativos pendientes",
+      "severity": "non-blocking",
+      "problem": "El brief dice explicitamente que el texto final de la fase lunar sera definido posteriormente, y no define los textos de casi todas las pantallas.",
+      "instruction": "Escribir copy solo cuando la autora lo proporcione. Los campos null en results.json y moon-phases.json son deliberados. Usar TODOs, no inventar.",
+      "affectedFiles": ["data/results/results.json", "data/moon/moon-phases.json"]
+    },
+    {
+      "id": "P-007",
+      "title": "Ceremonias por reino",
+      "severity": "blocking-for-ceremony",
+      "problem": "El brief establece que cada reino tiene su propia ceremonia y que no existe una universal, pero no define ninguna.",
+      "instruction": "Construir solo la estructura generica ceremony/awakening. NO implementar ninguna ceremonia concreta.",
+      "affectedFiles": ["data/kingdoms/*.json", "pages/ceremony"]
+    },
+    {
+      "id": "P-008",
+      "title": "¿Que reinos fueron maldecidos despues de la guerra?",
+      "severity": "non-blocking",
+      "problem": "El brief dice que varios reinos fueron maldecidos pero no especifica cuales.",
+      "instruction": "No registrar maldiciones por reino hasta confirmacion. Bastia, Tradia y Helia tienen la pregunta abierta en su archivo.",
+      "affectedFiles": ["data/kingdoms/*.json"]
+    },
+    {
+      "id": "P-009",
+      "title": "Nomenclatura de traits inconsistente",
+      "severity": "cosmetic",
+      "problem": "El brief escribe 'strategicThinking' y 'attachment' en camelCase y el resto en minusculas.",
+      "instruction": "Se conservan exactamente como el brief. No normalizar sin confirmacion.",
+      "affectedFiles": ["data/traits/traits.json"]
+    }
+  ],
+
+  "doNotInvent": {
+    "rule": "Si falta informacion sobre un reino, una ceremonia, un personaje, una maldicion, una fase lunar, una distribucion territorial o una regla del mundo, NO inventarla. Usar placeholders configurables y comentarios TODO.",
+    "currentlyUndefined": [
+      "las seis ceremonias por reino",
+      "el reparto 3/3 de reinos y el tipo de Helia",
+      "el numero y contenido de las preguntas",
+      "los textos narrativos de casi todas las pantallas",
+      "el eje luz/oscuridad: calculo, nombres y umbrales",
+      "cuales reinos fueron maldecidos",
+      "toponimos: ciudades, territorios y montanas",
+      "el nombre definitivo de la experiencia",
+      "la afinidad de luz/oscuridad de Ross, Deron, Halik y Tarik",
+      "el desenlace de la guerra para cada reino",
+      "el papel de Alden mas alla de ser el ejemplo del principio de luz y oscuridad",
+      "los poderes de Diubak y la naturaleza exacta de la maldicion de los Cazuts"
+    ]
+  }
+}

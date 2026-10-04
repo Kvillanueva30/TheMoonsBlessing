@@ -1,0 +1,91 @@
+{
+  "id": "ederian",
+  "name": "Ederian",
+  "type": "mixed",
+  "typeStatus": "confirmed",
+  "typeNote": "El brief lo declara explícitamente: uno de los reinos donde conviven Manskling y Diubaks.",
+  "founder": {
+    "name": "Lucius",
+    "title": "Primer rey"
+  },
+  "essence": {
+    "en": "Courage despite fear.",
+    "es": "Valentía a pesar del miedo."
+  },
+  "essenceNote": "Lucius no es valiente porque nunca tenga miedo. Es valiente porque aprende a actuar a pesar de tenerlo.",
+  "conceptualInspirations": [
+    {
+      "name": "Gryffindor",
+      "source": "Harry Potter",
+      "note": "Referencia conceptual únicamente. NO copiar el personaje."
+    },
+    {
+      "name": "Peter Pevensie",
+      "source": "Narnia",
+      "note": "Referencia conceptual únicamente. NO copiar el personaje."
+    }
+  ],
+  "values": [
+    "valentía",
+    "nobleza",
+    "responsabilidad",
+    "protección",
+    "empatía",
+    "lealtad",
+    "liderazgo",
+    "sacrificio",
+    "deber",
+    "comunidad"
+  ],
+  "shadows": [
+    { "from": "valentía", "to": "imprudencia" },
+    { "from": "responsabilidad", "to": "sobrecarga" },
+    { "from": "protección", "to": "control" },
+    { "from": "nobleza", "to": "rigidez moral" },
+    { "from": "liderazgo", "to": "paternalismo" },
+    { "from": "deber", "to": "sacrificio excesivo" }
+  ],
+  "guardrail": "Ederian NO es el reino bueno. Sus valores tienen sombras y el reino no implica moralidad.",
+  "lightDarkness": {
+    "founderAffinity": "high-light",
+    "note": "Lucius tiene una gran cantidad de luz."
+  },
+  "history": [
+    {
+      "id": "lucius-childhood",
+      "title": "Lucius de niño",
+      "text": "Lucius era un niño tímido y temeroso. Le gustaban las reglas y tenía miedo de las consecuencias de hacer algo incorrecto. Perdió a su madre cuando era pequeño y era hijo único. Tenía un gran corazón."
+    },
+    {
+      "id": "silas-brother",
+      "title": "Silas como hermano",
+      "text": "Lucius seguía constantemente a su mejor amigo, Silas, que era su modelo a seguir. Veía a Silas como un hermano. La madre de Silas terminó criando también a Lucius."
+    },
+    {
+      "id": "admiration-huntress",
+      "title": "Admiración por la madre de Silas",
+      "text": "Lucius admiraba mucho a la madre de Silas porque era cazadora. Cuando ella murió, la pérdida afectó profundamente a Silas. Ese acontecimiento también obligó a Lucius a dejar de vivir completamente dominado por el miedo."
+    },
+    {
+      "id": "blessing-and-territory",
+      "title": "La bendición y el territorio",
+      "text": "Como rey, Lucius se convierte en una persona noble, atenta, responsable, protectora, empática y preocupada por su pueblo. Fue el primero en recibir la bendición de la Diosa Luna para todo su reino. La Diosa le concedió además una enorme cantidad de territorio. Ederian se convirtió en el reino más grande."
+    }
+  ],
+  "war": {
+    "involved": true,
+    "role": "Reino atacado por Silas, que lo consideraba favorecido.",
+    "note": "El brief no define las bajas, el territorio conquistado ni el desenlace para Ederian. NO inventar."
+  },
+  "ceremony": {
+    "status": "undefined",
+    "description": null,
+    "moonPhaseRule": "Se realiza bajo la misma fase lunar que estaba presente cuando la persona nació.",
+    "todo": "TODO: definir la ceremonia propia de Ederian. El brief establece que cada reino tiene la suya y que no existe una ceremonia universal."
+  },
+  "todo": [
+    "TODO: definir la ceremonia de Ederian.",
+    "TODO: confirmar nombres de ciudades o territorios de Ederian. No hay topónimos definidos.",
+    "TODO: confirmar el alcance del territorio asignado a Lucius."
+  ]
+}

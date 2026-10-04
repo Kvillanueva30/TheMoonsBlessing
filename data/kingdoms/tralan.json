@@ -1,0 +1,85 @@
+{
+  "id": "tralan",
+  "name": "Tralan",
+  "type": "cazut-exclusive",
+  "typeStatus": "confirmed",
+  "typeNote": "El brief lo declara explícitamente: 'Reino Cazut'.",
+  "founder": {
+    "name": "Ross",
+    "title": "Primer rey"
+  },
+  "essence": {
+    "en": "Look for security and belonging when you do not trust yourself.",
+    "es": "Buscar seguridad y pertenencia cuando uno no confía en sí mismo."
+  },
+  "essenceQuote": "No quería estar del lado equivocado. Solo quería estar del lado que pudiera protegerlo.",
+  "conceptualInspirations": [
+    {
+      "name": "Peter Pettigrew",
+      "source": "Harry Potter",
+      "note": "Referencia conceptual: una persona que busca protección, sigue a personas mas fuertes, se encuentra rodeada de personas valientes y toma decisiones moralmente cuestionables para mantenerse a salvo. NO copiar el personaje."
+    },
+    {
+      "name": "Principe Selim",
+      "source": "Historia de Sultan",
+      "note": "Referencia conceptual: un gobernante que termina refugiandose en el alcohol y los excesos y desconectandose de sus responsabilidades. NO copiar el personaje."
+    }
+  ],
+  "values": [
+    "adaptación",
+    "supervivencia",
+    "prudencia",
+    "pertenencia",
+    "lealtad",
+    "sensibilidad",
+    "flexibilidad",
+    "protección"
+  ],
+  "shadows": [
+    { "from": "adaptación", "to": "oportunismo" },
+    { "from": "supervivencia", "to": "traición" },
+    { "from": "prudencia", "to": "cobardía" },
+    { "from": "lealtad", "to": "dependencia" },
+    { "from": "flexibilidad", "to": "falta de principios" },
+    { "from": "sensibilidad", "to": "ansiedad" },
+    { "from": "protección", "to": "sometimiento" }
+  ],
+  "guardrail": "Tralan NO es el reino malo. El problema de Ross es que evita enfrentarse a si mismo, no que sea cruel.",
+  "lightDarkness": {
+    "founderAffinity": "unconfirmed",
+    "note": "El brief no define la afinidad de Ross con la luz o la oscuridad. NO inventar."
+  },
+  "history": [
+    {
+      "id": "ross-childhood",
+      "title": "Ross de niño",
+      "text": "Ross era parte del grupo de Lucius y Silas, pero siempre estaba siguiendo a los demas. Seguia a Silas, seguia a Lucius, observaba lo que hacian y evitaba tomar el liderazgo. Admiraba especialmente a Silas, pero no necesariamente porque quisiera ser como el: lo veia como una figura de proteccion. Ross pensaba que mientras estuviera junto a Silas y Lucius, nada podria pasarle. Silas siempre lo protegeria."
+    },
+    {
+      "id": "ross-personality",
+      "title": "Personalidad de Ross",
+      "text": "Ross tiene ansiedad, miedo, pensamientos oscuros, inseguridad, dependencia, necesidad de proteccion y una moral flexible. Busca escapar de sus emociones mediante excesos, entre ellos el alcohol, las mujeres, los placeres y otras conductas evasivas."
+    },
+    {
+      "id": "the-betrayal",
+      "title": "El engaño",
+      "text": "Cuando Silas prepara su plan, Ross es quien engaña a Lucius y a Deron. Esto permite que Silas, Tarik y Halik tengan el camino mas facil. Ross no lo hace porque quiera destruir a Lucius: lo hace porque Silas representa para el seguridad."
+    }
+  ],
+  "war": {
+    "involved": true,
+    "role": "Reino considerado por Silas como favorecido y por tanto objetivo de su plan. Ross participa mediante el engaño a Lucius, no como servidor de combate.",
+    "note": "El brief no detalla el papel militar de Tralan en la guerra. NO inventar."
+  },
+  "ceremony": {
+    "status": "undefined",
+    "description": null,
+    "moonPhaseRule": "Se realiza bajo la misma fase lunar que estaba presente cuando la persona nació.",
+    "todo": "TODO: definir la ceremonia propia de Tralan."
+  },
+  "todo": [
+    "TODO: definir la ceremonia de Tralan.",
+    "TODO: definir el estado actual de Ross tras la guerra.",
+    "TODO: definir la afinidad de luz/oscuridad de Ross."
+  ]
+}

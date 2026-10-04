@@ -1,0 +1,81 @@
+{
+  "id": "helia",
+  "name": "Helia",
+  "type": null,
+  "typeStatus": "unconfirmed",
+  "typeNote": "El brief NO declara el tipo de Helia. Solo indica que Tarik fue su primer rey. Ademas, el reparto 3 mixtos / 3 Cazut que el brief declara a nivel general NO se cumple con los tipos declarados por reino (1 mixto + 4 Cazut). Ver data/lore-rules.json, pendiente P-001. NO hardcodear.",
+  "founder": {
+    "name": "Tarik",
+    "title": "Primer rey"
+  },
+  "essence": {
+    "en": "Seek strength and self-improvement to prove your worth.",
+    "es": "Buscar fuerza y superación para demostrar tu valor."
+  },
+  "essenceQuote": "Si logro ser mejor que él, finalmente sabré quién soy.",
+  "conceptualInspirations": [],
+  "values": [
+    "fuerza",
+    "determinación",
+    "competitividad",
+    "disciplina",
+    "perseverancia",
+    "ambición",
+    "valentía",
+    "superación",
+    "lealtad"
+  ],
+  "shadows": [
+    { "from": "superación", "to": "obsesión" },
+    { "from": "competitividad", "to": "resentimiento" },
+    { "from": "disciplina", "to": "autodestrucción" },
+    { "from": "ambición", "to": "insatisfacción" },
+    { "from": "valentía", "to": "imprudencia" },
+    { "from": "lealtad", "to": "dependencia" },
+    { "from": "admiración", "to": "pérdida de identidad" },
+    { "from": "venganza", "to": "odio" }
+  ],
+  "guardrail": "Helia NO es el reino del valor simple. Su motor es la comparacion permanente, y su sombra es la perdida de identidad.",
+  "lightDarkness": {
+    "founderAffinity": "unconfirmed",
+    "note": "El brief no define la afinidad de Tarik con la luz o la oscuridad. Tras la muerte de Halik, su motivacion pasa de superar a Silas a vengar a Halik. NO inventar su afinidad."
+  },
+  "history": [
+    {
+      "id": "second-to-silas",
+      "title": "Siempre el segundo",
+      "text": "Tarik siempre fue el segundo de Silas. Tenia una rivalidad con el. Lo veia como alguien a quien debia superar. Entrenaba constantemente, se exigia hasta el limite e intentaba superar a Silas mediante fuerza y disciplina, pero nunca lo conseguia."
+    },
+    {
+      "id": "identity-problem",
+      "title": "Problema de identidad",
+      "text": "Tarik tiene poca identidad propia. Esto lo sabe Halik. Tarik pasa gran parte de su vida intentando ser como Silas, pero nunca logra convertirse en el. Su personalidad esta construida alrededor de una comparacion: tengo que superar a Silas. Su hermano intenta protegerlo de esto."
+    },
+    {
+      "id": "following-silas",
+      "title": "Durante la guerra",
+      "text": "Tarik sigue a Silas. Halik sigue a Tarik. Esto crea la cadena Silas, Tarik, Halik."
+    },
+    {
+      "id": "shift-of-motivation",
+      "title": "El cambio de motivacion",
+      "text": "Durante la guerra, Lucius mata a Halik. La muerte enfurece a Tarik. Tarik quiere atacar, pero Silas lo detiene para evitar que pierda el control y muera tambien. Despues de la muerte de Halik, Tarik se jura vengar a su hermano. Esto cambia su motivacion: antes, superar a Silas; despues, vengar a Halik."
+    }
+  ],
+  "war": {
+    "involved": true,
+    "role": "Tarik se alio con Silas, Halik y Ross.",
+    "note": "El brief no indica que Halia fuera uno de los reinos atacados por Silas ni uno de los maldecidos. NO inventar."
+  },
+  "ceremony": {
+    "status": "undefined",
+    "description": null,
+    "moonPhaseRule": "Se realiza bajo la misma fase lunar que estaba presente cuando la persona nació.",
+    "todo": "TODO: definir la ceremonia propia de Helia."
+  },
+  "todo": [
+    "TODO: confirmar el tipo de Helia: mixto o Cazut exclusivo. Ver pendiente P-001 en lore-rules.json.",
+    "TODO: definir la ceremonia de Helia.",
+    "TODO: definir si Helia fue maldecida despues de la guerra."
+  ]
+}
