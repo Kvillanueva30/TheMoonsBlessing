@@ -1,0 +1,40 @@
+<main class="birth-date">
+  <div class="moon-glow" aria-hidden="true"></div>
+
+  <section class="content">
+    <p class="eyebrow">Tu noche de nacimiento</p>
+    <h1>¿Qué luna te observó?</h1>
+    <p class="hint">Ingresa la fecha en la que naciste.</p>
+
+    <form (ngSubmit)="submit()">
+      <label>
+        Día
+        <select [(ngModel)]="day" name="day" required>
+          @for (d of days; track d) {
+            <option [value]="d">{{ d }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Mes
+        <select [(ngModel)]="month" name="month" required>
+          @for (m of months; track m) {
+            <option [value]="m">{{ m }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        Año
+        <select [(ngModel)]="year" name="year" required>
+          @for (y of years; track y) {
+            <option [value]="y">{{ y }}</option>
+          }
+        </select>
+      </label>
+
+      <button type="submit" class="continue">Descubrir mi luna</button>
+    </form>
+  </section>
+</main>

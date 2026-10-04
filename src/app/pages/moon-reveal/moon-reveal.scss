@@ -1,0 +1,85 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.moon-reveal {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at 50% -10%, #0b0d14 0%, #05060a 70%);
+  color: #e8e6f0;
+  text-align: center;
+  padding: 2rem;
+}
+
+.moon {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(40vmin, 300px);
+  height: min(40vmin, 300px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f4f1e6 0%, #cfc9b8 60%, #9a967d 100%);
+  box-shadow:
+    0 0 60px rgba(232, 230, 240, 0.25),
+    0 0 180px rgba(139, 127, 212, 0.18);
+}
+
+/* Variaciones sutiles por fase, la misma luna, distinta sombra */
+.moon-reveal.new-moon .moon {
+  background: radial-gradient(circle, #111216 0%, #05060a 70%);
+  box-shadow: 0 0 40px rgba(139, 127, 212, 0.2);
+}
+
+.moon-reveal.full-moon .moon {
+  background: radial-gradient(circle at 40% 40%, #ffffff 0%, #f4f1e6 60%, #d6d0bf 100%);
+  box-shadow:
+    0 0 90px rgba(255, 255, 255, 0.35),
+    0 0 200px rgba(139, 127, 212, 0.25);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  margin-top: 30vmin;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: #8b7fd4;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.hint {
+  color: #9a96ad;
+  margin-bottom: 2rem;
+}
+
+.continue {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 127, 212, 0.5);
+  color: #e8e6f0;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(139, 127, 212, 0.12);
+    border-color: #8b7fd4;
+  }
+}

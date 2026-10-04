@@ -1,11 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
-// TODO: pantalla de fecha de nacimiento. Placeholder para que la ruta
-// exista mientras se construye la experiencia por pasos.
 @Component({
   selector: 'app-birth-date',
-  template: `<main style="display:grid;place-items:center;min-height:100vh;color:#e8e6f0">
-    <p>birth-date (pendiente)</p>
-  </main>`,
+  imports: [FormsModule],
+  templateUrl: './birth-date.html',
+  styleUrl: './birth-date.scss',
 })
-export class BirthDatePage {}
+export class BirthDatePage {
+  private readonly router = inject(Router);
+
+  day = 1;
+  month = 1;
+  year = 2000;
+
+  days = Array.from({ length: 31 }, (_, i) => i + 1);
+  months = Array.from({ length: 12 }, (_, i) => i + 1);
+  years = Array.from({ length: 120 }, (_, i) => new Date().getFullYear() - 119 + i);
+
+  submit() {
+    const date = new Date(this.year, this.month - 1, this.day);
+    this.router.navigate(['/moon-reveal'], {
+      queryParams: {
+        y: date.getFullYear(),
+        m: date.getMonth() + 1,
+        d: date.getDate(),
+      },
+    });
+  }
+}

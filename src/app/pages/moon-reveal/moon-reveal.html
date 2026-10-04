@@ -1,0 +1,11 @@
+<main class="moon-reveal" [class]="'moon-reveal ' + (phase || '')">
+  <div class="moon" aria-hidden="true"></div>
+
+  <section class="content">
+    <p class="eyebrow">Tu fase lunar</p>
+    <h1>{{ phaseLabel }}</h1>
+    <p class="hint">Este es el aspecto del cielo la noche en que naciste.</p>
+
+    <a routerLink="/questions" class="continue">Continuar</a>
+  </section>
+</main>
