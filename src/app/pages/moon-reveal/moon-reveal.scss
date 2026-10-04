@@ -12,6 +12,27 @@
   color: #e8e6f0;
   text-align: center;
   padding: 2rem;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
+    radial-gradient(circle at 35% 55%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
+    radial-gradient(circle at 55% 15%, rgba(255, 255, 255, 0.7) 1px, transparent 2px),
+    radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.5) 1px, transparent 2px),
+    radial-gradient(circle at 95% 65%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
+    radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
+    radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.7) 1px, transparent 2px);
+  animation: twinkle 8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
 .moon {
@@ -26,6 +47,12 @@
   box-shadow:
     0 0 60px rgba(232, 230, 240, 0.25),
     0 0 180px rgba(139, 127, 212, 0.18);
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
 }
 
 /* Variaciones sutiles por fase, la misma luna, distinta sombra */
@@ -51,7 +78,7 @@
   text-transform: uppercase;
   letter-spacing: 0.3em;
   font-size: 0.75rem;
-  color: #8b7fd4;
+  color: #f5c76a;
   margin-bottom: 0.5rem;
 }
 
@@ -70,8 +97,8 @@ h1 {
   display: inline-block;
   padding: 0.8rem 2rem;
   border-radius: 999px;
-  border: 1px solid rgba(139, 127, 212, 0.5);
-  color: #e8e6f0;
+  border: 1px solid rgba(245, 199, 106, 0.6);
+  color: #f5c76a;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -79,7 +106,8 @@ h1 {
   transition: all 0.3s ease;
 
   &:hover {
-    background: rgba(139, 127, 212, 0.12);
-    border-color: #8b7fd4;
+    background: rgba(245, 199, 106, 0.12);
+    border-color: #f5c76a;
+    transform: translateY(-2px);
   }
 }

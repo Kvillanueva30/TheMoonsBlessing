@@ -12,6 +12,28 @@
   background: radial-gradient(ellipse at 50% -10%, #1a1a2e 0%, #05060a 60%);
 }
 
+.landing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 20%, rgba(5, 6, 10, 0.7) 80%);
+  pointer-events: none;
+}
+
+.cover {
+  position: absolute;
+  inset: 0;
+  opacity: 0.18;
+  filter: blur(2px) saturate(1.1);
+  animation: coverIn 1.4s ease-out;
+  pointer-events: none;
+}
+
+@keyframes coverIn {
+  from { opacity: 0; }
+  to { opacity: 0.18; }
+}
+
 .stars {
   position: absolute;
   inset: 0;
@@ -41,7 +63,11 @@
   width: min(42vmin, 340px);
   height: min(42vmin, 340px);
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #f4f1e6 0%, #cfc9b8 60%, #9a967d 100%);
+  background:
+    radial-gradient(circle at 62% 38%, #ddd6c4 4%, transparent 5%),
+    radial-gradient(circle at 42% 58%, #cfc9b8 5%, transparent 6%),
+    radial-gradient(circle at 72% 62%, #c6c0ad 3%, transparent 4%),
+    radial-gradient(circle at 35% 35%, #f4f1e6 0%, #cfc9b8 60%, #9a967d 100%);
   box-shadow:
     0 0 60px rgba(232, 230, 240, 0.25),
     0 0 180px rgba(139, 127, 212, 0.18);
