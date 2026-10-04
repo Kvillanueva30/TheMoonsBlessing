@@ -151,35 +151,45 @@
 
 /* --------------------------------------------------------------- pie --- */
 
-/* La firma no compite con la llamada a la acción: va fija abajo, diminuta y
-   sin filete, que es lo que la convertía en otro bloque que leer. */
+/* Firma de la autora como marca, no como bloque de texto suelto.
+   Apilada: en horizontal, el hueco entre la etiqueta y el nombre se leía como
+   un corte en la línea y parecía un fallo de maquetación. */
 .credit {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: clamp(0.9rem, 2.6svh, 1.6rem);
+  bottom: clamp(1rem, 3svh, 1.9rem);
   z-index: 2;
   display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.6rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.28rem;
   pointer-events: none;
 }
 
-/* Dorado, como el resto de los acentos. En gris se leía como una mancha
-   perdida al pie de la pantalla. */
+/* Filete corto que cierra la composición, como en una placa. */
+.credit::before {
+  content: "";
+  width: 2.1rem;
+  height: 1px;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(90deg, transparent, rgba(201, 146, 47, 0.55), transparent);
+}
+
 .credit-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.24em;
+  font-size: 0.56rem;
+  letter-spacing: 0.32em;
+  /* Sin sangría, la primera letra queda separada del resto por el tracking. */
+  text-indent: 0.32em;
   text-transform: uppercase;
-  color: #a8834a;
+  color: #9c7841;
 }
 
 .credit-name {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 1.05rem;
-  letter-spacing: 0.06em;
-  background: linear-gradient(180deg, #f0d9a8 0%, #c9922f 100%);
+  font-size: 1.02rem;
+  letter-spacing: 0.05em;
+  background: linear-gradient(180deg, #f2ddb0 0%, #c9922f 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
