@@ -1,127 +1,245 @@
 :host {
   display: block;
-  min-height: 100vh;
+  min-height: 100svh;
 }
 
+/* Todo centrado. Antes la copia iba alineada a la izquierda dentro de un
+   contenedor de 1180px, lo que dejaba 520px vacios a la derecha en pantallas
+   anchas y hacia que se leyera como descentrado. */
 .landing {
   position: relative;
-  min-height: 100vh;
   display: grid;
   place-items: center;
-  overflow: hidden;
-  background: radial-gradient(ellipse at 50% -10%, #1a1a2e 0%, #05060a 60%);
+  min-height: 100svh;
+  padding: clamp(1.5rem, 4svh, 3rem) 0;
+  background: #05060a;
+  color: #f2ece0;
+  overflow-x: hidden;
 }
 
-.landing::before {
-  content: '';
-  position: absolute;
+#motes {
+  position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 20%, rgba(5, 6, 10, 0.7) 80%);
+  z-index: 0;
   pointer-events: none;
 }
 
-.cover {
-  position: absolute;
-  inset: 0;
-  opacity: 0.18;
-  filter: blur(2px) saturate(1.1);
-  animation: coverIn 1.4s ease-out;
+.aurora {
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
   pointer-events: none;
-}
-
-@keyframes coverIn {
-  from { opacity: 0; }
-  to { opacity: 0.18; }
-}
-
-.stars {
-  position: absolute;
-  inset: 0;
+  opacity: 0.5;
   background:
-    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
-    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.7) 1px, transparent 2px),
-    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.5) 1px, transparent 2px),
-    radial-gradient(circle at 90% 60%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
-    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.7) 1px, transparent 2px);
-  background-size: 200% 200%;
-  animation: twinkle 6s ease-in-out infinite alternate;
-  pointer-events: none;
+    radial-gradient(38vw 38vw at 12% 8%, rgba(201, 146, 47, 0.16), transparent 62%),
+    radial-gradient(46vw 46vw at 88% 22%, rgba(42, 211, 198, 0.09), transparent 64%),
+    radial-gradient(52vw 52vw at 50% 108%, rgba(201, 146, 47, 0.11), transparent 60%);
+  filter: blur(28px);
 }
 
-@keyframes twinkle {
-  0% { opacity: 0.6; }
-  100% { opacity: 1; }
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+.stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.7rem, 1.8svh, 1.4rem);
+  width: min(100% - 2rem, 44rem);
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------- luna --- */
 
 .moon {
-  position: absolute;
-  top: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(42vmin, 340px);
-  height: min(42vmin, 340px);
+  position: relative;
+  /* min() con svh para que en pantallas bajas no se coma el alto disponible */
+  width: min(34vmin, 26svh, 15rem);
+  aspect-ratio: 1;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 62% 38%, #ddd6c4 4%, transparent 5%),
-    radial-gradient(circle at 42% 58%, #cfc9b8 5%, transparent 6%),
-    radial-gradient(circle at 72% 62%, #c6c0ad 3%, transparent 4%),
-    radial-gradient(circle at 35% 35%, #f4f1e6 0%, #cfc9b8 60%, #9a967d 100%);
+  /* Recorta la sombra al circulo: al desplazarla sobresale de la luna. */
+  overflow: hidden;
+  background: radial-gradient(circle at 35% 35%, #f4f1e6 0%, #cfc9b8 60%, #9a967d 100%);
   box-shadow:
     0 0 60px rgba(232, 230, 240, 0.25),
     0 0 180px rgba(139, 127, 212, 0.18);
-  opacity: 0.9;
   animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.content {
-  position: relative;
-  z-index: 1;
-  margin-top: 30vmin;
-  text-align: center;
-  padding: 0 var(--madar-space-md);
+/* La sombra es un disco del mismo tamaño que la luna, desplazado en
+   horizontal. El borde curvo del disco dibuja el terminador solo, que es
+   exactamente la forma de la fase real.
+
+   d = 0 la luna esta tapada, d = -100% la sombra sale entera por la
+   izquierda. Negativo deja la luz a la derecha (fases crecientes),
+   positivo la deja a la izquierda (fases menguantes). */
+.moon-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #05060a;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.55);
+  transition: transform 0.8s ease;
 }
+
+.phase-new-moon .moon-shadow {
+  transform: translateX(0);
+}
+.phase-waxing-crescent .moon-shadow {
+  transform: translateX(-9%);
+}
+.phase-first-quarter .moon-shadow {
+  transform: translateX(-50%);
+}
+.phase-waxing-gibbous .moon-shadow {
+  transform: translateX(-91%);
+}
+.phase-full-moon .moon-shadow {
+  transform: translateX(-100%);
+}
+.phase-waning-gibbous .moon-shadow {
+  transform: translateX(91%);
+}
+.phase-last-quarter .moon-shadow {
+  transform: translateX(50%);
+}
+.phase-waning-crescent .moon-shadow {
+  transform: translateX(9%);
+}
+
+.phase-full-moon {
+  background: radial-gradient(circle at 40% 40%, #ffffff 0%, #f4f1e6 60%, #d6d0bf 100%);
+  box-shadow:
+    0 0 90px rgba(255, 255, 255, 0.35),
+    0 0 200px rgba(139, 127, 212, 0.25);
+}
+
+.phase-new-moon {
+  box-shadow: 0 0 40px rgba(139, 127, 212, 0.2);
+}
+
+/* --------------------------------------------------------------- texto --- */
 
 .eyebrow {
-  color: #f5c76a;
+  font-size: 0.66rem;
+  letter-spacing: 0.34em;
+  color: #c9922f;
   text-transform: uppercase;
-  letter-spacing: 0.35em;
-  font-size: 0.75rem;
-  margin-bottom: var(--madar-space-sm);
 }
 
-h1 {
-  font-size: clamp(1.5rem, 4vw, 2.75rem);
-  font-weight: 400;
-  line-height: 1.3;
-  margin: 0 0 var(--madar-space-md);
+h1.title {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-weight: 300;
+  /* El segundo termino con svh evita que el titulo desborde en pantallas
+     bajas: antes con 12.5vw solo, ocupaba 168px y empujaba el boton fuera. */
+  font-size: clamp(1.9rem, min(6.4vw, 9svh), 4rem);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  background: linear-gradient(178deg, #fffdf7 4%, #f0d9a8 42%, #c9922f 82%, #8a6220 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 12px 44px rgba(201, 146, 47, 0.2));
+  text-wrap: balance;
 }
 
-.begin {
-  display: inline-block;
-  padding: 0.75rem 2.5rem;
-  border: 1px solid rgba(245, 199, 106, 0.6);
-  border-radius: 999px;
-  color: #f5c76a;
-  text-decoration: none;
+.cta-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: clamp(0.4rem, 1.4svh, 1rem);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: clamp(0.7rem, 1.6svh, 1.02rem) 1.9rem;
+  font-size: 0.76rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  transition:
-    border-color 0.3s ease,
-    background-color 0.3s ease,
-    transform 0.3s ease;
+  border-radius: 2px;
+  border: 1px solid #c9922f;
+  color: #0a0a0a;
+  background: linear-gradient(100deg, #f0d9a8, #c9922f);
+  transition: all 0.4s cubic-bezier(0.22, 0.68, 0.32, 1);
+  font-weight: 500;
+  text-decoration: none;
+}
 
-  &:hover,
-  &:focus-visible {
-    border-color: #f5c76a;
-    background-color: rgba(245, 199, 106, 0.08);
-    transform: translateY(-2px);
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(201, 146, 47, 0.34);
+}
+
+/* ----------------------------------------------------- bloque de novela --- */
+
+.book {
+  margin-top: clamp(0.6rem, 2svh, 1.6rem);
+  padding-top: clamp(0.7rem, 2svh, 1.4rem);
+  border-top: 1px solid rgba(242, 236, 224, 0.09);
+  width: 100%;
+}
+
+.book-tagline {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1rem, 2.6svh, 1.35rem);
+  color: #f2ece0;
+  opacity: 0.86;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem 2rem;
+  margin-top: clamp(0.7rem, 2svh, 1.4rem);
+}
+
+.meta {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  color: #5d5a55;
+  text-transform: uppercase;
+}
+
+.meta b {
+  display: block;
+  color: #f2ece0;
+  font-size: 0.84rem;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  text-transform: none;
+  margin-top: 0.28rem;
+}
+
+/* Si aun asi no cabe todo, el boton ya esta por encima del pliegue porque va
+   antes que este bloque. */
+@media (max-height: 420px) {
+  .book {
+    display: none;
   }
 }

@@ -1,17 +1,33 @@
 <main class="landing">
-  <div class="cover" style="background-image: url('book-cover.jpg')" aria-hidden="true"></div>
-  <div class="stars" aria-hidden="true"></div>
-  <div class="moon" aria-hidden="true"></div>
+  <canvas id="motes"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
 
-  <section class="content">
+  <section class="stage">
+    <div class="moon" [class]="'moon phase-' + todayPhase" aria-hidden="true">
+      <span class="moon-shadow"></span>
+    </div>
+
     <p class="eyebrow">{{ name }}</p>
 
     @if (results | async; as r) {
-      <h1>{{ r.landing.tagline }}</h1>
-      <a class="begin" routerLink="/birth-date">{{ r.landing.cta }}</a>
+      <h1 class="title">{{ r.landing.tagline }}</h1>
     } @else {
-      <h1>The Moon remembers the night you were born.</h1>
-      <a class="begin" routerLink="/birth-date">Begin</a>
+      <h1 class="title">The Moon remembers the night you were born.</h1>
     }
+
+    <div class="cta-row">
+      <a class="btn" routerLink="/birth-date">Comenzar</a>
+    </div>
+
+    <div class="book">
+      <p class="book-tagline">«Una bendición puede ser un regalo… o una condena.»</p>
+      <div class="meta-row">
+        <div class="meta">Autora<b>Karla Villanueva</b></div>
+        <div class="meta">Género<b>Fantasía épica · Juvenil</b></div>
+        <div class="meta">Editorial<b>D'McPherson</b></div>
+        <div class="meta">ISBN<b>9962141699</b></div>
+      </div>
+    </div>
   </section>
 </main>
