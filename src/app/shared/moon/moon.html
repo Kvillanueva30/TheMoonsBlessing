@@ -1,0 +1,119 @@
+<!--
+  Luna en estilo grabado.
+
+  Se dibuja al revés a como se lee: primero el tramado de la cara en sombra,
+  recortado con una máscara que esconde la zona iluminada, y después el
+  contorno del terminador encima. Asi el tramado nunca invade la parte que
+  tiene sol y el terminador queda limpio.
+-->
+<svg
+  class="moon-svg"
+  viewBox="-50 -50 100 100"
+  role="img"
+  [attr.aria-label]="phase().id"
+>
+  <defs>
+    <clipPath [attr.id]="clipId">
+      <path [attr.d]="litPath()" />
+    </clipPath>
+
+    <!-- La máscara de la sombra: blanca dentro del disco, negra sobre la zona
+         iluminada. El borrón es un círculo y no un rectángulo porque si fuera
+         cuadrado el tramado se saldría del disco por las esquinas. -->
+    <mask [attr.id]="darkMaskId">
+      <circle r="50" fill="#fff" />
+      <path [attr.d]="litPath()" fill="#000" />
+    </mask>
+
+    <!-- Tramado diagonal, el recurso clásico del grabado. -->
+    <pattern
+      [attr.id]="hatchId"
+      width="3.4"
+      height="3.4"
+      patternUnits="userSpaceOnUse"
+      patternTransform="rotate(38)"
+    >
+      <line x1="0" y1="0" x2="0" y2="3.4" class="hatch-line" />
+    </pattern>
+  </defs>
+
+  <g class="disc">
+    <!-- Mitad menguante: se voltea para no duplicar la geometría. -->
+    <g [attr.transform]="mirror()">
+      <!-- Cara en sombra. La máscara va aquí y no en el <svg>, porque si se
+           aplica al svg entero se ocultan también el limbo, los cráteres y el
+           terminador, que deben verse en las dos mitades. -->
+      <rect
+        x="-50"
+        y="-50"
+        width="100"
+        height="100"
+        [attr.fill]="'url(#' + hatchId + ')'"
+        [attr.mask]="'url(#' + darkMaskId + ')'"
+      />
+
+      <!-- Cráteres: solo circles, sin relleno. El segundo círculo, desplazado
+           hacia la luz, es el borde iluminado; el primero es el hueco. -->
+      <g class="craters">
+        <g transform="translate(-24 -22)">
+          <circle r="8.5" class="crater" />
+          <circle cx="-0.9" cy="-0.9" r="7.6" class="crater-rim" />
+        </g>
+        <g transform="translate(-6 -33)">
+          <circle r="5" class="crater" />
+          <circle cx="-0.7" cy="-0.7" r="4.4" class="crater-rim" />
+        </g>
+        <g transform="translate(16 -27)">
+          <circle r="6.5" class="crater" />
+          <circle cx="-0.8" cy="-0.8" r="5.7" class="crater-rim" />
+        </g>
+        <g transform="translate(-33 2)">
+          <circle r="4.2" class="crater" />
+          <circle cx="-0.6" cy="-0.6" r="3.7" class="crater-rim" />
+        </g>
+        <g transform="translate(-11 6)">
+          <circle r="10" class="crater" />
+          <circle cx="-1" cy="-1" r="8.9" class="crater-rim" />
+        </g>
+        <g transform="translate(12 -4)">
+          <circle r="3.6" class="crater" />
+          <circle cx="-0.5" cy="-0.5" r="3.1" class="crater-rim" />
+        </g>
+        <g transform="translate(30 -12)">
+          <circle r="7.2" class="crater" />
+          <circle cx="-0.9" cy="-0.9" r="6.4" class="crater-rim" />
+        </g>
+        <g transform="translate(-22 24)">
+          <circle r="6" class="crater" />
+          <circle cx="-0.8" cy="-0.8" r="5.3" class="crater-rim" />
+        </g>
+        <g transform="translate(4 28)">
+          <circle r="4.6" class="crater" />
+          <circle cx="-0.6" cy="-0.6" r="4" class="crater-rim" />
+        </g>
+        <g transform="translate(26 18)">
+          <circle r="5.4" class="crater" />
+          <circle cx="-0.7" cy="-0.7" r="4.7" class="crater-rim" />
+        </g>
+        <g transform="translate(-2 -14)">
+          <circle r="2.6" class="crater" />
+          <circle cx="-0.4" cy="-0.4" r="2.2" class="crater-rim" />
+        </g>
+      </g>
+
+      <!-- Zonas oscuras grandes (mares) marcadas solo con elipse. -->
+      <g class="maria">
+        <ellipse cx="-9" cy="-2" rx="17" ry="13" />
+        <ellipse cx="17" cy="10" rx="13" ry="10" />
+        <ellipse cx="-16" cy="16" rx="9" ry="7" />
+      </g>
+
+      <!-- El terminador, con la elipse real que sale de la iluminación. -->
+      <path [attr.d]="litPath()" class="terminator" />
+    </g>
+
+    <!-- El contorno del disco va encima de todo, y sin voltear: es el mismo
+         para las ocho fases. -->
+    <circle r="50" class="limb" />
+  </g>
+</svg>

@@ -1,11 +1,12 @@
 import { Component, inject, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MoonService } from '../../core/services/moon.service';
+import { MoonComponent } from '../../shared/moon/moon';
 import { CTA_LABEL, EXPERIENCE_NAME, EXPERIENCE_TAGLINE } from '../../core/config/experience.config';
 
 @Component({
   selector: 'app-landing',
-  imports: [RouterLink],
+  imports: [RouterLink, MoonComponent],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
@@ -21,7 +22,7 @@ export class LandingPage implements AfterViewInit {
    * quiere ver: la luna de hoy. MoonService evalúa a 12:00 UTC de ese día, así
    * que el resultado no depende de su zona horaria.
    */
-  protected readonly todayPhase = inject(MoonService).getPhaseId(toCalendarDate(new Date()));
+  protected readonly today = inject(MoonService).getPhase(toCalendarDate(new Date()));
 
   ngAfterViewInit(): void {
     this.initStars();

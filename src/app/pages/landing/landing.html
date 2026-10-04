@@ -5,9 +5,7 @@
 
   <section class="stage">
     <!-- Elemento dominante de la portada: la luna, con la fase del día real -->
-    <div class="moon" [class]="'moon phase-' + todayPhase" aria-hidden="true">
-      <span class="moon-shadow"></span>
-    </div>
+    <app-moon [phase]="today" />
 
     <h1 class="title">{{ name }}</h1>
     <p class="tagline">{{ tagline }}</p>
