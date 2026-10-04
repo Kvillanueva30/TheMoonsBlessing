@@ -49,13 +49,20 @@
   filter: blur(32px);
 }
 
-/* Velo que cierra los bordes y lleva la mirada al centro. */
+/* Velo que cierra los bordes y lleva la mirada al centro. Se suaviza en la
+   franja inferior: con el valor anterior el pie de autor caía en la zona más
+   oscura y quedaba ilegible, con aspecto de mancha. */
 .vignette {
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(ellipse 78% 68% at 50% 42%, transparent 42%, rgba(2, 3, 7, 0.62) 100%);
+  background: radial-gradient(
+    ellipse 82% 74% at 50% 40%,
+    transparent 46%,
+    rgba(2, 3, 7, 0.34) 78%,
+    rgba(2, 3, 7, 0.5) 100%
+  );
 }
 
 /* ------------------------------------------------------------- escena --- */
@@ -126,22 +133,32 @@
   }
 }
 
-/* La sombra es un disco del mismo tamaño que la luna, desplazado en
-   horizontal. El borde curvo del disco dibuja el terminador, que es la forma
-   real de la fase. d = 0 la luna está tapada; d negativo deja la luz a la
-   derecha (crecientes), positivo a la izquierda (menguantes). */
+/* La sombra cubre siempre el disco entero y se recorta con clip-path, no con
+   inset. Así los degradados se miden sobre el disco completo y caen en el
+   mismo sitio en las ocho fases; si se usara inset, en los cuartos el centro
+   del degradado se desplazaría a la mitad y la cara oscura perdería volumen. */
 .moon-shadow {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  /* Brillo terrestre: la cara oculta no es negra, es un azul gris casi negro.
-     Si fuera del color del cielo, un cuarto menguante se leería como una
-     luna fina en vez de como media luna. */
-  background: radial-gradient(circle at 42% 38%, rgba(30, 33, 45, 0.97) 62%, rgba(16, 18, 26, 0.99) 100%);
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-  /* Sin transición. La fase lunar no cambia mientras se mira, y animar el
-     inset/transform hacía que al cargar la luna barrene de una fase a otra,
-     que se lee como un fallo de render, no como una animación. */
+  /* Translúcida a propósito. Si fuera opaca, la mitad oscura sería un
+     rectángulo de color plano y la luna parecería un gráfico de sectores
+     partido en dos. Al dejar pasar la textura aparece el brillo terrestre y
+     el disco vuelve a leerse como una esfera. */
+  background:
+    /* El terminador ocupa una franja del 46% al 54%. El recorte de clip-path
+       empieza en el 50%, así que el degradado sube justo ahí y el paso de
+       luz a sombra queda en unas pocas docenas de píxeles en vez de ser un
+       corte vertical limpio, que es lo que hacía parecer un círculo partido. */
+    linear-gradient(
+      90deg,
+      rgba(24, 26, 36, 0) 44%,
+      rgba(23, 25, 35, 0.42) 50%,
+      rgba(19, 21, 31, 0.66) 58%,
+      rgba(14, 16, 25, 0.74) 100%
+    ),
+    radial-gradient(circle at 40% 36%, rgba(42, 46, 63, 0.26) 52%, rgba(11, 13, 20, 0.62) 100%);
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.34);
 }
 
 .phase-new-moon .moon-shadow {
@@ -163,23 +180,17 @@
   transform: translateX(9%);
 }
 
-/* Los cuartos necesitan otra cosa. El método del disco desplazado funciona
-   para Creciente y Gibosa, donde el terminador sí es elástico. Pero en cuarto
-   la luna está iluminada justo a la mitad y el terminador es una recta: al
-   desplazar el disco sale un arco, y la media luna se ve como una luna fina.
-   Aquí la sombra es un rectángulo plano. El overflow circular del padre lo
-   recorta por detrás, así que el resultado es un medio disco exacto. Sin
-   border-radius: eso es lo que deformaba el disco en un polígono. */
+/* En cuarto la sombra es justo media luna, con el terminador recto. Se recorta
+   con clip-path para conservar las coordenadas del degradado. Primero
+   creciente: iluminada a la derecha, así que la sombra es la mitad izquierda. */
 .phase-first-quarter .moon-shadow {
   transform: none;
-  inset: 0 50% 0 0;
-  border-radius: 0;
+  clip-path: inset(0 50% 0 0);
 }
 
 .phase-last-quarter .moon-shadow {
   transform: none;
-  inset: 0 0 0 50%;
-  border-radius: 0;
+  clip-path: inset(0 0 0 50%);
 }
 
 .phase-full-moon {
@@ -282,17 +293,17 @@
 }
 
 .credit-label {
-  font-size: 0.58rem;
+  font-size: 0.6rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #4c4a52;
+  color: #8b8598;
 }
 
 .credit-name {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   letter-spacing: 0.06em;
-  color: #6f6b78;
+  color: #b9b3c6;
 }
 
 /* En pantallas muy bajas se sacrifica el pie antes que el botón. */

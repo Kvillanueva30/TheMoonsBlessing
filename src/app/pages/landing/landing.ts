@@ -30,9 +30,11 @@ export class LandingPage implements AfterViewInit {
   /**
    * Campo de estrellas.
    *
-   * Antes esto eran partículas cálidas que subían, y se leía como polen o
-   * chispas, no como cielo. Una estrella no se desplaza: solo parpadea. Aquí
-   * hay varias temperaturas de color, y solo las más brillantes llevan halo.
+   * Antes esto eran partículas cálidas que subían, y se leía como polen. Ahora
+   * es un campo de estrellas con temperatura de color y halo solo en las más
+   * brillantes. Se combina parpadeo con una deriva vertical muy lenta: una
+   * estrella real no se mueve, pero del todo quieta la escena parece una
+   * imagen fija.
    */
   private initStars(): void {
     const canvas = document.getElementById('stars') as HTMLCanvasElement | null;
@@ -45,7 +47,10 @@ export class LandingPage implements AfterViewInit {
       y: number;
       r: number;
       base: number;
-      speed: number;
+      /** Parpadeo, en rad/ms. */
+      twinkle: number;
+      /** Deriva vertical, en px/ms. */
+      drift: number;
       phase: number;
       color: string;
       halo: boolean;
@@ -68,14 +73,17 @@ export class LandingPage implements AfterViewInit {
       // Una estrella cada ~3400 px², con tope para pantallas enormes.
       const count = Math.min(460, Math.round((canvas.width * canvas.height) / 3400));
       stars = Array.from({ length: count }, () => {
-        // El exponente reparta el peso hacia las pequeñas, como el cielo real.
+        // El exponente reparte el peso hacia las pequeñas, como el cielo real.
         const r = Math.random() ** 2.6 * 1.5 + 0.32;
         return {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           r,
-          base: 0.28 + Math.random() * 0.62,
-          speed: 0.0004 + Math.random() * 0.0011,
+          base: 0.3 + Math.random() * 0.6,
+          // Periodo de 1,8 a 5 s. Antes iba de 6 a 25 s y no se perceive.
+          twinkle: 0.0012 + Math.random() * 0.0023,
+          // 0,6 a 2,4 px/s. Se ve el movimiento sin que parezca que nieva.
+          drift: 0.0006 + Math.random() * 0.0018,
           phase: Math.random() * Math.PI * 2,
           color: pickColor(),
           halo: r > 1.05,
@@ -89,11 +97,15 @@ export class LandingPage implements AfterViewInit {
     const draw = (t: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (const s of stars) {
-        // Parpadeo lento y desincronizado. Sin movimiento vertical.
-        const alpha = s.base * (0.72 + 0.28 * Math.sin(t * s.speed + s.phase));
+        s.y -= s.drift;
+        if (s.y < -4) {
+          s.y = canvas.height + 4;
+          s.x = Math.random() * canvas.width;
+        }
+        const alpha = s.base * (0.6 + 0.4 * Math.sin(t * s.twinkle + s.phase));
         if (s.halo) {
           const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 5);
-          const hex = Math.round(alpha * 90)
+          const hex = Math.round(alpha * 95)
             .toString(16)
             .padStart(2, '0');
           g.addColorStop(0, `${s.color}${hex}`);
