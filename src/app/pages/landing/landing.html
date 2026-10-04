@@ -1,0 +1,15 @@
+<main class="landing">
+  <div class="moon" aria-hidden="true"></div>
+
+  <section class="content">
+    <p class="eyebrow">{{ name }}</p>
+
+    @if (results | async; as r) {
+      <h1>{{ r.landing.tagline }}</h1>
+      <a class="begin" routerLink="/birth-date">{{ r.landing.cta }}</a>
+    } @else {
+      <h1>The Moon remembers the night you were born.</h1>
+      <a class="begin" routerLink="/birth-date">Begin</a>
+    }
+  </section>
+</main>
