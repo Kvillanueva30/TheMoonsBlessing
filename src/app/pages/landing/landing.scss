@@ -38,7 +38,9 @@
   margin: clamp(1.1rem, 3svh, 2rem) 0 0;
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-weight: 300;
-  font-size: clamp(1.45rem, min(4.6vw, 5.8svh), 3rem);
+  /* El minimo sube a 1.7rem: en movil el titulo se leia pequeno al lado de
+     la luna, que es lo que domina la pantalla. El techo no cambia. */
+  font-size: clamp(1.7rem, min(4.6vw, 5.8svh), 3rem);
   line-height: 1.14;
   letter-spacing: 0.015em;
   background: linear-gradient(178deg, #fffdf7 4%, #f0d9a8 44%, #c9922f 84%, #8a6220 100%);
@@ -58,10 +60,10 @@
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-style: italic;
   font-weight: 300;
-  /* El minimo sube a 1.05rem: en movil Cormorant se leia pequeno por ser
-     serif delgada, no por falta de tamano. El techo se mantiene igual para
-     que en escritorio no cambie nada. */
-  font-size: clamp(1.05rem, min(2.4vw, 2.5svh), 1.25rem);
+  /* Sube a 1.15rem de minimo y 1.35rem de techo. Cormorant es serif delgada:
+     a igual tamano que una grotesca se perceptiblemente mas pequena, asi que
+     necesita mas cuerpo, no solo mas ancho. */
+  font-size: clamp(1.15rem, min(2.6vw, 2.5svh), 1.35rem);
   line-height: 1.55;
   color: #a9a4b8;
   text-wrap: balance;
@@ -80,10 +82,11 @@
   align-items: center;
   gap: 0.7rem;
   padding: clamp(0.72rem, 1.7svh, 1.05rem) 2rem;
-  /* 0.74rem era pequeno de mas en movil, donde el tracking amplio hace que
-     el texto se lea aun mas corto. Sube a 0.8rem. */
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
+  /* 0.8rem seguia pequeno. El tracking de 0.18em hace que el texto se lea
+     mas corto de lo que es, asi que el cuerpo sube a 0.95rem y el tracking
+     baja un poco para compensar. Tamano de boton comodo en movil. */
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   border-radius: 2px;
   border: 1px solid #c9922f;
@@ -136,19 +139,20 @@
 }
 
 .credit-label {
-  /* Sube de 0.52rem: con 0.3em de tracking la firma era casi ilegible en
-     movil. Sigue siendo la linea mas discreta, pero se lee. */
-  font-size: 0.62rem;
-  letter-spacing: 0.26em;
+  /* 0.62rem seguia ilegible en movil con 0.26em de tracking. Sube a 0.78rem
+     y el tracking baja a 0.2em: en cuerpo pequeno, tracking amplio consume
+     el ancho y deja huecos que rompen la palabra. */
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
   /* Compensa el tracking, o la primera letra queda suelta. */
-  text-indent: 0.26em;
+  text-indent: 0.2em;
   text-transform: uppercase;
   color: rgba(157, 151, 172, 0.78);
 }
 
 .credit-name {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   letter-spacing: 0.05em;
   color: rgba(216, 208, 228, 0.86);
 }
