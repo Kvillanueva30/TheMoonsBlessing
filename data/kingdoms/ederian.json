@@ -1,9 +1,15 @@
 {
   "id": "ederian",
   "name": "Ederian",
-  "type": "mixed",
-  "typeStatus": "confirmed",
-  "typeNote": "El brief lo declara explícitamente: uno de los reinos donde conviven Manskling y Diubaks.",
+  "natures": [
+    "manskling",
+    "diubak"
+  ],
+  "natureRule": {
+    "source": "Estado actual de Madar, confirmado por la autora.",
+    "note": "En Ederian conviven manskling y diubak. La elección entre ambas depende del criterio de la bendición, no del reino.",
+    "caution": "La naturaleza NO es moralidad. Cazut no significa malo y Manskling/Diubak no significa bueno."
+  },
   "founder": {
     "name": "Lucius",
     "title": "Primer rey"
@@ -38,12 +44,30 @@
     "comunidad"
   ],
   "shadows": [
-    { "from": "valentía", "to": "imprudencia" },
-    { "from": "responsabilidad", "to": "sobrecarga" },
-    { "from": "protección", "to": "control" },
-    { "from": "nobleza", "to": "rigidez moral" },
-    { "from": "liderazgo", "to": "paternalismo" },
-    { "from": "deber", "to": "sacrificio excesivo" }
+    {
+      "from": "valentía",
+      "to": "imprudencia"
+    },
+    {
+      "from": "responsabilidad",
+      "to": "sobrecarga"
+    },
+    {
+      "from": "protección",
+      "to": "control"
+    },
+    {
+      "from": "nobleza",
+      "to": "rigidez moral"
+    },
+    {
+      "from": "liderazgo",
+      "to": "paternalismo"
+    },
+    {
+      "from": "deber",
+      "to": "sacrificio excesivo"
+    }
   ],
   "guardrail": "Ederian NO es el reino bueno. Sus valores tienen sombras y el reino no implica moralidad.",
   "lightDarkness": {

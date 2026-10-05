@@ -1,9 +1,15 @@
 {
   "id": "tralan",
   "name": "Tralan",
-  "type": "cazut-exclusive",
-  "typeStatus": "confirmed",
-  "typeNote": "El brief lo declara explícitamente: 'Reino Cazut'.",
+  "natures": [
+    "manskling",
+    "diubak"
+  ],
+  "natureRule": {
+    "source": "Estado actual de Madar, confirmado por la autora.",
+    "note": "En Tralan conviven manskling y diubak. La elección entre ambas depende del criterio de la bendición, no del reino.",
+    "caution": "La naturaleza NO es moralidad. Cazut no significa malo y Manskling/Diubak no significa bueno."
+  },
   "founder": {
     "name": "Ross",
     "title": "Primer rey"
@@ -36,13 +42,34 @@
     "protección"
   ],
   "shadows": [
-    { "from": "adaptación", "to": "oportunismo" },
-    { "from": "supervivencia", "to": "traición" },
-    { "from": "prudencia", "to": "cobardía" },
-    { "from": "lealtad", "to": "dependencia" },
-    { "from": "flexibilidad", "to": "falta de principios" },
-    { "from": "sensibilidad", "to": "ansiedad" },
-    { "from": "protección", "to": "sometimiento" }
+    {
+      "from": "adaptación",
+      "to": "oportunismo"
+    },
+    {
+      "from": "supervivencia",
+      "to": "traición"
+    },
+    {
+      "from": "prudencia",
+      "to": "cobardía"
+    },
+    {
+      "from": "lealtad",
+      "to": "dependencia"
+    },
+    {
+      "from": "flexibilidad",
+      "to": "falta de principios"
+    },
+    {
+      "from": "sensibilidad",
+      "to": "ansiedad"
+    },
+    {
+      "from": "protección",
+      "to": "sometimiento"
+    }
   ],
   "guardrail": "Tralan NO es el reino malo. El problema de Ross es que evita enfrentarse a si mismo, no que sea cruel.",
   "lightDarkness": {

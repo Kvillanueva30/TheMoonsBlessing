@@ -1,9 +1,15 @@
 {
   "id": "xorian",
   "name": "Xorian",
-  "type": "cazut-exclusive",
-  "typeStatus": "confirmed",
-  "typeNote": "El brief lo declara explícitamente: 'Reino Cazut'.",
+  "natures": [
+    "manskling",
+    "diubak"
+  ],
+  "natureRule": {
+    "source": "Estado actual de Madar, confirmado por la autora.",
+    "note": "En Xorian conviven manskling y diubak. La elección entre ambas depende del criterio de la bendición, no del reino.",
+    "caution": "La naturaleza NO es moralidad. Cazut no significa malo y Manskling/Diubak no significa bueno."
+  },
   "founder": {
     "name": "Deron",
     "title": "Primer rey"
@@ -43,13 +49,34 @@
     "respeto por la vida"
   ],
   "shadows": [
-    { "from": "paz", "to": "pasividad" },
-    { "from": "moderación", "to": "conformismo" },
-    { "from": "prudencia", "to": "aislamiento" },
-    { "from": "observación", "to": "indiferencia" },
-    { "from": "protección", "to": "sobreprotección" },
-    { "from": "armonía", "to": "evitar conflictos" },
-    { "from": "estabilidad", "to": "miedo al cambio" }
+    {
+      "from": "paz",
+      "to": "pasividad"
+    },
+    {
+      "from": "moderación",
+      "to": "conformismo"
+    },
+    {
+      "from": "prudencia",
+      "to": "aislamiento"
+    },
+    {
+      "from": "observación",
+      "to": "indiferencia"
+    },
+    {
+      "from": "protección",
+      "to": "sobreprotección"
+    },
+    {
+      "from": "armonía",
+      "to": "evitar conflictos"
+    },
+    {
+      "from": "estabilidad",
+      "to": "miedo al cambio"
+    }
   ],
   "guardrail": "Xorian NO es el reino bueno ni el pacífico por excelencia. Su acceso es el aislamiento. Ederian, Bastia, Tralan, Tradia y Helia tambien tienen sombras.",
   "lightDarkness": {

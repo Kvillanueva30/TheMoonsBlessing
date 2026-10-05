@@ -1,9 +1,14 @@
 {
   "id": "tradia",
   "name": "Tradia",
-  "type": "cazut-exclusive",
-  "typeStatus": "confirmed",
-  "typeNote": "El brief lo declara explícitamente: 'Reino Cazut'. Aclaracion: en la seccion 16 el encabezado dice 'Primer rey: Halik' y a continuacion describe a Halik y Tarik como los gemelos.",
+  "natures": [
+    "cazut"
+  ],
+  "natureRule": {
+    "source": "Estado actual de Madar, confirmado por la autora.",
+    "note": "La naturaleza de Tradia es cazut por la maldición del reino. No hay alternativa en este estado del mundo.",
+    "caution": "La naturaleza NO es moralidad. Cazut no significa malo y Manskling/Diubak no significa bueno."
+  },
   "founder": {
     "name": "Halik",
     "title": "Primer rey"
@@ -38,13 +43,34 @@
     "protección"
   ],
   "shadows": [
-    { "from": "inteligencia", "to": "manipulación" },
-    { "from": "planificación", "to": "control" },
-    { "from": "autocontrol", "to": "represión" },
-    { "from": "observación", "to": "distanciamiento" },
-    { "from": "protección", "to": "interferencia" },
-    { "from": "conocimiento", "to": "arrogancia" },
-    { "from": "prudencia", "to": "inacción" }
+    {
+      "from": "inteligencia",
+      "to": "manipulación"
+    },
+    {
+      "from": "planificación",
+      "to": "control"
+    },
+    {
+      "from": "autocontrol",
+      "to": "represión"
+    },
+    {
+      "from": "observación",
+      "to": "distanciamiento"
+    },
+    {
+      "from": "protección",
+      "to": "interferencia"
+    },
+    {
+      "from": "conocimiento",
+      "to": "arrogancia"
+    },
+    {
+      "from": "prudencia",
+      "to": "inacción"
+    }
   ],
   "guardrail": "Tradia NO es el reino de los sabios Bondados. Halik sigue a Silas en la guerra, y su inteligencia puede volverse manipulación.",
   "lightDarkness": {

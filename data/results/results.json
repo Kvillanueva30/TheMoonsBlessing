@@ -2,76 +2,70 @@
   "$comment": "Textos de resultado. Almacena naturaleza, origen, afinidad y caracter. NO contiene resultados hardcodeados por reino en los componentes: la UI lee de aqui.",
   "version": "0.1.0",
   "axes": {
-    "KINGDOM": "Reino, resuelto por afinidad. Ver kingdomsAffinity.",
-    "MOON": "Fase lunar de nacimiento. Ver moon/moon-phases.json.",
-    "NATURE": "Manskling, Diubak o Cazut. Ver data/lore-rules.json para la politica vigente.",
-    "ORIGIN": "Como se origino esa naturaleza. Ver origins.",
-    "AFFINITY": "Eje Luz / Oscuridad. NO es moralidad.",
-    "CHARACTER": "Rasgos dominantes. Ver traits/traits.json."
+    "KINGDOM": "Reino, resuelto por afinidad con un legado. NUNCA elegido por el visitante.",
+    "MOON": "Fase lunar de nacimiento. Capa simbolica. SIN ninguna arista hacia reino o naturaleza.",
+    "NATURE": "RESULTADO PRINCIPAL: Manskling, Diubak o Cazut. Ver lore-rules.json -> policies.kingdomToNature y policies.blessing.",
+    "ORIGIN": "Como se origino esa naturaleza: bendicion, linaje o maldicion. Ver origins.",
+    "DESIRE": "Lo que el visitante quiere. NO determina la naturaleza por si solo.",
+    "NEED": "Lo que realmente necesita por dentro. Junto con DESIRE, forma el criterio de la bendicion.",
+    "CHARACTER": "Rasgos dominantes. Ver traits/traits.json. NO determina la naturaleza."
   },
   "headline": {
     "en": "THE MOON HAS REVEALED YOUR NATURE",
     "es": "LA LUNA HA REVELADO TU NATURALEZA",
     "note": "Confirmado en el brief. Es el encabezado del resultado final."
   },
-  "natures": [
-    {
-      "id": "manskling",
-      "label": { "en": "Manskling", "es": "Manskling" },
-      "definition": "Persona que permanece Manskling. No recibio una transformacion.",
-      "loreRule": "Todos comienzan siendo Manskling. No fueron bendecidos ni maldecidos."
+  "natures": {
+    "manskling": {
+      "label": "Manskling",
+      "headline": "Eres un Manskling.",
+      "meaning": "Naciste Manskling y la Diosa Luna no vio en ti una necesidad que solo ella pudiera llenar.",
+      "note": "Gil es Manskling y esta en paz con su vida. Eso no lo hace \"bueno\": significa que esta completo. Benny tambien es Manskling, y sacrifica y nunca traiciona. La naturaleza no sigue al caracter."
     },
-    {
-      "id": "diubak-transformed",
-      "label": { "en": "Diubak - Transformed", "es": "Diubak - Transformado" },
-      "definition": "Manskling que recibio la bendicion de la Diosa Luna y se transformo durante la ceremonia.",
-      "originId": "manskling-to-diubak"
+    "diubak": {
+      "label": "Diubak",
+      "headline": "Eres un Diubak.",
+      "meaning": "La Diosa Luna vio en ti una necesidad que tu mismo no puedes resolver, y te acerco a su naturaleza.",
+      "note": "No porque fueras bueno ni superior. Darya fue bendecida por una necesidad que ni ella misma entendia y luego se corrompio. Su naturaleza nunca dejo de ser Diubak."
     },
-    {
-      "id": "diubak-lineage",
-      "label": { "en": "Diubak - Lineage", "es": "Diubak - Linaje" },
-      "definition": "Persona que pertenece a una linea Diubak. Los primeros Diubaks fueron creados por la Diosa Luna y sus descendientes heredan esta naturaleza.",
-      "originId": "diubak-by-lineage"
-    },
-    {
-      "id": "cazut",
-      "label": { "en": "Cazut", "es": "Cazut" },
-      "definition": "Persona perteneciente a una linea maldita. Los primeros Cazuts surgieron como consecuencia de una maldicion, que luego se transmitio mediante el linaje.",
-      "originId": "cazut-by-birth"
+    "cazut": {
+      "label": "Cazut",
+      "headline": "Eres un Cazut.",
+      "meaning": "Naciste bajo la maldicion. Tu naturaleza viene del reino, no de lo que hay en ti.",
+      "note": "Alden es Cazut y noble. Cazarut no es maldad. Un Cazut puede tener tanta luz como un Diubak, y puede ser la persona mas dulce del municipio."
     }
-  ],
-  "origins": [
-    {
-      "id": "manskling-to-diubak",
-      "label": { "en": "Manskling > Diubak", "es": "Manskling > Diubak" },
-      "narrative": {
-        "en": "You were born Manskling. But when the Moon called, your body answered. You became Diubak.",
-        "es": "Naciste Manskling. Pero cuando la Luna llamo, tu cuerpo respondio. Te convertiste en Diubak."
-      }
+  },
+  "origins": {
+    "blessing": {
+      "id": "blessing",
+      "label": "Por la bendicion de la Diosa Luna",
+      "appliesTo": [
+        "manskling",
+        "diubak"
+      ],
+      "rule": "Antes de la Primera Guerra la Diosa bendijo a determinadas personas. Criterio: deseo vs necesidad.",
+      "note": "Un regalo, no un premio. Ver policies.blessing."
     },
-    {
-      "id": "diubak-by-lineage",
-      "label": { "en": "Diubak by lineage", "es": "Diubak por linaje" },
-      "narrative": {
-        "en": "The Moon did not change you. Your blood already carried the legacy of the first Diubaks.",
-        "es": "La Luna no te cambio. Tu sangre ya cargaba con la herencia de los primeros Diubaks."
-      }
+    "lineage": {
+      "id": "lineage",
+      "label": "Por linaje",
+      "appliesTo": [
+        "diubak",
+        "cazut"
+      ],
+      "rule": "Hay naturalezas que se heredan en la familia sin que la Diosa bendiga a cada individuo.",
+      "note": "Rayden desciende de Lucius, el primero, y toda su familia es Diubak. NO es un caso de la bendicion psicologica. El visitante del test NO trae linaje: este origen no se usa como mecanismo, solo como referencia narrativa."
     },
-    {
-      "id": "cazut-by-birth",
-      "label": { "en": "Inherited", "es": "Heredado" },
-      "narrative": {
-        "en": "The curse was never placed upon you. It was inherited.",
-        "es": "La maldicion nunca fue puesta sobre ti. Fue heredada."
-      }
-    },
-    {
-      "id": "remained-manskling",
-      "label": { "en": "Manskling", "es": "Manskling" },
-      "narrative": null,
-      "todo": "TODO: el brief NO proporciona el texto narrativo para el caso en que la persona permanece Manskling. NO inventar."
+    "curse": {
+      "id": "curse",
+      "label": "Por la maldicion del reino",
+      "appliesTo": [
+        "cazut"
+      ],
+      "rule": "Despues de la Primera Guerra, tres reinos quedaron afectados y sus habitantes nacen Cazut.",
+      "note": "Alden nacio bajo esa maldicion. Cazut por nacimiento, nunca por ceremonia."
     }
-  ],
+  },
   "reveals": {
     "kingdom": {
       "en": "Your choices have revealed where you belong.",
@@ -82,10 +76,19 @@
     "todo": "TODO: escribir el texto que introduce la ceremonia, especifico por reino. El brief establece que cada reino tiene la suya."
   },
   "lightDarknessAxis": {
-    "values": ["light", "darkness"],
-    "note": "El brief NO define nombres, textos ni umbrales para este eje. Solo establece que luz y oscuridad son complementarias y que la naturaleza NO determina la moralidad.",
-    "todo": "TODO: definir como se calcula, como se nombra en pantalla y que textos narrativos acompañan a cada valor.",
-    "constraint": "Este eje NO debe describir bondad o maldad. Ver el caso de Alden en lore-rules.json."
+    "status": "REPLACED_BY_BLESSING",
+    "resolvedOn": "2026-10-05",
+    "was": "Un eje Luz/Oscuridad con valores light y darkness.",
+    "why": [
+      "La naturaleza NO se reduce a una escala moral.",
+      "\"Mucha luz = Diubak\" es INCORRECTO: Alden puede tener mucha luz y ser Cazut.",
+      "\"Oscuridad = Cazut\" tambien es INCORRECTO.",
+      "Darya tiene mucha oscuridad Y mucha luz. La luz no desaparece por estar cubierta.",
+      "La Diosa Luna ve lo que quieres frente a lo que necesitas, no quanto moral hay en ti."
+    ],
+    "replacement": "El criterio de la bendicion: DESIRE (wishOutside) frente a NEED (innerNeed). Ver policies.blessing.",
+    "innerLight": "La Luz Interior sigue existiendo como CAPA NARRATIVA que el texto final interpreta. Nunca como puntuacion, barra ni porcentaje.",
+    "hardConstraint": "El motor NO debe emitir ninguna regla del tipo \"Luz Interior alta = Diubak\" ni \"Oscuridad = Cazut\". Ver policies.blessing.forbiddenMappings."
   },
   "landing": null,
   "landingNote": "El copy de marca del landing (nombre, frase principal y texto del boton) vive en src/app/core/config/experience.config.ts, no aqui. Es branding, no lore, y asi el heroe se ve sin esperar a la red.",
