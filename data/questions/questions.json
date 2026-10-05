@@ -38,18 +38,58 @@
     "Ninguna pregunta debe asumir una fecha en Madar. El estado actual es el único."
   ],
   "coverageReport": {
-    "note": "Generado a mano. Recalcular al añadir preguntas.",
-    "minStrongOptionsPerKingdom": 4,
-    "strongOptionsPerKingdom": {
-      "ederian": 3,
-      "bastia": 2,
-      "tralan": 3,
-      "xorian": 2,
-      "tradia": 5,
-      "helia": 2
+    "note": "Numeros CALCULADOS por enumeracion exhaustiva de las 4^11 combinaciones posibles, no estimaciones. Recalcular al cambiar el banco.",
+    "generatedFor": {
+      "questions": 11,
+      "options": 44,
+      "combinations": 4194304
     },
-    "verdict": "INSUFICIENTE — 4 de 6 reinos por debajo del mínimo. Faltan opciones fuertes de Bastia, Xorian y Helia.",
-    "blocksRelease": true
+    "tieRate": 10.7,
+    "strongOptionsPerKingdom": {
+      "ederian": 8,
+      "bastia": 3,
+      "tralan": 3,
+      "xorian": 6,
+      "tradia": 0,
+      "helia": 0
+    },
+    "maxAffinityPerKingdom": {
+      "ederian": 29,
+      "bastia": 25,
+      "tralan": 25,
+      "xorian": 27,
+      "tradia": 16,
+      "helia": 18
+    },
+    "winRatePercent": {
+      "ederian": 28.52,
+      "bastia": 36.06,
+      "tralan": 14.83,
+      "xorian": 18.67,
+      "tradia": 0.01,
+      "helia": 1.91
+    },
+    "winCounts": {
+      "ederian": 1196380,
+      "bastia": 1512312,
+      "tralan": 621964,
+      "xorian": 783138,
+      "tradia": 509,
+      "helia": 80001
+    },
+    "verdict": "DEFICIENTE. Tradia gana 0.01% de las veces y Helia 1.9%: son casi inalcanzables.",
+    "diagnosis": [
+      "Tradia tiene 0 opciones con afinidad fuerte y su afinidad maxima es 16, frente a 29 del mas alto.",
+      "Los tres reinos Cazut compiten entre si, pero sus afinidades estan tan bajas que nunca superan a los reinos Manskling/Diubak.",
+      "Un visitante que responda de forma realista NO llegara nunca a Tradia ni casi nunca a Helia."
+    ],
+    "blocksRelease": true,
+    "todo": [
+      "TODO CRITICO: añadir preguntas con afinidad fuerte de Tradia (Halik).",
+      "TODO CRITICO: añadir preguntas con afinidad fuerte de Helia (Tarik).",
+      "TODO: revisar el reparto. 28.5/36.1/14.8/18.7 no es uniforme y Tradia/Helia son la cola.",
+      "TODO: resolver el 450887 empate (10.7% de los casos). El motor desempata alfabeticamente, lo que sesga hacia Ederian."
+    ]
   },
   "questions": [
     {
