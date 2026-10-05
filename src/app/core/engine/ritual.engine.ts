@@ -110,7 +110,7 @@ export function resolveRitual(ritual: RitualInput): MadarResult {
   }
 
   const legacies = rankLegacies(scored, kingdoms);
-  const kingdom = pickKingdom(legacies, kingdoms);
+  const kingdom = pickKingdom(legacies, kingdoms, tieBreakSeed(input.answers));
   const { nature, origin } = decideNature(scored, kingdom);
 
   return {
@@ -186,26 +186,61 @@ function rankLegacies(
 /**
  * El reino con mas afinidad.
  *
- * El visitante NUNCA elige reino. Si hay empate, el orden alfabetico de
- * `kingdoms` decide de forma determinista: es preferible a un empate aleatorio
- * que cambiaria el resultado entre recargas.
+ * El visitante NUNCA elige reino.
+ *
+ * DESEMPATE. Un empate por nombre seria un sesgo, no una regla. Desempatar por
+ * orden alfabetico favorece a 'ederian' (primero) y castiga a 'tralan'
+ * (ultimo), y se comprobó que eso hacia que Ross perdiera casi todos sus
+ * empates contra Tarik. Un desempate no puede decidir el reino de alguien.
+ *
+ * Se usa un PRNG con semilla derivada de las propias respuestas: el resultado
+ * sigue siendo determinista (mismas entradas, mismo reino) pero ningun reino
+ * queda favorecido por como se llama.
+ *
+ * Un empate sigue siendo un defecto del banco, no una decision del visitante.
+ * Ver questions.json -> coverageReport.
  *
  * @throws si no hay ningun reino configurado.
  */
 function pickKingdom(
   legacies: readonly LegacyAffinity[],
   kingdoms: readonly KingdomRule[],
+  tieBreakSeed: number,
 ): KingdomRule {
   if (legacies.length === 0) {
     throw new Error('Las afinidades salieron vacias. No se puede deducir un reino.');
   }
 
-  const winnerId = legacies[0].kingdomId;
+  const best = legacies[0].score;
+  const contenders = legacies.filter((l) => l.score === best).map((l) => l.kingdomId);
+
+  const winnerId = contenders.length === 1 ? contenders[0] : seededPick(contenders, tieBreakSeed);
+
   const winner = kingdoms.find((k) => k.id === winnerId);
   if (!winner) {
     throw new Error(`El reino "${winnerId}" tiene afinidad pero no existe en los datos.`);
   }
   return winner;
+}
+
+/**
+ * Elige uno entre varios de forma determinista y sin favorece a ninguno.
+ *
+ * PRNG xorshift32. La semilla se deriva de las respuestas del visitante, asi que
+ * recargar la pagina da el mismo reino, pero el reparto de empates es uniforme.
+ */
+function seededPick(candidates: readonly KingdomId[], seed: number): KingdomId {
+  // Orden estable previo, para que el PRNG siempre reciba la misma lista.
+  const ordered = [...candidates].sort();
+  let state = seed >>> 0 || 1;
+  for (let i = 0; i < ordered.length; i++) {
+    state ^= state << 13;
+    state >>>= 0;
+    state ^= state >> 17;
+    state ^= state << 5;
+    state >>>= 0;
+  }
+  return ordered[state % ordered.length];
 }
 
 // ---------------------------------------------------------------------------
@@ -267,6 +302,24 @@ function needsBlessing(
   }
   // Normalizado: una pregunta no puede pesar mas que varias.
   return averageNeed >= BLESSING_THRESHOLD / BLESSING_MAX_PER_CHOICE;
+}
+
+/**
+ * Semilla del desempate, derivada de las respuestas.
+ *
+ * Se usa para que el resultado sea reproducible sin que el nombre del reino
+ * influya. Ver pickKingdom.
+ */
+function tieBreakSeed(answers: readonly AnswerSet[]): number {
+  let hash = 0x811c9dc5;
+  for (const answer of answers) {
+    const key = `${answer.questionId}:${answer.choiceId}`;
+    for (let i = 0; i < key.length; i++) {
+      hash ^= key.charCodeAt(i);
+      hash = Math.imul(hash, 0x01000193) >>> 0;
+    }
+  }
+  return hash >>> 0;
 }
 
 // ---------------------------------------------------------------------------

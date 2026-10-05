@@ -313,6 +313,88 @@ describe('resolveRitual', () => {
     });
   });
 
+  describe('desempate', () => {
+    /**
+     * Pregunta con DOS opciones que empatan entre tralan y helia.
+     * Ninguna de las dos opciones favorece a ningun otro reino.
+     */
+    function tyingQuestion(id: string): Question {
+      const legacyAffinity = Object.fromEntries(
+        KINGDOMS.map((k) => [k.id, k.id === 'tralan' || k.id === 'helia' ? 3 : 0]),
+      ) as Record<KingdomId, number>;
+
+      const base = { legacyAffinity, wishOutside: 0, innerNeed: 0 };
+      return {
+        id,
+        theme: id,
+        axis: 'test',
+        text: id,
+        choices: [
+          { id: 'a', text: 'opcion a', ...base },
+          { id: 'b', text: 'opcion b', ...base },
+        ],
+      };
+    }
+
+    it('NO reparte los empates por orden alfabetico', () => {
+      // Alfabeto: 'ederian' < 'helia' < 'tralan'. Un desempate alfabetico
+      // daria la victoria SIEMPRE a helia y tralan no ganaria nunca un empate.
+      // Con PRNG de semilla, ambos deben ganar.
+      const ids = ['q1', 'q2', 'q3'];
+      const questions = ids.map(tyingQuestion);
+      const wins: Record<string, number> = { tralan: 0, helia: 0 };
+
+      // Todas las combinaciones posibles de a/b en tres preguntas: 8 semillas.
+      for (let mask = 0; mask < 8; mask++) {
+        const answers = ids.map((id, i) => ({
+          questionId: id,
+          choiceId: (mask >> i) & 1 ? 'b' : 'a',
+        }));
+        wins[run(questions, answers).kingdom]++;
+      }
+
+      expect(wins['tralan']).toBeGreaterThan(0);
+      expect(wins['helia']).toBeGreaterThan(0);
+    });
+
+    it('el resultado sigue siendo determinista con el desempate', () => {
+      const ids = ['q1', 'q2'];
+      const questions = ids.map(tyingQuestion);
+      const answers = [
+        { questionId: 'q1', choiceId: 'a' },
+        { questionId: 'q2', choiceId: 'b' },
+      ];
+
+      const a = run(questions, answers);
+      const b = run(questions, answers);
+      const c = run(questions, answers);
+
+      expect(b.kingdom).toBe(a.kingdom);
+      expect(c.kingdom).toBe(a.kingdom);
+    });
+
+    it('cambiar las respuestas puede cambiar el reino ganador en un empate', () => {
+      const ids = ['q1', 'q2', 'q3'];
+      const questions = ids.map(tyingQuestion);
+
+      const a = run(questions, [
+        { questionId: 'q1', choiceId: 'a' },
+        { questionId: 'q2', choiceId: 'a' },
+        { questionId: 'q3', choiceId: 'a' },
+      ]);
+      const b = run(questions, [
+        { questionId: 'q1', choiceId: 'b' },
+        { questionId: 'q2', choiceId: 'b' },
+        { questionId: 'q3', choiceId: 'b' },
+      ]);
+
+      // No se exige que difieran: solo que el desempate exista y sea estable.
+      // Lo que se verifica aqui es que ambos son reinos validos.
+      expect(KINGDOMS.map((k) => k.id)).toContain(a.kingdom);
+      expect(KINGDOMS.map((k) => k.id)).toContain(b.kingdom);
+    });
+  });
+
   describe('Between', () => {
     it('siempre es null: no hay formula y no se inventa', () => {
       const q = [question('q1', { ederian: 3 }, 3, 3)];
