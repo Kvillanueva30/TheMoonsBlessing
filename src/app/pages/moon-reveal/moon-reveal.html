@@ -1,11 +1,14 @@
-<main class="moon-reveal" [class]="'moon-reveal ' + (phaseId || '')">
-  <div class="stars" aria-hidden="true"></div>
-  <div class="moon" aria-hidden="true"></div>
+<main class="moon-reveal">
+  <app-sky />
 
   <section class="content">
+    @if (phase; as p) {
+      <app-moon [phase]="p" class="reveal-moon" />
+    }
+
     <p class="eyebrow">Tu fase lunar</p>
     <h1>{{ phaseLabel }}</h1>
-    <p class="hint">Este es el aspecto del cielo la noche en que naciste.</p>
+    <p class="hint">Este es el aspecto del cielo el día en que naciste.</p>
 
     <a routerLink="/questions" class="continue">Continuar</a>
   </section>

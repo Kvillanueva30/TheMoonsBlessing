@@ -1,113 +1,97 @@
 :host {
   display: block;
-  min-height: 100vh;
+  min-height: 100svh;
 }
 
 .moon-reveal {
   position: relative;
-  min-height: 100vh;
   display: grid;
   place-items: center;
-  background: radial-gradient(ellipse at 50% -10%, #0b0d14 0%, #05060a 70%);
+  min-height: 100svh;
+  padding: clamp(1.5rem, 4svh, 3rem) 0;
   color: #e8e6f0;
   text-align: center;
-  padding: 2rem;
   overflow: hidden;
 }
 
-.stars {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
-    radial-gradient(circle at 35% 55%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-    radial-gradient(circle at 55% 15%, rgba(255, 255, 255, 0.7) 1px, transparent 2px),
-    radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.5) 1px, transparent 2px),
-    radial-gradient(circle at 95% 65%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
-    radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-    radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.7) 1px, transparent 2px);
-  animation: twinkle 8s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-@keyframes twinkle {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-.moon {
-  position: absolute;
-  top: 12%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(40vmin, 300px);
-  height: min(40vmin, 300px);
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #f4f1e6 0%, #cfc9b8 60%, #9a967d 100%);
-  box-shadow:
-    0 0 60px rgba(232, 230, 240, 0.25),
-    0 0 180px rgba(139, 127, 212, 0.18);
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-10px); }
-}
-
-/* Variaciones sutiles por fase, la misma luna, distinta sombra */
-.moon-reveal.new-moon .moon {
-  background: radial-gradient(circle, #111216 0%, #05060a 70%);
-  box-shadow: 0 0 40px rgba(139, 127, 212, 0.2);
-}
-
-.moon-reveal.full-moon .moon {
-  background: radial-gradient(circle at 40% 40%, #ffffff 0%, #f4f1e6 60%, #d6d0bf 100%);
-  box-shadow:
-    0 0 90px rgba(255, 255, 255, 0.35),
-    0 0 200px rgba(139, 127, 212, 0.25);
-}
-
+/* El fondo del espacio vive en styles.scss sobre html, y el cielo en
+   app-sky. Esta página ya no pinta ni sus propias estrellas ni su propio
+   degradado: si los pinto aquí, tapan el cielo compartido. */
 .content {
   position: relative;
   z-index: 1;
-  margin-top: 30vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+/* La luna usa el mismo componente SVG que el landing, así que las dos
+   pantallas enseñan exactamente el mismo dibujo. */
+app-moon {
+  width: min(52vmin, 36svh, 19rem);
+  margin-bottom: clamp(0.8rem, 2.5svh, 1.6rem);
 }
 
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  font-size: 0.75rem;
-  color: #f5c76a;
-  margin-bottom: 0.5rem;
+  text-indent: 0.3em;
+  font-size: 0.68rem;
+  color: #c9922f;
 }
 
 h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.7rem, min(5.6vw, 7svh), 3.2rem);
+  font-weight: 300;
+  letter-spacing: 0.015em;
+  background: linear-gradient(178deg, #fffdf7 4%, #f0d9a8 44%, #c9922f 84%, #8a6220 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-wrap: balance;
 }
 
 .hint {
-  color: #9a96ad;
-  margin-bottom: 2rem;
+  margin: 0;
+  max-width: 38ch;
+  color: #a9a4b8;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(0.95rem, 2.2svh, 1.15rem);
+  line-height: 1.5;
 }
 
 .continue {
-  display: inline-block;
-  padding: 0.8rem 2rem;
-  border-radius: 999px;
-  border: 1px solid rgba(245, 199, 106, 0.6);
-  color: #f5c76a;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: clamp(0.6rem, 2svh, 1.4rem);
+  padding: clamp(0.7rem, 1.7svh, 1rem) 2rem;
+  border-radius: 2px;
+  border: 1px solid #c9922f;
+  background: linear-gradient(100deg, #f0d9a8, #c9922f);
+  color: #0a0a0a;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  font-size: 0.8rem;
-  transition: all 0.3s ease;
+  font-size: 0.74rem;
+  font-weight: 500;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.68, 0.32, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 0.68, 0.32, 1);
+}
 
-  &:hover {
-    background: rgba(245, 199, 106, 0.12);
-    border-color: #f5c76a;
-    transform: translateY(-2px);
-  }
+.continue:hover,
+.continue:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(201, 146, 47, 0.34);
+}
+
+.continue:focus-visible {
+  outline: 2px solid #f0d9a8;
+  outline-offset: 3px;
 }

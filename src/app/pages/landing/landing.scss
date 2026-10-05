@@ -18,41 +18,6 @@
   overflow-x: hidden;
 }
 
-#stars {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Halo cálido alrededor de la luna. */
-.nebula {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(30vw 30vw at 50% 26%, rgba(201, 146, 47, 0.11), transparent 66%),
-    radial-gradient(18vw 18vw at 50% 26%, rgba(139, 127, 212, 0.1), transparent 70%);
-  filter: blur(32px);
-}
-
-/* Velo que cierra los lados y la parte alta, y lleva la mirada al centro.
-   Centrado arriba y con la elipse acortada: si llega hasta abajo, oscurece la
-   franja justo encima de la banda dorada y se ve como un parche sucio. */
-.vignette {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(
-    105% 62% at 50% 12%,
-    transparent 42%,
-    rgba(2, 3, 7, 0.26) 82%,
-    rgba(2, 3, 7, 0.34) 100%
-  );
-}
-
 /* ------------------------------------------------------------- escena --- */
 
 .stage {

@@ -2,10 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MoonPhaseResult, MoonService } from '../../core/services/moon.service';
 import { MoonPhasesService } from '../../data/moon-phases.service';
+import { MoonComponent } from '../../shared/moon/moon';
+import { SkyComponent } from '../../shared/sky/sky';
 
 @Component({
   selector: 'app-moon-reveal',
-  imports: [RouterLink],
+  imports: [RouterLink, MoonComponent, SkyComponent],
   templateUrl: './moon-reveal.html',
   styleUrl: './moon-reveal.scss',
 })

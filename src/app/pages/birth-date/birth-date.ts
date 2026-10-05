@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SkyComponent } from '../../shared/sky/sky';
 
 @Component({
   selector: 'app-birth-date',
-  imports: [FormsModule],
+  imports: [FormsModule, SkyComponent],
   templateUrl: './birth-date.html',
   styleUrl: './birth-date.scss',
 })

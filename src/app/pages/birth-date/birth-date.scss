@@ -15,20 +15,6 @@
   overflow: hidden;
 }
 
-.stars {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
-    radial-gradient(circle at 35% 55%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-    radial-gradient(circle at 55% 15%, rgba(255, 255, 255, 0.7) 1px, transparent 2px),
-    radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.5) 1px, transparent 2px),
-    radial-gradient(circle at 95% 65%, rgba(255, 255, 255, 0.8) 1px, transparent 2px),
-    radial-gradient(circle at 25% 85%, rgba(255, 255, 255, 0.6) 1px, transparent 2px),
-    radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.7) 1px, transparent 2px);
-  animation: twinkle 8s ease-in-out infinite alternate;
-  pointer-events: none;
-}
 
 @keyframes twinkle {
   0% { opacity: 0.5; }
