@@ -1,94 +1,113 @@
 {
-  "$comment": "Banco de preguntas del test de Madar. El lore es dato: aquí no hay naturalezas escritoas, solo afinidad con legados y el criterio de la bendición. El visitante nunca ve puntuaciones.",
-  "version": 3,
-  "status": "WIP — cobertura incompleta, ver coverageReport",
-  "schema": {
-    "question": {
-      "id": "string",
-      "theme": "string — etiqueta interna, no se muestra",
-      "axis": "blessing | legacy | character — qué eje sondea la pregunta",
-      "text": "string — el dilema, nunca una pregunta directa sobre la naturaleza",
-      "choices": "array"
+  "$comment": "Banco de preguntas de Madar. El lore es dato. Aqui no hay naturalezas escritas, solo afinidad con legados y el criterio de la bendicion. El visitante nunca ve puntuaciones.",
+  "version": 4,
+  "status": "afinidad calibrada con la matriz de los seis Primeros",
+  "founderMatrix": {
+    "note": "Referencia de personalidad/arquetipo. NO es canon de Madar y no se copian historias. Lo que se usa es la DIFERENCIA psicologica entre los seis Primeros. Las afinidades responden a la MOTIVACION de la respuesta, no a la accion descrita.",
+    "scale": {
+      "0": "neutral",
+      "1": "roza la esencia, o relacion secundaria",
+      "2": "encaja bastante",
+      "3": "expresa claramente la esencia del reino",
+      "negative": "se aleja o contradice la esencia"
     },
-    "choice": {
-      "id": "string",
-      "text": "string",
-      "legacyAffinity": "object<kingdomId, -3..+3> — afinidad con el LEGADO del fundador, no con el fundador",
-      "blessing": {
-        "wishOutside": "0..3 — cuánto apunta el deseo hacia fuera (poder, estatus, reconocimiento, superioridad)",
-        "innerNeed": "0..3 — una necesidad interna no resuelta. 0 = estoy completo siendo quien soy"
+    "founders": {
+      "ederian": {
+        "founder": "Lucius",
+        "essence": "Actua A PESAR del miedo, por responsabilidad y proteccion. No necesita demostrar que es mejor que los demas.",
+        "sombra": "Su sentido de la responsabilidad puede cargarlo demasiado sobre si mismo."
       },
-      "traits": "object<traitId, -3..+3> — solo rasgos del catálogo. NO determinan la naturaleza",
-      "resonance": "string — nota interna del lorekeeper. NO se muestra al visitante"
-    }
+      "bastia": {
+        "founder": "Silas",
+        "essence": "Quiere demostrar que MERECE estar arriba. La comparacion con otros es su motor.",
+        "sombra": "Empieza desde algo legitimo (querer ser reconocido) y se corrompe cuando se compara demasiado."
+      },
+      "xorian": {
+        "founder": "Deron",
+        "essence": "Pertenencia y vinculos. Busca seguridad EN el grupo. Protege a los suyos para que esten juntos.",
+        "sombra": "Evita conflictos para no perder vinculos; depende de los demas."
+      },
+      "tradia": {
+        "founder": "Halik",
+        "essence": "Protege MEDIANTE EL PENSAMIENTO. Anticipacion, calculo del momento.",
+        "sombra": "Su inteligencia puede volverse manipulacion. No es el reino de los sabios bondadosos."
+      },
+      "helia": {
+        "founder": "Tarik",
+        "essence": "Superarse Y demostrar de que es capaz. Rivalidad consigo mismo.",
+        "sombra": "Convertir toda situacion en competencia; confundir superacion con tener que vencer siempre."
+      },
+      "tralan": {
+        "founder": "Ross",
+        "essence": "Preservar SU PROPIA paz. Puede tener miedo y decidir NO actuar.",
+        "sombra": "Evitar actuar por miedo; delegar lo dificil en otros."
+      }
+    },
+    "criticalDistinctions": [
+      "Lucius actua aunque tenga miedo. Ross tiene miedo y puede decidir NO actuar.",
+      "Lucius actua por responsabilidad. Tarik actua por necesidad de demostrar su capacidad.",
+      "Deron evita el conflicto para preservar los VINCULOS. Ross lo evita para preservar SU PAZ.",
+      "Silas quiere demostrar que MERECE estar por encima de OTROS. Tarik quiere superar sus PROPIOS limites.",
+      "Halik protege PENSANDO el momento. Deron protege POR los suyos. Lucius protege POR deber.",
+      "Levantarse no significa nada hasta que se sepa POR QUE. Seis motivaciones, seis reinos."
+    ]
   },
   "criterion": {
-    "note": "CÓMO SE LEE blessing. Ver data/lore-rules.json -> policies.blessing",
-    "manskling": "innerNeed ≈ 0. Completo siendo quien soy, o mi deseo ya viene de dentro. (Gil)",
-    "diubak": "innerNeed >= 2 Y wishOutside >= 2. El deseo apunta afuera pero la necesidad está adentro, y no la puedo resolver solo. (Darya)",
-    "trampa": "Benny: wishOutside alto pero innerNeed 0. Quería ser Diubak y no lo necesitaba. NO es Diubak por mucho que quiera.",
-    "noEs": "Este eje NO mide bondad. Un sacrificio puede tener innerNeed 0 (Benny). La corrupción posterior de Darya no le quita la naturaleza."
+    "note": "COMO SE LEE blessing. Ver data/lore-rules.json -> policies.blessing",
+    "axis": "wishOutside (el deseo apunta hacia fuera) frente a innerNeed (necesidad interna no resuelta)",
+    "manskling": "innerNeed ~ 0. Completo siendo quien soy. (Gil)",
+    "diubak": "innerNeed >= 2. Hay algo que no puedo resolver yo solo. (Darya)",
+    "trampa": "Benny: wishOutside alto pero innerNeed 0. Queria ser Diubak y no lo necesitaba.",
+    "noEs": "Este eje NO mide moralidad. Un sacrificio puede tener innerNeed 0 y seguir siendo Manskling. La corrupcion posterior de Darya no le quita la naturaleza.",
+    "axesIndependent": "blessing NO es el mismo eje que legacyAffinity. Las preguntas de la bendicion no necesitan empujar a ningun reino, y las de legado no necesitan puntuar necesidad."
   },
   "designRules": [
     "El visitante NUNCA ve puntuaciones, afinidades ni contadores.",
     "El visitante nunca elige reino ni naturaleza.",
-    "Ninguna pregunta debe poder responderse con 'quiero ser Diubak'.",
+    "Ninguna pregunta puede responderse con 'quiero ser Diubak'.",
     "Nada de preguntas que midan moralidad. Ver policies.blessing.forbiddenMappings.",
-    "Afinidad con el LEGADO, no con el fundador. No es reencarnación ni copia.",
-    "Ninguna pregunta debe asumir una fecha en Madar. El estado actual es el único."
+    "Afinidad con el LEGADO, no con el fundador. No es reencarnacion ni copia.",
+    "Ninguna pregunta asume una fecha en Madar. El estado actual es el unico.",
+    "La motivacion pesa mas que la accion. 'Me levanto' no es automaticamente Tarik."
   ],
   "coverageReport": {
-    "note": "Numeros CALCULADOS por enumeracion exhaustiva de las 4^11 combinaciones posibles, no estimaciones. Recalcular al cambiar el banco.",
+    "note": "Todo por MONTE CARLO con 5.000.000 muestras y PRNG de semilla fija. Es una ESTIMACION, no un exacto. La alcanzabilidad es probable, no probada: un reino que no aparece en 5.000.000 muestras es probablemente inalcanzable, pero no se afirma sin prueba exhaustiva.",
     "generatedFor": {
-      "questions": 11,
-      "options": 44,
-      "combinations": 4194304
+      "questions": 15,
+      "options": 70,
+      "samples": 5000000,
+      "seed": "0x2f6e2b1"
     },
-    "tieRate": 10.7,
+    "kingdomWinRatePercentEstimated": {
+      "ederian": 13.97,
+      "bastia": 25.23,
+      "tralan": 2.45,
+      "xorian": 51.9,
+      "tradia": 4.77,
+      "helia": 1.69
+    },
+    "natureRatePercentEstimated": {
+      "manskling": 0.53,
+      "diubak": 67.78,
+      "cazut": 31.69
+    },
+    "tieRatePercent": 8.3,
+    "spreadPercent": 50.21,
     "strongOptionsPerKingdom": {
-      "ederian": 8,
-      "bastia": 3,
-      "tralan": 3,
-      "xorian": 6,
-      "tradia": 0,
-      "helia": 0
+      "ederian": 11,
+      "bastia": 10,
+      "tralan": 9,
+      "xorian": 12,
+      "tradia": 7,
+      "helia": 5
     },
-    "maxAffinityPerKingdom": {
-      "ederian": 29,
-      "bastia": 25,
-      "tralan": 25,
-      "xorian": 27,
-      "tradia": 16,
-      "helia": 18
-    },
-    "winRatePercent": {
-      "ederian": 28.52,
-      "bastia": 36.06,
-      "tralan": 14.83,
-      "xorian": 18.67,
-      "tradia": 0.01,
-      "helia": 1.91
-    },
-    "winCounts": {
-      "ederian": 1196380,
-      "bastia": 1512312,
-      "tralan": 621964,
-      "xorian": 783138,
-      "tradia": 509,
-      "helia": 80001
-    },
-    "verdict": "DEFICIENTE. Tradia gana 0.01% de las veces y Helia 1.9%: son casi inalcanzables.",
-    "diagnosis": [
-      "Tradia tiene 0 opciones con afinidad fuerte y su afinidad maxima es 16, frente a 29 del mas alto.",
-      "Los tres reinos Cazut compiten entre si, pero sus afinidades estan tan bajas que nunca superan a los reinos Manskling/Diubak.",
-      "Un visitante que responda de forma realista NO llegara nunca a Tradia ni casi nunca a Helia."
-    ],
-    "blocksRelease": true,
+    "probablyUnreachable": [],
+    "verdict": "Los 6 reinos aparecen. Desnivel de 50.21 puntos (xorian 51.9% vs helia 1.69%).",
     "todo": [
-      "TODO CRITICO: añadir preguntas con afinidad fuerte de Tradia (Halik).",
-      "TODO CRITICO: añadir preguntas con afinidad fuerte de Helia (Tarik).",
-      "TODO: revisar el reparto. 28.5/36.1/14.8/18.7 no es uniforme y Tradia/Helia son la cola.",
-      "TODO: resolver el 450887 empate (10.7% de los casos). El motor desempata alfabeticamente, lo que sesga hacia Ederian."
+      "El desnivel de 50.21 puntos es alto. Reparto objetivo: ~16.7% cada uno.",
+      "TODO: numero final de preguntas (P-004 abierta).",
+      "TODO: registrar casos canonicos en data/.",
+      "TODO: comportamiento de Between. NO inventar formula."
     ]
   },
   "questions": [
@@ -117,7 +136,7 @@
             "ambition": 2,
             "leadership": 1
           },
-          "resonance": "Rayden se considera perfecto y busca reconocimiento. Ojo: desired ≠ need (innerNeed bajo)."
+          "resonance": "Quiere el cargo. wishOutside alto sin necesidad interna: el reconocimiento apunta hacia fuera."
         },
         {
           "id": "b",
@@ -138,7 +157,7 @@
             "patience": 2,
             "independence": 1
           },
-          "resonance": "Gil. Quiere paz y puede vivir siendo quien es. NO es bondad: es una cuestion de completitud."
+          "resonance": "Gil. Quiere paz y puede vivir siendo quien es. NO es bondad: es completitud. No necesita nada de fuera."
         },
         {
           "id": "c",
@@ -159,7 +178,7 @@
             "ambition": 2,
             "attachment": 2
           },
-          "resonance": "Darya: busca fuera lo que necesita encontrar dentro. Diubak."
+          "resonance": "Darya: busca fuera lo que necesita encontrar dentro. Necesidad no resuelta."
         },
         {
           "id": "d",
@@ -168,7 +187,7 @@
             "ederian": 3,
             "bastia": 0,
             "tralan": 0,
-            "xorian": -1,
+            "xorian": 2,
             "tradia": 0,
             "helia": -1
           },
@@ -180,7 +199,7 @@
             "protection": 2,
             "loyalty": 2
           },
-          "resonance": "Lucius: el poder en Ederian se usó para proteger. innerNeed bajo, no Diubak."
+          "resonance": "Lucius: el poder en Ederian se uso para proteger. Tambien Deron, por el vinculo."
         }
       ]
     },
@@ -196,8 +215,8 @@
           "legacyAffinity": {
             "ederian": 2,
             "bastia": -2,
-            "tralan": 2,
-            "xorian": 3,
+            "tralan": 3,
+            "xorian": 2,
             "tradia": -1,
             "helia": 2
           },
@@ -209,7 +228,7 @@
             "independence": 2,
             "patience": 1
           },
-          "resonance": "Gil otra vez. Manskling por completitud, no por moralidad."
+          "resonance": "Lucius: actua aunque tenga miedo, y no por demostrar nada. Su motivo es el deber con alguien concreto."
         },
         {
           "id": "b",
@@ -220,7 +239,7 @@
             "tralan": -1,
             "xorian": -1,
             "tradia": 1,
-            "helia": 2
+            "helia": 1
           },
           "blessing": {
             "wishOutside": 3,
@@ -230,7 +249,7 @@
             "ambition": 3,
             "competitiveness": 2
           },
-          "resonance": "Benny:Associado el Diubak con estatus. Quería, no necesitaba. La trampa: innerNeed bajo."
+          "resonance": "Silas: el reconocimiento es su motivo. wishOutside alto, innerNeed bajo: querer no es necesitar."
         },
         {
           "id": "c",
@@ -251,7 +270,7 @@
             "attachment": 2,
             "curiosity": 2
           },
-          "resonance": "Darya: no ser suficiente por dentro. Señal de Diubak."
+          "resonance": "Darya: no ser suficiente por dentro. Senal de bendicion."
         },
         {
           "id": "d",
@@ -260,8 +279,8 @@
             "ederian": 0,
             "bastia": 0,
             "tralan": -2,
-            "xorian": 2,
-            "tradia": -1,
+            "xorian": 3,
+            "tradia": 0,
             "helia": -1
           },
           "blessing": {
@@ -280,7 +299,7 @@
       "id": "b-003",
       "theme": "Identidad",
       "axis": "blessing",
-      "text": "Te ofrecen dejar de ser quien eres a cambio de ser alguien que todos admirarían. A cambio no tendrías que ser quien eres.",
+      "text": "Te ofrecen dejar de ser quien eres a cambio de ser alguien a quien todos admirarían. A cambio no tendrías que ser quien eres.",
       "choices": [
         {
           "id": "a",
@@ -290,7 +309,7 @@
             "bastia": 3,
             "tralan": -1,
             "xorian": -1,
-            "tradia": 2,
+            "tradia": 1,
             "helia": 2
           },
           "blessing": {
@@ -301,7 +320,7 @@
             "ambition": 3,
             "impulsiveness": 1
           },
-          "resonance": "Rayden: se considera perfecto y no ve el problema. wish alto, need bajo."
+          "resonance": "Silas: convertirse en alguien admirado. Tambien Tarik por superarse, pero el objeto es la mirada ajena."
         },
         {
           "id": "b",
@@ -311,7 +330,7 @@
             "bastia": -1,
             "tralan": 3,
             "xorian": 2,
-            "tradia": -1,
+            "tradia": 0,
             "helia": 1
           },
           "blessing": {
@@ -322,7 +341,7 @@
             "independence": 3,
             "discipline": 1
           },
-          "resonance": "Xorian: observar sin participar es también una posición. No es cobardía."
+          "resonance": "Ross: observar sin participar tambien es una posicion. No es cobardia."
         },
         {
           "id": "c",
@@ -343,7 +362,7 @@
             "ambition": 2,
             "attachment": 2
           },
-          "resonance": "Darya: laADMIRACIÓN externa no rellena el hueco interno. Diubak."
+          "resonance": "Darya: la admiracion externa no rellena el hueco interno."
         },
         {
           "id": "d",
@@ -364,7 +383,7 @@
             "attachment": 3,
             "fear": 2
           },
-          "resonance": "Darya con miedo declarado. Ojo: NO es 'baja autoestima = Diubak' como regla, es un caso concreto de necesidad no resuelta."
+          "resonance": "Necesidad no resuelta declarada. NO es una regla de 'baja autoestima = Diubak': es un caso concreto."
         }
       ]
     },
@@ -380,9 +399,9 @@
           "legacyAffinity": {
             "ederian": 3,
             "bastia": 1,
-            "tralan": 1,
-            "xorian": -1,
-            "tradia": 0,
+            "tralan": 0,
+            "xorian": 1,
+            "tradia": 2,
             "helia": 0
           },
           "blessing": {
@@ -393,7 +412,7 @@
             "leadership": 2,
             "strategicThinking": 2
           },
-          "resonance": "Lucius: el poder como servicio. innerNeed bajo, no Diubak."
+          "resonance": "Lucius: el poder como servicio. Y Halik, que tambien lo usa para resolver."
         },
         {
           "id": "b",
@@ -403,8 +422,8 @@
             "bastia": -1,
             "tralan": 2,
             "xorian": 3,
-            "tradia": -1,
-            "helia": 1
+            "tradia": 1,
+            "helia": 0
           },
           "blessing": {
             "wishOutside": 1,
@@ -414,7 +433,7 @@
             "independence": 3,
             "adaptability": 2
           },
-          "resonance": "Deron: no intervenir no es cobardía. Completo sin el poder."
+          "resonance": "Ross: no intervenir. Completo sin el poder."
         },
         {
           "id": "c",
@@ -435,7 +454,7 @@
             "ambition": 2,
             "attachment": 2
           },
-          "resonance": "El poder no era el problema. Darya persiguiendo lo externo. Diubak."
+          "resonance": "El poder no era el problema. Darya persiguiendo lo externo."
         },
         {
           "id": "d",
@@ -456,7 +475,7 @@
             "discipline": 3,
             "independence": 1
           },
-          "resonance": "Límite moral. NO implica 'bueno = Manskling': es una decisión sobre uno mismo, no sobre la naturaleza."
+          "resonance": "Limite moral. NO implica 'bueno = Manskling': es una decision sobre uno mismo, no sobre la naturaleza."
         }
       ]
     },
@@ -464,7 +483,7 @@
       "id": "b-005",
       "theme": "Sacrificio",
       "axis": "blessing",
-      "text": "Te piden algo que no quieres dar, y sabes que hacerlo te va a dejar una marca. Lo queoningas no lo vas a recuperar.",
+      "text": "Te piden algo que no quieres dar, y sabes que hacerlo te va a dejar una marca. Lo que() no vas a recuperar.",
       "choices": [
         {
           "id": "a",
@@ -472,8 +491,8 @@
           "legacyAffinity": {
             "ederian": 3,
             "bastia": 0,
-            "tralan": 1,
-            "xorian": 0,
+            "tralan": 0,
+            "xorian": 2,
             "tradia": 0,
             "helia": -1
           },
@@ -485,7 +504,7 @@
             "selflessness": 3,
             "loyalty": 2
           },
-          "resonance": "CUIDADO con la trampa de la moralidad: esto parece noble y aun así tiene necesidad. No es 'bondad = Diubak'."
+          "resonance": "Lucius: el deber. OJO con la trampa de la moralidad: esto parece noble y aun asi tiene necesidad."
         },
         {
           "id": "b",
@@ -506,7 +525,7 @@
             "independence": 2,
             "impulsiveness": 1
           },
-          "resonance": "No es Diubak por egoísmo: innerNeed bajo. La naturaleza no sigue a la moralidad."
+          "resonance": "No es Diubak por egoismo: innerNeed bajo. La naturaleza no sigue a la moralidad."
         },
         {
           "id": "c",
@@ -527,7 +546,7 @@
             "loyalty": 2,
             "ambition": 2
           },
-          "resonance": "Sacrifica y sigue queriendo fuera. El sacrificio no cierra la brecha. Diubak."
+          "resonance": "Sacrifica y sigue queriendo fuera. El sacrificio no cierra la brecha."
         },
         {
           "id": "d",
@@ -537,7 +556,7 @@
             "bastia": -1,
             "tralan": 2,
             "xorian": 1,
-            "tradia": 0,
+            "tradia": 1,
             "helia": 0
           },
           "blessing": {
@@ -548,15 +567,780 @@
             "discipline": 3,
             "loyalty": 2
           },
-          "resonance": "Benny: sacrificial y leal, y sigue siendo Manskling. Prueba viva de que naturaleza ≠ carácter."
+          "resonance": "Benny: sacrificial y leal, y sigue siendo Manskling. Prueba viva de que naturaleza y caracter son cosas distintas."
         }
       ]
     },
     {
       "id": "l-001",
+      "theme": "Por qué te levantas",
+      "axis": "legacy",
+      "text": "Unos compañeros tienen que cruzar el río y el agua ya está subiendo. Tú puedes cruzar rápido y volver. Nadie te lo pide.",
+      "motive": "EL separador. La misma accion, seis motivaciones distintas, una por reino.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Hay que sacarlos. Voy.",
+          "legacyAffinity": {
+            "ederian": 3,
+            "bastia": 0,
+            "tralan": -2,
+            "xorian": 1,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "protection": 3,
+            "courage": 2
+          },
+          "resonance": "Lucius: actua aunque tenga miedo, y no por demostrar nada. Su motivo es el deber con alguien concreto."
+        },
+        {
+          "id": "b",
+          "text": "Quiero ver que también puedo. Quiero que lo vean.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 2,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": 0,
+            "helia": 3
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 1
+          },
+          "traits": {
+            "competitiveness": 3,
+            "courage": 1
+          },
+          "resonance": "Tarik: superarse Y demostrar de que es capaz. El 'que lo vean' lo acerca a Silas, pero el motor es la superacion propia."
+        },
+        {
+          "id": "c",
+          "text": "No quiero quedarme atrás. Ya he estado abajo antes.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 3,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": 0,
+            "helia": 1
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 1
+          },
+          "traits": {
+            "ambition": 3,
+            "competitiveness": 2
+          },
+          "resonance": "Silas: el termino de comparacion es OTRO, no uno mismo. Aqui esta la diferencia con Tarik."
+        },
+        {
+          "id": "d",
+          "text": "Están todos ahí abajo. Los veo y no me suelto.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": 0,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "protection": 2,
+            "empathy": 3
+          },
+          "resonance": "Deron: el motivo es el vinculo. Que la gente este junta. No calcula el momento, como Halik."
+        },
+        {
+          "id": "e",
+          "text": "Espero dos minutos. Cuando baje el agua del otro lado, es más seguro.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 0,
+            "tralan": 1,
+            "xorian": 1,
+            "tradia": 3,
+            "helia": -2
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "strategicThinking": 3,
+            "patience": 2
+          },
+          "resonance": "Halik: protege mediante el pensamiento y calcula el momento para minimizar el riesgo. No busca demostrar nada."
+        },
+        {
+          "id": "f",
+          "text": "Quiero que esto se acabe y vuelva la calma.",
+          "legacyAffinity": {
+            "ederian": -2,
+            "bastia": 0,
+            "tralan": 3,
+            "xorian": 2,
+            "tradia": 0,
+            "helia": -2
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "patience": 2,
+            "independence": 2
+          },
+          "resonance": "Ross: preservar SU propia paz. Se aleja de Lucius, que actua con miedo; Ross busca la calma."
+        },
+        {
+          "id": "g",
+          "text": "Me levanto y voy. Luego ya se verá.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 0,
+            "tralan": 0,
+            "xorian": 0,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 1,
+            "innerNeed": 1
+          },
+          "traits": {
+            "courage": 2,
+            "impulsiveness": 1
+          },
+          "resonance": "Neutro: se levanta sin motivo definido. ESTA es la trampa de la accion sin motivacion, y por eso existe."
+        }
+      ]
+    },
+    {
+      "id": "l-002",
+      "theme": "El consejo",
+      "axis": "legacy",
+      "text": "En el consejo, el rey pregunta la opinión de quien está al fondo de la sala. Todos esperan que no hables.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Lo dices. Si no lo dices, no lo va a decir nadie.",
+          "legacyAffinity": {
+            "ederian": 3,
+            "bastia": 1,
+            "tralan": -1,
+            "xorian": 0,
+            "tradia": 1,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "leadership": 2,
+            "courage": 2
+          },
+          "resonance": "Lucius: decir lo que hay que decir por responsabilidad. El contenido se parece a Halik, pero la motivacion no."
+        },
+        {
+          "id": "b",
+          "text": "Lo dices, pero antes calculas a quién le conviene que te escuche.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 1,
+            "tralan": 0,
+            "xorian": 0,
+            "tradia": 3,
+            "helia": 1
+          },
+          "blessing": {
+            "wishOutside": 2,
+            "innerNeed": 0
+          },
+          "traits": {
+            "strategicThinking": 3,
+            "competitiveness": 1
+          },
+          "resonance": "La sombra de Halik: la inteligencia convertida en manipulacion. Roz(a) a Silas por buscar el mejor posicion."
+        },
+        {
+          "id": "c",
+          "text": "Esperas. Que se lo pregunten a otro. No te corresponde.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 0,
+            "tralan": 3,
+            "xorian": 2,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "patience": 2,
+            "strategicThinking": 1
+          },
+          "resonance": "Ross: decide no actuar. No calcula el momento, simplemente se aparta."
+        },
+        {
+          "id": "d",
+          "text": "Lo dices porque el grupo lo necesita. Para eso está el consejo.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": 0,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 1,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 1
+          },
+          "traits": {
+            "empathy": 3,
+            "patience": 1
+          },
+          "resonance": "Deron: habla por el vinculo, para que el grupo funcione. A diferencia de Lucius, aqui el motivo es la pertenencia."
+        },
+        {
+          "id": "e",
+          "text": "Lo dices. Y quieres que quede claro que lo has dicho tú.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 3,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": 1,
+            "helia": 2
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 1
+          },
+          "traits": {
+            "ambition": 3,
+            "leadership": 1
+          },
+          "resonance": "Silas: el reconocimiento. El contenido puede ser bueno; lo que empuja es el crédito."
+        }
+      ]
+    },
+    {
+      "id": "l-003",
+      "theme": "Crítica",
+      "axis": "blessing",
+      "text": "Alguien a quien respetas te dice, a la cara, que nunca llegarás a nada. Añade que lo dice por tu bien.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Le das las gracias. Te ha dicho algo que ya sabías.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": -1,
+            "tralan": 1,
+            "xorian": 2,
+            "tradia": 3,
+            "helia": -1
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 1
+          },
+          "traits": {
+            "patience": 2,
+            "curiosity": 2
+          },
+          "resonance": "Halik incorpora la informacion. No le necesita para demostrar nada."
+        },
+        {
+          "id": "b",
+          "text": "No te afecta. Lo que piensen de ti no cambia lo que hagas.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": -2,
+            "tralan": 3,
+            "xorian": 0,
+            "tradia": -1,
+            "helia": 3
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "independence": 3,
+            "discipline": 1
+          },
+          "resonance": "El limite entre superarse a uno mismo (Tarik) y no medirse con nadie (Ross). Por eso empuja a los dos y separa a Silas."
+        },
+        {
+          "id": "c",
+          "text": "Quieres que se note que llevas todo el peso de esto.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 2,
+            "tralan": 0,
+            "xorian": 0,
+            "tradia": 0,
+            "helia": 2
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 2
+          },
+          "traits": {
+            "ambition": 2,
+            "selflessness": 1
+          },
+          "resonance": "Lucius cuando se convierte en carga. Su propia sombra: la responsabilidad excessiva busca ser vista."
+        },
+        {
+          "id": "d",
+          "text": "Le preguntas qué tendría que cambiar para que opinara distinto.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 0,
+            "tralan": 0,
+            "xorian": 1,
+            "tradia": 3,
+            "helia": 1
+          },
+          "blessing": {
+            "wishOutside": 1,
+            "innerNeed": 2
+          },
+          "traits": {
+            "curiosity": 3,
+            "strategicThinking": 1
+          },
+          "resonance": "Halik: la critica como dato. Es el mismo camino de la manipulacion, un paso mas."
+        },
+        {
+          "id": "e",
+          "text": "Buscas a alguien mejor que él. Alguien tiene que saber hacerlo.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 3,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": 1,
+            "helia": 2
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 1
+          },
+          "traits": {
+            "competitiveness": 3,
+            "impulsiveness": 1
+          },
+          "resonance": "Silas: la comparacion que se pudre en resentimiento."
+        }
+      ]
+    },
+    {
+      "id": "l-004",
+      "theme": "Conocimiento",
+      "axis": "legacy",
+      "text": "Tienes una información que cambia lo que todos creen. Puedes decirla ahora o guardarla.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "La dices. Sea quien sea, tiene que saberlo.",
+          "legacyAffinity": {
+            "ederian": 3,
+            "bastia": 0,
+            "tralan": -1,
+            "xorian": 1,
+            "tradia": 1,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "empathy": 2,
+            "courage": 1
+          },
+          "resonance": "Lucius: la verdad aunque le cueste. No calcula a quien le conviene."
+        },
+        {
+          "id": "b",
+          "text": "La guardas hasta saber cómo usarla.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 1,
+            "tralan": 1,
+            "xorian": 1,
+            "tradia": 3,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 2,
+            "innerNeed": 0
+          },
+          "traits": {
+            "strategicThinking": 3,
+            "patience": 1
+          },
+          "resonance": "Halik: el conocimiento como herramienta de decision. Sin sombra todavia."
+        },
+        {
+          "id": "c",
+          "text": "Lo dices, pero decides tú a quién se lo das.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 1,
+            "tralan": 0,
+            "xorian": 0,
+            "tradia": 3,
+            "helia": 1
+          },
+          "blessing": {
+            "wishOutside": 2,
+            "innerNeed": 0
+          },
+          "traits": {
+            "strategicThinking": 3,
+            "competitiveness": 1
+          },
+          "resonance": "La sombra de Halik: la informacion como palanca."
+        },
+        {
+          "id": "d",
+          "text": "La guardas. No es asunto tuyo y no te va a dar ningún problema.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 0,
+            "tralan": 3,
+            "xorian": 2,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "independence": 2,
+            "patience": 1
+          },
+          "resonance": "Ross: evitar implicarse. El motivo es su paz, no el grupo como en Deron."
+        },
+        {
+          "id": "e",
+          "text": "La cuentas. Así los que están abajo dejan de .",
+          "legacyAffinity": {
+            "ederian": 2,
+            "bastia": -1,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 2,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "protection": 3,
+            "empathy": 2
+          },
+          "resonance": "Deron: la informacion al servicio del vinculo. Y Halik, porque la usa con un proposito."
+        },
+        {
+          "id": "f",
+          "text": "La dices para que se note que lo sabes tú y no ellos.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 3,
+            "tralan": 0,
+            "xorian": -1,
+            "tradia": 1,
+            "helia": 2
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 1
+          },
+          "traits": {
+            "ambition": 3,
+            "leadership": 1
+          },
+          "resonance": "Silas: el conocimiento como crédito. Se diferencia de Halik, que sabe para decidir, no para que le reconozcan."
+        },
+        {
+          "id": "g",
+          "text": "La usas para saber en qué punto estás y superarte.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": -1,
+            "tralan": 0,
+            "xorian": 0,
+            "tradia": 1,
+            "helia": 3
+          },
+          "blessing": {
+            "wishOutside": 1,
+            "innerNeed": 1
+          },
+          "traits": {
+            "competitiveness": 3,
+            "curiosity": 1
+          },
+          "resonance": "Tarik: superacion con uno mismo, sin comparacion con nadie. Por eso no lleva madera de Silas."
+        }
+      ]
+    },
+    {
+      "id": "l-005",
+      "theme": "Lealtad",
+      "axis": "legacy",
+      "text": "La persona que hizo daño a tu rey vive en tu ciudad. No tienes ninguna orden. Nadie te ha dicho que hagas nada.",
+      "motive": "El veto de Halik reactiva a Tarik: su motivo pasa de superar a Silas a vengar a Halik.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Vas a por él. No hay orden, pero tampoco hace falta.",
+          "legacyAffinity": {
+            "ederian": -2,
+            "bastia": 1,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": -1,
+            "helia": 3
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 1
+          },
+          "traits": {
+            "impulsiveness": 3,
+            "loyalty": 2
+          },
+          "resonance": "La venganza de Tarik tras la muerte de Halik. Es el punto explicito del lore de Helia."
+        },
+        {
+          "id": "b",
+          "text": "No te mueves. Tu rey no ha dicho nada.",
+          "legacyAffinity": {
+            "ederian": 2,
+            "bastia": 0,
+            "tralan": 2,
+            "xorian": 1,
+            "tradia": 0,
+            "helia": -2
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 1
+          },
+          "traits": {
+            "discipline": 2,
+            "loyalty": 1
+          },
+          "resonance": "Ross: no actuar sin permiso. Lucius tambien espera, aunque por deber."
+        },
+        {
+          "id": "c",
+          "text": "Lo impides, aunque no sea tu ciudad y aunque nadie te lo pidiera.",
+          "legacyAffinity": {
+            "ederian": 3,
+            "bastia": 1,
+            "tralan": -1,
+            "xorian": 1,
+            "tradia": 0,
+            "helia": -1
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 1
+          },
+          "traits": {
+            "protection": 3,
+            "empathy": 1
+          },
+          "resonance": "Silas protegiendo a Lucius, y Lucius protegiendo a su pueblo. El deber por encima de la propiedad."
+        },
+        {
+          "id": "d",
+          "text": "Recoges lo que necesitas saber y se lo pasas a quien decide.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 1,
+            "tralan": 0,
+            "xorian": 1,
+            "tradia": 3,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 1,
+            "innerNeed": 0
+          },
+          "traits": {
+            "strategicThinking": 3,
+            "patience": 1
+          },
+          "resonance": "Halik: la informacion como herramienta de decision, no como arma. Se diferencia de Silas, que la retiene."
+        },
+        {
+          "id": "e",
+          "text": "No te mueves. No es tu guerra.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 0,
+            "tralan": 3,
+            "xorian": 2,
+            "tradia": 0,
+            "helia": -1
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "independence": 3,
+            "patience": 1
+          },
+          "resonance": "Xorian fue el unico reino que no intervino. Ross: preservar su propia paz."
+        },
+        {
+          "id": "f",
+          "text": "Te mueves, pero por los tuyos. Que no les .",
+          "legacyAffinity": {
+            "ederian": 2,
+            "bastia": 0,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 1,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "protection": 3,
+            "empathy": 2
+          },
+          "resonance": "Deron: el vinculo como motivo. No protege a la justicia ni a un rey, protege a los suyos."
+        }
+      ]
+    },
+    {
+      "id": "l-006",
+      "theme": "Reconocimiento",
+      "axis": "blessing",
+      "text": "Un siglo después de su muerte, el nombre de tu fundador es el más repetido en tu reino. ¿Qué hace ese nombre contigo?",
+      "motive": "Silas necesita reconocimiento porque se define por encima de otros. Tarik no lo necesita porque se supera a si mismo. Esta pregunta separa a los dos.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Nada. Es el nombre de otro. Yo no necesito que me reconozcan.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": -3,
+            "tralan": 2,
+            "xorian": 0,
+            "tradia": -1,
+            "helia": 3
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "independence": 3,
+            "discipline": 1
+          },
+          "resonance": "Tarik en su version sana: superarse sin reconocimiento. Y Ross por su cuenta. Se aleja de Silas."
+        },
+        {
+          "id": "b",
+          "text": "Es el punto más alto al que puedo aspirar. Necesito que reconozcan lo que hago.",
+          "legacyAffinity": {
+            "ederian": -1,
+            "bastia": 3,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": 1,
+            "helia": 1
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 1
+          },
+          "traits": {
+            "ambition": 3,
+            "competitiveness": 2
+          },
+          "resonance": "Silas: la ascension y el reconocimiento. Necesita el nombre de arriba para saber quien es."
+        },
+        {
+          "id": "c",
+          "text": "Me basta con que los míos estén a salvo. El nombre no importa.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": -1,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 1,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 0
+          },
+          "traits": {
+            "protection": 2,
+            "empathy": 3
+          },
+          "resonance": "Deron: el vinculo por encima de todo. El reconocimiento le da igual."
+        },
+        {
+          "id": "d",
+          "text": "Quiero que se note que aquí estuve yo. Que no se me olvide.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 3,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": 1,
+            "helia": 2
+          },
+          "blessing": {
+            "wishOutside": 3,
+            "innerNeed": 2
+          },
+          "traits": {
+            "ambition": 3,
+            "leadership": 1
+          },
+          "resonance": "Silas: la comparacion permanente. Tambien Tarik, pero por la mirada de los otros."
+        }
+      ]
+    },
+    {
+      "id": "l-007",
       "theme": "Miedo",
       "axis": "legacy",
-      "text": "Tu grupo tiene que cruzar el paso de noche. Tu has-ledado a parar. Nadie dice nada, pero todos esperan que alguien lo haga.",
+      "text": "Tu grupo tiene que cruzar el paso de noche. Tú has-ledado a parar. Nadie dice nada, pero todos esperan que alguien lo haga.",
       "choices": [
         {
           "id": "a",
@@ -564,7 +1348,7 @@
           "legacyAffinity": {
             "ederian": 3,
             "bastia": 1,
-            "tralan": -1,
+            "tralan": -2,
             "xorian": 0,
             "tradia": 0,
             "helia": 1
@@ -578,7 +1362,7 @@
             "loyalty": 1,
             "resilience": 1
           },
-          "resonance": "Núcleo de Ederian: valentía a pesar del miedo. También roza a Tarik, que avanza por disciplina más que por miedo."
+          "resonance": "Lucius: valentia a pesar del miedo. No busca demostrar nada."
         },
         {
           "id": "b",
@@ -587,8 +1371,8 @@
             "ederian": -2,
             "bastia": 0,
             "tralan": 3,
-            "xorian": 1,
-            "tradia": 1,
+            "xorian": 2,
+            "tradia": 0,
             "helia": -1
           },
           "blessing": {
@@ -600,7 +1384,7 @@
             "fear": 2,
             "adaptability": 1
           },
-          "resonance": "Ross: no quiere el liderazgo, busca a alguien fuerte delante."
+          "resonance": "Ross: puede tener miedo y decidir no actuar. Se diferencia de Lucius en eso."
         },
         {
           "id": "c",
@@ -608,10 +1392,10 @@
           "legacyAffinity": {
             "ederian": 0,
             "bastia": 2,
-            "tralan": 1,
-            "xorian": -1,
-            "tradia": 0,
-            "helia": 1
+            "tralan": 0,
+            "xorian": 0,
+            "tradia": 2,
+            "helia": 0
           },
           "blessing": {
             "wishOutside": 3,
@@ -621,7 +1405,7 @@
             "ambition": 2,
             "leadership": 1
           },
-          "resonance": "Roza a Silas, que protegía a Lucius y le gustaba demostrar su fuerza. wish alto, need bajo."
+          "resonance": "Lucius: actua aunque tenga miedo, y no por demostrar nada. Su motivo es el deber con alguien concreto."
         },
         {
           "id": "d",
@@ -629,9 +1413,9 @@
           "legacyAffinity": {
             "ederian": 1,
             "bastia": 0,
-            "tralan": 1,
-            "xorian": 1,
-            "tradia": 1,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 0,
             "helia": 0
           },
           "blessing": {
@@ -643,382 +1427,12 @@
             "courage": 1,
             "attachment": 1
           },
-          "resonance": "Transversal: empuja poco hacia reino, pero sí hacia necesidad. El miedo al abandono sí es una necesidad."
+          "resonance": "Deron: no quiere separarse del grupo. Y hay miedo al abandono, que si es necesidad."
         }
       ]
     },
     {
-      "id": "l-002",
-      "theme": "Observar",
-      "axis": "legacy",
-      "text": "La disputa es entre otros dos. Tú no eres parte. Se acerca el momento en que alguien tendrá que tomar partido.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Te pones entre los dos. Que sea lo que sea.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": 2,
-            "tralan": -2,
-            "xorian": -2,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "protection": 2,
-            "empathy": 2,
-            "courage": 1
-          },
-          "resonance": "Silas y Lucius juntos. Bastia y Ederian."
-        },
-        {
-          "id": "b",
-          "text": "No te metes. Esta pelea no es tuya.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": -1,
-            "tralan": 1,
-            "xorian": 3,
-            "tradia": -1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 3,
-            "strategicThinking": 2
-          },
-          "resonance": "Xorian: el único reino que no intervino. Su posición era esencialmente «esta guerra no es nuestra»."
-        },
-        {
-          "id": "c",
-          "text": "Esperas a ver quién gana y te pones con ese.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 2,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 2,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "competitiveness": 2,
-            "strategicThinking": 2
-          },
-          "resonance": "Halik: pragmático hasta el final.wishOutside alto sin necesidad."
-        },
-        {
-          "id": "d",
-          "text": "Te vas. No quieres que nadie te relacione con esto.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": -1,
-            "tralan": 2,
-            "xorian": 2,
-            "tradia": -1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "attachment": 2,
-            "independence": 1
-          },
-          "resonance": "Retirada con miedo a la mirada ajena. Ross o Tarik."
-        }
-      ]
-    },
-    {
-      "id": "l-003",
-      "theme": "Lealtad",
-      "axis": "legacy",
-      "text": "Tu rey te ordena algo que contradice lo que creías correcto. Él no sabe que lo sabes.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo haces. Es su reino.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 1,
-            "tralan": 2,
-            "xorian": -2,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "loyalty": 3,
-            "discipline": 2
-          },
-          "resonance": "El deber por encima del juicio. Lucius aceptaba la responsabilidad."
-        },
-        {
-          "id": "b",
-          "text": "No lo haces. Y tecallas el motivo.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 2,
-            "tradia": 1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 2
-          },
-          "traits": {
-            "discipline": 3,
-            "independence": 2
-          },
-          "resonance": "La sombra propia por encima del deber ajeno. No es Diubak por rebeldía: por necesidad."
-        },
-        {
-          "id": "c",
-          "text": "Lo haces, pero te aseguras de que el pueblo vea lo que cuesta.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": -1,
-            "xorian": 0,
-            "tradia": 2,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 2
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "leadership": 1
-          },
-          "resonance": "Silas: fuerza y cálculo a la vez. wishOutside e innerNeed parejos."
-        },
-        {
-          "id": "d",
-          "text": "Renuncias antes de que te lo ordene.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -1,
-            "tralan": 3,
-            "xorian": 3,
-            "tradia": -2,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 1
-          },
-          "traits": {
-            "independence": 3,
-            "adaptability": 1
-          },
-          "resonance": "No aguantar el cargo es una posición legítima. Ross y Deron."
-        }
-      ]
-    },
-    {
-      "id": "l-004",
-      "theme": "Pérdida",
-      "axis": "legacy",
-      "text": "Pierdes a alguien que no se puede recuperar. La gente te mira esperando saber cómo lo llevas.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "No dices nada. Lo llevas dentro y sigues.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 2
-          },
-          "traits": {
-            "resilience": 3,
-            "discipline": 2
-          },
-          "resonance": "El duelo se convierte en deber. Necesidad interna real, sin deseo externo."
-        },
-        {
-          "id": "b",
-          "text": "Lo dices entero, delante de todos.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 1,
-            "tralan": 2,
-            "xorian": -1,
-            "tradia": -1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "empathy": 2,
-            "attachment": 2,
-            "courage": 1
-          },
-          "resonance": "Poner el duelo a la vista. Tarik: el que sostiene a los otros."
-        },
-        {
-          "id": "c",
-          "text": "Buscas a alguien a quien culpar. Alguien tiene que tener la culpa.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 2,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 2,
-            "helia": -2
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 3
-          },
-          "traits": {
-            "impulsiveness": 3,
-            "competitiveness": 1
-          },
-          "resonance": "Darya corrompida: mucho wishOutside y mucha necesidad no resuelta. NO es 'oscuridad = Cazut'."
-        },
-        {
-          "id": "d",
-          "text": "Te quedas. No vas a irte a ningún lado todavía.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -1,
-            "tralan": 2,
-            "xorian": 1,
-            "tradia": -1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 3
-          },
-          "traits": {
-            "attachment": 3,
-            "resilience": 1
-          },
-          "resonance": "Pérdida como hueco que sigue abierto. La necesidad más pura del banco."
-        }
-      ]
-    },
-    {
-      "id": "l-005",
-      "theme": "Vínculo",
-      "axis": "legacy",
-      "text": "Alguien te pide un favor que te va a costar. Si lo haces, se lo vas a deber para siempre. Si no, no pasa nada.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo haces. Sin cobrarlo nunca.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": -1,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "loyalty": 3,
-            "selflessness": 2
-          },
-          "resonance": "Benny: nunca traiciona a Anika. Y sigue siendo Manskling."
-        },
-        {
-          "id": "b",
-          "text": "Lo haces, pero le dices el precio desde el principio.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": 1,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 1
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "discipline": 1
-          },
-          "resonance": "Silas: el vínculo es real pero tiene condiciones."
-        },
-        {
-          "id": "c",
-          "text": "No lo haces. No quieres que nadie te deba nada.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": -1,
-            "tralan": 2,
-            "xorian": 3,
-            "tradia": -1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "independence": 3,
-            "strategicThinking": 1
-          },
-          "resonance": "Mantener la distancia limpia. Deron."
-        },
-        {
-          "id": "d",
-          "text": "Lo haces y no lo cobras, ni siquiera si cambia la cosa.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": -1,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 3
-          },
-          "traits": {
-            "loyalty": 3,
-            "attachment": 3
-          },
-          "resonance": "Un vínculo del que no puedes salir. Eso sí es necesidad interna."
-        }
-      ]
-    },
-    {
-      "id": "l-006",
+      "id": "l-008",
       "theme": "Oscuridad",
       "axis": "legacy",
       "text": "Hay algo en ti que no le enseñas a nadie. No le has hecho nada a nadie. Solo está ahí.",
@@ -1042,7 +1456,7 @@
             "attachment": 2,
             "fear": 2
           },
-          "resonance": "Ocultar no es ser oscuro. Alden también tiene luz Y Cazut."
+          "resonance": "Ocultar no es ser oscuro. Alden tambien es Cazut y noble. Ocultar empuja a Halik, que calcula."
         },
         {
           "id": "b",
@@ -1050,7 +1464,7 @@
           "legacyAffinity": {
             "ederian": 2,
             "bastia": 0,
-            "tralan": 2,
+            "tralan": 1,
             "xorian": 3,
             "tradia": 0,
             "helia": 1
@@ -1064,7 +1478,7 @@
             "curiosity": 2,
             "discipline": 1
           },
-          "resonance": "Conocer lo propio sin actuarlo. Xorian: mirar antes de moverse."
+          "resonance": "Ross: conocer lo propio sin actuarlo. Observar antes de moverse."
         },
         {
           "id": "c",
@@ -1073,9 +1487,9 @@
             "ederian": -2,
             "bastia": 3,
             "tralan": -1,
-            "xorian": -2,
+            "xorian": -1,
             "tradia": 1,
-            "helia": -2
+            "helia": -1
           },
           "blessing": {
             "wishOutside": 3,
@@ -1085,7 +1499,7 @@
             "impulsiveness": 2,
             "ambition": 2
           },
-          "resonance": "Bastia: la sombra como herramienta. NO significa que sea malo."
+          "resonance": "Silas: la sombra como herramienta. NO significa que sea malo."
         },
         {
           "id": "d",
@@ -1093,10 +1507,10 @@
           "legacyAffinity": {
             "ederian": 1,
             "bastia": 0,
-            "tralan": 1,
-            "xorian": 0,
+            "tralan": 0,
+            "xorian": 3,
             "tradia": 0,
-            "helia": 2
+            "helia": 0
           },
           "blessing": {
             "wishOutside": 1,
@@ -1106,16 +1520,200 @@
             "attachment": 3,
             "empathy": 1
           },
-          "resonance": "Confesar la sombra a un solo vínculo. Necesidad real."
+          "resonance": "Deron: confesar a un solo vinculo. Confiar en uno es confiar en el grupo entero."
+        }
+      ]
+    },
+    {
+      "id": "l-009",
+      "theme": "Pérdida",
+      "axis": "blessing",
+      "text": "Pierdes a alguien que no se puede recuperar. La gente te mira esperando saber cómo lo llevas.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "No dices nada. Lo llevas dentro y sigues.",
+          "legacyAffinity": {
+            "ederian": 3,
+            "bastia": 1,
+            "tralan": 0,
+            "xorian": 2,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 2
+          },
+          "traits": {
+            "resilience": 3,
+            "discipline": 2
+          },
+          "resonance": "Lucius: el duelo se convierte en deber. Necesidad interna real, sin deseo externo."
+        },
+        {
+          "id": "b",
+          "text": "Lo dices entero, delante de todos.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": 1,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 0,
+            "helia": 1
+          },
+          "blessing": {
+            "wishOutside": 1,
+            "innerNeed": 2
+          },
+          "traits": {
+            "empathy": 2,
+            "attachment": 2,
+            "courage": 1
+          },
+          "resonance": "Deron: poner el duelo a la vista para no cargarlo solo."
+        },
+        {
+          "id": "c",
+          "text": "Buscas a alguien a quien culpar. Alguien tiene que tener la culpa.",
+          "legacyAffinity": {
+            "ederian": -2,
+            "bastia": 3,
+            "tralan": -1,
+            "xorian": -1,
+            "tradia": 1,
+            "helia": -1
+          },
+          "blessing": {
+            "wishOutside": 2,
+            "innerNeed": 3
+          },
+          "traits": {
+            "impulsiveness": 3,
+            "competitiveness": 1
+          },
+          "resonance": "La corrupcion de Darya: mucho deseo hacia fuera y mucha necesidad sin resolver. NO es 'oscuridad = Cazut'."
+        },
+        {
+          "id": "d",
+          "text": "Te quedas. No vas a irte a ningún lado todavía.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": -1,
+            "tralan": 2,
+            "xorian": 1,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 1,
+            "innerNeed": 3
+          },
+          "traits": {
+            "attachment": 3,
+            "resilience": 1
+          },
+          "resonance": "La perdida como hueco que sigue abierto. La necesidad mas pura del banco."
+        }
+      ]
+    },
+    {
+      "id": "l-010",
+      "theme": "Vínculo",
+      "axis": "legacy",
+      "text": "Alguien te pide un favor que te va a costar. Si lo haces, se lo vas a deber para siempre. Si no, no pasa nada.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Lo haces. Sin cobrarlo nunca.",
+          "legacyAffinity": {
+            "ederian": 3,
+            "bastia": 0,
+            "tralan": 0,
+            "xorian": 2,
+            "tradia": 0,
+            "helia": -1
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 1
+          },
+          "traits": {
+            "loyalty": 3,
+            "selflessness": 2
+          },
+          "resonance": "Lucius. Y Benny, que nunca traiciona a Anika y sigue siendo Manskling."
+        },
+        {
+          "id": "b",
+          "text": "Lo haces, pero le dices el precio desde el principio.",
+          "legacyAffinity": {
+            "ederian": 1,
+            "bastia": 2,
+            "tralan": 0,
+            "xorian": 0,
+            "tradia": 2,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 2,
+            "innerNeed": 1
+          },
+          "traits": {
+            "strategicThinking": 3,
+            "discipline": 1
+          },
+          "resonance": "Silas: el vinculo es real pero tiene condiciones. Y Halik, que piensa el momento."
+        },
+        {
+          "id": "c",
+          "text": "No lo haces. No quieres que nadie te deba nada.",
+          "legacyAffinity": {
+            "ederian": 0,
+            "bastia": -1,
+            "tralan": 3,
+            "xorian": 2,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 1
+          },
+          "traits": {
+            "independence": 3,
+            "strategicThinking": 1
+          },
+          "resonance": "Ross: mantiene la distancia limpia. Deron tambien, pero el suyo es no romper el vinculo."
+        },
+        {
+          "id": "d",
+          "text": "Lo haces y no lo cobras, ni siquiera si cambia la cosa.",
+          "legacyAffinity": {
+            "ederian": 2,
+            "bastia": 0,
+            "tralan": 0,
+            "xorian": 3,
+            "tradia": 0,
+            "helia": 0
+          },
+          "blessing": {
+            "wishOutside": 0,
+            "innerNeed": 3
+          },
+          "traits": {
+            "loyalty": 3,
+            "attachment": 3
+          },
+          "resonance": "Deron: un vinculo del que no puede salir. Eso si es necesidad interna."
         }
       ]
     }
   ],
   "todo": [
-    "TODO: cobertura de afinidad con legados INSUFICIENTE. Bastia, Xorian y Helia por debajo del mínimo.",
-    "TODO: añadir opciones que exploren 'qué está intentando encontrar en su vida' de forma más directa.",
-    "TODO: decidir el número final de preguntas (P-004 sigue abierta).",
-    "TODO: registrar Tussem, Anika Griffin, Gil, Benny, Darya y Rayden como casos canónicos en data/.",
-    "TODO: definir qué hace el motor con el concepto Between. NO inventar fórmula."
+    "TODO: recalcular coverageReport tras esta calibracion.",
+    "TODO: decidir el numero final de preguntas (P-004 sigue abierta).",
+    "TODO: registrar Tussem, Anika Griffin, Gil, Benny, Darya y Rayden como casos canonicos en data/.",
+    "TODO: definir que hace el motor con el concepto Between. NO inventar formula."
   ]
 }
