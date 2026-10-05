@@ -247,7 +247,9 @@
       "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
       "canBless": false,
       "canBlessReason": "Pregunta conceptual: \"que haces cuando se te ofrece algo que podria darte mas\". Observa suficiencia, deseo externo, anticipacion de vacio o motivacion de proteccion. No es la pregunta central que revela una necesidad capaz de llevar a la bendicion. Aunque (c) sea inner_search, la pregunta NO abre via de bendicion. Decision de la autora.",
-      "note": "canBless:false por funcion conceptual, no porque (c) tenga verified:false. verified NO es una regla de exclusion: describe si la persona ya vivio la experiencia. verified:false NO impide contribuir a una revelacion."
+      "note": "canBless:false por funcion conceptual, no porque (c) tenga verified:false. verified NO es una regla de exclusion: describe si la persona ya vivio la experiencia. verified:false NO impide contribuir a una revelacion.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "b-002",
@@ -479,7 +481,9 @@
       "evidenceStatus": "APROBADO — 8 opciones etiquetadas",
       "note": "Las 8 opciones cubren los cuatro estados: suficiencia (a, h), necesidad con contenido o sin (c, e, g), deseo hacia fuera (b), contradiccion deseo/necesidad (f) y limite relacional (d). Ninguna nombra una naturaleza.",
       "canBless": true,
-      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta."
+      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "b-003",
@@ -617,7 +621,9 @@
       "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
       "note": "c) y d) aceptan la misma accion pero no la misma necesidad. c) lo insuficiente es quien es, y lo ha comprobado. d) lo insuficiente es que nadie se lo haya dicho, y el remedio esta fuera. b-003/c es la UNICA located_identity del banco de perfil: punto unico de fallo asumido.",
       "canBless": true,
-      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta."
+      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "b-004",
@@ -754,7 +760,9 @@
       "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
       "note": "Ninguna opcion produce needInward por querer poder. a) y b) son complete_present con verified distinta (comprobado / afirmado). c) es la unica via de necesidad interna y existe por pauta de remediacion fallida. d) es limite moral: character_only. b-004 no tiene located_identity: decision de la autora para no duplicar b-003/c.",
       "canBless": true,
-      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta."
+      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "b-005",
@@ -891,7 +899,9 @@
       "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
       "note": "RESTRICCION DURA: b-005 no produce bendicion. Tres de sus cuatro opciones son character_only. La cuarta (c) es external_desire, no necesidad interna. Sacrificar no es necesitar. (d) es el caso Benny declarado.",
       "canBless": false,
-      "canBlessReason": "Esta pregunta NO puede producir bendicion por ninguna combinacion de sus respuestas."
+      "canBlessReason": "Esta pregunta NO puede producir bendicion por ninguna combinacion de sus respuestas.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "l-001",
@@ -2284,7 +2294,9 @@
       "canBless": false,
       "canBlessReason": "Mide comportamiento sin testigos: resolucion, reaccion, conducta y espera. Su unica opcion con senal interna (e) es unformulable, que es aloneInsufficient. Una evidencia insufficient por si sola NO convierte a toda la pregunta en via de bendicion. Decision de la autora.",
       "evidenceStatus": "APROBADO — 6 opciones etiquetadas",
-      "note": "Correccion de fondo: cuatro opciones estaban como sufficiency y solo UNA lo es. a) es agencia para resolver, no suficiencia. d) solo dice que espera, sin saber por que. f) es independencia ante el publico, no \"nunca he necesitado que me completen\". canBless PENDIENTE de decision."
+      "note": "Correccion de fondo: cuatro opciones estaban como sufficiency y solo UNA lo es. a) es agencia para resolver, no suficiencia. d) solo dice que espera, sin saber por que. f) es independencia ante el publico, no \"nunca he necesitado que me completen\". canBless PENDIENTE de decision.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "i-002",
@@ -2481,7 +2493,9 @@
       "canBless": false,
       "canBlessReason": "La estructura de la pregunta establece un estado de SUFICIENCIA ASUMIDA: el enunciado dice \"tienes todo lo que necesitas, no falta nada\". Su unica evidencia potencialmente interna es d) minor_acknowledged_emptiness, que es amb:true y aloneInsufficient:true. No constituye una via suficiente para una revelacion de necesidad. Decision de la autora: no convertir un vacio minimo reconocido en \"hay una necesidad que la Diosa debe resolver\".",
       "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
-      "note": "Correcciones: a) no es suficiencia propia sino redireccion a otros. c) no es reconocimiento sino busqueda de algo ajeno a el. d) reconoce un vacio minimo: es inner_search, no sufficiency, y amb:true porque admite mas de una lectura. sufficiency baja de 4/7 a 2/7. canBless PENDIENTE."
+      "note": "Correcciones: a) no es suficiencia propia sino redireccion a otros. c) no es reconocimiento sino busqueda de algo ajeno a el. d) reconoce un vacio minimo: es inner_search, no sufficiency, y amb:true porque admite mas de una lectura. sufficiency baja de 4/7 a 2/7. canBless PENDIENTE.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "i-003",
@@ -2662,7 +2676,9 @@
         "f": "Que me digan. verified:false — quiere confirmacion externa.",
         "note": " compartmental. Son fenomenos distintos (identificar vs confirmar) pero comparten familia y subtipo. Si la distincion llegara a tener funcion en la interpretacion, se separan en external_identification / external_confirmation. No se crea un subtipo sin funcion.",
         "note2": "Este es el caso pendiente de \"verified:false dentro de una pregunta que podria bendecir\". Aqui se resuelve por canBless:false de la PREGUNTA, no por el valor de verified."
-      }
+      },
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "i-004",
@@ -2860,7 +2876,9 @@
       "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
       "note": "Las siete revisadas. Ninguna toca sufficiency: a) jerarquiza valores, b) no tiene respuesta, d) no quiere cambiar, g) quiere saber. canBless PENDIENTE de decision.",
       "canBless": true,
-      "canBlessReason": "La pregunta, COMO CONJUNTO, permite revelar una relacion entre cambio, identidad y algo que la persona reconoce internamente que esta dispuesta a abandonar o transformar. NO es porque inward_declared implique bendicion: esa regla quedo cerrada. f) es el caso mas fuerte: reconoce una eleccion interna, sabe que esta dispuesto a sacrificar, y no espera que nadie externo le diga que significa. Elegir f NO significa ser Diubak automaticamente: la evidencia entra al innerProfile y posteriormente la Diosa interpreta el conjunto. Decision de la autora."
+      "canBlessReason": "La pregunta, COMO CONJUNTO, permite revelar una relacion entre cambio, identidad y algo que la persona reconoce internamente que esta dispuesta a abandonar o transformar. NO es porque inward_declared implique bendicion: esa regla quedo cerrada. f) es el caso mas fuerte: reconoce una eleccion interna, sabe que esta dispuesto a sacrificar, y no espera que nadie externo le diga que significa. Elegir f NO significa ser Diubak automaticamente: la evidencia entra al innerProfile y posteriormente la Diosa interpreta el conjunto. Decision de la autora.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     },
     {
       "id": "i-005",
@@ -3060,7 +3078,9 @@
       "canBless": false,
       "canBlessReason": "Habla de algo emocionalmente profundo — la mirada de alguien que te importa — pero el objeto de TODAS las respuestas es externo. a) quiere saber que piensa (validacion externa). b) y f) son independencia respecto a esa mirada. c) adapta quien muestra a la expectativa del otro, pero no revela que necesita internamente. d) controla como sera interpretado. e) deja que el otro mire. g) desea la atencion del otro. Ninguna opcion tiene contenido interno, y todas las que tienen capacidad de bendecir son aloneInsufficient. Decision de la autora.",
       "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
-      "note": "Las siete revisadas. sufficiency baja de 4/7 a 0/7. external_desire es la familia dominante de esta pregunta, que es coherente con su enunciado: alguien te mira y tu haces algo con esa mirada. canBless PENDIENTE de decision."
+      "note": "Las siete revisadas. sufficiency baja de 4/7 a 0/7. external_desire es la familia dominante de esta pregunta, que es coherente con su enunciado: alguien te mira y tu haces algo con esa mirada. canBless PENDIENTE de decision.",
+      "frozen": true,
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
     }
   ],
   "todo": [
@@ -3222,6 +3242,75 @@
       "principleNoScores": "NO hay score de bending. NO hay cantidad de evidencias. NO hay umbral. El perfil se compone de evidencia cualitativa y la decision de naturaleza sigue SIN ESCRIBIR.",
       "nextStep": "Disenar la regla de naturaleza. Es lo unico que queda antes de escribir el motor.",
       "note": "La semantica termino antes que las proporciones. Las etiquetas ya no se tocan por cuadrar numeros."
+    },
+    "frozen": {
+      "frozenOn": "2026-10-05",
+      "questions": [
+        {
+          "id": "b-001",
+          "canBless": false
+        },
+        {
+          "id": "b-002",
+          "canBless": true
+        },
+        {
+          "id": "b-003",
+          "canBless": true
+        },
+        {
+          "id": "b-004",
+          "canBless": true
+        },
+        {
+          "id": "b-005",
+          "canBless": false
+        },
+        {
+          "id": "i-001",
+          "canBless": false
+        },
+        {
+          "id": "i-002",
+          "canBless": false
+        },
+        {
+          "id": "i-003",
+          "canBless": false
+        },
+        {
+          "id": "i-004",
+          "canBless": true
+        },
+        {
+          "id": "i-005",
+          "canBless": false
+        }
+      ],
+      "canBless": {
+        "b-001": false,
+        "b-002": true,
+        "b-003": true,
+        "b-004": true,
+        "b-005": false,
+        "i-001": false,
+        "i-002": false,
+        "i-003": false,
+        "i-004": true,
+        "i-005": false
+      },
+      "rule": "canBless pertenece a la PREGUNTA. Ningun subtipo implica capacidad de bendecir. El motor lo lee del dato, no lo deduce.",
+      "hardRules": [
+        "Ningun subtype implica por si mismo capacidad de bendecir.",
+        "verified:false NO es impedimento ni no impedimento. Sigue ABIERTO.",
+        "interpretiveAmbiguity:true no invalida la evidencia: gobierna que puede afirmar la revelacion. No puntua.",
+        "aloneInsufficient debe respetarse.",
+        "canBless pertenece a la pregunta, no a la opcion.",
+        "Sacrificar no es necesitar. Querer poder no es necesitar transformarse.",
+        "No ajustar pesos ni scores para compensar frecuencias.",
+        "No crear mas preguntas ni subtipos por anticipacion."
+      ],
+      "openIssue": "Caso hibrido SIN resolver: deseo externo (tipo Benny) combinado con una sola evidencia de direccion interna (tipo Darya). Queda documentado como cuestion de interpretacion del perfil. No se anade pregunta para taparlo. Ver docs/inner-profile-cases.md."
     }
   }
 }
