@@ -40,4 +40,20 @@ export class MoonRevealPage {
   get phaseLabel(): string | null {
     return this.phaseId ? this.moonPhases.labelFor(this.phaseId) : null;
   }
+
+  /**
+   * La fecha se propaga a la siguiente pagina.
+   *
+   * Sin esto la luna se pierde: /questions la necesita para pasarla a
+   * /result, y la pagina de resultado no puede dibujarla sin ella.
+   */
+  get year(): number | null {
+    return this.route.snapshot.queryParamMap.get('y') ? Number(this.route.snapshot.queryParamMap.get('y')) : null;
+  }
+  get month(): number | null {
+    return this.route.snapshot.queryParamMap.get('m') ? Number(this.route.snapshot.queryParamMap.get('m')) : null;
+  }
+  get day(): number | null {
+    return this.route.snapshot.queryParamMap.get('d') ? Number(this.route.snapshot.queryParamMap.get('d')) : null;
+  }
 }

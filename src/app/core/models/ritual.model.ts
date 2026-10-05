@@ -27,13 +27,17 @@ export interface CalendarDate {
   day: number;
 }
 
-/** Salida de MoonService. Se copia por valor: el motor no lo muta. */
-export interface MoonPhaseResult {
-  phaseId: string;
-  phaseName: { en: string; es: string };
-  illumination: number;
-  age: number;
-}
+/**
+ * Salida de MoonService. Se reexporta desde aqui para que el modelo del
+ * resultado no tenga que duplicar la forma.
+ *
+ * NO se redeclara el tipo: se importa. Declararlo aparte es como aparecio un
+ * MoonPhaseResult con campos que no existen (phaseId, phaseName, age).
+ */
+export type { MoonPhaseResult } from '../services/moon.service';
+
+/** Import para uso local en este archivo. */
+import type { MoonPhaseResult } from '../services/moon.service';
 
 // ---------------------------------------------------------------------------
 // Reinos y naturalezas

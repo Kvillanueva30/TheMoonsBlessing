@@ -4,6 +4,7 @@ import {
   RitualInput,
   resolveRitual,
 } from './ritual.engine';
+import type { MoonPhaseResult } from '../services/moon.service';
 import {
   AnswerSet,
   KingdomId,
@@ -34,11 +35,10 @@ const NATURE_RULES = {
 } as const;
 
 /** Luna falsa: el motor no debe mirarla nunca. */
-const MOON = {
-  phaseId: 'new-moon',
-  phaseName: { en: 'New Moon', es: 'Luna Nueva' },
+const MOON: MoonPhaseResult = {
+  id: 'new-moon',
+  angle: 0,
   illumination: 0,
-  age: 0.1,
 };
 
 /**
@@ -89,7 +89,7 @@ describe('resolveRitual', () => {
       const result = run(q, allA(['q1']));
 
       expect(result.moon).toEqual(MOON);
-      expect(result.moon.phaseId).toBe('new-moon');
+      expect(result.moon.id).toBe('new-moon');
     });
 
     it('produce exactamente el mismo reino y naturaleza con luna nueva y luna llena', () => {
@@ -103,7 +103,7 @@ describe('resolveRitual', () => {
       });
       const fullMoon = resolveRitual({
         input: {
-          moon: { ...MOON, phaseId: 'full-moon', illumination: 1, age: 14.2 },
+          moon: { ...MOON, id: 'full-moon', angle: 180, illumination: 1 } satisfies MoonPhaseResult,
           answers: allA(['q1']),
         },
         questions: q,

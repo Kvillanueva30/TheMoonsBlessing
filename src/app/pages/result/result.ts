@@ -1,10 +1,11 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, ElementRef, computed, inject, signal, viewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RitualSessionService } from '../../core/services/ritual-session.service';
 import { KingdomService, KingdomData } from '../../data/kingdom.service';
 import { QuestionBankService } from '../../data/question-bank.service';
 import { MoonPhasesService } from '../../data/moon-phases.service';
 import { MoonComponent } from '../../shared/moon/moon';
+import { ShareComponent } from '../../shared/share/share';
 import { SkyComponent } from '../../shared/sky/sky';
 import { MoonPhaseResult } from '../../core/services/moon.service';
 import { GoddessResult, NatureId } from '../../core/models/inner.model';
@@ -23,7 +24,7 @@ import { KingdomId } from '../../core/models/ritual.model';
  */
 @Component({
   selector: 'app-result',
-  imports: [SkyComponent, MoonComponent],
+  imports: [SkyComponent, MoonComponent, ShareComponent],
   templateUrl: './result.html',
   styleUrl: './result.scss',
 })
@@ -95,6 +96,27 @@ export class ResultPage {
 
   /** Frases que el visitante eligio y que sostienen la revelacion. */
   readonly perceived = computed(() => this.nature()?.revelation.perceived ?? []);
+
+  /**
+   * Texto que se comparte.
+   *
+   * Se compone con lo que el motor YA dijo. No inventa una frase mejor:
+   * si el resultado es Cazut por la maldicion del reino, dice Cazut.
+   */
+  readonly shareText = computed(() => {
+    const partes: string[] = [];
+    if (this.moonLabel()) partes.push(`Mi luna: ${this.moonLabel()}`);
+    if (this.kingdom()) partes.push(`Mi reino: ${this.kingdom()!.name}`);
+    if (this.natureLabel()) partes.push(this.natureLabel());
+    return partes.length ? partes.join(' · ') : 'Descubrí lo que soy en Madar.';
+  });
+
+  /**
+   * Se captura ESTE bloque: luna, naturaleza y reino. El boton de compartir
+   * queda FUERA a proposito, para que la imagen compartida no seene a
+   * pantalla con sus propios controles.
+   */
+  readonly card = viewChild.required<HTMLElement>('resultCard');
 
   restart(): void {
     this.session.reset();

@@ -99,4 +99,6 @@ Repositorio `madar-ritual`, rama `main`. **GitHub Actions: `push → build → d
 
 ## Fuera de alcance
 
-Perfiles de personajes, ceremonías por reino, poderes, linajes, compatibilidades, imágenes por IA, animaciones, música, efectos de sonido, vídeos cortos, compartir resultado, guardar resultados, integración con el sitio de BETWEEN, agentes de IA. La arquitectura los admite; **no se construyen**.
+Perfiles de personajes, ceremonías por reino, poderes, linajes, compatibilidades, imágenes por IA, animaciones, música, efectos de sonido, vídeos cortos, guardar resultados, integración con el sitio de BETWEEN, agentes de IA. La arquitectura los admite; **no se construyen**.
+
+**Excepción ya construida:** compartir resultado. La página de resultado captura el bloque real con `html-to-image` y comparte la imagen tal cual se ve. El enlace lleva el resultado entero en la URL (`/result?y&m&d&a=...`), así que también sirve para rehacerlo.

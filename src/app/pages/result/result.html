@@ -8,7 +8,7 @@
       <button type="button" class="ghost" (click)="restart()">Volver al principio</button>
     </section>
   } @else if (ready()) {
-    <section class="result" aria-live="polite">
+    <section #resultCard class="result" aria-live="polite">
 
       <!-- LUNA. Se muestra aparte: no haWuGly influenced reino ni naturaleza. -->
       <article class="block moon-block">
@@ -52,6 +52,12 @@
           }
         </article>
       }
+
+      <app-share
+      [target]="card()"
+      [filename]="'madar-' + natureLabel().toLowerCase() + '.png'"
+      [shareTitle]="shareText()"
+    />
 
       <button type="button" class="ghost" (click)="restart()">Volver al principio</button>
     </section>

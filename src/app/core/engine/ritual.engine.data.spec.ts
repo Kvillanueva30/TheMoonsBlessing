@@ -1,4 +1,5 @@
 import { resolveRitual, KingdomRule, RitualInput } from './ritual.engine';
+import type { MoonPhaseResult } from '../services/moon.service';
 import { KingdomId, NatureId, MadarResult } from '../models/ritual.model';
 import questionsData from '../../../../data/questions/questions.json';
 import ederian from '../../../../data/kingdoms/ederian.json';
@@ -25,11 +26,10 @@ const NATURE_RULES = {
   cazut: { headline: 'Eres un Cazut.', meaning: 'c' },
 } as const;
 
-const MOON = {
-  phaseId: 'new-moon',
-  phaseName: { en: 'New Moon', es: 'Luna Nueva' },
+const MOON: MoonPhaseResult = {
+  id: 'new-moon',
+  angle: 0,
   illumination: 0,
-  age: 0.1,
 };
 
 const QUESTIONS = questionsData.questions as unknown as RitualInput['questions'];
@@ -157,7 +157,7 @@ describe('motor contra el banco real', () => {
     const newMoon = run(ALL_A);
     const fullMoon = resolveRitual({
       input: {
-        moon: { ...MOON, phaseId: 'full-moon', illumination: 1, age: 14.2 },
+        moon: { ...MOON, id: 'full-moon', angle: 180, illumination: 1 } satisfies MoonPhaseResult,
         answers: ALL_A,
       },
       questions: QUESTIONS,

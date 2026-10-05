@@ -10,6 +10,11 @@
     <h1>{{ phaseLabel }}</h1>
     <p class="hint">Este es el aspecto del cielo el día en que naciste.</p>
 
-    <a routerLink="/questions" class="continue">Continuar</a>
+    <a
+      [routerLink]="['/questions']"
+      [queryParams]="{ y: year, m: month, d: day }"
+      class="continue"
+      >Continuar</a
+    >
   </section>
 </main>

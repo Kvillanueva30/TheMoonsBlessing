@@ -1405,7 +1405,7 @@
         },
         {
           "id": "e",
-          "text": "La cuentas. Así los que están abajo dejan de .",
+          "text": "La cuentas. Así los que están abajo dejan de sufrir.",
           "legacyAffinity": {
             "ederian": 2,
             "bastia": -1,
@@ -1524,28 +1524,6 @@
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
-          "id": "c",
-          "text": "Recoges lo que necesitas saber y se lo pasas a quien decide.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 1,
-            "tralan": -1,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "protection": 3,
-            "empathy": 1
-          },
-          "resonance": "Silas protegiendo a Lucius, y Lucius protegiendo a su pueblo. El deber por encima de la propiedad.",
-          "designNote": "Silas protegiendo a Lucius, y Lucius protegiendo a su pueblo. El deber por encima de la propiedad."
-        },
-        {
           "id": "d",
           "text": "Recoges lo que necesitas saber y se lo pasas a quien decide.",
           "legacyAffinity": {
@@ -1591,7 +1569,7 @@
         },
         {
           "id": "f",
-          "text": "Te mueves, pero por los tuyos. Que no les .",
+          "text": "Te mueves, pero por los tuyos. Que no les alcance.",
           "legacyAffinity": {
             "ederian": 2,
             "bastia": 0,
@@ -1716,7 +1694,7 @@
       "id": "l-007",
       "theme": "Miedo",
       "axis": "legacy",
-      "text": "Vuestro grupo tiene que cruzar el paso de noche y tú, que estabas guiando, te has parado. Nadie dice nada, pero todos esperan que alguien siga.",
+      "text": "Tu grupo tiene que cruzar el paso de noche y tú te has parado. Nadie dice nada, pero todos esperan que alguien siga.",
       "choices": [
         {
           "id": "a",
