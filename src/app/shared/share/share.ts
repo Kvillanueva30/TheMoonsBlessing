@@ -207,12 +207,9 @@ export class ShareComponent {
       const url = encodeURIComponent(location.href);
       const text = encodeURIComponent(this.shareTitle());
       window.open(net.build(url, text), '_blank', 'noopener,noreferrer');
-
-      this.message.set(
-        blob
-          ? 'Imagen guardada y red abierta. Adjunta la imagen manualmente.'
-          : 'Red abierta.',
-      );
+      // Sin mensaje: la red abierta ya se ve. Solo se avisa si la imagen no
+      // pudo generarse, que si es algo que el visitante no puede deducir.
+      if (!blob) this.message.set('No se ha podido generar la imagen.');
     } finally {
       this.busy.set(false);
     }
