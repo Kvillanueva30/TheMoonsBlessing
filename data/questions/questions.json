@@ -935,7 +935,6 @@
             "courage": 2
           },
           "designNote": "Lucius: actua aunque tenga miedo, y no por demostrar nada. Su motivo es el deber con alguien concreto.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -958,7 +957,6 @@
             "courage": 1
           },
           "designNote": "Tarik: superarse Y demostrar de que es capaz. El 'que lo vean' lo acerca a Silas, pero el motor es la superacion propia.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -981,7 +979,6 @@
             "competitiveness": 2
           },
           "designNote": "Silas: el termino de comparacion es OTRO, no uno mismo. Aqui esta la diferencia con Tarik.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1004,7 +1001,6 @@
             "empathy": 3
           },
           "designNote": "Deron: el motivo es el vinculo. Que la gente este junta. No calcula el momento, como Halik.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1027,7 +1023,6 @@
             "patience": 2
           },
           "designNote": "Halik: protege mediante el pensamiento y calcula el momento para minimizar el riesgo. No busca demostrar nada.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1050,7 +1045,6 @@
             "independence": 2
           },
           "designNote": "Ross: preservar SU propia paz. Se aleja de Lucius, que actua con miedo; Ross busca la calma.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1103,7 +1097,6 @@
             "courage": 2
           },
           "designNote": "Lucius: decir lo que hay que decir por responsabilidad. El contenido se parece a Halik, pero la motivacion no.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1148,7 +1141,6 @@
             "strategicThinking": 1
           },
           "designNote": "Ross: decide no actuar. No calcula el momento, simplemente se aparta.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1171,7 +1163,6 @@
             "patience": 1
           },
           "designNote": "Deron: habla por el vinculo, para que el grupo funcione. A diferencia de Lucius, aqui el motivo es la pertenencia.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1194,7 +1185,6 @@
             "leadership": 1
           },
           "designNote": "Silas: el reconocimiento. El contenido puede ser bueno; lo que empuja es el crédito.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
@@ -1292,7 +1282,6 @@
             "strategicThinking": 1
           },
           "designNote": "Halik: la critica como dato. Es el mismo camino de la manipulacion, un paso mas.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1315,7 +1304,6 @@
             "impulsiveness": 1
           },
           "designNote": "Silas: la comparacion que se pudre en resentimiento.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
@@ -1347,7 +1335,6 @@
             "courage": 1
           },
           "designNote": "Lucius: la verdad aunque le cueste. No calcula a quien le conviene.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1370,7 +1357,6 @@
             "patience": 1
           },
           "designNote": "Halik: el conocimiento como herramienta de decision. Sin sombra todavia.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1415,7 +1401,6 @@
             "patience": 1
           },
           "designNote": "Ross: evitar implicarse. El motivo es su paz, no el grupo como en Deron.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1438,7 +1423,6 @@
             "empathy": 2
           },
           "designNote": "Deron: la informacion al servicio del vinculo. Y Halik, porque la usa con un proposito.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1461,7 +1445,6 @@
             "leadership": 1
           },
           "designNote": "Silas: el conocimiento como crédito. Se diferencia de Halik, que sabe para decidir, no para que le reconozcan.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1484,7 +1467,6 @@
             "curiosity": 1
           },
           "designNote": "Tarik: superacion con uno mismo, sin comparacion con nadie. Por eso no lleva madera de Silas.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
@@ -1539,7 +1521,6 @@
             "loyalty": 1
           },
           "designNote": "Ross: no actuar sin permiso. Lucius tambien espera, aunque por deber.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1584,7 +1565,6 @@
             "patience": 1
           },
           "designNote": "Halik: la informacion como herramienta de decision, no como arma. Se diferencia de Silas, que la retiene.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1629,7 +1609,6 @@
             "empathy": 2
           },
           "designNote": "Deron: el vinculo como motivo. No protege a la justicia ni a un rey, protege a los suyos.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
@@ -1639,7 +1618,7 @@
       "id": "l-006",
       "theme": "Reconocimiento",
       "axis": "blessing",
-      "text": "Un siglo después de su muerte, el nombre de tu fundador es el más repetido en tu reino. ¿Qué hace ese nombre contigo?",
+      "text": "Un siglo después de su muerte, el nombre de tu fundador es el más repetido en tu reino. ¿Qué te provoca ese nombre?",
       "motive": "Silas necesita reconocimiento porque se define por encima de otros. Tarik no lo necesita porque se supera a si mismo. Esta pregunta separa a los dos.",
       "choices": [
         {
@@ -1684,7 +1663,6 @@
             "competitiveness": 2
           },
           "designNote": "Silas: la ascension y el reconocimiento. Necesita el nombre de arriba para saber quien es.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1707,7 +1685,6 @@
             "empathy": 3
           },
           "designNote": "Deron: el vinculo por encima de todo. El reconocimiento le da igual.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1730,7 +1707,6 @@
             "leadership": 1
           },
           "designNote": "Silas: la comparacion permanente. Tambien Tarik, pero por la mirada de los otros.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
@@ -1763,7 +1739,6 @@
             "resilience": 1
           },
           "designNote": "Lucius: valentia a pesar del miedo. No busca demostrar nada.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1787,7 +1762,6 @@
             "adaptability": 1
           },
           "designNote": "Ross: puede tener miedo y decidir no actuar. Se diferencia de Lucius en eso.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1810,7 +1784,6 @@
             "leadership": 1
           },
           "designNote": "Lucius: actua aunque tenga miedo, y no por demostrar nada. Su motivo es el deber con alguien concreto.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1834,7 +1807,6 @@
             "attachment": 1
           },
           "designNote": "Deron: no quiere separarse del grupo. Y hay miedo al abandono, que si es necesidad.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
@@ -1889,7 +1861,6 @@
             "discipline": 1
           },
           "designNote": "Ross: conocer lo propio sin actuarlo. Observar antes de moverse.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1912,7 +1883,6 @@
             "ambition": 2
           },
           "designNote": "Silas: la sombra como herramienta. NO significa que sea malo.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1935,7 +1905,6 @@
             "empathy": 1
           },
           "designNote": "Deron: confesar a un solo vinculo. Confiar en uno es confiar en el grupo entero.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
@@ -1967,7 +1936,6 @@
             "discipline": 2
           },
           "designNote": "Lucius: el duelo se convierte en deber. Necesidad interna real, sin deseo externo.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -1991,7 +1959,6 @@
             "courage": 1
           },
           "designNote": "Deron: poner el duelo a la vista para no cargarlo solo.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -2088,7 +2055,6 @@
             "discipline": 1
           },
           "designNote": "Silas: el vinculo es real pero tiene condiciones. Y Halik, que piensa el momento.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -2111,7 +2077,6 @@
             "strategicThinking": 1
           },
           "designNote": "Ross: mantiene la distancia limpia. Deron tambien, pero el suyo es no romper el vinculo.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         },
         {
@@ -2134,7 +2099,6 @@
             "attachment": 3
           },
           "designNote": "Deron: un vinculo del que no puede salir. Eso si es necesidad interna.",
-          "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
       ],
