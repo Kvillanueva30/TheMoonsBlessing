@@ -143,6 +143,17 @@ app-moon {
 }
 
 /* --- Final --- */
+/* Solo el rótulo. Sin botones: por ahora no hay con qué compartir, y un
+   rótulo que anuncia algo que no ocurre miente. */
+.share-label {
+  justify-self: center;
+  margin: 0;
+  color: #9a8f74;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
 .ghost {
   justify-self: center;
   padding: 0.75rem 0;
