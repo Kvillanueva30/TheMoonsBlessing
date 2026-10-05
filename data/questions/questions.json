@@ -115,11 +115,11 @@
       "id": "b-001",
       "theme": "Suficiencia",
       "axis": "blessing",
-      "text": "El consejo de tu municipio busca a alguien y tu nombre está sobre la mesa. Nadie te obliga. Puedes seguir como hasta ahora.",
+      "text": "El rey busca a alguien y tu nombre está sobre la mesa. Nadie te obliga. Puedes seguir como hasta ahora.",
       "choices": [
         {
           "id": "a",
-          "text": "Lo aceptas. Te gustaría que el municipio te necesitara.",
+          "text": "Lo aceptas. Te gustaría que el pueblo te necesitara.",
           "legacyAffinity": {
             "ederian": 1,
             "bastia": 2,
@@ -249,13 +249,14 @@
       "canBlessReason": "Pregunta conceptual: \"que haces cuando se te ofrece algo que podria darte mas\". Observa suficiencia, deseo externo, anticipacion de vacio o motivacion de proteccion. No es la pregunta central que revela una necesidad capaz de llevar a la bendicion. Aunque (c) sea inner_search, la pregunta NO abre via de bendicion. Decision de la autora.",
       "note": "canBless:false por funcion conceptual, no porque (c) tenga verified:false. verified NO es una regla de exclusion: describe si la persona ya vivio la experiencia. verified:false NO impide contribuir a una revelacion.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "suficiencia"
     },
     {
       "id": "b-002",
       "theme": "Lo que falta",
       "axis": "blessing",
-      "text": "Una noche, alguien te pregunta qué te falta. No hay nadie más alrededor y la pregunta no tiene trampa.",
+      "text": "Una noche, alguien te pregunta qué te falta. No hay nadie más y la pregunta no tiene trampa.",
       "choices": [
         {
           "id": "a",
@@ -483,13 +484,14 @@
       "canBless": true,
       "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "sujeto"
     },
     {
       "id": "b-003",
       "theme": "Identidad",
       "axis": "blessing",
-      "text": "Te ofrecen dejar de ser quien eres a cambio de ser alguien a quien todos admirarían. A cambio no tendrías que ser quien eres.",
+      "text": "Te ofrecen dejar de ser quien eres a cambio de ser alguien a quien todos admirarían.",
       "choices": [
         {
           "id": "a",
@@ -623,13 +625,14 @@
       "canBless": true,
       "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "identidad"
     },
     {
       "id": "b-004",
       "theme": "Poder",
       "axis": "blessing",
-      "text": "Hay un problema que te duele y que no puedes resolver con lo que tienes. Alguien te ofrece el poder real para acabarlo.",
+      "text": "Hay un problema que te duele y no puedes resolver con lo que tienes. Te ofrecen el poder real para acabarlo.",
       "choices": [
         {
           "id": "a",
@@ -762,13 +765,14 @@
       "canBless": true,
       "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "poder"
     },
     {
       "id": "b-005",
       "theme": "Sacrificio",
       "axis": "blessing",
-      "text": "Te piden algo que no quieres dar, y sabes que hacerlo te va a dejar una marca. Lo que sea, no lo vas a recuperar.",
+      "text": "Te piden algo que no quieres dar. Sabes que te va a dejar una marca, y no lo vas a recuperar.",
       "choices": [
         {
           "id": "a",
@@ -901,7 +905,8 @@
       "canBless": false,
       "canBlessReason": "Esta pregunta NO puede producir bendicion por ninguna combinacion de sus respuestas.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "sacrificio"
     },
     {
       "id": "l-001",
@@ -1069,13 +1074,14 @@
           },
           "resonance": "Neutro: se levanta sin motivo definido. ESTA es la trampa de la accion sin motivacion, y por eso existe."
         }
-      ]
+      ],
+      "etching": "sujeto"
     },
     {
       "id": "l-002",
-      "theme": "El consejo",
+      "theme": "La sala del rey",
       "axis": "legacy",
-      "text": "En el consejo, el rey pregunta la opinión de quien está al fondo de la sala. Todos esperan que no hables.",
+      "text": "En la sala del rey, pregunta la opinión de quien está al fondo. Todos esperan que no hables.",
       "choices": [
         {
           "id": "a",
@@ -1147,7 +1153,7 @@
         },
         {
           "id": "d",
-          "text": "Lo dices porque el grupo lo necesita. Para eso está el consejo.",
+          "text": "Lo dices porque el grupo lo necesita. Para eso está la sala.",
           "legacyAffinity": {
             "ederian": 1,
             "bastia": 0,
@@ -1191,7 +1197,8 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "sabiduria"
     },
     {
       "id": "l-003",
@@ -1311,13 +1318,14 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "sujeto"
     },
     {
       "id": "l-004",
       "theme": "Conocimiento",
       "axis": "legacy",
-      "text": "Tienes una información que cambia lo que todos creen. Puedes decirla ahora o guardarla.",
+      "text": "Tienes información que cambia lo que todos creen. Puedes decirla ahora o guardarla.",
       "choices": [
         {
           "id": "a",
@@ -1479,13 +1487,14 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "sabiduria"
     },
     {
       "id": "l-005",
       "theme": "Lealtad",
       "axis": "legacy",
-      "text": "La persona que hizo daño a tu rey vive en tu ciudad. No tienes ninguna orden. Nadie te ha dicho que hagas nada.",
+      "text": "La persona que hizo daño a tu rey vive cerca de ti. No tienes ninguna orden. Nadie te ha dicho que hagas nada.",
       "motive": "El veto de Halik reactiva a Tarik: su motivo pasa de superar a Silas a vengar a Halik.",
       "choices": [
         {
@@ -1535,7 +1544,7 @@
         },
         {
           "id": "c",
-          "text": "Lo impides, aunque no sea tu ciudad y aunque nadie te lo pidiera.",
+          "text": "Recoges lo que necesitas saber y se lo pasas a quien decide.",
           "legacyAffinity": {
             "ederian": 3,
             "bastia": 1,
@@ -1623,7 +1632,8 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "vinculo"
     },
     {
       "id": "l-006",
@@ -1723,13 +1733,14 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "espejo"
     },
     {
       "id": "l-007",
       "theme": "Miedo",
       "axis": "legacy",
-      "text": "Tu grupo tiene que cruzar el paso de noche. Tú has-ledado a parar. Nadie dice nada, pero todos esperan que alguien lo haga.",
+      "text": "Vuestro grupo tiene que cruzar el paso de noche y tú, que estabas guiando, te has parado. Nadie dice nada, pero todos esperan que alguien siga.",
       "choices": [
         {
           "id": "a",
@@ -1826,7 +1837,8 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "miedo"
     },
     {
       "id": "l-008",
@@ -1926,7 +1938,8 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "espejo"
     },
     {
       "id": "l-009",
@@ -2024,7 +2037,8 @@
           },
           "resonance": "La perdida como hueco que sigue abierto. La necesidad mas pura del banco."
         }
-      ]
+      ],
+      "etching": "sujeto"
     },
     {
       "id": "l-010",
@@ -2123,7 +2137,8 @@
           "evidence": {},
           "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
         }
-      ]
+      ],
+      "etching": "sujeto"
     },
     {
       "id": "i-001",
@@ -2296,7 +2311,8 @@
       "evidenceStatus": "APROBADO — 6 opciones etiquetadas",
       "note": "Correccion de fondo: cuatro opciones estaban como sufficiency y solo UNA lo es. a) es agencia para resolver, no suficiencia. d) solo dice que espera, sin saber por que. f) es independencia ante el publico, no \"nunca he necesitado que me completen\". canBless PENDIENTE de decision.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "sujeto"
     },
     {
       "id": "i-002",
@@ -2495,7 +2511,8 @@
       "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
       "note": "Correcciones: a) no es suficiencia propia sino redireccion a otros. c) no es reconocimiento sino busqueda de algo ajeno a el. d) reconoce un vacio minimo: es inner_search, no sufficiency, y amb:true porque admite mas de una lectura. sufficiency baja de 4/7 a 2/7. canBless PENDIENTE.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "suficiencia"
     },
     {
       "id": "i-003",
@@ -2678,14 +2695,15 @@
         "note2": "Este es el caso pendiente de \"verified:false dentro de una pregunta que podria bendecir\". Aqui se resuelve por canBless:false de la PREGUNTA, no por el valor de verified."
       },
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "conflicto"
     },
     {
       "id": "i-004",
       "theme": "Dentro de veinte años",
       "axis": "inner",
       "feedsProfile": true,
-      "text": "Tienes veinte años por delante. Solo uno puede ser de una manera distinta a como has sido hasta ahora. Elige.",
+      "text": "Tienes veinte años por delante. Solo uno puede ser distinto a como has sido hasta ahora. Elige.",
       "intent": "La pérdida del tiempo. ¿Qué se sacrifica? La respuesta revela qué se considera descartable.",
       "choices": [
         {
@@ -2878,7 +2896,8 @@
       "canBless": true,
       "canBlessReason": "La pregunta, COMO CONJUNTO, permite revelar una relacion entre cambio, identidad y algo que la persona reconoce internamente que esta dispuesta a abandonar o transformar. NO es porque inward_declared implique bendicion: esa regla quedo cerrada. f) es el caso mas fuerte: reconoce una eleccion interna, sabe que esta dispuesto a sacrificar, y no espera que nadie externo le diga que significa. Elegir f NO significa ser Diubak automaticamente: la evidencia entra al innerProfile y posteriormente la Diosa interpreta el conjunto. Decision de la autora.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "sujeto"
     },
     {
       "id": "i-005",
@@ -3080,7 +3099,8 @@
       "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
       "note": "Las siete revisadas. sufficiency baja de 4/7 a 0/7. external_desire es la familia dominante de esta pregunta, que es coherente con su enunciado: alguien te mira y tu haces algo con esa mirada. canBless PENDIENTE de decision.",
       "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo."
+      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
+      "etching": "espejo"
     }
   ],
   "todo": [

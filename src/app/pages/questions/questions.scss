@@ -51,6 +51,23 @@
   text-transform: uppercase;
 }
 
+/* Grabado a la izquierda del enunciado. En movil se coloca encima. */
+.head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  align-items: center;
+  margin-bottom: 2.2rem;
+}
+
+.head-text {
+  min-width: 0;
+}
+
+.head .eyebrow {
+  margin-bottom: 0.8rem;
+}
+
 .dilemma,
 .lead {
   margin: 0 0 2.4rem;
@@ -229,6 +246,18 @@
   .page {
     place-items: start center;
     padding-top: 3rem;
+  }
+
+  /* El grabado se coloca encima del enunciado y se hace mas discreto. */
+  .head {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    margin-bottom: 1.8rem;
+  }
+
+  .head .eyebrow {
+    margin-bottom: 0.6rem;
   }
 
   .choices button {

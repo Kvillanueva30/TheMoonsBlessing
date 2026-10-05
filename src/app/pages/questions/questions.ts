@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionBankService } from '../../data/question-bank.service';
-import { BankQuestion, toEvidence } from '../../core/engine/evidence.adapter';
-import { interpretGoddess } from '../../core/engine/goddess.engine';
-import { GoddessResult, NatureId, OriginId } from '../../core/models/inner.model';
+import { BankQuestion } from '../../core/engine/evidence.adapter';
+import { EtchingComponent, EtchingTheme } from '../../shared/etching/etching';
 import { SkyComponent } from '../../shared/sky/sky';
 
 /**
@@ -14,20 +14,23 @@ import { SkyComponent } from '../../shared/sky/sky';
  * Que lee y que no:
  *   - Lee el TEXTO de las preguntas y las opciones. Nada mas.
  *   - NO lee afinidades, ni canBless, ni evidencia para mostrarla.
- *   - El motor se invoca AL TERMINAR, y su salida se pinta como revelacion.
- *     El componente no decide nada: traduce ids a evidencia y devuelve el
- *     resultado tal cual.
+ *   - Al terminar NO calcula nada: pasa las respuestas y navega. El
+ *     interprete corre en la pagina de resultado, no aqui.
  */
 @Component({
   selector: 'app-questions',
-  imports: [SkyComponent],
+  imports: [SkyComponent, EtchingComponent],
   templateUrl: './questions.html',
   styleUrl: './questions.scss',
 })
 export class QuestionsPage {
   private readonly bank = inject(QuestionBankService);
+  private readonly router = inject(Router);
 
-  /** Preguntas del perfil, en el orden del banco. */
+  /** La fecha de nacimiento viaja en la URL: la pagina no la guarda. */
+  private readonly date = inject(ActivatedRoute).snapshot.queryParamMap;
+
+  /** Preguntas en el orden del banco, barajadas al cargar. */
   readonly questions = signal<readonly BankQuestion[]>([]);
   readonly index = signal(0);
   readonly chosen = signal<string | null>(null);
@@ -35,20 +38,31 @@ export class QuestionsPage {
   /** Respuestas acumuladas. Solo ids: el texto vive en el banco. */
   readonly answers = signal<Readonly<Record<string, string>>>({});
 
-  /** Resultado del motor. Null mientras no se ha terminado. */
-  readonly result = signal<GoddessResult | null>(null);
-
   readonly current = computed<BankQuestion | null>(() => this.questions()[this.index()] ?? null);
 
   readonly isLast = computed(
     () => this.questions().length > 0 && this.index() === this.questions().length - 1,
   );
 
-  readonly answeredCount = computed(() => Object.keys(this.answers()).length);
-
   constructor() {
-    this.bank.profileQuestions.subscribe((qs) => this.questions.set(shuffle(qs)));
+    this.bank.questions.subscribe((qs) => this.questions.set(shuffle(qs)));
   }
+
+  /** Las opciones visibles: solo texto. Nada de etiquetas. */
+  readonly options = computed(() =>
+    (this.current()?.choices ?? []).map((c) => ({ id: c.id, text: c.text })),
+  );
+
+  /**
+   * Grabado del tema actual.
+   *
+   * Es atmosferico: no depende de lo que se responde. El nombre del tema
+   * vive en el banco, en el campo `etching`.
+   */
+  readonly etching = computed<EtchingTheme>(() => {
+    const theme = (this.current() as { etching?: EtchingTheme } | null)?.etching;
+    return theme ?? 'sujeto';
+  });
 
   choose(choiceId: string): void {
     const question = this.current();
@@ -74,52 +88,33 @@ export class QuestionsPage {
     this.chosen.set(this.answers()[this.questions()[prev].id] ?? null);
   }
 
-  /** Invoca el motor. El componente no interpreta: solo entrega entradas. */
+  /**
+   * Al terminar, navega al resultado pasando la fecha y las respuestas.
+   *
+   * Las respuestas van como `a=pregunta:opcion` para que la pagina de
+   * resultado sea reproducible con solo la URL: recargar da el mismo
+   * resultado. Es tambien lo que permitiria compartirlo mas adelante.
+   */
   private finish(): void {
-    const questions = this.questions();
     const answers = this.answers();
+    const y = this.date.get('y');
+    const m = this.date.get('m');
+    const d = this.date.get('d');
 
-    const { evidence } = toEvidence(questions);
-    const chosen = questions
-      .map((q) => {
-        const choiceId = answers[q.id];
-        return evidence.find((e) => e.questionId === q.id && e.choiceId === choiceId);
-      })
-      .filter((e): e is NonNullable<typeof e> => e !== undefined);
-
-    // El canon todavia no se aplica aqui: el reino se resuelve en su propia
-    // capa. Se pasa vacio para que la naturaleza salga del perfil.
-    this.result.set(interpretGoddess({ evidence: chosen, canonicalNature: [] }));
-  }
-
-  readonly nature = computed<NatureId | null>(() => this.result()?.nature ?? null);
-  readonly origin = computed<OriginId | null>(() => this.result()?.origin ?? null);
-  readonly revelation = computed(() => this.result()?.revelation ?? null);
-
-  /** Etiqueta legible. El texto de naturaleza vive en results.json, no aqui. */
-  readonly natureLabel = computed<string>(() => {
-    const n = this.nature();
-    if (n === 'diubak') return 'Diubak';
-    if (n === 'cazut') return 'Cazut';
-    if (n === 'manskling') return 'Manskling';
-    return '';
-  });
-
-  /** Las opciones visibles: solo texto. Nada de etiquetas. */
-  options(): readonly { id: string; text: string }[] {
-    return (this.current()?.choices ?? []).map((c) => ({ id: c.id, text: c.text }));
-  }
-
-  /** Evidencias que la Diosa puede nombrar, tal cual las produjo el visitante. */
-  perceivedLines(): readonly string[] {
-    return (this.revelation()?.perceived ?? []).map((e) => e.text);
+    this.router.navigate(['/result'], {
+      queryParams: {
+        ...(y && m && d ? { y, m, d } : {}),
+        a: Object.keys(answers)
+          .sort()
+          .map((questionId) => `${questionId}:${answers[questionId]}`),
+      },
+    });
   }
 
   reset(): void {
     this.index.set(0);
     this.chosen.set(null);
     this.answers.set({});
-    this.result.set(null);
     this.questions.set(shuffle(this.questions()));
   }
 }
@@ -128,7 +123,7 @@ export class QuestionsPage {
  * Mezcla las preguntas en cada carga.
  *
  * Motivo: el orden fijo despierta una tendencia. Alguien que responde siempre
- * la primera opción marca el ritmo por posición, no por lo que corresponde.
+ * la primera opcion marca el ritmo por posicion, no por lo que corresponde.
  *
  * Es una permutacion: no pierde ni duplica preguntas. Y al recargar cambia,
  * asi que la sesion no se puede "ensayar".

@@ -1,0 +1,59 @@
+<main class="page">
+  <app-sky />
+
+  @if (missing()) {
+    <section class="blank">
+      <h1 class="lead">Aún no hay nada que mirar.</h1>
+      <p class="body">Esta página necesita tus respuestas. Vuelve a empezar la ceremonia.</p>
+      <button type="button" class="ghost" (click)="restart()">Volver al principio</button>
+    </section>
+  } @else if (ready()) {
+    <section class="result" aria-live="polite">
+
+      <!-- LUNA. Se muestra aparte: no haWuGly influenced reino ni naturaleza. -->
+      <article class="block moon-block">
+        <p class="label">Tu luna de nacimiento</p>
+        @if (moonLabel(); as label) {
+          <div class="moon-holder">
+            <app-moon [phase]="moon()!" />
+            <p class="moon-name">{{ label }}</p>
+          </div>
+        }
+      </article>
+
+      <!-- NATURALEZA. Es el resultado principal. -->
+      <article class="block nature-block">
+        <p class="label">La Diosa Luna te reconoce como</p>
+        <h1 class="nature">{{ natureLabel() }}</h1>
+        <p class="reason">{{ reason() }}</p>
+
+        @if (perceived().length > 0) {
+          <div class="grounds">
+            <p class="grounds-label">Lo que viste en ti</p>
+            <ul>
+              @for (evidence of perceived(); track evidence.text) {
+                <li>«{{ evidence.text }}»</li>
+              }
+            </ul>
+          </div>
+        }
+      </article>
+
+      <!-- REINO. Contexto: nunca se elige. -->
+      @if (kingdom(); as k) {
+        <article class="block kingdom-block">
+          <p class="label">Tu reino</p>
+          <p class="kingdom-name">{{ k.name }}</p>
+          @if (founderName(); as founder) {
+            <p class="founder">Legado de {{ founder }}</p>
+          }
+          @if (kingdomEssence(); as essence) {
+            <p class="essence">{{ essence }}</p>
+          }
+        </article>
+      }
+
+      <button type="button" class="ghost" (click)="restart()">Volver al principio</button>
+    </section>
+  }
+</main>

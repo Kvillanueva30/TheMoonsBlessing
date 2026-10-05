@@ -25,6 +25,13 @@ const PROVISIONAL = 'PROVISIONAL';
 export interface BankChoice {
   readonly id: string;
   readonly text: string;
+  /**
+   * Afinidad con cada reino, -3..+3.
+   *
+   * Solo la capa de reino lo usa. Las preguntas de perfil interno la tienen
+   * a CERO a proposito: no identifican un reino, identifican a la persona.
+   */
+  readonly legacyAffinity?: Readonly<Record<string, number>>;
   readonly evidence?: {
     readonly family: EvidenceFamily;
     readonly subtype: string;

@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
 import { QuestionsPage, shuffle } from './questions';
 
 /**
  * Tests de la pagina de preguntas.
  *
- * Fija el CONTRATO entre la pagina y el motor:
+ * Fija el CONTRATO:
  *   - La pagina muestra texto, nunca afinidades ni evidencia.
- *   - El orden es aleatorio y cambia en cada carga.
- *   - El motor no se invoca hasta el final.
- *   - Lo que se cita en la revelacion sale de las respuestas del visitante.
+ *   - El orden es aleatorio y es una permutacion.
+ *   - Al terminar NO calcula nada: navega con las respuestas.
  */
 
 const BANK = {
@@ -20,7 +20,7 @@ const BANK = {
     { id: 'b-002', theme: 'Lo que falta', text: 'Dos', feedsProfile: true, canBless: true,
       choices: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }] },
     { id: 'l-001', theme: 'Por que te levantas', text: 'Reino', feedsProfile: false, canBless: false,
-      choices: [{ id: 'a', text: 'A' }] },
+      choices: [{ id: 'a', text: 'A' }, { id: 'b', text: 'B' }] },
   ],
 };
 
@@ -33,7 +33,7 @@ describe('QuestionsPage', () => {
     TestBed.resetTestingModule();
     TestBed.configureTestingModule({
       imports: [QuestionsPage],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
     });
     http = TestBed.inject(HttpTestingController);
     fixture = TestBed.createComponent(QuestionsPage);
@@ -41,38 +41,23 @@ describe('QuestionsPage', () => {
   });
 
   afterEach(() => {
-    // Cualquier peticion sin responder haria fallar el test aunque el codigo
-    // bajo prueba este bien. Se responde a la del banco y se verifica el resto.
     const pending = http.match(() => true);
     for (const req of pending) req.flush({ questions: [] });
     http.verify();
   });
 
-  function flushBank() {
+  function loadBank() {
+    fixture.detectChanges();
     http.expectOne((r) => r.url.includes('data/questions/questions.json')).flush(BANK);
     fixture.detectChanges();
   }
 
-  /** Construye el componente y espera el banco. */
-  function loadBank() {
-    fixture.detectChanges();
-    flushBank();
-  }
-
-  
-
   describe('carga', () => {
-    it('solo muestra las preguntas del perfil, no las de reino', () => {
+    it('pregunta TODAS las del banco, no solo el perfil', () => {
       loadBank();
-      const ids = page.questions().map((q) => q.id);
-      expect(ids).toContain('b-001');
-      expect(ids).toContain('b-002');
-      expect(ids).not.toContain('l-001');
-    });
-
-    it('mantiene todas las preguntas del perfil', () => {
-      loadBank();
-      expect(page.questions().length).toBe(2);
+      // La capa de reino necesita l-001; si la pagina la filtrara, el reino
+      // quedaria sin datos. Se preguntan todas.
+      expect(page.questions().length).toBe(3);
     });
 
     it('arranca en la primera con nada elegido', () => {
@@ -88,9 +73,7 @@ describe('QuestionsPage', () => {
 
     it('el orden cambia entre mezclas', () => {
       const ordenes = new Set<string>();
-      for (let i = 0; i < 60; i++) {
-        ordenes.add(shuffle(BASE).join(','));
-      }
+      for (let i = 0; i < 60; i++) ordenes.add(shuffle(BASE).join(','));
       expect(ordenes.size).toBeGreaterThan(1);
     });
 
@@ -113,12 +96,6 @@ describe('QuestionsPage', () => {
       const original = [...BASE];
       shuffle(original);
       expect(original).toEqual(BASE);
-    });
-
-    it('la pagina muestra el perfil en un orden no necesariamente fijo', () => {
-      loadBank();
-      const ids = page.questions().map((q) => q.id);
-      expect([...ids].sort()).toEqual(['b-001', 'b-002']);
     });
   });
 
@@ -179,76 +156,17 @@ describe('QuestionsPage', () => {
       expect(page.isLast()).toBe(false);
       page.choose('a');
       page.next();
-      expect(page.isLast()).toBe(true);
-    });
-  });
-
-  describe('revelacion', () => {
-    function answerAll(choiceFor: (questionId: string) => string) {
-      for (const q of page.questions()) {
-        page.choose(choiceFor(q.id));
-        page.next();
-      }
-    }
-
-    it('no hay resultado hasta terminar', () => {
-      loadBank();
-      page.choose('a');
-      page.next();
-      expect(page.result()).toBeNull();
-    });
-
-    it('el motor produce una naturaleza al terminar', () => {
-      loadBank();
-      answerAll(() => 'a');
-      expect(['manskling', 'diubak', 'cazut']).toContain(page.nature());
-    });
-
-    it('la etiqueta de naturaleza es legible', () => {
-      loadBank();
-      answerAll(() => 'a');
-      expect(['Manskling', 'Diubak', 'Cazut']).toContain(page.natureLabel());
-    });
-
-    it('la revelacion explica el motivo', () => {
-      loadBank();
-      answerAll(() => 'a');
-      expect(page.revelation()!.reason.length).toBeGreaterThan(10);
-    });
-
-    it('solo cita respuestas que el visitante eligio', () => {
-      loadBank();
-      answerAll(() => 'a');
-      const permitidos = new Set(['A', 'B']);
-      for (const line of page.perceivedLines()) {
-        expect(permitidos.has(line)).toBe(true);
-      }
-    });
-
-    it('el origen no es de canon: el reino se resuelve en otra capa', () => {
-      loadBank();
-      answerAll(() => 'a');
-      expect(page.origin()).not.toBe('curse');
-      expect(page.origin()).not.toBe('lineage');
-    });
-
-    it('volver a empezar limpia el resultado', () => {
-      loadBank();
-      answerAll(() => 'a');
-      expect(page.result()).not.toBeNull();
-      page.reset();
-      expect(page.result()).toBeNull();
-      expect(page.answers()).toEqual({});
+      expect(page.isLast()).toBe(false);
     });
   });
 
   describe('la UI no calcula nada', () => {
-    it('no expone afinidades, evidencia ni interpretacion', () => {
+    it('no expone naturaleza, afinidades ni interpretacion', () => {
       loadBank();
       const own = page as unknown as Record<string, unknown>;
-      expect(own['affinities']).toBeUndefined();
-      expect(own['evidence']).toBeUndefined();
-      expect(own['interpretation']).toBeUndefined();
+      for (const key of ['result', 'nature', 'natureLabel', 'revelation', 'affinities', 'evidence', 'interpretation', 'origin', 'perceivedLines']) {
+        expect(own[key]).toBeUndefined();
+      }
     });
 
     it('las opciones visibles solo llevan id y texto', () => {
@@ -256,6 +174,24 @@ describe('QuestionsPage', () => {
       for (const option of page.options()) {
         expect(Object.keys(option).sort()).toEqual(['id', 'text']);
       }
+    });
+  });
+
+  describe('reiniciar', () => {
+    it('limpia respuestas e indice', () => {
+      loadBank();
+      page.choose('a');
+      page.next();
+      page.reset();
+      expect(page.index()).toBe(0);
+      expect(page.answers()).toEqual({});
+      expect(page.chosen()).toBeNull();
+    });
+
+    it('vuelve a barajar', () => {
+      loadBank();
+      page.reset();
+      expect(page.questions().length).toBe(3);
     });
   });
 });

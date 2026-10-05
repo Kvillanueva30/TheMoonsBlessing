@@ -5,34 +5,15 @@
     <div class="state">
       <p class="breath">La noche está mirando.</p>
     </div>
-  } @else if (revelation(); as rev) {
-    <section class="reveal" aria-live="polite">
-      <p class="eyebrow">La Diosa Luna te ha mirado</p>
-      <h1 class="lead">{{ natureLabel() }}</h1>
-
-      <p class="body">{{ rev.reason }}</p>
-
-      @if (perceivedLines().length > 0) {
-        <div class="grounds">
-          <p class="grounds-label">Lo que viste en ti</p>
-          <ul>
-            @for (line of perceivedLines(); track line) {
-              <li>«{{ line }}»</li>
-            }
-          </ul>
-        </div>
-      }
-
-      @if (origin() === 'no_transformation_needed') {
-        <p class="note">No hacía falta que cambiaras nada.</p>
-      }
-
-      <button type="button" class="ghost" (click)="reset()">Volver a empezar</button>
-    </section>
   } @else if (current(); as question) {
     <section class="stage">
-      <p class="eyebrow">{{ question.theme }}</p>
-      <h1 class="dilemma">{{ question.text }}</h1>
+      <div class="head">
+        <app-etching [theme]="etching()" />
+        <div class="head-text">
+          <p class="eyebrow">{{ question.theme }}</p>
+          <h1 class="dilemma">{{ question.text }}</h1>
+        </div>
+      </div>
 
       <ul class="choices" role="radiogroup" [attr.aria-label]="question.theme">
         @for (option of options(); track option.id) {
