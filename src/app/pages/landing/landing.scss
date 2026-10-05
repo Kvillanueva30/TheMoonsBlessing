@@ -9,29 +9,13 @@
   position: relative;
   display: grid;
   place-items: center;
-  /* El aire inferior se lo come el pie de autor, que va fijo abajo. */
+  /* Sin esto el elemento se queda con la altura del contenido y el pie
+     fijo queda fuera de su fondo. El cielo vive ahora en styles.scss. */
+  min-height: 100svh;
+  /* El aire inferior se lo come la firma, que va fija abajo. */
   padding: clamp(1.5rem, 4svh, 3rem) 0 clamp(3.5rem, 8svh, 5rem);
   color: #f2ece0;
   overflow-x: hidden;
-  /* Espacio profundo: no un negro plano. Nebulosas frías, la banda de la vía
-     láctea en diagonal y un claro hacia arriba. */
-  /* El degradado vertical antes bajaba de 12,5 a 4,2 de luminancia, y justo
-     encima de la banda dorada el fondo quedaba en 4,1: un salto de 98 contra
-     el dorado que se leía como un parche sucio. Ahora el recorrido es de 12,5
-     a 9,1, suave y sin franja. */
-  background:
-    radial-gradient(58% 42% at 76% 10%, rgba(66, 84, 152, 0.16), transparent 68%),
-    radial-gradient(46% 38% at 10% 80%, rgba(104, 60, 128, 0.14), transparent 70%),
-    radial-gradient(38% 30% at 92% 74%, rgba(48, 96, 112, 0.1), transparent 72%),
-    linear-gradient(
-      114deg,
-      transparent 34%,
-      rgba(150, 162, 205, 0.05) 44%,
-      rgba(186, 180, 214, 0.075) 51%,
-      rgba(150, 162, 205, 0.05) 58%,
-      transparent 68%
-    ),
-    radial-gradient(140% 120% at 50% 0%, #0a0c19 0%, #080a13 55%, #070910 100%);
 }
 
 #stars {

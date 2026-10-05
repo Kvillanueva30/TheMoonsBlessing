@@ -31,12 +31,43 @@ html,
 body {
   margin: 0;
   padding: 0;
+  /* El cielo va aquí y no en cada página. Cuando estaba en .landing, el
+     elemento se quedaba corto — medido: 403px en un viewport de 526px — y
+     el fondo no llegaba a cubrir la franja de abajo, que es justo donde va la
+     firma de la autora. En el body siempre llega al final del viewport y,
+     además, todas las páginas lo heredan. */
   min-height: 100%;
-  background-color: var(--madar-bg);
   color: var(--madar-text);
 }
 
+/* Cielo: no un negro plano. Nebulosas frías, la banda de la vía láctea en
+   diagonal y un claro hacia arriba.
+   El degradado vertical antes bajaba de 12,5 a 4,2 de luminancia y, justo
+   encima de la banda del pie, el fondo quedaba en 4,1: un salto de 98 contra
+   el dorado que se leía como un parche sucio. Ahora el recorrido es de 12,5 a
+   9,1, suave y sin franja. */
+html {
+  background:
+    radial-gradient(58% 42% at 76% 10%, rgba(66, 84, 152, 0.16), transparent 68%),
+    radial-gradient(46% 38% at 10% 80%, rgba(104, 60, 128, 0.14), transparent 70%),
+    radial-gradient(38% 30% at 92% 74%, rgba(48, 96, 112, 0.1), transparent 72%),
+    linear-gradient(
+      114deg,
+      transparent 34%,
+      rgba(150, 162, 205, 0.05) 44%,
+      rgba(186, 180, 214, 0.075) 51%,
+      rgba(150, 162, 205, 0.05) 58%,
+      transparent 68%
+    ),
+    radial-gradient(140% 120% at 50% 0%, #0a0c19 0%, #080a13 55%, #070910 100%);
+  /* Fijo para que el cielo no se desplace al hacer scroll y no se repita. */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 body {
+  background-color: transparent;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
