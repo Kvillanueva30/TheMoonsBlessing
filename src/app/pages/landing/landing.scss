@@ -155,54 +155,46 @@
 
 /* --------------------------------------------------------------- pie --- */
 
-/* Firma de la autora: sección de cristal dorado de ancho completo al pie.
-   Con texto suelto sobre el negro, y luego con una píldora flotante, ninguna de
-   las dos leía como una sección. Ahora es una banda que cierra la pantalla, con
-   el cielo desenfocado detrás y las letras blancas encima. */
+/* Firma de la autora, como marca tipográfica y nada más.
+   Se probaron tres fondos —ninguno, píldora de cristal y banda dorada— y los
+   tres competían con la luna y partían la pantalla en dos. La luna está
+   dibujada con líneas finas y oro apagado, así que la firma usa el mismo
+   lenguaje: sin caja, sin borde, sin sombra, solo el filete y el texto. */
 .credit {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: clamp(1.1rem, 3.2svh, 2rem);
   z-index: 3;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: clamp(0.65rem, 1.5svh, 0.9rem) 1rem;
-  overflow: hidden;
+  gap: 0.5rem;
   pointer-events: none;
+}
 
-  /* Degradado dorado, en la misma dirección que el botón, pero más profundo:
-     con letras blancas hace falta fondo oscuro para que se lean. El vidrio
-     translúcido se veía bien sobre el negro pero dejaba ver el cielo a través,
-     que es justo lo que hacía que la banda no leyera como sección cerrada. */
-  background: linear-gradient(100deg, #8f6520 0%, #5c4212 100%);
-  border-top: 1px solid rgba(240, 217, 168, 0.3);
-  box-shadow: 0 -1px 18px rgba(201, 146, 47, 0.18);
+/* Filete corto, mismo peso que el limbo de la luna. */
+.credit::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background: rgba(201, 146, 47, 0.32);
 }
 
 .credit-label {
-  font-size: 0.54rem;
-  letter-spacing: 0.26em;
+  font-size: 0.52rem;
+  letter-spacing: 0.3em;
   /* Compensa el tracking, o la primera letra queda suelta. */
-  text-indent: 0.26em;
+  text-indent: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 248, 235, 0.72);
-}
-
-.credit-dot {
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background: rgba(255, 244, 220, 0.5);
+  color: rgba(157, 151, 172, 0.7);
 }
 
 .credit-name {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.04em;
-  color: #fff8ec;
+  font-size: 0.96rem;
+  letter-spacing: 0.05em;
+  color: rgba(216, 208, 228, 0.82);
 }
 
 /* En pantallas muy bajas se sacrifica el pie antes que el botón. */
