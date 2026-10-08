@@ -120,12 +120,24 @@
 .stage > :nth-child(4) { animation-delay: 0.95s; }
 
 @keyframes entrance {
-  from { opacity: 0; transform: translateY(1.2rem); }
-  to { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(1.2rem) scale(0.98); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* La luna no aparece: se enciende. De sombra a luz. */
+.stage app-moon {
+  animation: moonGlow 2.2s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation-delay: 0.35s;
+}
+
+@keyframes moonGlow {
+  from { opacity: 0; filter: brightness(0.2) drop-shadow(0 0 0 rgba(201, 146, 47, 0)); }
+  to { opacity: 1; filter: brightness(1) drop-shadow(0 0 34px rgba(201, 146, 47, 0.24)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stage > * {
+  .stage > *,
+  .stage app-moon {
     animation: none;
   }
 }
