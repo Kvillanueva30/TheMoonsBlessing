@@ -7,6 +7,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  /* Sin esto el hero se pegaba arriba en pantallas altas. */
+  justify-content: center;
+  align-items: center;
   min-height: 100svh;
   padding: clamp(2rem, 5svh, 4rem) 0;
   color: #f2ece0;
