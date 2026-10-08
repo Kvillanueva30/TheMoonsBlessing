@@ -10,13 +10,15 @@
   } @else if (ready()) {
     <section class="result" aria-live="polite">
 
-      <!-- LUNA. Se muestra aparte: no haWuGly influenced reino ni naturaleza. -->
+      <!-- LUNA. La misma del inicio, con la fase real de nacimiento. -->
       <article class="block moon-block">
         <p class="label">Tu luna de nacimiento</p>
-        @if (moonLabel(); as label) {
+        @if (moon(); as phase) {
           <div class="moon-holder">
-            <app-moon [phase]="moon()!" />
-            <p class="moon-name">{{ label }}</p>
+            <app-moon [phase]="phase" />
+            @if (moonLabel(); as label) {
+              <p class="moon-name">{{ label }}</p>
+            }
           </div>
         }
       </article>

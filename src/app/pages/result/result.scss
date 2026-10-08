@@ -51,6 +51,8 @@
 
 app-moon {
   display: block;
+  /* La misma medida que la luna de la pantalla inicial. */
+  width: min(52vmin, 36svh, 19rem);
 }
 
 .moon-name {

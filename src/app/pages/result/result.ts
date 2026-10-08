@@ -36,7 +36,17 @@ export class ResultPage {
   private readonly moonPhases = inject(MoonPhasesService);
 
   readonly moon = signal<MoonPhaseResult | null>(null);
-  readonly moonLabel = signal<string | null>(null);
+
+  /**
+   * El nombre sale del archivo de fases, que se carga por HTTP y todavia no
+   * esta disponible en el constructor. Por eso se calcula desde la senal y no
+   * se fija una vez: si se fijara ahi, quedaria en null para siempre y la luna
+   * no se dibujaria nunca.
+   */
+  readonly moonLabel = computed(() => {
+    const phase = this.moon();
+    return phase ? this.moonPhases.labelFor(phase.id) : null;
+  });
   readonly kingdom = signal<KingdomData | null>(null);
   readonly nature = signal<GoddessResult | null>(null);
   readonly ready = signal(false);
@@ -56,9 +66,7 @@ export class ResultPage {
     const m = Number(params.get('m'));
     const d = Number(params.get('d'));
     if (y && m && d) {
-      const phase = this.session.getMoon({ year: y, month: m, day: d });
-      this.moon.set(phase);
-      this.moonLabel.set(this.moonPhases.labelFor(phase.id));
+      this.moon.set(this.session.getMoon({ year: y, month: m, day: d }));
     }
 
     this.bank.questions.subscribe((questions) => {
