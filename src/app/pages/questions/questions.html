@@ -6,7 +6,7 @@
       <p class="breath">La noche está mirando.</p>
     </div>
   } @else if (current(); as question) {
-    <section class="stage">
+    <section class="stage" [class.alt]="index() % 2 === 1">
       <div class="head">
         <app-etching [theme]="etching()" />
         <div class="head-text">

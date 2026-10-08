@@ -109,3 +109,23 @@
   outline: 2px solid #f0d9a8;
   outline-offset: 3px;
 }
+
+/* Entrada en cascada: luna, titulo, frase y boton aparecen uno tras otro. */
+.stage > * {
+  animation: entrance 1s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.stage > :nth-child(1) { animation-delay: 0.05s; }
+.stage > :nth-child(2) { animation-delay: 0.35s; }
+.stage > :nth-child(3) { animation-delay: 0.65s; }
+.stage > :nth-child(4) { animation-delay: 0.95s; }
+
+@keyframes entrance {
+  from { opacity: 0; transform: translateY(1.2rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage > * {
+    animation: none;
+  }
+}

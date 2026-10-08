@@ -294,3 +294,20 @@
     transition: none;
   }
 }
+/* Transicion entre preguntas: al alternar la clase alt, la animacion anterior
+   queda sin efecto y esta empieza de nuevo, asi cada pregunta entra con vida
+   en vez de cambiar de golpe. */
+.stage.alt {
+  animation-name: riseAlt;
+}
+
+@keyframes riseAlt {
+  from { opacity: 0; transform: translateY(1.2rem); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage.alt {
+    animation: none;
+  }
+}
