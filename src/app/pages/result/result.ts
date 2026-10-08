@@ -143,7 +143,6 @@ export class ResultPage {
     if (!label) return null;
 
     return {
-      nature: this.nature()?.nature ?? 'manskling',
       natureLabel: label,
       natureMeaning: this.resultsData()?.natures?.[this.nature()?.nature ?? '']?.meaning ?? '',
       kingdomName: this.kingdom()?.name ?? null,
