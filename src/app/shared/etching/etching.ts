@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 /**
  * Grabados de tema para las preguntas.
@@ -46,19 +46,8 @@ export type EtchingTheme =
 export class EtchingComponent {
   readonly theme = input.required<EtchingTheme>();
 
-  /**
-   * Líneas de tramado, iguales a las de la luna. Se generan una vez por
-   * instancia y se reutilizan: son el mismo patrón en todos los grabados.
-   */
   private readonly uid = Math.random().toString(36).slice(2, 9);
   protected readonly hatchId = `etch-hatch-${this.uid}`;
 
-  protected readonly hatchLines = computed(() => {
-    const out: string[] = [];
-    for (let i = -44; i <= 44; i += 5) out.push(`M ${i} -50 L ${i} 50`);
-    return out;
-  });
-
-  /** Etiqueta accesible. El grabado no aporta información, así que es decorativo. */
-  protected readonly decorative = computed(() => true);
+  /** Etiqueta accesible. El grabado no aporta informacion, asi que es decorativo. */
 }

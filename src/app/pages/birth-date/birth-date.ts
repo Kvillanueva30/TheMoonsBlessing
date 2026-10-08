@@ -22,7 +22,7 @@ export class BirthDatePage {
 
   submit() {
     const date = new Date(this.year, this.month - 1, this.day);
-    this.router.navigate(['/moon-reveal'], {
+    this.router.navigate(['/questions'], {
       queryParams: {
         y: date.getFullYear(),
         m: date.getMonth() + 1,

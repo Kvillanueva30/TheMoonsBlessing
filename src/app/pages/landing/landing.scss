@@ -122,65 +122,6 @@
   box-shadow: 0 0 60px rgba(212, 175, 55, 0.55);
 }
 
-/* --------------------------------------------------- paths ---------- */
-
-.paths {
-  position: relative;
-  z-index: 2;
-  width: min(100% - 2.5rem, 58rem);
-  margin: clamp(4rem, 8svh, 7rem) auto 0;
-  text-align: center;
-}
-
-.section-title {
-  margin: 0 0 2.4rem;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(1.6rem, min(4vw, 4.4svh), 2.4rem);
-  color: #f0d9a8;
-  letter-spacing: 0.03em;
-}
-
-.paths-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.path-card {
-  padding: 1.6rem 1.2rem 1.8rem;
-  border: 1px solid rgba(212, 175, 55, 0.18);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.02);
-  transition: border-color 0.35s ease, transform 0.35s ease, background 0.35s ease;
-}
-
-.path-card:hover {
-  border-color: rgba(212, 175, 55, 0.5);
-  background: rgba(255, 255, 255, 0.045);
-  transform: translateY(-4px);
-}
-
-.path-ico {
-  font-size: 1.7rem;
-  margin-bottom: 0.8rem;
-}
-
-.path-card h3 {
-  margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-weight: 500;
-  font-size: 1.3rem;
-  color: #ece9f2;
-}
-
-.path-card p {
-  margin: 0.5rem 0 0;
-  color: #a9a4b8;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
 /* -------------------------------------------------- reveal ---------- */
 
 .reveal {
@@ -227,8 +168,24 @@
 /* ------------------------------------------------- responsive -------- */
 
 @media (max-width: 40rem) {
-  .paths-grid {
-    grid-template-columns: 1fr;
+  .landing {
+    padding: clamp(1rem, 3svh, 2rem) 0;
+  }
+
+  .hero-moon {
+    width: min(40vmin, 24svh, 13rem);
+  }
+
+  .headline {
+    font-size: clamp(1.7rem, 7vw, 2.6rem);
+  }
+
+  .btn {
+    padding: 0.8rem 1.8rem;
+  }
+
+  .reveal {
+    margin-top: clamp(2.5rem, 6svh, 4rem);
   }
 }
 
