@@ -25,19 +25,24 @@ export class ShareService {
    * @returns el blob PNG, o null si el navegador no puede generarlo
    */
   async capture(node: HTMLElement): Promise<Blob | null> {
+    // Las medidas se leen del propio nodo y no se escriben aqui a mano: si la
+    // tarjeta cambia de proporcion, el PNG la sigue sin tocar este archivo.
+    const width = node.offsetWidth;
+    const height = node.offsetHeight;
+
     // Se intenta dos veces. El primer intento es el bueno; si el navegador se
     // atraganta con las hojas de estilo externas, el segundo va sin tipografias
-    // y sale con la tipografia del sistema. El nodo ya mide 1200x630 de todos
-    // modos, asi que la imagen sigue siendo valida.
+    // y sale con la tipografia del sistema. El nodo ya tiene el tamano correcto
+    // de todos modos, asi que la imagen sigue siendo valida.
     const intentos = [
       {
-        width: 1200,
-        height: 630,
-        // pixelRatio 1 para que el PNG salga a 1200x630 exactos y no al doble.
+        width,
+        height,
+        // pixelRatio 1 para que el PNG salga al tamano exacto y no al doble.
         pixelRatio: 1,
         backgroundColor: '#050816',
       },
-      { pixelRatio: 1, backgroundColor: '#050816', skipFonts: true },
+      { width, height, pixelRatio: 1, backgroundColor: '#050816', skipFonts: true },
     ] as Parameters<typeof toBlob>[1][];
 
     for (const opciones of intentos) {
