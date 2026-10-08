@@ -25,19 +25,34 @@ export class ShareService {
    * @returns el blob PNG, o null si el navegador no puede generarlo
    */
   async capture(node: HTMLElement): Promise<Blob | null> {
-    try {
-      return await toBlob(node, {
+    // Se intenta dos veces. El primer intento es el bueno; si el navegador se
+    // atraganta con las hojas de estilo externas, el segundo va sin tipografias
+    // y sale con la tipografia del sistema. El nodo ya mide 1200x630 de todos
+    // modos, asi que la imagen sigue siendo valida.
+    const intentos = [
+      {
         width: 1200,
         height: 630,
         // pixelRatio 1 para que el PNG salga a 1200x630 exactos y no al doble.
         pixelRatio: 1,
-        cacheBust: true,
         backgroundColor: '#050816',
-      });
-    } catch {
-      // Un PNG es un extra. Si falla, no se rompe la pagina: se avisa y ya.
-      return null;
+      },
+      { pixelRatio: 1, backgroundColor: '#050816', skipFonts: true },
+    ] as Parameters<typeof toBlob>[1][];
+
+    for (const opciones of intentos) {
+      try {
+        const blob = await toBlob(node, opciones);
+        if (blob) return blob;
+      } catch (error) {
+        // Se deja el motivo en consola: si esto falla en un navegador concreto,
+        // sin esto no hay forma de saber por que.
+        console.warn('[share] captura fallida', error);
+      }
     }
+
+    // Un PNG es un extra. Si falla, no se rompe la pagina: se avisa y ya.
+    return null;
   }
 
   /**

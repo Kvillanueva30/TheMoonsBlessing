@@ -221,21 +221,34 @@ app-moon {
   font-size: 0.88rem;
 }
 
+/* Enlace de navegacion, NO un boton.
+   El primario de la pagina es "Compartir resultado" (dorado, con relleno). Este
+   es terciario: si tuviera caja competirian entre si, y si no tuviera nada
+   pareciera texto plano. El subrayado fino es la senal de "esto se pulsa"
+   sin necesidad de una caja. */
 .ghost {
   justify-self: center;
-  padding: 0.75rem 0;
+  padding: 0.75rem 0.2rem;
   background: none;
   border: 0;
+  border-bottom: 1px solid rgba(205, 197, 182, 0.32);
   color: #8d8474;
   font: inherit;
   font-size: 0.9rem;
   letter-spacing: 0.06em;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .ghost:hover {
   color: #cfc7b6;
+  border-bottom-color: rgba(205, 197, 182, 0.7);
+}
+
+.ghost:focus-visible {
+  outline: none;
+  color: #cfc7b6;
+  border-bottom-color: #f0d9a8;
 }
 
 .blank {

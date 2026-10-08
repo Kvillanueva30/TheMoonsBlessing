@@ -172,8 +172,15 @@ function rankLegacies(
   );
 
   for (const choice of scored) {
+    // Una pregunta que no es de reino (las de bendicion y las de caracter) no
+    // trae afinidad con legado. Antes esto reventaba con
+    // "Cannot read properties of undefined"; ahora aporta 0, que es lo
+    // correcto: no dice nada de ningun reino.
+    const affinityByKingdom = choice.legacyAffinity;
+    if (!affinityByKingdom) continue;
+
     for (const kingdom of kingdoms) {
-      const affinity = choice.legacyAffinity[kingdom.id] ?? 0;
+      const affinity = affinityByKingdom[kingdom.id] ?? 0;
       totals.set(kingdom.id, (totals.get(kingdom.id) ?? 0) + affinity);
     }
   }

@@ -199,15 +199,26 @@
   border-color: #f5c76a;
 }
 
+/* Enlace de navegacion, NO un boton. El primario de la pagina es
+   "Continuar". Este es terciario: con caja competirian, y sin nada pareceria
+   texto plano. El subrayado fino es la senal de "esto se pulsa". */
 .ghost {
-  padding: 0.7rem 0;
+  padding: 0.7rem 0.2rem;
   background: none;
   border: 0;
+  border-bottom: 1px solid rgba(205, 197, 182, 0.32);
   color: #8d8474;
 }
 
 .ghost:hover:not(:disabled) {
   color: #cfc7b6;
+  border-bottom-color: rgba(205, 197, 182, 0.7);
+}
+
+.ghost:focus-visible {
+  outline: none;
+  color: #cfc7b6;
+  border-bottom-color: #f0d9a8;
 }
 
 .primary:disabled,

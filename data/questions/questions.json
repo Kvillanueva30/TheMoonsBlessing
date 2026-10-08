@@ -495,6 +495,150 @@
         }
       ],
       "etching": "ventaja"
+    },
+    {
+      "id": "q9",
+      "theme": "Identidad",
+      "axis": "blessing",
+      "feedsProfile": true,
+      "canBless": true,
+      "text": "Te ofrecen dejar de ser quien eres a cambio de ser alguien a quien todavía no conoces. ¿Qué haces?",
+      "canBlessReason": "Pregunta de identidad. La opcion a) es la unica que dice que lo insuficiente es QUIEN ES, y solo se demuestra tras haber probado ser otro: por eso located_identity. Decision de la autora.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Lo tomo. Y en unos meses descubro que el que era tampoco me bastaba.",
+          "evidence": {
+            "family": "inner_search",
+            "subtype": "located_identity",
+            "direction": "inward",
+            "unresolved": true,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "Lo insuficiente es QUIEN ES. Y ya lo ha comprobado: probo ser otro y tampoco basto"
+          }
+        },
+        {
+          "id": "b",
+          "text": "Lo tomo. Y me gusta que me mire(n) como a alguien nuevo.",
+          "evidence": {
+            "family": "external_desire",
+            "subtype": "recognition",
+            "direction": "outward",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
+            "status": "APROBADO",
+            "lee": "Quiere ser visto de otra forma. El objeto del deseo es externo"
+          }
+        },
+        {
+          "id": "c",
+          "text": "No. Prefiero seguir siendo quien soy.",
+          "evidence": {
+            "family": "sufficiency",
+            "subtype": "complete_present",
+            "direction": "none",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "No necesita transformarse. Se basta a si mismo"
+          }
+        },
+        {
+          "id": "d",
+          "text": "No lo sé. Me da igual quién sea yo.",
+          "evidence": {
+            "family": "character_only",
+            "subtype": "passive_waiting",
+            "direction": "none",
+            "unresolved": true,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
+            "status": "APROBADO",
+            "lee": "No se posiciona. No dice nada sobre quien es"
+          }
+        }
+      ],
+      "etching": "identidad-escena"
+    },
+    {
+      "id": "q10",
+      "theme": "El remedio",
+      "axis": "blessing",
+      "feedsProfile": true,
+      "canBless": true,
+      "text": "Te ofrecen la solución a lo que te pasa. La tomas. ¿Y después?",
+      "canBlessReason": "Pregunta del remedio fallido. La opcion a) es la unica que demuestra que la necesidad existe y se descubrio por fallar el remedio equivocado, no por sentir vacio: eso es misdirected_remedy. Decision de la autora.",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Sigo igual. El problema era otro.",
+          "evidence": {
+            "family": "inner_search",
+            "subtype": "misdirected_remedy",
+            "direction": "outward",
+            "unresolved": true,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "La necesidad existe y se descubrio por fallar el remedio equivocado. No por sentir vacio"
+          }
+        },
+        {
+          "id": "b",
+          "text": "Lo tomo por lo que trae. No era eso lo que buscaba.",
+          "evidence": {
+            "family": "external_desire",
+            "subtype": "recognition",
+            "direction": "outward",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
+            "status": "APROBADO",
+            "lee": "Quiere el beneficio externo, no la neces interna"
+          }
+        },
+        {
+          "id": "c",
+          "text": "No hago nada. Nunca he necesitado eso.",
+          "evidence": {
+            "family": "sufficiency",
+            "subtype": "complete_present",
+            "direction": "none",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "No necesita nada de eso"
+          }
+        },
+        {
+          "id": "d",
+          "text": "Lo tomo. Y sigo sin saber qué me falta.",
+          "evidence": {
+            "family": "inner_search",
+            "subtype": "unformulable",
+            "direction": "none",
+            "unresolved": true,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
+            "status": "APROBADO",
+            "lee": "Hay algo que no consigue nombrar. Ni puede"
+          }
+        }
+      ],
+      "etching": "remedio"
     }
   ],
   "todo": [
@@ -521,7 +665,9 @@
         "pool": [
           "q5",
           "q6",
-          "q7"
+          "q7",
+          "q9",
+          "q10"
         ],
         "role": "Deseo vs necesidad: decide Manskling o Diubak."
       },
@@ -540,7 +686,9 @@
     "blessingQuestions": [
       "q5",
       "q6",
-      "q7"
+      "q7",
+      "q9",
+      "q10"
     ],
     "characterQuestions": [
       "q8"
@@ -575,7 +723,9 @@
       "blessingCapable": [
         "q5",
         "q6",
-        "q7"
+        "q7",
+        "q9",
+        "q10"
       ],
       "notBlessingCapable": [
         "q1",
@@ -584,7 +734,7 @@
         "q4",
         "q8"
       ],
-      "ratio": "3 de 8",
+      "ratio": "5 de 10",
       "principle": "canBless lo declara la PREGUNTA. Ningun subtipo implica capacidad de bendecir.",
       "nextStep": "Disenar la regla de naturaleza. Es lo unico que queda antes de escribir el motor."
     }

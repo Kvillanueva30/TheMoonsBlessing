@@ -18,7 +18,8 @@ import questionsData from '../../../../data/questions/questions.json';
 const bank = (questionsData as { questions: BankQuestion[] }).questions;
 const perfil = bank.filter((p) => p.feedsProfile);
 
-const BLESS = ['b-002', 'b-003', 'b-004', 'i-004'];
+// Las preguntas que pueden bendecir, por id del banco actual.
+const BLESS = ['q5', 'q6', 'q7', 'q9', 'q10'];
 
 function medir() {
   const { evidence } = toEvidence(perfil);
@@ -45,25 +46,30 @@ function medir() {
   const lecturas: Record<string, number> = {};
   const ejemplos: string[][] = [];
 
-  for (const a of combos[0])
-    for (const b of combos[1])
-      for (const c of combos[2])
-        for (const d of combos[3]) {
-          const chosen = [a, b, c, d];
-          const profile = buildProfile([...chosen, ...contexto]);
-          const reading = interpret(profile);
-          const rev = reveal(profile, reading, []);
+  // Una vuelta por cada combinacion. El bucle es generico a proposito: asi el
+  // banco puede crecer o cambiar de ids sin reescribir el spec entero.
+  const recorrer = (nivel: number, acc: Evidence[]): void => {
+    if (nivel === combos.length) {
+      const profile = buildProfile([...acc, ...contexto]);
+      const reading = interpret(profile);
+      const rev = reveal(profile, reading, []);
 
-          tally[rev.nature] = (tally[rev.nature] ?? 0) + 1;
-          const key = `${reading.innerNeedWithContent ? 'necesidad' : 'sin necesidad'} + ${
-            reading.remediationPattern ? 'remediacion' : 'sin remediacion'
-          }`;
-          lecturas[key] = (lecturas[key] ?? 0) + 1;
+      tally[rev.nature] = (tally[rev.nature] ?? 0) + 1;
+      const key = `${reading.innerNeedWithContent ? 'necesidad' : 'sin necesidad'} + ${
+        reading.remediationPattern ? 'remediacion' : 'sin remediacion'
+      }`;
+      lecturas[key] = (lecturas[key] ?? 0) + 1;
 
-          if (rev.nature === 'diubak' && ejemplos.length < 5) {
-            ejemplos.push(chosen.map((e) => `${e.questionId}/${e.choiceId} ${e.subtype}`));
-          }
-        }
+      if (rev.nature === 'diubak' && ejemplos.length < 5) {
+        ejemplos.push(acc.map((e) => `${e.questionId}/${e.choiceId} ${e.subtype}`));
+      }
+      return;
+    }
+    for (const e of combos[nivel]) {
+      recorrer(nivel + 1, [...acc, e]);
+    }
+  };
+  recorrer(0, []);
 
   const total = combos.reduce((n, c) => n * c.length, 1);
   return { tally, lecturas, ejemplos, total };
@@ -85,16 +91,20 @@ describe('alcanzabilidad de la naturaleza', () => {
   });
 
   it('el reparto de las lecturas es el esperado', () => {
-    // MEDIDO sobre las 896 combinaciones de las 4 preguntas decisivas.
-    //   sin necesidad + sin remediacion   315   35.2%
-    //   necesidad    + sin remediacion     189   21.1%   <- no bendice
-    //   sin necesidad + remediacion        117   13.1%
-    //   necesidad    + remediacion        275   30.7%   <- bendice
-    //   naturaleza: manskling 81.03%  diubak 18.97%
-    expect(lecturas['necesidad + remediacion']).toBe(275);
-    expect(lecturas['necesidad + sin remediacion']).toBe(189);
-    expect(tally['diubak']).toBe(170);
-    expect(tally['manskling']).toBe(726);
+    // MEDIDO sobre las 768 combinaciones de las 5 preguntas decisivas
+    // (q5, q6, q7, q9, q10) del banco de 10.
+    //   sin necesidad + sin remediacion   288   37.5%
+    //   necesidad    + sin remediacion      96   12.5%
+    //   sin necesidad + remediacion       144   18.75%
+    //   necesidad    + remediacion        240   31.25%  <- bendice
+    //   naturaleza: manskling 81.25%  diubak 18.75%
+    //
+    // Antes de anadir q9 y q10 el banco daba 0% de Diubak: los subtipos
+    // located_identity y misdirected_remedy no existian en ninguna pregunta.
+    expect(lecturas['necesidad + remediacion']).toBe(240);
+    expect(lecturas['necesidad + sin remediacion']).toBe(96);
+    expect(tally['diubak']).toBe(144);
+    expect(tally['manskling']).toBe(624);
   });
 
   it('Diubak es alcanzable', () => {

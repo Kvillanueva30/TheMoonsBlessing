@@ -35,7 +35,9 @@ export type EtchingTheme =
   | 'verdad'
   | 'deseo'
   | 'quieres-o-necesitas'
-  | 'ventaja';
+  | 'ventaja'
+  | 'identidad-escena'
+  | 'remedio';
 
 @Component({
   selector: 'app-etching',

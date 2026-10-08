@@ -112,6 +112,30 @@
       </g>
     }
 
+    @case ('identidad-escena') {
+      <g>
+        <rect width="200" height="140" fill="#0a0c14" />
+        <circle cx="72" cy="56" r="18" fill="none" stroke="#6a614c" stroke-width="1.4" />
+        <circle cx="128" cy="70" r="18" fill="none" stroke="#f3d28c" stroke-width="1.6" />
+        <path d="M72 74 L72 112 M128 88 L128 112" fill="none" stroke="#d4af37" stroke-width="1.4"/>
+        <path d="M96 34 L 96 62" stroke="#9a8f74" stroke-width="1.2" stroke-dasharray="3 4"/>
+        <path d="M92 58 L 96 64 L 100 58" fill="none" stroke="#9a8f74" stroke-width="1.2"/>
+        <rect y="112" width="200" height="28" [attr.fill]="'url(#' + hatchId + ')'" opacity="0.4" />
+      </g>
+    }
+
+    @case ('remedio') {
+      <g>
+        <rect width="200" height="140" fill="#0a0c14" />
+        <path d="M100 112 L 100 44" fill="none" stroke="#9a8f74" stroke-width="1.6"/>
+        <path d="M100 44 L 128 62 L 100 62 Z" fill="none" stroke="#9a8f74" stroke-width="1.2"/>
+        <circle cx="100" cy="120" r="16" fill="none" stroke="#6a614c" stroke-width="1.4"/>
+        <path d="M124 96 A 34 34 0 1 1 138 84" fill="none" stroke="#f3d28c" stroke-width="1.6"/>
+        <path d="M130 76 L 140 86 L 128 90 Z" fill="none" stroke="#f3d28c" stroke-width="1.4"/>
+        <rect y="118" width="200" height="22" [attr.fill]="'url(#' + hatchId + ')'" opacity="0.4" />
+      </g>
+    }
+
     @default {
       <g>
         <rect width="200" height="140" fill="#0a0c14" />

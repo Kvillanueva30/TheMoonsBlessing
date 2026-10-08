@@ -70,8 +70,15 @@ export class ResultPage {
   /** Mensaje breve para el visitante tras compartir o descargar. */
   readonly shareNote = signal<string | null>(null);
 
-  /** Nodo de la tarjeta oculta, para capturarlo. */
-  readonly shareCard = viewChild.required<ElementRef<HTMLElement>>('shareCardEl');
+  /**
+ * Nodo de la tarjeta oculta, para capturarlo.
+ *
+ * Query opcional y no requerida: la tarjeta vive dentro de un @if, y si el
+ * visitante llega al boton sin que el bloque se haya pintado, required lanzaria
+ * una excepcion en vez de dar un mensaje. generateImage() tiene ademas un
+ * respaldo por documento.
+ */
+  readonly shareCard = viewChild<ElementRef<HTMLElement>>('shareCardEl');
 
   constructor() {
     const params = this.route.snapshot.queryParamMap;
@@ -177,17 +184,6 @@ export class ResultPage {
     this.shareNote.set('Imagen descargada.');
   }
 
-  /** Camino explicito de descarga, siempre disponible. */
-  downloadImage(): void {
-    void (async () => {
-      const blob = await this.generateImage();
-      if (blob) {
-        this.shareService.download(blob);
-        this.shareNote.set('Imagen descargada.');
-      }
-    })();
-  }
-
   /** Captura la tarjeta oculta. Avisa si el navegador no puede. */
   private async generateImage(): Promise<Blob | null> {
     if (this.sharing()) return null;
@@ -195,9 +191,21 @@ export class ResultPage {
     this.shareNote.set(null);
 
     try {
-      const blob = await this.shareService.capture(this.shareCard().nativeElement);
+      const host = this.shareCard()?.nativeElement ?? null;
+      // Se captura el div interior .card, no el host <app-share-card>: el host
+      // esta fuera de pantalla y la libreria de captura no lo clona bien.
+      const card =
+        host?.querySelector<HTMLElement>('.card') ??
+        document.querySelector<HTMLElement>('app-share-card .card');
+
+      if (!card) {
+        this.shareNote.set('No pudimos preparar la imagen.');
+        return null;
+      }
+
+      const blob = await this.shareService.capture(card);
       if (!blob) {
-        this.shareNote.set('Tu navegador no pudo generar la imagen.');
+        this.shareNote.set('No pudimos generar la imagen. Prueba con otro navegador.');
       }
       return blob;
     } finally {

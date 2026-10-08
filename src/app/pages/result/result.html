@@ -68,9 +68,6 @@
           <button type="button" class="share-primary" (click)="share()" [disabled]="sharing()">
             {{ sharing() ? 'Preparando imagen...' : 'Compartir resultado' }}
           </button>
-          <button type="button" class="share-ghost" (click)="downloadImage()" [disabled]="sharing()">
-            Descargar PNG
-          </button>
         </div>
 
         @if (shareNote(); as note) {
