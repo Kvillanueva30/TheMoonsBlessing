@@ -200,3 +200,24 @@ app-moon {
     animation: none;
   }
 }
+/* Firma de la autora, al final del resultado. */
+.credit {
+  justify-self: center;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.credit-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(157, 151, 172, 0.78);
+}
+
+.credit-name {
+  display: block;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.15rem;
+  color: rgba(216, 208, 228, 0.86);
+}

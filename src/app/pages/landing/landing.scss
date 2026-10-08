@@ -12,8 +12,7 @@
   /* Sin esto el elemento se queda con la altura del contenido y el pie
      fijo queda fuera de su fondo. El cielo vive ahora en styles.scss. */
   min-height: 100svh;
-  /* El aire inferior se lo come la firma, que va fija abajo. */
-  padding: clamp(1.5rem, 4svh, 3rem) 0 clamp(3.5rem, 8svh, 5rem);
+  padding: clamp(1.5rem, 4svh, 3rem) 0 clamp(1.5rem, 4svh, 3rem);
   color: #f2ece0;
   overflow-x: hidden;
 }
@@ -37,12 +36,12 @@
 .title {
   margin: clamp(1.1rem, 3svh, 2rem) 0 0;
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-weight: 300;
+  font-weight: 500;
   /* El minimo sube a 1.7rem: en movil el titulo se leia pequeno al lado de
      la luna, que es lo que domina la pantalla. El techo no cambia. */
   font-size: clamp(1.7rem, min(4.6vw, 5.8svh), 3rem);
   line-height: 1.14;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.06em;
   background: linear-gradient(178deg, #fffdf7 4%, #f0d9a8 44%, #c9922f 84%, #8a6220 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -90,8 +89,8 @@
   text-transform: uppercase;
   border-radius: 2px;
   border: 1px solid #c9922f;
-  color: #0a0a0a;
-  background: linear-gradient(100deg, #f0d9a8, #c9922f);
+  color: #f0d9a8;
+  background: transparent;
   transition:
     transform 0.35s cubic-bezier(0.22, 0.68, 0.32, 1),
     box-shadow 0.35s cubic-bezier(0.22, 0.68, 0.32, 1);
@@ -102,64 +101,11 @@
 .btn:hover,
 .btn:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(201, 146, 47, 0.34);
+  background: rgba(240, 217, 168, 0.08);
+  box-shadow: 0 14px 40px rgba(201, 146, 47, 0.18);
 }
 
 .btn:focus-visible {
   outline: 2px solid #f0d9a8;
   outline-offset: 3px;
-}
-
-/* --------------------------------------------------------------- pie --- */
-
-/* Firma de la autora, como marca tipográfica y nada más.
-   Se probaron tres fondos —ninguno, píldora de cristal y banda dorada— y los
-   tres competían con la luna y partían la pantalla en dos. La luna está
-   dibujada con líneas finas y oro apagado, así que la firma usa el mismo
-   lenguaje: sin caja, sin borde, sin sombra, solo el filete y el texto. */
-.credit {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: clamp(1.1rem, 3.2svh, 2rem);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  pointer-events: none;
-}
-
-/* Filete corto, mismo peso que el limbo de la luna. */
-.credit::before {
-  content: "";
-  width: 1.5rem;
-  height: 1px;
-  background: rgba(201, 146, 47, 0.32);
-}
-
-.credit-label {
-  /* 0.62rem seguia ilegible en movil con 0.26em de tracking. Sube a 0.78rem
-     y el tracking baja a 0.2em: en cuerpo pequeno, tracking amplio consume
-     el ancho y deja huecos que rompen la palabra. */
-  font-size: 0.78rem;
-  letter-spacing: 0.2em;
-  /* Compensa el tracking, o la primera letra queda suelta. */
-  text-indent: 0.2em;
-  text-transform: uppercase;
-  color: rgba(157, 151, 172, 0.78);
-}
-
-.credit-name {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 1.2rem;
-  letter-spacing: 0.05em;
-  color: rgba(216, 208, 228, 0.86);
-}
-
-/* En pantallas muy bajas se sacrifica el pie antes que el botón. */
-@media (max-height: 430px) {
-  .credit {
-    display: none;
-  }
 }

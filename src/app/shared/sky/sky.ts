@@ -46,15 +46,16 @@ export class SkyComponent implements OnDestroy {
       // La mayoría blanco-azules, algunas cálidas, muy pocas anaranjadas.
       if (roll < 0.62) return '#eef2ff';
       if (roll < 0.88) return '#fff6e2';
-      if (roll < 0.97) return '#ffe2bd';
-      return '#ffc79a';
+      if (roll < 0.93) return '#ffe2bd';
+      if (roll < 0.98) return '#ffc79a';
+      return '#d9ccff';
     };
 
     const build = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       // Una estrella cada ~3400 px², con tope para pantallas enormes.
-      const count = Math.min(460, Math.round((canvas.width * canvas.height) / 3400));
+      const count = Math.min(800, Math.round((canvas.width * canvas.height) / 1800));
       this.stars = Array.from({ length: count }, () => {
         // El exponente reparte el peso hacia las pequeñas, como el cielo real.
         const r = Math.random() ** 2.6 * 1.5 + 0.32;

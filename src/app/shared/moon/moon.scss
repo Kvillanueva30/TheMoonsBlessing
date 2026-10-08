@@ -2,7 +2,7 @@
   display: block;
   /* min() con svh: en pantallas bajas la luna cede altura al contenido en vez
      de empujar el botón fuera del pliegue. */
-  width: min(42vmin, 30svh, 17rem);
+  width: min(52vmin, 38svh, 28rem);
   aspect-ratio: 1;
   filter: drop-shadow(0 0 34px rgba(201, 146, 47, 0.14));
 }

@@ -70,2438 +70,170 @@
     "Ninguna pregunta asume una fecha en Madar. El estado actual es el unico.",
     "La motivacion pesa mas que la accion. 'Me levanto' no es automaticamente Tarik."
   ],
-  "coverageReport": {
-    "note": "Todo por MONTE CARLO con 5.000.000 muestras y PRNG de semilla fija. Es una ESTIMACION, no un exacto. La alcanzabilidad es probable, no probada: un reino que no aparece en 5.000.000 muestras es probablemente inalcanzable, pero no se afirma sin prueba exhaustiva.",
-    "generatedFor": {
-      "questions": 15,
-      "options": 70,
-      "samples": 5000000,
-      "seed": "0x2f6e2b1"
-    },
-    "kingdomWinRatePercentEstimated": {
-      "ederian": 18.5,
-      "bastia": 27.12,
-      "tralan": 3.79,
-      "xorian": 39.21,
-      "tradia": 7.74,
-      "helia": 3.64
-    },
-    "natureRatePercentEstimated": {
-      "manskling": 0.52,
-      "diubak": 60.99,
-      "cazut": 38.5
-    },
-    "tieRatePercent": 10,
-    "spreadPercent": 35.57,
-    "strongOptionsPerKingdom": {
-      "ederian": 11,
-      "bastia": 10,
-      "tralan": 9,
-      "xorian": 12,
-      "tradia": 7,
-      "helia": 5
-    },
-    "probablyUnreachable": [],
-    "verdict": "Los 6 reinos aparecen. Desnivel de 35.57 puntos (xorian 39.21% vs helia 3.64%).",
-    "todo": [
-      "El desnivel de 35.57 puntos es alto. Reparto objetivo: ~16.7% cada uno.",
-      "TODO: numero final de preguntas (P-004 abierta).",
-      "TODO: registrar casos canonicos en data/.",
-      "TODO: comportamiento de Between. NO inventar formula."
-    ]
-  },
   "questions": [
     {
-      "id": "b-001",
-      "theme": "Suficiencia",
-      "axis": "blessing",
-      "text": "El rey busca a alguien y tu nombre está sobre la mesa. Nadie te obliga. Puedes seguir como hasta ahora.",
+      "id": "q1",
+      "theme": "La barca",
+      "axis": "legacy",
+      "feedsProfile": false,
+      "canBless": false,
+      "text": "Solo cabe uno en la barca que cruza el río antes de la crecida. Estás tú, tu mejor amigo, y el soldado que salvó al pueblo el año pasado. ¿Quién cruza?",
       "choices": [
         {
           "id": "a",
-          "text": "Lo aceptas. Te gustaría que el pueblo te necesitara.",
+          "text": "Me subo yo.",
           "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 2,
-            "tralan": -1,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 2,
-            "leadership": 1
-          },
-          "resonance": "El objeto del deseo es que otros le necesiten. No es reconocimiento ni admiracion, y no es una necesidad interna.",
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "needs_to_be_needed",
-            "direction": "outward",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Quiere sentir que otros la necesitan. El objeto del deseo es externo"
+            "bastia": 3
           }
         },
         {
           "id": "b",
-          "text": "Lo rechazas. Ya estás bien donde estás.",
+          "text": "Mi mejor amigo.",
           "legacyAffinity": {
-            "ederian": 2,
-            "bastia": -1,
-            "tralan": 2,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "patience": 2,
-            "independence": 1
-          },
-          "resonance": "Se basta. Completitud, no bondad.",
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "complete_present",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Se basta. No necesita nada de fuera"
+            "xorian": 3
           }
         },
         {
           "id": "c",
-          "text": "Lo aceptas. Y ya sabes que después te vas a sentir igual de vacío.",
+          "text": "El soldado.",
           "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": 1,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 3
-          },
-          "traits": {
-            "ambition": 2,
-            "attachment": 2
-          },
-          "resonance": "Anticipacion informada: sabe que no va a llenar el vacio antes de probarlo. No es experiencia vivida, por eso verified:false y aloneInsufficient.",
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "anticipatory_emptiness",
-            "direction": "inward",
-            "unresolved": true,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Anticipa que el cargo no llenara el vacio. Lo sabe antes de probarlo",
-            "aloneInsufficient": true
+            "ederian": 3
           }
         },
         {
           "id": "d",
-          "text": "Lo aceptas, y desde el primer día piensas en cómo usarlo para proteger a los tuyos.",
+          "text": "No cruzo. Me quedo en la orilla.",
           "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 1
-          },
-          "traits": {
-            "protection": 2,
-            "loyalty": 2
-          },
-          "resonance": "Acepta por deber hacia otros. No es una necesidad propia ni una transformacion buscada.",
-          "evidence": {
-            "family": "character_only",
-            "subtype": "duty_for_others",
-            "direction": "none",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Acepta para proteger a otros. Motivo de deber, no de necesidad propia"
+            "tralan": 3
           }
         }
-      ],
-      "feedsProfile": true,
-      "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
-      "canBless": false,
-      "canBlessReason": "Pregunta conceptual: \"que haces cuando se te ofrece algo que podria darte mas\". Observa suficiencia, deseo externo, anticipacion de vacio o motivacion de proteccion. No es la pregunta central que revela una necesidad capaz de llevar a la bendicion. Aunque (c) sea inner_search, la pregunta NO abre via de bendicion. Decision de la autora.",
-      "note": "canBless:false por funcion conceptual, no porque (c) tenga verified:false. verified NO es una regla de exclusion: describe si la persona ya vivio la experiencia. verified:false NO impide contribuir a una revelacion.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "suficiencia"
+      ]
     },
     {
-      "id": "b-002",
-      "theme": "Lo que falta",
-      "axis": "blessing",
-      "text": "Una noche, alguien te pregunta qué te falta. No hay nadie más y la pregunta no tiene trampa.",
+      "id": "q2",
+      "theme": "El extranjero",
+      "axis": "legacy",
+      "feedsProfile": false,
+      "canBless": false,
+      "text": "Un extranjero toca tu puerta de noche, con la ropa rasgada y sin nombre. ¿Qué haces?",
       "choices": [
         {
           "id": "a",
-          "text": "Nada. De verdad nada.",
+          "text": "Le pregunto quién es desde dentro. Y si me convence, le abro.",
           "legacyAffinity": {
-            "ederian": 2,
-            "bastia": -2,
-            "tralan": 3,
-            "xorian": 1,
-            "tradia": -1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 2,
-            "patience": 1
-          },
-          "resonance": "Su motivo es el deber con alguien concreto.",
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "complete_present",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "No le falta nada. Afirmacion en presente"
+            "helia": 3
           }
         },
         {
           "id": "b",
-          "text": "Más reconocimiento. Es lo único que me falta.",
+          "text": "No le abro, pero le dejo lo necesario en el escalón.",
           "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 3,
-            "competitiveness": 2
-          },
-          "resonance": "wishOutside alto, innerNeed bajo: querer no es necesitar.",
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "recognition",
-            "direction": "outward",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Lo que falta esta fuera: el reconocimiento de otros"
+            "tradia": 3
           }
         },
         {
           "id": "c",
-          "text": "No sabría decirlo. Hay algo dentro que no logro alcanzar.",
+          "text": "Le abro y le doy cobijo.",
           "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 3
-          },
-          "traits": {
-            "attachment": 2,
-            "curiosity": 2
-          },
-          "resonance": "Senal de bendicion.",
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "unlocated",
-            "direction": "inward",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Algo dentro que no alcanza. Ubicacion sin contenido",
-            "aloneInsufficient": true
+            "xorian": 3
           }
         },
         {
           "id": "d",
-          "text": "Que dejen de necesitarme tanto.",
+          "text": "Cierro la puerta.",
           "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": -2,
-            "xorian": 3,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "attachment": 2,
-            "selflessness": 1
-          },
-          "resonance": "Carga ajena que no es suya: necesidad propia disfrazada de los otros.",
-          "evidence": {
-            "family": "relational_boundary",
-            "subtype": "too_dependent",
-            "direction": "outward",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Pesa que le necesiten. Cambia una relacion externa, no se transforma"
+            "tralan": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "theme": "Juicio injusto",
+      "axis": "legacy",
+      "feedsProfile": false,
+      "canBless": false,
+      "text": "Ves cómo acusan a un inocente y el juez se hace el sordo. ¿Qué haces?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Me pongo de pie y grito que no es justo.",
+          "legacyAffinity": {
+            "bastia": 3
           }
         },
         {
-          "id": "e",
-          "text": "Nada de eso. Solo que se me escapa el nombre, como una palabra que tienes en la punta y no sale.",
+          "id": "b",
+          "text": "Recojo pruebas primero, para poder acusar con fundamento.",
           "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "unformulable",
-            "direction": "none",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Hay algo que no consigue expresar. Ni puede nombrarlo",
-            "aloneInsufficient": true
-          },
-          "traits": {}
+            "tradia": 3
+          }
         },
         {
-          "id": "f",
-          "text": "Que no me falte. Pero si soy honesto, lo que busco no está en ninguna parte de fuera.",
+          "id": "c",
+          "text": "Miro a mi alrededor a ver si alguien más se mueve.",
           "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "desire_vs_need",
-            "subtype": "inward_declared",
-            "direction": "inward",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Lo busca y sabe que no esta fuera. Direccion sin contenido"
-          },
-          "traits": {}
+            "xorian": 3
+          }
         },
         {
-          "id": "g",
-          "text": "Alguien. Pero no sé quién ni para qué. Sé que me falta y no sé de quién.",
+          "id": "d",
+          "text": "Le hablo al juez en privado y le explico el daño que hace.",
           "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "unidentified",
-            "direction": "none",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Le falta algo y no sabe que. Carencia sin ubicacion",
-            "aloneInsufficient": true
-          },
-          "traits": {}
-        },
-        {
-          "id": "h",
-          "text": "No me falta nada. Nunca he necesitado que nadie me completara.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "never_needed_completion",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Nunca ha necesitado que nadie le completara. Afirmacion historica"
-          },
-          "traits": {}
+            "ederian": 3
+          }
         }
-      ],
+      ]
+    },
+    {
+      "id": "q4",
+      "theme": "La cámara sellada",
+      "axis": "legacy",
+      "feedsProfile": false,
+      "canBless": false,
+      "text": "Descubres una cámara sellada con pruebas de que la historia de tu reino no es la que te contaron. ¿Qué haces?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Lo cuento en la plaza, aunque tiemble el reino.",
+          "legacyAffinity": {
+            "helia": 3
+          }
+        },
+        {
+          "id": "b",
+          "text": "Lo escondo. El reino no merece derrumbarse hoy.",
+          "legacyAffinity": {
+            "tralan": 3
+          }
+        },
+        {
+          "id": "c",
+          "text": "Lo investigo a fondo antes de tocarlo.",
+          "legacyAffinity": {
+            "ederian": 3
+          }
+        },
+        {
+          "id": "d",
+          "text": "Se lo llevo al juez, que decida.",
+          "legacyAffinity": {
+            "tradia": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "theme": "La verdad",
+      "axis": "blessing",
       "feedsProfile": true,
-      "evidenceStatus": "APROBADO — 8 opciones etiquetadas",
-      "note": "Las 8 opciones cubren los cuatro estados: suficiencia (a, h), necesidad con contenido o sin (c, e, g), deseo hacia fuera (b), contradiccion deseo/necesidad (f) y limite relacional (d). Ninguna nombra una naturaleza.",
       "canBless": true,
-      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "sujeto"
-    },
-    {
-      "id": "b-003",
-      "theme": "Identidad",
-      "axis": "blessing",
-      "text": "Te ofrecen dejar de ser quien eres a cambio de ser alguien a quien todos admirarían.",
+      "text": "Alguien te dice en la cara algo tuyo que llevas años negando. ¿Qué pasa contigo?",
       "choices": [
         {
           "id": "a",
-          "text": "Lo tomo. Es el trato que quería.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 3,
-            "impulsiveness": 1
-          },
-          "resonance": "Tambien",
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "transformation_status",
-            "direction": "outward",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Acepta por el estatus. El objeto del deseo es la mirada de los demas"
-          }
-        },
-        {
-          "id": "b",
-          "text": "Lo dejo pasar. Soy quien soy y me llega.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": -1,
-            "tralan": 3,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 3,
-            "discipline": 1
-          },
-          "resonance": "No es cobardia.",
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "complete_present",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "No le hace falta ser otro. Se basta"
-          }
-        },
-        {
-          "id": "c",
-          "text": "Lo tomo. Y en unos meses descubro que el que era tampoco me bastaba.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": 0,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 3
-          },
-          "traits": {
-            "ambition": 2,
-            "attachment": 2
-          },
-          "resonance": "",
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "located_identity",
-            "direction": "inward",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Lo insuficiente es QUIEN ES. Y ya lo ha comprobado: probo ser otro y tampoco basto"
-          }
-        },
-        {
-          "id": "d",
-          "text": "Lo tomo. Necesito que alguien me diga que valgo.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 1,
-            "tralan": 1,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 3
-          },
-          "traits": {
-            "attachment": 3,
-            "fear": 2
-          },
-          "resonance": "ATENCION: esta opcion se reetiqueto. Antes era \"necesidad no resuelta declarada\" y se TOMABA como ejemplo de. Ahora es validation_needed: el objeto y el remedio estan FUERA de la persona. No es la misma evidencia que located_identity.",
-          "evidence": {
-            "family": "desire_vs_need",
-            "subtype": "validation_needed",
-            "direction": "outward",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Lo insuficiente es que NADIE LE HAYA DICHO que vale. El remedio esta fuera: el testimonio de otro",
-            "aloneInsufficient": true
-          }
-        }
-      ],
-      "feedsProfile": true,
-      "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
-      "note": "c) y d) aceptan la misma accion pero no la misma necesidad. c) lo insuficiente es quien es, y lo ha comprobado. d) lo insuficiente es que nadie se lo haya dicho, y el remedio esta fuera. b-003/c es la UNICA located_identity del banco de perfil: punto unico de fallo asumido.",
-      "canBless": true,
-      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "identidad"
-    },
-    {
-      "id": "b-004",
-      "theme": "Poder",
-      "axis": "blessing",
-      "text": "Hay un problema que te duele y no puedes resolver con lo que tienes. Te ofrecen el poder real para acabarlo.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo uso y lo resuelvo. Era exactamente lo que hacía falta.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 1,
-            "tradia": 2,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 1
-          },
-          "traits": {
-            "leadership": 2,
-            "strategicThinking": 2
-          },
-          "resonance": "Y",
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "complete_present",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "El poder resuelto el problema. No habia una necesidad detras"
-          }
-        },
-        {
-          "id": "b",
-          "text": "No lo necesito. Debe haber otra manera.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -1,
-            "tralan": 2,
-            "xorian": 3,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 3,
-            "adaptability": 2
-          },
-          "resonance": "complete_present con verified:false. Afirma que no necesita el poder pero NO lo ha comprobado. La segunda frase (\"debe haber otra manera\") es buscar, no negarse. Discutible: podria marcarse amb:true si se leyera como evasion.",
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "complete_present",
-            "direction": "none",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Afirma que no lo necesita y busca otra via. No lo ha comprobado"
-          }
-        },
-        {
-          "id": "c",
-          "text": "Lo tomo. Y luego descubro que el problema era otro.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": 1,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 3
-          },
-          "traits": {
-            "ambition": 2,
-            "attachment": 2
-          },
-          "resonance": "UNICA opcion de esta pregunta que revela una necesidad interna. Y no la revela por sentir vacio, sino por haber fallado el remedio equivocado. Esta es la via legitima hacia una bendicion en b-004.",
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "misdirected_remedy",
-            "direction": "outward",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "La necesidad existe y se descubrió por fallar el remedio equivocado. No por sentir vacio"
-          }
-        },
-        {
-          "id": "d",
-          "text": "Lo rechazo. No quiero ser la persona que hace eso.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": -2,
-            "tradia": -2,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "discipline": 3,
-            "independence": 1
-          },
-          "resonance": "Limite moral. character_only. NO es necesidad y NO puede bendecir: bendecir por esto seria \"persona buena = \". Es una decision sobre uno mismo, no sobre su naturaleza.",
-          "evidence": {
-            "family": "character_only",
-            "subtype": "moral_limit",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Rechaza el poder por lo que SERIA, no por lo que necesita"
-          }
-        }
-      ],
-      "feedsProfile": true,
-      "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
-      "note": "Ninguna opcion produce needInward por querer poder. a) y b) son complete_present con verified distinta (comprobado / afirmado). c) es la unica via de necesidad interna y existe por pauta de remediacion fallida. d) es limite moral: character_only. b-004 no tiene located_identity: decision de la autora para no duplicar b-003/c.",
-      "canBless": true,
-      "canBlessReason": "Esta pregunta puede producir bendicion, pero solo si la evidencia aporta contenido interno y pauta de remediacion. Ninguna opcion suelta basta.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "poder"
-    },
-    {
-      "id": "b-005",
-      "theme": "Sacrificio",
-      "axis": "blessing",
-      "text": "Te piden algo que no quieres dar. Sabes que te va a dejar una marca, y no lo vas a recuperar.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo hago. Hay cosas que no negocio.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "selflessness": 3,
-            "loyalty": 2
-          },
-          "resonance": "CUIDADO con la trampa. Sacrifice + nobleza NO puede producir bendicion. character_only: es una decision sobre si mismo, no una necesidad interna.",
-          "evidence": {
-            "family": "character_only",
-            "subtype": "moral_limit",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Lo hace por lo que no negocia. Decision firme sobre uno mismo"
-          }
-        },
-        {
-          "id": "b",
-          "text": "No lo hago. Y no lo lamento.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 1,
-            "tralan": -2,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "independence": 2,
-            "impulsiveness": 1
-          },
-          "resonance": "No lo hace y no lo lamenta. character_only. Decir esto NO es egoismo a ojos del motor: es una ausencia de remordimiento, que es otra cosa.",
-          "evidence": {
-            "family": "character_only",
-            "subtype": "impulsive_act",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "No lo hace y no lo lamenta. Caracter, no necesidad"
-          }
-        },
-        {
-          "id": "c",
-          "text": "Lo hago. Y aun así sigo queriendo lo mismo que antes.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 2,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 3
-          },
-          "traits": {
-            "loyalty": 2,
-            "ambition": 2
-          },
-          "resonance": "LA UNICA de esta pregunta que no es character_only. El sacrificio no cerro la brecha: el deseo sigue intacto. Es external_desire con unresolved:true, no necesidad interna. Puede coexistir con necesidad, pero no la crea.",
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "unfulfilled_persistence",
-            "direction": "outward",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Sacrifica y el deseo sigue intacto. La brecha NO se cerro con el sacrificio"
-          }
-        },
-        {
-          "id": "d",
-          "text": "Lo hago porque es lo que corresponde. No porque me cambie.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": -1,
-            "tralan": 2,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "discipline": 3,
-            "loyalty": 2
-          },
-          "resonance": "CASO BENNY DECLARADO. Sacrifica, es leal, y sigue siendo. sufficiency/never_needed_completion: el deber no es una necesidad. Si el sacrificio llegara a bendecir, este caso estaria mal.",
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "never_needed_completion",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Lo hace porque corresponde y no porque le cambie. Es el caso Benny"
-          }
-        }
-      ],
-      "feedsProfile": true,
-      "evidenceStatus": "APROBADO — 4 opciones etiquetadas",
-      "note": "RESTRICCION DURA: b-005 no produce bendicion. Tres de sus cuatro opciones son character_only. La cuarta (c) es external_desire, no necesidad interna. Sacrificar no es necesitar. (d) es el caso Benny declarado.",
-      "canBless": false,
-      "canBlessReason": "Esta pregunta NO puede producir bendicion por ninguna combinacion de sus respuestas.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "sacrificio"
-    },
-    {
-      "id": "l-001",
-      "theme": "Por qué te levantas",
-      "axis": "legacy",
-      "text": "Unos compañeros tienen que cruzar el río y el agua ya está subiendo. Tú puedes cruzar rápido y volver. Nadie te lo pide.",
-      "motive": "EL separador. La misma accion, seis motivaciones distintas, una por reino.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Hay que sacarlos. Voy.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 0,
-            "tralan": -2,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "protection": 3,
-            "courage": 2
-          },
-          "designNote": "Lucius: actua aunque tenga miedo, y no por demostrar nada. Su motivo es el deber con alguien concreto.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "b",
-          "text": "Quiero ver que también puedo. Quiero que lo vean.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 0,
-            "helia": 3
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "competitiveness": 3,
-            "courage": 1
-          },
-          "designNote": "Tarik: superarse Y demostrar de que es capaz. El 'que lo vean' lo acerca a Silas, pero el motor es la superacion propia.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "c",
-          "text": "No quiero quedarme atrás. Ya he estado abajo antes.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 3,
-            "competitiveness": 2
-          },
-          "designNote": "Silas: el termino de comparacion es OTRO, no uno mismo. Aqui esta la diferencia con Tarik.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "d",
-          "text": "Están todos ahí abajo. Los veo y no me suelto.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "protection": 2,
-            "empathy": 3
-          },
-          "designNote": "Deron: el motivo es el vinculo. Que la gente este junta. No calcula el momento, como Halik.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "e",
-          "text": "Espero dos minutos. Cuando baje el agua del otro lado, es más seguro.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 0,
-            "tralan": 1,
-            "xorian": 1,
-            "tradia": 3,
-            "helia": -2
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "patience": 2
-          },
-          "designNote": "Halik: protege mediante el pensamiento y calcula el momento para minimizar el riesgo. No busca demostrar nada.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "f",
-          "text": "Quiero que esto se acabe y vuelva la calma.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 0,
-            "tralan": 3,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": -2
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "patience": 2,
-            "independence": 2
-          },
-          "designNote": "Ross: preservar SU propia paz. Se aleja de Lucius, que actua con miedo; Ross busca la calma.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "g",
-          "text": "Me levanto y voy. Luego ya se verá.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 1
-          },
-          "traits": {
-            "courage": 2,
-            "impulsiveness": 1
-          },
-          "resonance": "Neutro: se levanta sin motivo definido. ESTA es la trampa de la accion sin motivacion, y por eso existe."
-        }
-      ],
-      "etching": "sujeto"
-    },
-    {
-      "id": "l-002",
-      "theme": "La sala del rey",
-      "axis": "legacy",
-      "text": "En la sala del rey, pregunta la opinión de quien está al fondo. Todos esperan que no hables.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo dices. Si no lo dices, no lo va a decir nadie.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 1,
-            "tralan": -1,
-            "xorian": 0,
-            "tradia": 1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "leadership": 2,
-            "courage": 2
-          },
-          "designNote": "Lucius: decir lo que hay que decir por responsabilidad. El contenido se parece a Halik, pero la motivacion no.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "b",
-          "text": "Lo dices, pero antes calculas a quién le conviene que te escuche.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 3,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 0
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "competitiveness": 1
-          },
-          "resonance": "La sombra de Halik: la inteligencia convertida en manipulacion. Roz(a) a Silas por buscar el mejor posicion.",
-          "designNote": "La sombra de Halik: la inteligencia convertida en manipulacion. Roz(a) a Silas por buscar el mejor posicion."
-        },
-        {
-          "id": "c",
-          "text": "Esperas. Que se lo pregunten a otro. No te corresponde.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 0,
-            "tralan": 3,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "patience": 2,
-            "strategicThinking": 1
-          },
-          "designNote": "Ross: decide no actuar. No calcula el momento, simplemente se aparta.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "d",
-          "text": "Lo dices porque el grupo lo necesita. Para eso está la sala.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "empathy": 3,
-            "patience": 1
-          },
-          "designNote": "Deron: habla por el vinculo, para que el grupo funcione. A diferencia de Lucius, aqui el motivo es la pertenencia.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "e",
-          "text": "Lo dices. Y quieres que quede claro que lo has dicho tú.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 3,
-            "leadership": 1
-          },
-          "designNote": "Silas: el reconocimiento. El contenido puede ser bueno; lo que empuja es el crédito.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "sabiduria"
-    },
-    {
-      "id": "l-003",
-      "theme": "Crítica",
-      "axis": "blessing",
-      "text": "Alguien a quien respetas te dice, a la cara, que nunca llegarás a nada. Añade que lo dice por tu bien.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Le das las gracias. Te ha dicho algo que ya sabías.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -1,
-            "tralan": 1,
-            "xorian": 2,
-            "tradia": 3,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "patience": 2,
-            "curiosity": 2
-          },
-          "resonance": "Halik incorpora la informacion. No le necesita para demostrar nada.",
-          "designNote": "Halik incorpora la informacion. No le necesita para demostrar nada."
-        },
-        {
-          "id": "b",
-          "text": "No te afecta. Lo que piensen de ti no cambia lo que hagas.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -2,
-            "tralan": 3,
-            "xorian": 0,
-            "tradia": -1,
-            "helia": 3
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 3,
-            "discipline": 1
-          },
-          "resonance": "El limite entre superarse a uno mismo (Tarik) y no medirse con nadie (Ross). Por eso empuja a los dos y separa a Silas.",
-          "designNote": "El limite entre superarse a uno mismo (Tarik) y no medirse con nadie (Ross). Por eso empuja a los dos y separa a Silas."
-        },
-        {
-          "id": "c",
-          "text": "Quieres que se note que llevas todo el peso de esto.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 2
-          },
-          "traits": {
-            "ambition": 2,
-            "selflessness": 1
-          },
-          "resonance": "Lucius cuando se convierte en carga. Su propia sombra: la responsabilidad excessiva busca ser vista.",
-          "designNote": "Lucius cuando se convierte en carga. Su propia sombra: la responsabilidad excessiva busca ser vista."
-        },
-        {
-          "id": "d",
-          "text": "Le preguntas qué tendría que cambiar para que opinara distinto.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 1,
-            "tradia": 3,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "curiosity": 3,
-            "strategicThinking": 1
-          },
-          "designNote": "Halik: la critica como dato. Es el mismo camino de la manipulacion, un paso mas.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "e",
-          "text": "Buscas a alguien mejor que él. Alguien tiene que saber hacerlo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "competitiveness": 3,
-            "impulsiveness": 1
-          },
-          "designNote": "Silas: la comparacion que se pudre en resentimiento.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "sujeto"
-    },
-    {
-      "id": "l-004",
-      "theme": "Conocimiento",
-      "axis": "legacy",
-      "text": "Tienes información que cambia lo que todos creen. Puedes decirla ahora o guardarla.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "La dices. Sea quien sea, tiene que saberlo.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 0,
-            "tralan": -1,
-            "xorian": 1,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "empathy": 2,
-            "courage": 1
-          },
-          "designNote": "Lucius: la verdad aunque le cueste. No calcula a quien le conviene.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "b",
-          "text": "La guardas hasta saber cómo usarla.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 1,
-            "tralan": 1,
-            "xorian": 1,
-            "tradia": 3,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 0
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "patience": 1
-          },
-          "designNote": "Halik: el conocimiento como herramienta de decision. Sin sombra todavia.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "c",
-          "text": "Lo dices, pero decides tú a quién se lo das.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 3,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 0
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "competitiveness": 1
-          },
-          "resonance": "La sombra de Halik: la informacion como palanca.",
-          "designNote": "La sombra de Halik: la informacion como palanca."
-        },
-        {
-          "id": "d",
-          "text": "La guardas. No es asunto tuyo y no te va a dar ningún problema.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 0,
-            "tralan": 3,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 2,
-            "patience": 1
-          },
-          "designNote": "Ross: evitar implicarse. El motivo es su paz, no el grupo como en Deron.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "e",
-          "text": "La cuentas. Así los que están abajo dejan de sufrir.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": -1,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 2,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "protection": 3,
-            "empathy": 2
-          },
-          "designNote": "Deron: la informacion al servicio del vinculo. Y Halik, porque la usa con un proposito.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "f",
-          "text": "La dices para que se note que lo sabes tú y no ellos.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 3,
-            "tralan": 0,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 3,
-            "leadership": 1
-          },
-          "designNote": "Silas: el conocimiento como crédito. Se diferencia de Halik, que sabe para decidir, no para que le reconozcan.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "g",
-          "text": "La usas para saber en qué punto estás y superarte.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -1,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 1,
-            "helia": 3
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 1
-          },
-          "traits": {
-            "competitiveness": 3,
-            "curiosity": 1
-          },
-          "designNote": "Tarik: superacion con uno mismo, sin comparacion con nadie. Por eso no lleva madera de Silas.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "sabiduria"
-    },
-    {
-      "id": "l-005",
-      "theme": "Lealtad",
-      "axis": "legacy",
-      "text": "La persona que hizo daño a tu rey vive cerca de ti. No tienes ninguna orden. Nadie te ha dicho que hagas nada.",
-      "motive": "El veto de Halik reactiva a Tarik: su motivo pasa de superar a Silas a vengar a Halik.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Vas a por él. No hay orden, pero tampoco hace falta.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 1,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": -1,
-            "helia": 3
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "impulsiveness": 3,
-            "loyalty": 2
-          },
-          "resonance": "La venganza de Tarik tras la muerte de Halik. Es el punto explicito del lore de Helia.",
-          "designNote": "La venganza de Tarik tras la muerte de Halik. Es el punto explicito del lore de Helia."
-        },
-        {
-          "id": "b",
-          "text": "No te mueves. Tu rey no ha dicho nada.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": 0,
-            "tralan": 2,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": -2
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "discipline": 2,
-            "loyalty": 1
-          },
-          "designNote": "Ross: no actuar sin permiso. Lucius tambien espera, aunque por deber.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "d",
-          "text": "Recoges lo que necesitas saber y se lo pasas a quien decide.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 1,
-            "tradia": 3,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 0
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "patience": 1
-          },
-          "designNote": "Halik: la informacion como herramienta de decision, no como arma. Se diferencia de Silas, que la retiene.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "e",
-          "text": "No te mueves. No es tu guerra.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 0,
-            "tralan": 3,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 3,
-            "patience": 1
-          },
-          "resonance": "Xorian fue el unico reino que no intervino. Ross: preservar su propia paz.",
-          "designNote": "Xorian fue el unico reino que no intervino. Ross: preservar su propia paz."
-        },
-        {
-          "id": "f",
-          "text": "Te mueves, pero por los tuyos. Que no les alcance.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "protection": 3,
-            "empathy": 2
-          },
-          "designNote": "Deron: el vinculo como motivo. No protege a la justicia ni a un rey, protege a los suyos.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "vinculo"
-    },
-    {
-      "id": "l-006",
-      "theme": "Reconocimiento",
-      "axis": "blessing",
-      "text": "Un siglo después de su muerte, el nombre de tu fundador es el más repetido en tu reino. ¿Qué te provoca ese nombre?",
-      "motive": "Silas necesita reconocimiento porque se define por encima de otros. Tarik no lo necesita porque se supera a si mismo. Esta pregunta separa a los dos.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Nada. Es el nombre de otro. Yo no necesito que me reconozcan.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -3,
-            "tralan": 2,
-            "xorian": 0,
-            "tradia": -1,
-            "helia": 3
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "independence": 3,
-            "discipline": 1
-          },
-          "resonance": "Tarik en su version sana: superarse sin reconocimiento. Y Ross por su cuenta. Se aleja de Silas.",
-          "designNote": "Tarik en su version sana: superarse sin reconocimiento. Y Ross por su cuenta. Se aleja de Silas."
-        },
-        {
-          "id": "b",
-          "text": "Es el punto más alto al que puedo aspirar. Necesito que reconozcan lo que hago.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 3,
-            "competitiveness": 2
-          },
-          "designNote": "Silas: la ascension y el reconocimiento. Necesita el nombre de arriba para saber quien es.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "c",
-          "text": "Me basta con que los míos estén a salvo. El nombre no importa.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -1,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "protection": 2,
-            "empathy": 3
-          },
-          "designNote": "Deron: el vinculo por encima de todo. El reconocimiento le da igual.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "d",
-          "text": "Quiero que se note que aquí estuve yo. Que no se me olvide.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": 2
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 2
-          },
-          "traits": {
-            "ambition": 3,
-            "leadership": 1
-          },
-          "designNote": "Silas: la comparacion permanente. Tambien Tarik, pero por la mirada de los otros.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "espejo"
-    },
-    {
-      "id": "l-007",
-      "theme": "Miedo",
-      "axis": "legacy",
-      "text": "Tu grupo tiene que cruzar el paso de noche y tú te has parado. Nadie dice nada, pero todos esperan que alguien siga.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Avanzas primero, aunque las manos te tiemblan. Nadie tiene que saber que te da miedo.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 1,
-            "tralan": -2,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 0
-          },
-          "traits": {
-            "courage": 3,
-            "loyalty": 1,
-            "resilience": 1
-          },
-          "designNote": "Lucius: valentia a pesar del miedo. No busca demostrar nada.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "b",
-          "text": "Esperas a que otro lo haga. Tú no has pedido ir primero.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 0,
-            "tralan": 3,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 1
-          },
-          "traits": {
-            "attachment": 2,
-            "fear": 2,
-            "adaptability": 1
-          },
-          "designNote": "Ross: puede tener miedo y decidir no actuar. Se diferencia de Lucius en eso.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "c",
-          "text": "Te ofreces a ir, pero primero calculas cómo te lo agradecerá el grupo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 2,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 2,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "ambition": 2,
-            "leadership": 1
-          },
-          "designNote": "Lucius: actua aunque tenga miedo, y no por demostrar nada. Su motivo es el deber con alguien concreto.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "d",
-          "text": "Te ofreces a ir y luego miras atrás por si alguien viene contigo.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 1,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "empathy": 2,
-            "courage": 1,
-            "attachment": 1
-          },
-          "designNote": "Deron: no quiere separarse del grupo. Y hay miedo al abandono, que si es necesidad.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "miedo"
-    },
-    {
-      "id": "l-008",
-      "theme": "Oscuridad",
-      "axis": "legacy",
-      "text": "Hay algo en ti que no le enseñas a nadie. No le has hecho nada a nadie. Solo está ahí.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo escondes bien. Y sigue ahí.",
-          "legacyAffinity": {
-            "ederian": -1,
-            "bastia": 1,
-            "tralan": 1,
-            "xorian": 1,
-            "tradia": 2,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 2
-          },
-          "traits": {
-            "attachment": 2,
-            "fear": 2
-          },
-          "resonance": "Ocultar no es ser oscuro. Alden tambien es Cazut y noble. Ocultar empuja a Halik, que calcula.",
-          "designNote": "Ocultar no es ser oscuro. Alden tambien es Cazut y noble. Ocultar empuja a Halik, que calcula."
-        },
-        {
-          "id": "b",
-          "text": "Lo miras de frente. Sin hacer nada con él, pero sin apartar la vista.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": 0,
-            "tralan": 1,
-            "xorian": 3,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "courage": 2,
-            "curiosity": 2,
-            "discipline": 1
-          },
-          "designNote": "Ross: conocer lo propio sin actuarlo. Observar antes de moverse.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "c",
-          "text": "Lo usas cuando te conviene.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 3,
-            "innerNeed": 1
-          },
-          "traits": {
-            "impulsiveness": 2,
-            "ambition": 2
-          },
-          "designNote": "Silas: la sombra como herramienta. NO significa que sea malo.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "d",
-          "text": "Se lo cuentas a una persona. Solo a una.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "attachment": 3,
-            "empathy": 1
-          },
-          "designNote": "Deron: confesar a un solo vinculo. Confiar en uno es confiar en el grupo entero.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "espejo"
-    },
-    {
-      "id": "l-009",
-      "theme": "Pérdida",
-      "axis": "blessing",
-      "text": "Pierdes a alguien que no se puede recuperar. La gente te mira esperando saber cómo lo llevas.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "No dices nada. Lo llevas dentro y sigues.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 2
-          },
-          "traits": {
-            "resilience": 3,
-            "discipline": 2
-          },
-          "designNote": "Lucius: el duelo se convierte en deber. Necesidad interna real, sin deseo externo.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "b",
-          "text": "Lo dices entero, delante de todos.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 1,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 0,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 2
-          },
-          "traits": {
-            "empathy": 2,
-            "attachment": 2,
-            "courage": 1
-          },
-          "designNote": "Deron: poner el duelo a la vista para no cargarlo solo.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "c",
-          "text": "Buscas a alguien a quien culpar. Alguien tiene que tener la culpa.",
-          "legacyAffinity": {
-            "ederian": -2,
-            "bastia": 3,
-            "tralan": -1,
-            "xorian": -1,
-            "tradia": 1,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 3
-          },
-          "traits": {
-            "impulsiveness": 3,
-            "competitiveness": 1
-          },
-          "resonance": "La corrupcion de Darya: mucho deseo hacia fuera y mucha necesidad sin resolver. NO es 'oscuridad = Cazut'.",
-          "designNote": "La corrupcion de Darya: mucho deseo hacia fuera y mucha necesidad sin resolver. NO es 'oscuridad = Cazut'."
-        },
-        {
-          "id": "d",
-          "text": "Te quedas. No vas a irte a ningún lado todavía.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": -1,
-            "tralan": 2,
-            "xorian": 1,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 1,
-            "innerNeed": 3
-          },
-          "traits": {
-            "attachment": 3,
-            "resilience": 1
-          },
-          "resonance": "La perdida como hueco que sigue abierto. La necesidad mas pura del banco."
-        }
-      ],
-      "etching": "sujeto"
-    },
-    {
-      "id": "l-010",
-      "theme": "Vínculo",
-      "axis": "legacy",
-      "text": "Alguien te pide un favor que te va a costar. Si lo haces, se lo vas a deber para siempre. Si no, no pasa nada.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo haces. Sin cobrarlo nunca.",
-          "legacyAffinity": {
-            "ederian": 3,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": -1
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "loyalty": 3,
-            "selflessness": 2
-          },
-          "resonance": "Lucius. Y Benny, que nunca traiciona a Anika y sigue siendo Manskling.",
-          "designNote": "Lucius. Y Benny, que nunca traiciona a Anika y sigue siendo Manskling."
-        },
-        {
-          "id": "b",
-          "text": "Lo haces, pero le dices el precio desde el principio.",
-          "legacyAffinity": {
-            "ederian": 1,
-            "bastia": 2,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 2,
-            "helia": 1
-          },
-          "blessing": {
-            "wishOutside": 2,
-            "innerNeed": 1
-          },
-          "traits": {
-            "strategicThinking": 3,
-            "discipline": 1
-          },
-          "designNote": "Silas: el vinculo es real pero tiene condiciones. Y Halik, que piensa el momento.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "c",
-          "text": "No lo haces. No quieres que nadie te deba nada.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": -1,
-            "tralan": 3,
-            "xorian": 2,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 1
-          },
-          "traits": {
-            "independence": 3,
-            "strategicThinking": 1
-          },
-          "designNote": "Ross: mantiene la distancia limpia. Deron tambien, pero el suyo es no romper el vinculo.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        },
-        {
-          "id": "d",
-          "text": "Lo haces y no lo cobras, ni siquiera si cambia la cosa.",
-          "legacyAffinity": {
-            "ederian": 2,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 3,
-            "tradia": 0,
-            "helia": 0
-          },
-          "blessing": {
-            "wishOutside": 0,
-            "innerNeed": 3
-          },
-          "traits": {
-            "loyalty": 3,
-            "attachment": 3
-          },
-          "designNote": "Deron: un vinculo del que no puede salir. Eso si es necesidad interna.",
-          "leeStatus": "ATRIBUCION — sin lectura independiente extraible"
-        }
-      ],
-      "etching": "sujeto"
-    },
-    {
-      "id": "i-001",
-      "theme": "Sin nadie",
-      "axis": "inner",
-      "feedsProfile": true,
-      "text": "Nadie te ve. No hay nadie en la sala ni a quien le pueda importar lo que hagas. ¿Qué haces?",
-      "intent": "Quita el público. Nada de esto lo hace nadie, ni lo premia nadie.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo que tenga que arreglar, lo arreglo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "self_resolution",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Hay un problema y actua para resolverlo. Confia en su capacidad. NO dice que este satisfecho"
-          },
-          "traits": {
-            "discipline": 2
-          },
-          "resonance": "Confia en su capacidad para resolver. Que pueda resolver problemas NO significa que este satisfecho: puede ser muy resolutiva y tener una enorme necesidad interna."
-        },
-        {
-          "id": "b",
-          "text": "Lo que me pide el cuerpo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "never_needed_completion",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Sigue lo que le pide el cuerpo. No necesita que nadie le diga que hacer"
-          },
-          "traits": {
-            "independence": 3
-          },
-          "resonance": "No necesita que nadie le diga que hacer. Es lo unico de esta pregunta que si es suficiencia."
-        },
-        {
-          "id": "c",
-          "text": "Lo que me salga. Sin pensarlo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "impulsive_act",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Reacciona sin pensar. Es conducta, no dice nada sobre su interior"
-          },
-          "traits": {
-            "impulsiveness": 3
-          },
-          "resonance": "Conducta, no interior. No dice nada sobre lo que necesita."
-        },
-        {
-          "id": "d",
-          "text": "Espero. A ver si el problema se va solo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "passive_waiting",
-            "direction": "none",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Espera y no interviene. No sabemos si es paciencia, confianza, evitacion, miedo o esperanza"
-          },
-          "traits": {
-            "patience": 3
-          },
-          "resonance": "Solo sabemos que espera y no interviene. La evidencia NO autoriza a elegir entre paciencia, confianza, evitacion, miedo y esperanza."
-        },
-        {
-          "id": "e",
-          "text": "Falta algo. Lo noto en el cuerpo aunque no sepa qué es.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "unformulable",
-            "direction": "none",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Hay algo que no consigue expresar. Ni puede nombrarlo",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "attachment": 1
-          },
-          "resonance": "Hay algo que no consigue expresar. No puede nombrarlo. Por si sola no construye nada."
-        },
-        {
-          "id": "f",
-          "text": "Me quedo quieto. Sin público, tampoco hace falta.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "audience_independence",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "No necesita publico ni testigos para hacer esto. No dice que no necesite nada"
-          },
-          "traits": {
-            "independence": 2
-          },
-          "resonance": "No necesita publico para esto. Es independencia ante la mirada ajena, NO suficiencia existencial."
-        }
-      ],
-      "canBless": false,
-      "canBlessReason": "Mide comportamiento sin testigos: resolucion, reaccion, conducta y espera. Su unica opcion con senal interna (e) es unformulable, que es aloneInsufficient. Una evidencia insufficient por si sola NO convierte a toda la pregunta en via de bendicion. Decision de la autora.",
-      "evidenceStatus": "APROBADO — 6 opciones etiquetadas",
-      "note": "Correccion de fondo: cuatro opciones estaban como sufficiency y solo UNA lo es. a) es agencia para resolver, no suficiencia. d) solo dice que espera, sin saber por que. f) es independencia ante el publico, no \"nunca he necesitado que me completen\". canBless PENDIENTE de decision.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "sujeto"
-    },
-    {
-      "id": "i-002",
-      "theme": "Cuando nada falta",
-      "axis": "inner",
-      "feedsProfile": true,
-      "text": "Tienes todo lo que necesitas. No falta nada. ¿Qué haces con eso?",
-      "intent": "La pregunta inversa de \"lo que te falta\". Aquí NO hay necesidad. ¿Qué haces cuando no falta nada?",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Busco a quién ayudar. Si a mí no me falta, algo tendrá que faltarle a otro.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "redirection_to_others",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Su suficiencia se dirige a otros. NO dice que el no necesite completarse: dice que busca donde si falta"
-          },
-          "traits": {
-            "protection": 3
-          },
-          "resonance": "Su capacidad de estar bien se dirige a otros. La frase NO dice que el no necesite completarse."
-        },
-        {
-          "id": "b",
-          "text": "Lo mismo de siempre. Nada ha cambiado.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "complete_present",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Continuidad. Nada ha cambiado y no necesita que cambie"
-          },
-          "traits": {
-            "patience": 2
-          },
-          "resonance": "Nada ha cambiado y no necesita que cambie."
-        },
-        {
-          "id": "c",
-          "text": "Busco un hueco. Algo que hacer que no tenga que ver conmigo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "outside_search",
-            "direction": "outward",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Busca un hueco que no tenga que ver con el. NO es reconocimiento: no quiere que lo reconozcan"
-          },
-          "traits": {
-            "ambition": 2
-          },
-          "resonance": "Busca algo que no tenga que ver con el. No es reconocimiento: nadie le tiene que validar nada."
-        },
-        {
-          "id": "d",
-          "text": "No lo noto. El vacío es pequeño y ya lo conozco.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "minor_acknowledged_emptiness",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Reconoce un vacio minimo y asumido. Es una carencia, aunque la lleve en paz",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "independence": 2
-          },
-          "resonance": "Reconoce un vacio, aunque sea minimo y asumido. Es una carencia, no una plenitud. No se puede afirmar nada concreto sobre ella."
-        },
-        {
-          "id": "e",
-          "text": "Espero un poco. No quiero tocar lo que ya funciona.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "preserve_what_works",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "No toca lo que ya funciona. Precaucion, no necesidad"
-          },
-          "traits": {
-            "patience": 3
-          },
-          "resonance": "No toca lo que ya funciona. Es precaucion."
-        },
-        {
-          "id": "f",
-          "text": "Busco algo que me falte. Solo por ver qué pasa.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "voluntary_limitation",
-            "direction": "outward",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Busca una limitacion a proposito para ver que pasa. No quiere ser admirado: quiere saber si hay mas"
-          },
-          "traits": {
-            "competitiveness": 2
-          },
-          "resonance": "Busca una limitacion a proposito, no porque le falte. Quiere ver si hay algo mas alla."
-        },
-        {
-          "id": "g",
-          "text": "Me quedo con lo que tengo. Lo otro ya vendrá.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "sufficiency",
-            "subtype": "content_with_continuity",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Acepta lo que tiene. Lo que viene ya vendrá"
-          },
-          "traits": {
-            "patience": 2
-          },
-          "resonance": "Acepta lo que tiene y espera. Lo que viene ya vendrá."
-        }
-      ],
-      "canBless": false,
-      "canBlessReason": "La estructura de la pregunta establece un estado de SUFICIENCIA ASUMIDA: el enunciado dice \"tienes todo lo que necesitas, no falta nada\". Su unica evidencia potencialmente interna es d) minor_acknowledged_emptiness, que es amb:true y aloneInsufficient:true. No constituye una via suficiente para una revelacion de necesidad. Decision de la autora: no convertir un vacio minimo reconocido en \"hay una necesidad que la Diosa debe resolver\".",
-      "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
-      "note": "Correcciones: a) no es suficiencia propia sino redireccion a otros. c) no es reconocimiento sino busqueda de algo ajeno a el. d) reconoce un vacio minimo: es inner_search, no sufficiency, y amb:true porque admite mas de una lectura. sufficiency baja de 4/7 a 2/7. canBless PENDIENTE.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "suficiencia"
-    },
-    {
-      "id": "i-003",
-      "theme": "Lo que no encaja",
-      "axis": "inner",
-      "feedsProfile": true,
-      "text": "Hay algo que no encaja. No sabes qué ni por qué, pero el cuerpo te avisa antes que la cabeza. ¿Qué haces con ese aviso?",
-      "intent": "El aviso del cuerpo. Distingue quien ignora el aviso de quien lo escucha, y quien necesita que se lo confirmen.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "Lo escucho. Aunque no lo entienda.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "unformulable",
-            "direction": "none",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Reconoce la senal interna y permanece abierta aunque no la comprenda",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "curiosity": 2
-          },
-          "resonance": "Atiende la senal sin comprenderla. Sabe que hay algo y no lo entiende. Eso es unresolved, no ignorancia."
-        },
-        {
-          "id": "b",
-          "text": "Lo hundo. Si no lo nombro, no existe.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "text": "Me molesta y lo niego al instante.",
           "evidence": {
             "family": "inner_search",
             "subtype": "suppressed",
@@ -2509,410 +241,84 @@
             "unresolved": false,
             "verified": true,
             "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Percibe la senal y la niega deliberadamente. Que la niegue demuestra que existe",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "discipline": 2
-          },
-          "resonance": "Niega deliberadamente una senal que percibe. Que intente hundirlo demuestra que existe."
-        },
-        {
-          "id": "c",
-          "text": "Busco a alguien que sepa lo que es.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "desire_vs_need",
-            "subtype": "validation_needed",
-            "direction": "outward",
-            "unresolved": true,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Necesita que otra persona le ponga NOMBRE a lo que siente",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "empathy": 1
-          },
-          "resonance": "Necesita que otro le ponga nombre a lo que siente. El remedio esta fuera."
-        },
-        {
-          "id": "d",
-          "text": "Espero a que se diga solo. No lo fuerzo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "passive_waiting",
-            "direction": "none",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Espera y no fuerza. No sabemos si es paciencia, confianza, evitacion o miedo"
-          },
-          "traits": {
-            "patience": 3
-          },
-          "resonance": "Espera y no fuerza. La evidencia no autoriza a elegir el motivo."
-        },
-        {
-          "id": "e",
-          "text": "Lo que el cuerpo dice no lo cuestiono. Voy.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "bodily_impulse",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Sigue la senal del cuerpo sin cuestionarla. No es actuar sin pensar: es obedecer al cuerpo"
-          },
-          "traits": {
-            "impulsiveness": 2,
-            "courage": 2
-          },
-          "resonance": "Sigue lo que dice el cuerpo sin cuestionarlo. Es obediencia a la senal, no impulsividad."
-        },
-        {
-          "id": "f",
-          "text": "Que me digan. Mientras no lo diga nadie, no es así.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "desire_vs_need",
-            "subtype": "validation_needed",
-            "direction": "outward",
-            "unresolved": true,
-            "verified": false,
-            "interpretiveAmbiguity": true,
-            "status": "APROBADO",
-            "lee": "Necesita que otra persona le CONFIRME lo que siente. Si nadie lo dice, no es asi",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "attachment": 3
-          },
-          "resonance": "Necesita que otro le confirme lo que siente. Mientras no lo diga nadie, para el no es real."
-        }
-      ],
-      "canBless": false,
-      "canBlessReason": "Si tiene informacion interior, pero ninguna de sus respuestas establece QUE necesidad interna existe ni que una transformacion sea la respuesta que esa persona necesita. Ademas sus dos evidencias internas mas directas (a y b) son aloneInsufficient. Una pregunta puede revelar conflicto interior y aun asi no ser una pregunta de bendicion. Por eso canBless se declara en el dato y no se infiere de las etiquetas. Decision de la autora.",
-      "evidenceStatus": "APROBADO — 6 opciones etiquetadas",
-      "note": "canBless:false con informacion interior. Es el caso que justifica que canBless viva en la pregunta: i-003 revela conflicto interior y aun asi no puede bendecir.",
-      "variantOnVerifiedFalse": {
-        "c": "Busco a alguien que sepa lo que es. verified:false — quiere identificacion externa.",
-        "f": "Que me digan. verified:false — quiere confirmacion externa.",
-        "note": " compartmental. Son fenomenos distintos (identificar vs confirmar) pero comparten familia y subtipo. Si la distincion llegara a tener funcion en la interpretacion, se separan en external_identification / external_confirmation. No se crea un subtipo sin funcion.",
-        "note2": "Este es el caso pendiente de \"verified:false dentro de una pregunta que podria bendecir\". Aqui se resuelve por canBless:false de la PREGUNTA, no por el valor de verified."
-      },
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "conflicto"
-    },
-    {
-      "id": "i-004",
-      "theme": "Dentro de veinte años",
-      "axis": "inner",
-      "feedsProfile": true,
-      "text": "Tienes veinte años por delante. Solo uno puede ser distinto a como has sido hasta ahora. Elige.",
-      "intent": "La pérdida del tiempo. ¿Qué se sacrifica? La respuesta revela qué se considera descartable.",
-      "choices": [
-        {
-          "id": "a",
-          "text": "La paz. Todos esos años de tranquilidad.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "character_only",
-            "subtype": "peace_as_priority",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Su valor mas alto es la tranquilidad. Renuncia a la paz antes que a nada. NO es obtener nada externo"
-          },
-          "traits": {
-            "patience": 2
-          },
-          "resonance": "Su valor mas alto es la tranquilidad. Renuncia a la paz antes que a nada."
+            "lee": "Percibe la señal y la niega."
+          }
         },
         {
           "id": "b",
-          "text": "No lo sé todavía.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "text": "Me duele, pero sé que tiene razón.",
           "evidence": {
-            "family": "character_only",
-            "subtype": "undecided",
+            "family": "inner_search",
+            "subtype": "minor_acknowledged_emptiness",
             "direction": "none",
-            "unresolved": true,
-            "verified": false,
-            "interpretiveAmbiguity": false,
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": true,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Todavia no tiene respuesta. Indeterminacion, no necesidad interna"
-          },
-          "traits": {
-            "curiosity": 2
-          },
-          "resonance": "Todavia no tiene respuesta. Indeterminacion, no necesidad interna."
+            "lee": "Reconoce una carencia aceptada en paz."
+          }
         },
         {
           "id": "c",
-          "text": "A la gente que quiero. Y me duele decirlo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "text": "Me da igual: ya lo sabía.",
           "evidence": {
-            "family": "character_only",
-            "subtype": "duty_for_others",
+            "family": "sufficiency",
+            "subtype": "content_with_continuity",
             "direction": "none",
             "unresolved": false,
-            "verified": false,
+            "verified": true,
             "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
             "status": "APROBADO",
-            "lee": "Sacrifica vinculos por otros. Es deber. NO habla de quien es uno"
-          },
-          "traits": {
-            "attachment": 3
-          },
-          "resonance": "Sacrifica vinculos por otros. Es deber. No habla de quien es uno.",
-          "resonanceChanged": "Antes decia: \"Sacrifica vinculos por otros. Es deber. NO habla de quien es uno: no es identidad\""
+            "lee": "Ya lo sabe y no lo rechaza."
+          }
         },
         {
           "id": "d",
-          "text": "Nada. Ya soy quien quiero ser.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "text": "Me pregunto por qué me lo han dicho ahora.",
           "evidence": {
-            "family": "character_only",
-            "subtype": "identity_continuity",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Responde a una situacion de cambio diciendo que no quiere abandonar quien ya es. NO es \"no me falta nada\""
-          },
-          "traits": {
-            "independence": 3
-          },
-          "resonance": "No quiere abandonar quien ya es. No es \"no me falta nada\": es no querer cambiar."
-        },
-        {
-          "id": "e",
-          "text": "A alguien que está ahí al lado. Ya lo sé.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "located_identity",
-            "direction": "inward",
-            "unresolved": true,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "Sacrifica a alguien porque necesita ser asi. Decision sobre quien es, y lo sabe"
-          },
-          "traits": {
-            "attachment": 2
-          },
-          "resonance": "Sacrifica a alguien porque necesita ser asi. Es una decision sobre quien es, y lo sabe."
-        },
-        {
-          "id": "f",
-          "text": "A mi libertad de hacerlo de otra manera. Ya lo sé.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "desire_vs_need",
-            "subtype": "inward_declared",
-            "direction": "inward",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "\"Ya lo se\": ya reconoce que necesita sacrificar su libertad. Decision tomada, no busqueda"
-          },
-          "traits": {
-            "impulsiveness": 2,
-            "independence": 1
-          },
-          "resonance": "Ya lo sabe y ya lo ha decidido. No esta buscando entender, esta declarando lo que esta dispuesto a sacrificar."
-        },
-        {
-          "id": "g",
-          "text": "No lo sé. Pero quiero saberlo ya.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "seeks_understanding",
-            "direction": "none",
+            "family": "external_desire",
+            "subtype": "validation_needed",
+            "direction": "outward",
             "unresolved": true,
             "verified": false,
             "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Quiere SABER, no transformarse. Impulso hacia el conocimiento, no necesidad interna"
-          },
-          "traits": {
-            "ambition": 2
-          },
-          "resonance": "Quiere saber. No necesita transformarse. Es un impulso hacia el conocimiento, no una necesidad interna."
+            "lee": "Quiere que entiendan su motivo."
+          }
         }
-      ],
-      "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
-      "note": "Las siete revisadas. Ninguna toca sufficiency: a) jerarquiza valores, b) no tiene respuesta, d) no quiere cambiar, g) quiere saber. canBless PENDIENTE de decision.",
+      ]
+    },
+    {
+      "id": "q6",
+      "theme": "El deseo exacto",
+      "axis": "blessing",
+      "feedsProfile": true,
       "canBless": true,
-      "canBlessReason": "La pregunta, COMO CONJUNTO, permite revelar una relacion entre cambio, identidad y algo que la persona reconoce internamente que esta dispuesta a abandonar o transformar. NO es porque inward_declared implique bendicion: esa regla quedo cerrada. f) es el caso mas fuerte: reconoce una eleccion interna, sabe que esta dispuesto a sacrificar, y no espera que nadie externo le diga que significa. Elegir f NO significa ser Diubak automaticamente: la evidencia entra al innerProfile y posteriormente la Diosa interpreta el conjunto. Decision de la autora.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "sujeto"
-    },
-    {
-      "id": "i-005",
-      "theme": "Alguien que te importa",
-      "axis": "inner",
-      "feedsProfile": true,
-      "text": "Alguien a quien te importa mucho te está mirando. No dice nada. Solo te mira. ¿Qué haces?",
-      "intent": "El espejo. ¿Se puede estar mirado sin necesitar que el espejo confirme nada?",
+      "text": "Te dan un deseo, pero solo uno y exacto. ¿Qué pides?",
       "choices": [
         {
           "id": "a",
-          "text": "Le pregunto qué le parezco.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "text": "Riquezas.",
           "evidence": {
             "family": "external_desire",
-            "subtype": "validation_needed",
+            "subtype": "recognition",
             "direction": "outward",
             "unresolved": false,
             "verified": false,
             "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Pide el veredicto de otra persona sobre si mismo. El objeto esta FUERA",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "attachment": 3
-          },
-          "resonance": "Pide el veredicto de otro sobre si mismo. El objeto esta fuera."
+            "lee": "Busca fuera lo que le falta."
+          }
         },
         {
           "id": "b",
-          "text": "Sigo con lo mío. No necesito su mirada para nada.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "audience_independence",
-            "direction": "none",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "La mirada ajena no le hace falta para lo suyo. NO es suficiencia"
-          },
-          "traits": {
-            "independence": 2
-          },
-          "resonance": "La mirada ajena no le hace falta. No dice que este completo: dice que no depende de ella."
-        },
-        {
-          "id": "c",
-          "text": "Intento ser el que creo que quiere ver.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "text": "Fama.",
           "evidence": {
             "family": "external_desire",
             "subtype": "transformation_status",
@@ -2920,359 +326,259 @@
             "unresolved": false,
             "verified": false,
             "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Adapta su conducta a la imagen que cree que el otro quiere ver. Sabe cual es: no hay nada que resolver",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "leadership": 2
-          },
-          "resonance": "Se convierte en la imagen que cree que el otro quiere ver. Sabe cual es; no hay nada que resolver."
+            "lee": "Quiere ser admirado."
+          }
+        },
+        {
+          "id": "c",
+          "text": "Sabiduría.",
+          "evidence": {
+            "family": "desire_vs_need",
+            "subtype": "seeks_understanding",
+            "direction": "outward",
+            "unresolved": true,
+            "verified": false,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
+            "status": "APROBADO",
+            "lee": "Quiere saber, no transformarse."
+          }
         },
         {
           "id": "d",
-          "text": "Le digo lo que estoy pensando. Si no lo digo, se lo va a inventar.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "text": "Nada.",
+          "evidence": {
+            "family": "sufficiency",
+            "subtype": "complete_present",
+            "direction": "none",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "No falta nada."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q7",
+      "theme": "Quieres o necesitas",
+      "axis": "blessing",
+      "feedsProfile": true,
+      "canBless": true,
+      "text": "Entre lo que quieres y lo que necesitas, solo puedes tener una cosa. ¿Cuál?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Lo que quiero.",
           "evidence": {
             "family": "external_desire",
-            "subtype": "validation_needed",
+            "subtype": "audience_independence",
             "direction": "outward",
             "unresolved": false,
             "verified": false,
             "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Quiere controlar la INTERPRETACION que el otro hara de el. A diferencia de a), no pide veredicto: lo evita",
-            "aloneInsufficient": true
-          },
-          "traits": {
-            "empathy": 3
-          },
-          "resonance": "Quiere controlar como le interpretan. No pide el veredicto: intenta evitar el equivocado."
+            "lee": "Se queda con el deseo."
+          }
         },
         {
-          "id": "e",
-          "text": "Me callo. Lo que vea, que lo vea.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "id": "b",
+          "text": "Lo que necesito.",
+          "evidence": {
+            "family": "desire_vs_need",
+            "subtype": "inward_declared",
+            "direction": "inward",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "Reconoce que necesita algo interno."
+          }
+        },
+        {
+          "id": "c",
+          "text": "No sé cuáles son cada una.",
+          "evidence": {
+            "family": "inner_search",
+            "subtype": "unformulable",
+            "direction": "none",
+            "unresolved": true,
+            "verified": true,
+            "interpretiveAmbiguity": true,
+            "aloneInsufficient": true,
+            "status": "APROBADO",
+            "lee": "No puede nombrar la brecha."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q8",
+      "theme": "La ventaja pequeña",
+      "axis": "inner",
+      "feedsProfile": true,
+      "canBless": false,
+      "text": "Puedes ganar ventaja con una mentira pequeña que nadie sospecharía. ¿Qué haces?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Miento y gano.",
+          "evidence": {
+            "family": "character_only",
+            "subtype": "impulsive_act",
+            "direction": "none",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "Elige el beneficio sin pensar."
+          }
+        },
+        {
+          "id": "b",
+          "text": "Digo la verdad.",
+          "evidence": {
+            "family": "character_only",
+            "subtype": "self_resolution",
+            "direction": "none",
+            "unresolved": false,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": false,
+            "status": "APROBADO",
+            "lee": "Prefiere el costo a mentir."
+          }
+        },
+        {
+          "id": "c",
+          "text": "No digo nada.",
           "evidence": {
             "family": "character_only",
             "subtype": "passive_waiting",
             "direction": "none",
-            "unresolved": false,
+            "unresolved": true,
             "verified": false,
             "interpretiveAmbiguity": true,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "No interviene en la mirada ajena. No sabemos si es aceptacion, resignacion o indiferencia"
-          },
-          "traits": {
-            "patience": 2
-          },
-          "resonance": "No interviene. No sabemos si es aceptacion, resignacion o indiferencia."
+            "lee": "No interviene."
+          }
         },
         {
-          "id": "f",
-          "text": "Me da igual lo que vea. Ya lo sé yo.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
+          "id": "d",
+          "text": "Miento solo si vale mucho.",
           "evidence": {
-            "family": "external_desire",
-            "subtype": "audience_independence",
-            "direction": "none",
-            "unresolved": false,
-            "verified": false,
-            "interpretiveAmbiguity": false,
-            "status": "APROBADO",
-            "lee": "El juicio propio sustituye al externo. \"Ya lo se yo\". b) y f) comparten subtipo a proposito"
-          },
-          "traits": {
-            "independence": 3
-          },
-          "resonance": "El juicio propio sustituye al externo. Ya lo sabe el, no hace falta que se lo digan."
-        },
-        {
-          "id": "g",
-          "text": "Que mire. Es lo único que quiero de él.",
-          "legacyAffinity": {
-            "ederian": 0,
-            "bastia": 0,
-            "tralan": 0,
-            "xorian": 0,
-            "tradia": 0,
-            "helia": 0
-          },
-          "traits": {
-            "attachment": 3
-          },
-          "resonance": "Quiere que le miren. No pide opinion ni aprobacion, y no habla de nada interno. Querer atencion no es automaticamente una carencia: puede ser un deseo relacional.",
-          "evidence": {
-            "family": "external_desire",
-            "subtype": "attention",
+            "family": "character_only",
+            "subtype": "validation_needed",
             "direction": "outward",
             "unresolved": false,
-            "verified": false,
+            "verified": true,
             "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Quiere que esa persona le preste atencion. El objeto del deseo es externo y no es un veredicto",
-            "aloneInsufficient": true
+            "lee": "Calcula el umbral."
           }
         }
-      ],
-      "canBless": false,
-      "canBlessReason": "Habla de algo emocionalmente profundo — la mirada de alguien que te importa — pero el objeto de TODAS las respuestas es externo. a) quiere saber que piensa (validacion externa). b) y f) son independencia respecto a esa mirada. c) adapta quien muestra a la expectativa del otro, pero no revela que necesita internamente. d) controla como sera interpretado. e) deja que el otro mire. g) desea la atencion del otro. Ninguna opcion tiene contenido interno, y todas las que tienen capacidad de bendecir son aloneInsufficient. Decision de la autora.",
-      "evidenceStatus": "APROBADO — 7 opciones etiquetadas",
-      "note": "Las siete revisadas. sufficiency baja de 4/7 a 0/7. external_desire es la familia dominante de esta pregunta, que es coherente con su enunciado: alguien te mira y tu haces algo con esa mirada. canBless PENDIENTE de decision.",
-      "frozen": true,
-      "frozenNote": "CONGELADA por la autora. No modificar textos, opciones ni etiquetas. canBless es decision de la pregunta y no se deduce del subtipo.",
-      "etching": "espejo"
+      ]
     }
   ],
   "todo": [
-    "TODO: recalcular coverageReport tras esta calibracion.",
-    "TODO: decidir el numero final de preguntas (P-004 sigue abierta).",
+    "TODO: recalcular coverageReport tras este rediseno.",
     "TODO: registrar Tussem, Anika Griffin, Gil, Benny, Darya y Rayden como casos canonicos en data/.",
     "TODO: definir que hace el motor con el concepto Between. NO inventar formula."
   ],
+  "selection": {
+    "decision": "Banco rediseñado el 7 de octubre de 2026. 8 preguntas nuevas, sin nombres de reinos ni de personajes, escenas gancho. canBless lo declara la pregunta.",
+    "perVisitor": 8,
+    "slots": {
+      "kingdom": {
+        "count": 4,
+        "pool": [
+          "q1",
+          "q2",
+          "q3",
+          "q4"
+        ],
+        "role": "Afinidad con los legados: deduce el reino."
+      },
+      "blessing": {
+        "count": 3,
+        "pool": [
+          "q5",
+          "q6",
+          "q7"
+        ],
+        "role": "Deseo vs necesidad: decide Manskling o Diubak."
+      },
+      "character": {
+        "count": 1,
+        "pool": [
+          "q8"
+        ],
+        "role": "Rasgo visible. canBless:false."
+      }
+    },
+    "frozenReplaced": "El banco viejo (b-001..b-005, l-001..l-010, i-001..i-005) y todas sus frozenNote quedan sustituidos."
+  },
   "profileLayer": {
     "note": "El perfil interior se construye SOLO con las preguntas marcadas feedsProfile:true.",
-    "originalBlessingQuestions": [
-      "b-001",
-      "b-002",
-      "b-003",
-      "b-004",
-      "b-005"
+    "blessingQuestions": [
+      "q5",
+      "q6",
+      "q7"
     ],
-    "newProfileQuestions": [
-      "i-001",
-      "i-002",
-      "i-003",
-      "i-004",
-      "i-005"
+    "characterQuestions": [
+      "q8"
     ],
     "normalization": "Cada pregunta aporta 1/N. NO se rellenan huecos repitiendo evidencia.",
     "caution": "El duelo y las preguntas de reino NO son perfil. Ver docs/motor-design.md.",
-    "notImplemented": "NO hay ninguna regla de naturaleza escrita. Las etiquetas son PROVISIONALES y estan sin validar.",
-    "etiquetasAprobadas": [
-      "b-002",
-      "b-003",
-      "b-004",
-      "b-005"
-    ],
-    "pendientes": [
-      "b-001"
-    ],
-    "puntosUnicosDeFallo": {
-      "located_identity": [
-        "b-003/c",
-        "i-004/e"
-      ],
-      "note": "La etiqueta tiene DOS fuentes, no una. Ambas comparten significado: \"la identidad es el terreno de la decision\". Esto reduce el punto unico de fallo que aceptaste antes, pero cambia la decision: ya no es b-003/c sola. Las etiquetas de i-004 siguen PROVISIONALES salvo c) y e)."
-    },
-    "restriccionesPorPregunta": {
-      "b-004": "Ninguna opcion produce bendicion por querer poder. Solo c) revela necesidad, y por fallo del remedio.",
-      "b-003": "c) y d) aceptan lo mismo pero la necesidad es distinta: quien soy vs que me lo digan.",
-      "b-002": "Ocho estados distintos. Ninguna nombra naturaleza.",
-      "b-005": "Sacrificar NO es necesitar. Tres de cuatro opciones son character_only. La cuarta es external_desire. Esta pregunta no puede producir bendicion de ninguna forma."
+    "noCharacterNames": "Las notas del banco NO pueden nombrar personajes canonicos (Anika, Darya, Gil, Benny, Rayden, Alden, Lucius, Silas, Halik, Tarik, Deron, Ross).",
+    "tagRule": {
+      "test": "¿La frase demuestra exactamente el significado del subtipo, o estamos agregando una interpretacion?",
+      "ifNot": "Cambiar la etiqueta. No crear un subtipo para forzar que encaje."
     },
     "canBlessRule": {
       "principle": "canBless lo declara la PREGUNTA, no la etiqueta. Ningun subtype implica poder de bendecir. El motor no puede deducirlo: tiene que leerlo.",
       "decidedByAuthor": [
-        "b-001",
-        "b-002",
-        "b-003",
-        "b-004",
-        "b-005"
+        "q5",
+        "q6",
+        "q7"
       ],
-      "pending": [
-        "i-001",
-        "i-002",
-        "i-003",
-        "i-004",
-        "i-005"
-      ],
-      "aloneInsufficient": [
-        "unlocated",
-        "unidentified",
-        "unformulable",
-        "validation_needed",
-        "anticipatory_emptiness"
-      ],
-      "note": "aloneInsufficient marca subtipos que no bastan solos aunque su pregunta pueda bendecir. Ej: b-002/f es inward_declared y la pregunta SÍ puede bendecir, pero esa opcion sola no basta.",
-      "subtypes": {
-        "needs_to_be_needed": "Quiero sentir que otros me necesitan. Objeto externo del deseo, NO necesidad interna.",
-        "recognition": "Quiero que reconozcan mi valor o lo que hago.",
-        "transformation_status": "Quiero convertirme en alguien mas admirado."
-      },
-      "caseWithoutBlessing": "i-003: revela conflicto interior y tiene canBless:false. Justifica que canBless se lea del dato.",
-      "verifiedFalseInsideBlessable": {
-        "status": "ABIERTO",
-        "case": "i-003/c e i-003/f son verified:false dentro de una pregunta de perfil.",
-        "resolvedBy": "No. Se resolvio por canBless:false de la PREGUNTA, no por el valor de verified.",
-        "note": "verified:false NO es todavia impedimento ni no impedimento para bendecir. Sigue abierto."
-      }
-    },
-    "noCharacterNames": "Las notas del banco NO pueden nombrar personajes canonicos (Anika, Darya, Gil, Benny, Rayden, Alden, Lucius, Silas, Halik, Tarik, Deron, Ross). El visitante no se compara con ellos y una nota asi puede contaminar la revelacion. Las asociaciones son solo de diseno.",
-    "tagRule": {
-      "test": "¿La frase demuestra exactamente el significado del subtipo, o estamos agregando una interpretacion?",
-      "ifNot": "Cambiar la etiqueta. No crear un subtipo para forzar que encaje.",
-      "warning": "No crear subtipos por frase distinta sin preguntarse si la dimension merece conservarse en el perfil.",
-      "applied": [
-        "i-001",
-        "i-002",
-        "i-003",
-        "i-004",
-        "i-005"
-      ]
-    },
-    "correccionSufficiency": {
-      "before": "i-001 tenia 4 de 6 opciones en sufficiency.",
-      "after": "i-001 tiene 1 de 6 en sufficiency. i-002 tiene 2 de 7. Antes ambas tenia 4.",
-      "reason": "sufficiency se estaba usando para resolver, para esperar y para no depender del publico. Nada de eso es suficiencia."
-    },
-    "newSubtypes": {
-      "self_resolution": "Confia en su capacidad para resolver. NO es satisfaccion.",
-      "passive_waiting": "Espera y no interviene. Sin saber por que: amb:true.",
-      "audience_independence": "No necesita publico para su conducta. NO es suficiencia existencial.",
-      "redirection_to_others": "Su suficiencia se dirige a otros, no a si mismo.",
-      "outside_search": "Busca algo que no tenga que ver con el. NO es reconocimiento.",
-      "minor_acknowledged_emptiness": "Un vacio minimo, asumido y en paz. amb:true. aloneInsufficient.",
-      "preserve_what_works": "No toca lo que ya funciona. Precaucion.",
-      "voluntary_limitation": "Busca una limitacion a proposito, no porque le falte.",
-      "content_with_continuity": "Acepta lo que tiene. Lo que viene ya vendrá.",
-      "warning": "Subtipos nuevos que existen porque una frase los necesito. Si una dimension no aporta nada a la interpretacion de la Diosa, se puede simplificar despues.",
-      "suppressed": "Percibe una senal interna y la niega deliberadamente. Sigue siendo inner_search porque la conducta solo tiene sentido si hay algo que se intenta hundir.",
-      "bodily_impulse": "Sigue la senal del cuerpo sin cuestionarla. Distinto de impulsive_act (actuar sin pensar).",
-      "peace_as_priority": "Su valor mas alto es la tranquilidad. Jerarquizacion de valores, no suficiencia.",
-      "undecided": "No tiene respuesta todavia. Indeterminacion. amb:false porque poco informativa no significa ambigua.",
-      "identity_continuity": "Responde a una situacion de cambio diciendo que no quiere abandonar quien es. No es \"no me falta nada\".",
-      "seeks_understanding": "Quiere SABER, no transformarse. No debe convertirse en \"hay algo dentro que necesita transformacion\".",
-      "validation_needed": "Quiere que otra persona le diga que vale, le ponga nombre a lo que siente, le confirme, o le diga como le ve. Todo el objeto del deseo es externo. Aplicado por primera vez en b-003/d.",
-      "attention": "Quiere que le miren. NO pide veredicto (validation_needed), NO pide que reconozcan su valor (recognition), NO habla de nada interno. SUBTIPO PROVISIONAL: es el unico sitio del banco donde aparece. Querer atencion NO es automaticamente una carencia: puede ser un deseo relacional. Si la distincion no llega a tener funcion en la interpretacion, se simplifica."
-    },
-    "subtypePendingDecision": {
-      "status": "RESUELTO",
-      "question": "¿validacion y atencion son categorias distintas?",
-      "answer": "SI. Se creo external_desire/attention como subtipo provisional reutilizable, no como dimension nueva.",
-      "note": "external_desire queda con: recognition, validation_needed, transformation_status, needs_to_be_needed, attention.",
-      "caution": "attention aparece UNA vez en todo el banco. Si no llega a tener funcion en la interpretacion de la Diosa, se simplifica."
-    },
-    "final": {
-      "closedOn": "2026-10-05",
-      "blessingCapable": [
-        "b-002",
-        "b-003",
-        "b-004",
-        "i-004"
-      ],
-      "notBlessingCapable": [
-        "b-001",
-        "b-005",
-        "i-001",
-        "i-002",
-        "i-003",
-        "i-005"
-      ],
-      "ratio": "4 de 10",
-      "principle": "canBless lo declara la PREGUNTA. Ningun subtipo implica capacidad de bendecir. El motor lo lee del dato, no lo deduce.",
       "hardRules": [
         "Ningun subtype implica por si mismo capacidad de bendecir.",
-        "verified:false NO es impedimento ni no impedimento. Sigue ABIERTO.",
+        "verified:false NO es impedimento ni no impedimento.",
         "interpretiveAmbiguity:true no invalida la evidencia: gobierna que puede afirmar la revelacion, no puntua.",
-        "canBless pertenece a la pregunta, no a la opcion.",
-        "Sacrificar no es necesitar. Querer poder no es necesitar transformarse.",
-        "No ajustar pesos ni scores para compensar frecuencias."
-      ],
-      "test": "¿La frase demuestra exactamente el significado del subtipo, o estamos agregando una interpretacion?",
-      "principleNoScores": "NO hay score de bending. NO hay cantidad de evidencias. NO hay umbral. El perfil se compone de evidencia cualitativa y la decision de naturaleza sigue SIN ESCRIBIR.",
-      "nextStep": "Disenar la regla de naturaleza. Es lo unico que queda antes de escribir el motor.",
-      "note": "La semantica termino antes que las proporciones. Las etiquetas ya no se tocan por cuadrar numeros."
-    },
-    "frozen": {
-      "frozenOn": "2026-10-05",
-      "questions": [
-        {
-          "id": "b-001",
-          "canBless": false
-        },
-        {
-          "id": "b-002",
-          "canBless": true
-        },
-        {
-          "id": "b-003",
-          "canBless": true
-        },
-        {
-          "id": "b-004",
-          "canBless": true
-        },
-        {
-          "id": "b-005",
-          "canBless": false
-        },
-        {
-          "id": "i-001",
-          "canBless": false
-        },
-        {
-          "id": "i-002",
-          "canBless": false
-        },
-        {
-          "id": "i-003",
-          "canBless": false
-        },
-        {
-          "id": "i-004",
-          "canBless": true
-        },
-        {
-          "id": "i-005",
-          "canBless": false
-        }
-      ],
-      "canBless": {
-        "b-001": false,
-        "b-002": true,
-        "b-003": true,
-        "b-004": true,
-        "b-005": false,
-        "i-001": false,
-        "i-002": false,
-        "i-003": false,
-        "i-004": true,
-        "i-005": false
-      },
-      "rule": "canBless pertenece a la PREGUNTA. Ningun subtipo implica capacidad de bendecir. El motor lo lee del dato, no lo deduce.",
-      "hardRules": [
-        "Ningun subtype implica por si mismo capacidad de bendecir.",
-        "verified:false NO es impedimento ni no impedimento. Sigue ABIERTO.",
-        "interpretiveAmbiguity:true no invalida la evidencia: gobierna que puede afirmar la revelacion. No puntua.",
         "aloneInsufficient debe respetarse.",
         "canBless pertenece a la pregunta, no a la opcion.",
         "Sacrificar no es necesitar. Querer poder no es necesitar transformarse.",
         "No ajustar pesos ni scores para compensar frecuencias.",
         "No crear mas preguntas ni subtipos por anticipacion."
+      ]
+    },
+    "final": {
+      "closedOn": "2026-10-07",
+      "blessingCapable": [
+        "q5",
+        "q6",
+        "q7"
       ],
-      "openIssue": "Caso hibrido SIN resolver: deseo externo (tipo Benny) combinado con una sola evidencia de direccion interna (tipo Darya). Queda documentado como cuestion de interpretacion del perfil. No se anade pregunta para taparlo. Ver docs/inner-profile-cases.md."
+      "notBlessingCapable": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q8"
+      ],
+      "ratio": "3 de 8",
+      "principle": "canBless lo declara la PREGUNTA. Ningun subtipo implica capacidad de bendecir.",
+      "nextStep": "Disenar la regla de naturaleza. Es lo unico que queda antes de escribir el motor."
     }
   }
 }

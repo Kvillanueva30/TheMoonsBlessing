@@ -10,14 +10,13 @@ export const EXPERIENCE_NAME = 'La bendición de la Diosa Luna';
 /**
  * Frase principal del landing.
  *
- * Continúa la del título: "La bendición de la Diosa Luna / Puede ser el mayor
- * de los regalos… o el principio de tu condena." Así ambas líneas se leen
- * como una sola frase.
+ * Acompaña al título: "La bendición de la Diosa Luna / Descubre tu lugar en Madar,
+ * bajo la mirada de la Diosa." Así ambas líneas se leen como una sola frase.
  */
-export const EXPERIENCE_TAGLINE = 'Puede ser el mayor de los regalos… o el principio de tu condena.';
+export const EXPERIENCE_TAGLINE = 'Descubre tu lugar en Madar, bajo la mirada de la Diosa.';
 
 /** Texto del boton que entra en la experiencia. */
-export const CTA_LABEL = 'Comenzar';
+export const CTA_LABEL = 'Descubre tu verdad';
 
 /** Idiomas disponibles en los datos de lore. */
 export type Language = 'en' | 'es';
