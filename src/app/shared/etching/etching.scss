@@ -10,35 +10,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
-}
-
-/* Grosores identicos a los de la luna para que todo se vea del mismo peso. */
-.limb {
-  fill: none;
-  stroke: rgba(233, 224, 203, 0.5);
-  stroke-width: 0.8;
-  stroke-linecap: round;
-}
-
-.ground {
-  fill: none;
-  stroke: rgba(240, 233, 216, 0.62);
-  stroke-width: 0.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.faint {
-  fill: none;
-  stroke: rgba(214, 200, 172, 0.24);
-  stroke-width: 0.55;
-  stroke-linecap: round;
-}
-
-.hatch-line {
-  stroke: rgba(214, 200, 172, 0.24);
-  stroke-width: 0.5;
+  object-fit: contain;
 }
 
 /* Aparición lenta: entra como si la luz cayera sobre el dibujo. */

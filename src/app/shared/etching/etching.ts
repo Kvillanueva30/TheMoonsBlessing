@@ -27,7 +27,15 @@ export type EtchingTheme =
   | 'proyeccion'
   | 'espejo'
   | 'sujeto'
-  | 'proposito';
+  | 'proposito'
+  | 'barca'
+  | 'extranjero'
+  | 'juicio'
+  | 'camara'
+  | 'verdad'
+  | 'deseo'
+  | 'quieres-o-necesitas'
+  | 'ventaja';
 
 @Component({
   selector: 'app-etching',

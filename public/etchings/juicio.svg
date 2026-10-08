@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140">
+  <defs>
+    <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="4" stroke="#d4af37" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+    <rect width="200" height="140" fill="#0a0c14"/>
+    <line x1="100" y1="24" x2="100" y2="104" stroke="#f3d28c" stroke-width="1.6"/>
+    <path d="M84 104 L 116 104" stroke="#f3d28c" stroke-width="1.6"/>
+    <path d="M84 24 L 116 24" stroke="#d4af37" stroke-width="1.4"/>
+    <path d="M84 24 L 70 56 L 98 56 Z" fill="none" stroke="#f3d28c" stroke-width="1.2"/>
+    <path d="M116 24 L 102 56 L 130 56 Z" fill="none" stroke="#f3d28c" stroke-width="1.2"/>
+    <line x1="70" y1="56" x2="98" y2="56" stroke="#f3d28c" stroke-width="1.2"/>
+    <line x1="102" y1="56" x2="130" y2="56" stroke="#f3d28c" stroke-width="1.2"/>
+    <rect y="116" width="200" height="24" fill="url(#hatch)" opacity="0.4"/>
+  
+</svg>

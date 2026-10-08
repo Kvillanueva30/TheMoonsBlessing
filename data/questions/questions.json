@@ -108,7 +108,7 @@
           }
         }
       ],
-      "etching": "proyeccion"
+      "etching": "barca"
     },
     {
       "id": "q2",
@@ -147,7 +147,7 @@
           }
         }
       ],
-      "etching": "pertenencia"
+      "etching": "extranjero"
     },
     {
       "id": "q3",
@@ -186,7 +186,7 @@
           }
         }
       ],
-      "etching": "conflicto"
+      "etching": "juicio"
     },
     {
       "id": "q4",
@@ -225,7 +225,7 @@
           }
         }
       ],
-      "etching": "identidad"
+      "etching": "camara"
     },
     {
       "id": "q5",
@@ -296,7 +296,7 @@
           }
         }
       ],
-      "etching": "espejo"
+      "etching": "verdad"
     },
     {
       "id": "q6",
@@ -367,7 +367,7 @@
           }
         }
       ],
-      "etching": "poder"
+      "etching": "deseo"
     },
     {
       "id": "q7",
@@ -423,7 +423,7 @@
           }
         }
       ],
-      "etching": "sabiduria"
+      "etching": "quieres-o-necesitas"
     },
     {
       "id": "q8",
@@ -494,7 +494,7 @@
           }
         }
       ],
-      "etching": "miedo"
+      "etching": "ventaja"
     }
   ],
   "todo": [
