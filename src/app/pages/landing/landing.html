@@ -1,16 +1,53 @@
-<main class="landing">
+﻿<main class="landing">
   <app-sky />
 
-  <section class="stage">
-    <!-- Elemento dominante de la portada: la luna, con la fase del día real -->
-    <app-moon [phase]="today" />
+  <section class="hero">
+    <app-moon [phase]="today" class="hero-moon" />
 
-    <h1 class="title">{{ name }}</h1>
-    <p class="tagline">{{ tagline }}</p>
+    <h1 class="headline">¿Qué lugar ocupas en Madar?</h1>
+    <p class="subheadline">La Diosa Luna observa cada alma.<br />Descubre el destino que te espera en menos de dos minutos.</p>
 
-    <div class="cta-row">
-      <a class="btn" routerLink="/birth-date">{{ cta }}</a>
+    <ul class="trust">
+      <li><span class="trust-ico">✨</span> Resultado único</li>
+      <li><span class="trust-ico">📖</span> Basado en el universo de Between</li>
+      <li><span class="trust-ico">⏱</span> Menos de 2 minutos</li>
+    </ul>
+
+    <a class="btn" routerLink="/birth-date">Descubrir mi destino</a>
+  </section>
+
+  <section class="paths">
+    <h2 class="section-title">Las Sendas de Madar</h2>
+    <div class="paths-grid">
+      <article class="path-card">
+        <div class="path-ico">⚔️</div>
+        <h3>Guerrero</h3>
+        <p>Forja tu destino con cada batalla.</p>
+      </article>
+      <article class="path-card">
+        <div class="path-ico">🌙</div>
+        <h3>Vidente</h3>
+        <p>Ve lo que los ojos no pueden.</p>
+      </article>
+      <article class="path-card">
+        <div class="path-ico">📚</div>
+        <h3>Erudito</h3>
+        <p>Conocimiento que decide el destino.</p>
+      </article>
+      <article class="path-card">
+        <div class="path-ico">👑</div>
+        <h3>Gobernante</h3>
+        <p>Tu reino te llama por su nombre.</p>
+      </article>
     </div>
   </section>
 
+  <section class="reveal">
+    <h2 class="section-title">Solo la Diosa conoce tu verdad</h2>
+    <div class="mockup">
+      <p class="mockup-label">Has sido elegido como</p>
+      <p class="mockup-title">Vidente de la Luna</p>
+      <p class="mockup-sub">Madar te observa.</p>
+    </div>
+  </section>
 </main>
