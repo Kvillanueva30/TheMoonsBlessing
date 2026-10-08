@@ -55,24 +55,20 @@
         </article>
       }
 
-      <!-- COMPARTIR. La tarjeta de 1200x630 vive fuera de pantalla: existe
+      <!-- COMPARTIR. La tarjeta vertical vive fuera de pantalla: existe
            para poder capturarse, no para que el visitante la lea aqui. -->
       @if (shareData(); as share) {
         <app-share-card #shareCardEl [data]="share" />
       }
 
       <section class="share">
-        <p class="share-label">Comparte tu resultado</p>
+        <p class="share-label">Muestra tu naturaleza</p>
 
         <div class="share-actions">
           <button type="button" class="share-primary" (click)="share()" [disabled]="sharing()">
-            {{ sharing() ? 'Preparando imagen...' : 'Compartir resultado' }}
+            {{ sharing() ? 'Preparando imagen...' : 'Compartir' }}
           </button>
         </div>
-
-        @if (shareNote(); as note) {
-          <p class="share-note" role="status">{{ note }}</p>
-        }
       </section>
 
       <button type="button" class="ghost" (click)="restart()">Volver al principio</button>

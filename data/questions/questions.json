@@ -237,7 +237,7 @@
       "choices": [
         {
           "id": "a",
-          "text": "Me molesta y lo niego al instante.",
+          "text": "Me enojo y lo niego al instante.",
           "evidence": {
             "family": "inner_search",
             "subtype": "suppressed",
@@ -502,12 +502,12 @@
       "axis": "blessing",
       "feedsProfile": true,
       "canBless": true,
-      "text": "Te ofrecen dejar de ser quien eres a cambio de ser alguien a quien todavía no conoces. ¿Qué haces?",
-      "canBlessReason": "Pregunta de identidad. La opcion a) es la unica que dice que lo insuficiente es QUIEN ES, y solo se demuestra tras haber probado ser otro: por eso located_identity. Decision de la autora.",
+      "text": "Un desconocido te ofrece tu vida ideal. ¿Qué haces?",
+      "canBlessReason": "Pregunta de identidad. a) es la unica que dice que lo insuficiente es QUIEN ES, y solo se demuestra si se probo ser otro y no basto: por eso located_identity. Decision de la autora.",
       "choices": [
         {
           "id": "a",
-          "text": "Lo tomo. Y en unos meses descubro que el que era tampoco me bastaba.",
+          "text": "Lo acepto sin pensarlo.",
           "evidence": {
             "family": "inner_search",
             "subtype": "located_identity",
@@ -522,22 +522,22 @@
         },
         {
           "id": "b",
-          "text": "Lo tomo. Y me gusta que me mire(n) como a alguien nuevo.",
+          "text": "Lo acepto pero con condiciones.",
           "evidence": {
-            "family": "external_desire",
-            "subtype": "recognition",
-            "direction": "outward",
-            "unresolved": false,
+            "family": "character_only",
+            "subtype": "passive_waiting",
+            "direction": "none",
+            "unresolved": true,
             "verified": true,
             "interpretiveAmbiguity": false,
             "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Quiere ser visto de otra forma. El objeto del deseo es externo"
+            "lee": "Negocia antes de decidir. No dice nada de su interior"
           }
         },
         {
           "id": "c",
-          "text": "No. Prefiero seguir siendo quien soy.",
+          "text": "Lo rechazo, prefiero mi vida como está.",
           "evidence": {
             "family": "sufficiency",
             "subtype": "complete_present",
@@ -552,17 +552,17 @@
         },
         {
           "id": "d",
-          "text": "No lo sé. Me da igual quién sea yo.",
+          "text": "Me da igual su oferta.",
           "evidence": {
             "family": "character_only",
-            "subtype": "passive_waiting",
+            "subtype": "impulsive_act",
             "direction": "none",
-            "unresolved": true,
+            "unresolved": false,
             "verified": true,
             "interpretiveAmbiguity": false,
             "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "No se posiciona. No dice nada sobre quien es"
+            "lee": "Conducta, no interior. Acepta o rechaza sin decir nada de quien es"
           }
         }
       ],
@@ -574,12 +574,12 @@
       "axis": "blessing",
       "feedsProfile": true,
       "canBless": true,
-      "text": "Te ofrecen la solución a lo que te pasa. La tomas. ¿Y después?",
-      "canBlessReason": "Pregunta del remedio fallido. La opcion a) es la unica que demuestra que la necesidad existe y se descubrio por fallar el remedio equivocado, no por sentir vacio: eso es misdirected_remedy. Decision de la autora.",
+      "text": "Llevas meses en un calabozo buscando una salida. ¿Cómo escapas?",
+      "canBlessReason": "Pregunta del remedio fallido. a) es la unica que demuestra que la necesidad existe y se descubrio por fallar el remedio equivocado, no por sentir vacio: eso es misdirected_remedy. Decision de la autora.",
       "choices": [
         {
           "id": "a",
-          "text": "Sigo igual. El problema era otro.",
+          "text": "Sigo intentando.",
           "evidence": {
             "family": "inner_search",
             "subtype": "misdirected_remedy",
@@ -594,7 +594,7 @@
         },
         {
           "id": "b",
-          "text": "Lo tomo por lo que trae. No era eso lo que buscaba.",
+          "text": "Negocio con quien me tiene aquí.",
           "evidence": {
             "family": "external_desire",
             "subtype": "recognition",
@@ -604,37 +604,37 @@
             "interpretiveAmbiguity": false,
             "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Quiere el beneficio externo, no la neces interna"
+            "lee": "Quiere salir por el beneficio externo, no por lo que le faltaba"
           }
         },
         {
           "id": "c",
-          "text": "No hago nada. Nunca he necesitado eso.",
+          "text": "Me rindo.",
           "evidence": {
-            "family": "sufficiency",
-            "subtype": "complete_present",
-            "direction": "none",
-            "unresolved": false,
-            "verified": true,
-            "interpretiveAmbiguity": false,
-            "aloneInsufficient": false,
-            "status": "APROBADO",
-            "lee": "No necesita nada de eso"
-          }
-        },
-        {
-          "id": "d",
-          "text": "Lo tomo. Y sigo sin saber qué me falta.",
-          "evidence": {
-            "family": "inner_search",
-            "subtype": "unformulable",
+            "family": "character_only",
+            "subtype": "passive_waiting",
             "direction": "none",
             "unresolved": true,
             "verified": true,
             "interpretiveAmbiguity": false,
             "aloneInsufficient": true,
             "status": "APROBADO",
-            "lee": "Hay algo que no consigue nombrar. Ni puede"
+            "lee": "Deja de intentar. Conducta, no dice nada sobre lo que necesita"
+          }
+        },
+        {
+          "id": "d",
+          "text": "Pienso en otras alternativas.",
+          "evidence": {
+            "family": "character_only",
+            "subtype": "seeks_understanding",
+            "direction": "none",
+            "unresolved": true,
+            "verified": true,
+            "interpretiveAmbiguity": false,
+            "aloneInsufficient": true,
+            "status": "APROBADO",
+            "lee": "Quiere SABER otra salida, no transformarse"
           }
         }
       ],

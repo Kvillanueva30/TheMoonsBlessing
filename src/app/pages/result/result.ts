@@ -67,8 +67,6 @@ export class ResultPage {
 
   /** Estado del boton de compartir: durante el proceso se deshabilita. */
   readonly sharing = signal(false);
-  /** Mensaje breve para el visitante tras compartir o descargar. */
-  readonly shareNote = signal<string | null>(null);
 
   /**
  * Nodo de la tarjeta oculta, para capturarlo.
@@ -139,28 +137,28 @@ export class ResultPage {
   /**
    * Datos de la tarjeta. Todos salen de lo que ya esta en pantalla: nada se
    * calcula aqui, nada del lore se escribe en este archivo.
-   *
-   * `reason` es el texto de la revelacion. La URL se arma con el origen real
-   * del sitio para que el enlace impreso en la imagen sea el de verdad.
    */
   readonly shareData = computed<ShareCardData | null>(() => {
     const label = this.natureLabel();
     if (!label) return null;
 
     return {
+      nature: this.nature()?.nature ?? 'manskling',
       natureLabel: label,
       natureMeaning: this.resultsData()?.natures?.[this.nature()?.nature ?? '']?.meaning ?? '',
       kingdomName: this.kingdom()?.name ?? null,
       founderName: this.founderName(),
       moonLabel: this.moonLabel(),
-      reason: this.reason(),
-      url: window.location.origin + window.location.pathname,
     };
   });
 
   /**
    * Boton principal. Intenta compartir con la Web Share API; si el navegador no
    * la soporta, descarga el PNG.
+   *
+   * No dice nada al visitante ni cuando funciona ni cuando no. Es lo que se
+   * decidio: si la imagen salio, el selector del sistema o la descarga ya se
+   * ven; un texto debajo solo anade ruido.
    */
   async share(): Promise<void> {
     const blob = await this.generateImage();
@@ -173,7 +171,6 @@ export class ResultPage {
           `Soy ${this.natureLabel()}`,
           `Mi lugar en Madar: ${this.natureLabel()}.`,
         );
-        this.shareNote.set('Resultado compartido.');
       } catch {
         // El usuario cancelo el selector. No es un fallo ni hay que avisar.
       }
@@ -181,14 +178,12 @@ export class ResultPage {
     }
 
     this.shareService.download(blob);
-    this.shareNote.set('Imagen descargada.');
   }
 
-  /** Captura la tarjeta oculta. Avisa si el navegador no puede. */
+  /** Captura la tarjeta oculta. Si no puede, devuelve null y no dice nada. */
   private async generateImage(): Promise<Blob | null> {
     if (this.sharing()) return null;
     this.sharing.set(true);
-    this.shareNote.set(null);
 
     try {
       const host = this.shareCard()?.nativeElement ?? null;
@@ -198,16 +193,9 @@ export class ResultPage {
         host?.querySelector<HTMLElement>('.card') ??
         document.querySelector<HTMLElement>('app-share-card .card');
 
-      if (!card) {
-        this.shareNote.set('No pudimos preparar la imagen.');
-        return null;
-      }
+      if (!card) return null;
 
-      const blob = await this.shareService.capture(card);
-      if (!blob) {
-        this.shareNote.set('No pudimos generar la imagen. Prueba con otro navegador.');
-      }
-      return blob;
+      return await this.shareService.capture(card);
     } finally {
       this.sharing.set(false);
     }
