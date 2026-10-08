@@ -1,0 +1,44 @@
+<div class="card" role="img" [attr.aria-label]="'Tu resultado: ' + data().natureLabel">
+  <div class="backdrop"></div>
+
+  <div class="frame">
+    <header class="top">
+      <span class="brand">BETWEEN</span>
+      <span class="brand-sub">CRONICAS DE MADAR</span>
+    </header>
+
+    <div class="middle">
+      <p class="kicker">La Diosa Luna te reconoce como</p>
+      <h1 class="nature">{{ data().natureLabel }}</h1>
+      <p class="meaning">{{ data().natureMeaning }}</p>
+
+      @if (data().reason) {
+        <p class="reason">{{ data().reason }}</p>
+      }
+    </div>
+
+    <footer class="bottom">
+      <div class="facts">
+        @if (data().kingdomName; as kingdom) {
+          <span class="fact">
+            <span class="fact-label">Reino</span>
+            <span class="fact-value">{{ kingdom }}</span>
+          </span>
+        }
+        @if (data().moonLabel; as moon) {
+          <span class="fact">
+            <span class="fact-label">Luna</span>
+            <span class="fact-value">{{ moon }}</span>
+          </span>
+        }
+        @if (data().founderName; as founder) {
+          <span class="fact">
+            <span class="fact-label">Legado de</span>
+            <span class="fact-value">{{ founder }}</span>
+          </span>
+        }
+      </div>
+      <span class="url">{{ data().url }}</span>
+    </footer>
+  </div>
+</div>

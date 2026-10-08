@@ -145,16 +145,80 @@ app-moon {
   line-height: 1.6;
 }
 
-/* --- Final --- */
-/* Solo el rótulo. Sin botones: por ahora no hay con qué compartir, y un
-   rótulo que anuncia algo que no ocurre miente. */
+/* --- Compartir --- */
+
+.share {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: center;
+  text-align: center;
+}
+
 .share-label {
-  justify-self: center;
   margin: 0;
   color: #9a8f74;
   font-size: 0.72rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
+}
+
+.share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+/* Mismo dorado que el CTA del landing. */
+.share-primary {
+  padding: 0.85rem 2rem;
+  background: linear-gradient(100deg, #f3d28c, #d4af37);
+  border: 1px solid #c9922f;
+  border-radius: 2px;
+  color: #0a0a0a;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.share-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+}
+
+.share-ghost {
+  padding: 0.85rem 1.6rem;
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  border-radius: 2px;
+  color: #f0d9a8;
+  font: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.share-ghost:hover:not(:disabled) {
+  border-color: #f0d9a8;
+  background: rgba(240, 217, 168, 0.06);
+}
+
+.share-primary:disabled,
+.share-ghost:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.share-note {
+  margin: 0;
+  color: #cfc7b6;
+  font-size: 0.88rem;
 }
 
 .ghost {

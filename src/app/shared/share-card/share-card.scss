@@ -1,0 +1,165 @@
+/* ----------------------------------------------------------------------
+   Tarjeta de resultado 1200x630 para compartir.
+
+   Tamano FIJO a proposito: es la medida de miniatura de Open Graph. No usa
+   unidades relativas, porque la captura con html-to-image necesita que el
+   bloque mida exactamente eso en cualquier pantalla.
+
+   Los colores son los de la aplicacion (styles.scss y result.scss): fondo
+   nocturno, dorado lunar. Las tipografias son las que ya carga index.html.
+
+   El host se saca de la pantalla: la tarjeta existe en el DOM para poder
+   capturarse, pero el visitante no la ve nunca.
+   ---------------------------------------------------------------------- */
+
+:host {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  width: 1200px;
+  height: 630px;
+  pointer-events: none;
+}
+
+.card {
+  position: relative;
+  width: 1200px;
+  height: 630px;
+  overflow: hidden;
+  color: #ffffff;
+  background: #050816;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Neblina azul y una luz dorada arriba a la derecha: el mismo clima del
+   cielo de la aplicacion, aqui estatico. */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(46% 42% at 82% 12%, rgba(212, 175, 55, 0.18), transparent 68%),
+    radial-gradient(52% 46% at 12% 88%, rgba(72, 96, 176, 0.2), transparent 70%),
+    linear-gradient(160deg, #0a1030 0%, #050816 62%, #04060f 100%);
+}
+
+.frame {
+  position: absolute;
+  inset: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 48px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+}
+
+/* --- cabecera --- */
+
+.top {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  color: #f3d28c;
+}
+
+.brand-sub {
+  font-size: 13px;
+  letter-spacing: 0.34em;
+  color: rgba(216, 216, 216, 0.62);
+}
+
+/* --- centro --- */
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* max-width para que un texto largo no se salga de la tarjeta. */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(216, 216, 216, 0.72);
+}
+
+.nature {
+  margin: 18px 0 0;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 108px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  /* Mismo degradado dorado que el titulo del landing. */
+  background: linear-gradient(178deg, #fffdf7 4%, #f0d9a8 44%, #c9922f 84%, #8a6220 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.meaning {
+  margin: 24px 0 0;
+  max-width: 820px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 30px;
+  font-style: italic;
+  line-height: 1.45;
+  color: #ece9f2;
+}
+
+.reason {
+  margin: 18px 0 0;
+  max-width: 760px;
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgba(216, 216, 216, 0.72);
+}
+
+/* --- pie --- */
+
+.bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.facts {
+  display: flex;
+  gap: 44px;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fact-label {
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(216, 216, 216, 0.55);
+}
+
+.fact-value {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 26px;
+  color: #f0d9a8;
+}
+
+.url {
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: rgba(216, 216, 216, 0.5);
+}
