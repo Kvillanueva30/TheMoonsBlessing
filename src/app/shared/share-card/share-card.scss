@@ -88,14 +88,13 @@
   margin: 0 auto;
 }
 
-/* Emblema de la naturaleza. Arriba a la derecha, en la diagonal contraria a
-   la marca: equilibra la composition sin empujar el nombre hacia abajo. */
+/* Emblema de la naturaleza. Va en el pie, junto a los datos: pequeno, como
+   una marca de agua que identifica el resultado sin robarle el sitio al
+   nombre, que es lo que tiene que dominar. */
 .emblem {
-  position: absolute;
-  top: 58px;
-  right: 58px;
-  width: 150px;
-  height: 150px;
+  width: 96px;
+  height: 96px;
+  flex: 0 0 auto;
   overflow: visible;
 }
 
