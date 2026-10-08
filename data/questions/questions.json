@@ -107,7 +107,8 @@
             "tralan": 3
           }
         }
-      ]
+      ],
+      "etching": "proyeccion"
     },
     {
       "id": "q2",
@@ -145,7 +146,8 @@
             "tralan": 3
           }
         }
-      ]
+      ],
+      "etching": "pertenencia"
     },
     {
       "id": "q3",
@@ -183,7 +185,8 @@
             "ederian": 3
           }
         }
-      ]
+      ],
+      "etching": "conflicto"
     },
     {
       "id": "q4",
@@ -221,7 +224,8 @@
             "tradia": 3
           }
         }
-      ]
+      ],
+      "etching": "identidad"
     },
     {
       "id": "q5",
@@ -291,7 +295,8 @@
             "lee": "Quiere que entiendan su motivo."
           }
         }
-      ]
+      ],
+      "etching": "espejo"
     },
     {
       "id": "q6",
@@ -361,7 +366,8 @@
             "lee": "No falta nada."
           }
         }
-      ]
+      ],
+      "etching": "poder"
     },
     {
       "id": "q7",
@@ -416,7 +422,8 @@
             "lee": "No puede nombrar la brecha."
           }
         }
-      ]
+      ],
+      "etching": "sabiduria"
     },
     {
       "id": "q8",
@@ -486,7 +493,8 @@
             "lee": "Calcula el umbral."
           }
         }
-      ]
+      ],
+      "etching": "miedo"
     }
   ],
   "todo": [
