@@ -17,19 +17,32 @@
   </section>
 
   <!--
-    Las tres en fila. No hay carrusel ni flechas: caben todas, y verlas juntas
-    es justamente lo que dice que el resultado no es una eleccion.
+    Las tres, y todas se ven a la vez en escritorio. En vertical se vuelven
+    carrusel: no caben tres con el texto que lleva la trasera, y una letra mas
+    pequena tampoco lo arregla. Ver CSS, media query max-width: 34rem.
+
+    El translateX solo actua en vertical. En escritorio la pista es un grid de
+    tres columnas y la transformacion se pone a cero en esa media query.
   -->
-  <ul class="fila">
-    @for (n of naturalezas(); track n.id) {
-      <li class="celda">
-        <button
-          type="button"
-          class="card"
-          [class.is-volteada]="isVolteada(n.id)"
-          (click)="voltear(n.id)"
-          [attr.aria-label]="'Ver qué es ' + n.label + ' y cómo se origina'"
-        >
+  <div class="reel">
+    <div
+      class="stage"
+      (pointerdown)="onDown($event)"
+      (pointerup)="onUp($event)"
+      (pointercancel)="onUp($event)"
+    >
+      <ul class="fila" [style.transform]="'translateX(-' + index() * 100 + '%)'">
+        @for (n of naturalezas(); track n.id; let i = $index) {
+          <li class="celda">
+            <button
+              type="button"
+              class="card"
+              [class.is-volteada]="isVolteada(n.id)"
+              (click)="voltear(n.id)"
+              [attr.aria-hidden]="!esCarrusel || isCurrent(i) ? null : 'true'"
+              [attr.tabindex]="!esCarrusel || isCurrent(i) ? 0 : -1"
+              [attr.aria-label]="'Ver qué es ' + n.label + ' y cómo se origina'"
+            >
           <span class="card-inner">
 
             <!-- ============ CARA FRONTAL: el retrato y el nombre ============ -->
@@ -76,13 +89,42 @@
               }
             </span>
 
-          </span>
-        </button>
+            </span>
+            </button>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!--
+      Las flechas solo se ven en vertical, que es donde la pista se mueve. En
+      escritorio estan las tres a la vez y no hay a donde ir.
+    -->
+    <button type="button" class="arrow arrow-prev" (click)="prev()" aria-label="La naturaleza anterior">
+      <span aria-hidden="true">‹</span>
+    </button>
+    <button type="button" class="arrow arrow-next" (click)="next()" aria-label="La naturaleza siguiente">
+      <span aria-hidden="true">›</span>
+    </button>
+  </div>
+
+  <!-- Puntos de luz. Sin numeros, igual que el sendero de las preguntas. -->
+  <ul class="dots">
+    @for (n of naturalezas(); track n.id; let i = $index) {
+      <li>
+        <button
+          type="button"
+          class="dot"
+          [class.now]="isCurrent(i)"
+          (click)="goTo(i)"
+          [attr.aria-label]="'Ver ' + n.label"
+          [attr.aria-current]="isCurrent(i) ? 'true' : null"
+        ></button>
       </li>
     }
   </ul>
 
-  <p class="hint-touch">Pasa el cursor. En el móvil, toca la carta.</p>
+  <p class="hint-touch">En el móvil, desliza y toca la carta para girarla.</p>
 
   <a class="btn" routerLink="/birth-date">Continuar</a>
 </main>

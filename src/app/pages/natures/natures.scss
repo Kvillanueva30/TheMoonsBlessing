@@ -70,17 +70,40 @@
 /* ------------------------------------------------------ las tres ------ */
 
 /*
-  Una fila de tres. El ancho maximo de la fila y el de cada celda se reparten
-  con el mismo factor, asi las tres quedan iguales y siempre caben: por
-  mucho que se estire el viewport, ninguna se sale.
+  .reel aloja la pista y las flechas. Las flechas NO pueden vivir dentro de
+  .stage, porque .stage necesita overflow:hidden para recortar el carril y eso
+  las recortaria a ellas.
+
+  flex: 1 y min-height: 0: sin el min-height la pista empuja al resto fuera
+  del viewport en pantallas cortas y el boton se sale por abajo.
 */
-.fila {
+.reel {
   position: relative;
   z-index: 2;
   flex: 1 1 auto;
   min-height: 0;
   width: 100%;
   max-width: min(100%, 62rem);
+}
+
+.stage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+/*
+  En escritorio: las tres a la vez, en grid de tres columnas.
+
+  El transform lo pone el componente para el carrusel, pero aqui no debe
+  mover nada: se anula abajo, en la media query de vertical. Sin esto, la
+  pista se desplazaria una carta y dejaria dos fuera de la pantalla.
+*/
+.fila {
+  position: relative;
+  z-index: 2;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.5rem, 1.6vw, 1.4rem);
@@ -91,6 +114,7 @@
 
 .celda {
   min-height: 0;
+  min-width: 0;
   perspective: 1400px;
 }
 
@@ -291,10 +315,10 @@
 .hint {
   flex: 0 0 auto;
   margin-top: clamp(0.2rem, 1svh, 0.5rem);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #6e6242;
+  color: #8b7c55;
 }
 
 /* ------------------------------------------------ cara trasera -------- */
@@ -307,20 +331,26 @@
 .back-nombre {
   flex: 0 0 auto;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(0.85rem, min(2.2vw, 2.6svh), 1.2rem);
+  font-size: clamp(1.1rem, min(2.4vw, 2.8svh), 1.5rem);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #f0d9a8;
   text-align: center;
 }
 
+/*
+  Aqui el minimo NO baja de 1rem: medido, con unidades de viewport el texto
+  llegaba a 11.5 px a 800 de ancho y a menos todavia en un movil, y no se
+  leia. En una card estrecha no cabe mas texto, asi que el minimo manda y el
+  overflow lo resuelve el carrusel de mas abajo, no una letra mas pequena.
+*/
 .back-meaning {
   flex: 0 0 auto;
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(0.72rem, min(1.32vw, 1.7svh), 1rem);
+  font-size: clamp(1rem, min(1.6vw, 2.2svh), 1.2rem);
   line-height: 1.4;
   color: #f2ece0;
   text-align: center;
@@ -333,7 +363,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: clamp(0.35rem, 1.2svh, 0.7rem);
+  gap: clamp(0.4rem, 1.2svh, 0.7rem);
   width: 100%;
   padding-top: clamp(0.4rem, 1.2svh, 0.7rem);
   border-top: 1px solid rgba(212, 175, 55, 0.24);
@@ -348,18 +378,18 @@
 }
 
 .origen-label {
-  font-size: clamp(0.58rem, min(1.02vw, 1.3svh), 0.74rem);
-  letter-spacing: 0.13em;
+  font-size: clamp(0.9rem, min(1.15vw, 1.45svh), 1rem);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #c9922f;
+  color: #d4a63c;
 }
 
 .origen-rule {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
-  font-size: clamp(0.68rem, min(1.2vw, 1.55svh), 0.92rem);
+  font-size: clamp(0.95rem, min(1.35vw, 1.7svh), 1.1rem);
   line-height: 1.38;
-  color: #b9b3c6;
+  color: #cbc5d6;
   text-wrap: pretty;
 }
 
@@ -368,10 +398,10 @@
 .hint-touch {
   flex: 0 0 auto;
   margin: clamp(0.6rem, 1.6svh, 1rem) 0 0;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6e6242;
+  color: #8b7c55;
   text-align: center;
 }
 
@@ -380,11 +410,11 @@
 .btn {
   flex: 0 0 auto;
   margin-top: clamp(0.7rem, 2svh, 1.3rem);
-  padding: clamp(0.6rem, 1.6svh, 1rem) clamp(1.6rem, 5vw, 2.4rem);
+  padding: clamp(0.75rem, 1.6svh, 1rem) clamp(1.6rem, 5vw, 2.4rem);
   display: inline-flex;
   align-items: center;
-  font-size: clamp(0.8rem, min(1.9vw, 2svh), 0.95rem);
-  letter-spacing: 0.14em;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 2px;
@@ -424,10 +454,108 @@
   }
 }
 
-/* En vertical estrecho las tres en fila se aprijan demasiado: se apilan. */
+/* ------------------------------------------------------ flechas ------- */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: clamp(2.1rem, 7vmin, 2.9rem);
+  height: clamp(2.1rem, 7vmin, 2.9rem);
+  /* Ocultas por defecto: en escritorio las tres estan a la vez y no hay a donde
+     ir. Se muestran solo en la media query de vertical. */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 50%;
+  background: rgba(8, 10, 17, 0.72);
+  color: #f0d9a8;
+  font-size: clamp(1.1rem, 3.4vmin, 1.5rem);
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.arrow:hover,
+.arrow:focus-visible {
+  border-color: #c9922f;
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.36);
+}
+
+.arrow-prev {
+  left: clamp(-2.9rem, -7vmin, -2.1rem);
+}
+
+.arrow-next {
+  right: clamp(-2.9rem, -7vmin, -2.1rem);
+}
+
+/*
+  Puntos de luz, sin numeros. El mismo lenguaje que el sendero de las
+  preguntas: la posicion se dice con la intensidad del punto, no con una cifra.
+*/
+.dots {
+  flex: 0 0 auto;
+  list-style: none;
+  display: flex;
+  gap: 0.8rem;
+  margin: clamp(0.7rem, 2svh, 1.2rem) 0 0;
+  padding: 0;
+}
+
+.dot {
+  display: block;
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #4a4436;
+  cursor: pointer;
+  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.dot.now {
+  background: #e8c76a;
+  box-shadow: 0 0 14px rgba(232, 199, 106, 0.75);
+  transform: scale(1.35);
+}
+
+/*
+  EN VERTICAL: las tres de una en una.
+
+  Medido en escritorio, a 800 de ancho, el texto de la trasera ya llegaba a
+  9.3 px. En vertical la card baja a unos 110 px de ancho y no cabe nada
+  legible. Con el minimo de letra ya arreglado, la fila de tres no cabe: una
+  letra mas pequena tampoco lo arregla, y el texto pequeño es justo lo que se
+  queria evitar.
+
+  Aqui la pista pasa a ser un carril de una carta, con el translateX que ya
+  pone el componente. Se anula el transform de escritorio con translateX(0).
+*/
 @media (max-width: 34rem) {
+  .reel {
+    max-width: 24rem;
+  }
+
   .fila {
-    max-width: 22rem;
+    display: flex;
+    gap: 0.5rem;
+    transform: translateX(0);
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+    will-change: transform;
+  }
+
+  .celda {
+    flex: 0 0 100%;
+  }
+
+  /* En vertical si hay carrusel, asi que las flechas si tienen sentido. */
+  .arrow {
+    display: flex;
   }
 }
 
@@ -451,7 +579,9 @@
   reducido lo que importa es que el significado se lea.
 */
 @media (prefers-reduced-motion: reduce) {
-  .card-inner {
+  .card-inner,
+  .fila,
+  .dot {
     transition: none;
   }
 

@@ -173,6 +173,68 @@ export class NaturesPage {
       return next;
     });
   }
+
+  // ------------------------------------------------------- carrusel ----
+
+  /**
+   * Indice de la carta visible. SOLO se usa en vertical.
+   *
+   * En escritorio las tres se ven a la vez y esto no se lee. En vertical no
+   * caben: medido, a 800 de ancho el texto de la trasera llegaba a 9.3 px, y
+   * en un movil la card baja a unos 110 px de ancho. Con el minimo de letra
+   * arreglado, la unica forma de que el texto quepa y se lea es una carta a
+   * la vez, como en la pantalla de los reinos.
+   */
+  readonly index = signal(0);
+
+  /**
+   * Si el navegador es estrecho y las tres van de una en una.
+   *
+   * Se decide en el constructor y no se recalcula: el breakpoint son 34rem,
+   * y un giro de pantalla a mitad de lectura cambiaria las reglas de foco y
+   * aria a la vez que se esta leyendo.
+   */
+  readonly esCarrusel =
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 34rem)').matches;
+
+  next(): void {
+    const n = this.total();
+    if (n === 0) return;
+    this.index.update((i) => (i + 1) % n);
+  }
+
+  prev(): void {
+    const n = this.total();
+    if (n === 0) return;
+    this.index.update((i) => (i - 1 + n) % n);
+  }
+
+  isCurrent(i: number): boolean {
+    return this.index() === i;
+  }
+
+  goTo(i: number): void {
+    this.index.set(i);
+  }
+
+  /**
+   * Deslizar. Mismo umbral que los reinos (48 px): por debajo es un roce y no
+   * debe cambiar la carta, que es lo que mas molesta cuando se intenta leer.
+   */
+  private startX: number | null = null;
+
+  onDown(event: PointerEvent): void {
+    this.startX = event.clientX;
+  }
+
+  onUp(event: PointerEvent): void {
+    if (this.startX === null) return;
+    const dx = event.clientX - this.startX;
+    this.startX = null;
+    if (Math.abs(dx) < 48) return;
+    if (dx < 0) this.next();
+    else this.prev();
+  }
 }
 
 /** Lo que la plantilla necesita de una naturaleza. Solo forma, ninguna regla. */

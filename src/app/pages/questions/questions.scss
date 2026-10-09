@@ -102,9 +102,10 @@
 
 .eyebrow {
   margin: 0 0 1.1rem;
-  color: #9a8f74;
-  font-size: 0.78rem;
-  letter-spacing: 0.28em;
+  color: #b8ab8c;
+  /* Medido en 0.78rem daba 12.5 px en produccion: pequeno de leer. */
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 

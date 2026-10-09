@@ -48,8 +48,9 @@
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  /* Medido en 0.75rem daba 12 px en produccion: pequeno de leer. */
+  font-size: 0.95rem;
   color: #f5c76a;
   margin-bottom: 0.5rem;
 }
@@ -61,7 +62,7 @@ h1 {
 }
 
 .hint {
-  color: #9a96ad;
+  color: #b4b0c4;
   margin-bottom: 2rem;
 }
 
@@ -99,8 +100,9 @@ select {
   background: transparent;
   color: #f5c76a;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  /* Medido en 0.8rem daba 12.8 px en produccion. */
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 
