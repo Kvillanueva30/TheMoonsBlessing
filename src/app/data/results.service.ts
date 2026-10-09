@@ -8,6 +8,8 @@ import { assetUrl } from './asset-url';
 export interface NatureText {
   readonly label: string;
   readonly headline: string;
+  /** Que criatura es esa naturaleza. Opcional: si el dato no lo trae, no se muestra. */
+  readonly queEs?: string;
   readonly meaning: string;
   readonly note?: string;
 }

@@ -73,20 +73,40 @@
 
             <!-- ============ CARA TRASERA: qué es y de dónde viene ============ -->
             <span class="face face-back">
-              <span class="back-nombre">{{ n.label }}</span>
+              <!--
+                El mismo marco dorado que rodea al retrato en la cara de
+                adelante. Sin el, al girar la tarjeta el texto aparece pelado y
+                se pierde el lenguaje visual: la cara de atras parecia de otro
+                componente. Las dos caras comparten molduras y adornos.
+              -->
+              <span class="frame frame-back" aria-hidden="true">
+                <svg class="orn orn-tl"><use href="#madar-orn" /></svg>
+                <svg class="orn orn-tr"><use href="#madar-orn" /></svg>
+                <svg class="orn orn-bl"><use href="#madar-orn" /></svg>
+                <svg class="orn orn-br"><use href="#madar-orn" /></svg>
+              </span>
 
-              <p class="back-meaning">{{ n.meaning }}</p>
+              <span class="back-cuerpo">
+                <span class="back-nombre">{{ n.label }}</span>
 
-              @if (n.origen.length > 0) {
-                <div class="origenes">
-                  @for (o of n.origen; track o.id) {
-                    <p class="origen">
-                      <span class="origen-label">{{ o.label }}</span>
-                      <span class="origen-rule">{{ o.rule }}</span>
-                    </p>
-                  }
-                </div>
-              }
+                <!-- QUE ES. Lo primero que se lee al girar: que criatura es. -->
+                @if (n.queEs; as queEs) {
+                  <p class="back-que-es">{{ queEs }}</p>
+                }
+
+                <p class="back-meaning">{{ n.meaning }}</p>
+
+                @if (n.origen.length > 0) {
+                  <div class="origenes">
+                    @for (o of n.origen; track o.id) {
+                      <p class="origen">
+                        <span class="origen-label">{{ o.label }}</span>
+                        <span class="origen-rule">{{ o.rule }}</span>
+                      </p>
+                    }
+                  </div>
+                }
+              </span>
             </span>
 
             </span>

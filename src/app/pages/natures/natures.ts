@@ -66,6 +66,7 @@ export class NaturesPage {
           id,
           label: n.label,
           headline: n.headline,
+          queEs: n.queEs,
           meaning: n.meaning,
           origen: this.origenDe(id),
           archivo: `naturaleza/${id}.jpeg`,
@@ -242,6 +243,8 @@ interface NatureView {
   readonly id: NatureId;
   readonly label: string;
   readonly headline: string;
+  /** Que es esa criatura. Viene del dato; si no esta, se omite. */
+  readonly queEs?: string;
   readonly meaning: string;
   readonly origen: readonly OrigenView[];
   readonly archivo: string;

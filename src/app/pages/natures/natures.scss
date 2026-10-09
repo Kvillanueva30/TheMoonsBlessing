@@ -175,6 +175,28 @@
   border-color: rgba(212, 175, 55, 0.5);
 }
 
+/*
+  El texto va en .back-cuerpo, que es lo unico que se dimensiona contra el
+  marco. Si los hijos cuelgan directamente de .face, el flex los alinearia al
+  borde de la tarjeta y el marco dorado los cortaria por encima.
+
+  El margen es el hueco que dejan los adornos de las esquinas: sin el, las
+  letras de la primera y la ultima linea caen debajo de la moldura.
+*/
+.back-cuerpo {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 1.6svh, 0.9rem);
+  padding: clamp(0.7rem, 2vmin, 1.1rem);
+  overflow-y: auto;
+}
+
 /* ------------------------------------------------ marco del retrato ---- */
 
 /*
@@ -330,6 +352,7 @@
 */
 .back-nombre {
   flex: 0 0 auto;
+  margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(1.1rem, min(2.4vw, 2.8svh), 1.5rem);
   letter-spacing: 0.08em;
@@ -344,30 +367,46 @@
   leia. En una card estrecha no cabe mas texto, asi que el minimo manda y el
   overflow lo resuelve el carrusel de mas abajo, no una letra mas pequena.
 */
+/*
+  QUE ES. Va antes que el significado: es lo primero que se pregunta al girar
+  una tarjeta, que criatura es esto. En roman, sin cursiva, para que se lea
+  distinto del significado que viene debajo en cursiva.
+*/
+.back-que-es {
+  flex: 0 0 auto;
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(0.95rem, min(1.35vw, 1.85svh), 1.1rem);
+  line-height: 1.38;
+  color: #f0d9a8;
+  text-align: center;
+  text-wrap: pretty;
+}
+
 .back-meaning {
   flex: 0 0 auto;
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(1rem, min(1.6vw, 2.2svh), 1.2rem);
-  line-height: 1.4;
+  font-size: clamp(0.95rem, min(1.45vw, 2svh), 1.15rem);
+  line-height: 1.38;
   color: #f2ece0;
   text-align: center;
   text-wrap: pretty;
 }
 
 .origenes {
-  flex: 0 1 auto;
-  min-height: 0;
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: clamp(0.4rem, 1.2svh, 0.7rem);
   width: 100%;
+  margin: 0;
   padding-top: clamp(0.4rem, 1.2svh, 0.7rem);
   border-top: 1px solid rgba(212, 175, 55, 0.24);
-  overflow-y: auto;
 }
 
 .origen {
@@ -387,8 +426,8 @@
 .origen-rule {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
-  font-size: clamp(0.95rem, min(1.35vw, 1.7svh), 1.1rem);
-  line-height: 1.38;
+  font-size: clamp(0.9rem, min(1.25vw, 1.6svh), 1.05rem);
+  line-height: 1.35;
   color: #cbc5d6;
   text-wrap: pretty;
 }
