@@ -188,10 +188,6 @@
   marco. Si los hijos cuelgan directamente de .face, el flex los alinearia al
   borde de la tarjeta y el marco dorado los cortaria por encima.
 
-  El margen es el hueco que dejan los adornos de las esquinas: sin el, las
-  letras de la primera y la ultima linea caen debajo de la moldura.
-*/
-/*
   El padding lateral NO baja de 1.1rem: medido a 360 px, con 2vmin el
   respiro era de 11.2 px y el texto llegaba prácticamente encima de la
   moldura dorada interior (inset 2 px) y de los adornos de esquina, que
@@ -205,7 +201,16 @@
   z-index: 1;
   flex: 1 1 auto;
   min-height: 0;
-  width: 100%;
+  /*
+    box-sizing, NO width. Con width:100% mas padding lateral la caja se salia
+    de la tarjeta: medido, 279 px de caja sobre una tarjeta de 306, y los
+    27 px sobrantes iban todos al mismo lado. Por eso el texto salia de los
+    lados y no se veia centrado: la caja no estaba centrada, el texto si.
+
+    Con box-sizing el relleno va para dentro y la caja ocupa exactamente el
+    ancho de la tarjeta.
+  */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -240,11 +245,23 @@
   padding: clamp(0.4rem, 1.2svh, 0.7rem);
 }
 
+/*
+  El lienzo es la caja del retrato y su proporcion es 4:5.
+
+  Con height:100% y width:auto la ALTURA manda y el aspect-ratio no se puede
+  imponer: medido, declaraba 4/5 pero la caja salia en 0.693, y los tres
+  retratos quedaban mas anchos de lo que deben. Con width:100% pasa al reves:
+  el ancho manda y en una tarjeta estrecha la caja sale mas alta que el hueco
+  disponible.
+
+  La solucion es que mande el ancho y que la altura la fije la proporcion, con
+  max-height como red de seguridad para que en una pantalla baja no se salga.
+*/
 .lienzo {
   position: relative;
-  height: 100%;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
   aspect-ratio: 4 / 5;
   display: flex;
   align-items: center;
@@ -428,19 +445,20 @@
   text-transform: uppercase;
   text-decoration: none;
   border-radius: 2px;
-  /* Turquesa con borde dorado, igual que el boton del landing. */
-  border: 1px solid #d4af37;
-  color: #04100f;
-  background: linear-gradient(100deg, #a9ede6, #4fd6c9);
-  box-shadow: 0 0 26px rgba(79, 214, 201, 0.4);
-  font-weight: 600;
+  /* Dorado, igual que el boton del landing. Los dos botones son la salida de
+     su pantalla y tienen que leerse igual. */
+  border: 1px solid #c9922f;
+  color: #0a0a0a;
+  background: linear-gradient(100deg, #f3d28c, #d4af37);
+  box-shadow: 0 0 26px rgba(212, 175, 55, 0.34);
+  font-weight: 500;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .btn:hover,
 .btn:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 0 60px rgba(79, 214, 201, 0.6);
+  box-shadow: 0 0 60px rgba(212, 175, 55, 0.55);
 }
 
 /* ------------------------------------------------- responsive -------- */
