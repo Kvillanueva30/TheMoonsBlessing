@@ -221,16 +221,15 @@
   box-sizing: border-box;
   display: grid;
   /*
-    Dos filas de contenido y el reparto del aire con align-content: center,
-    no con pistas 1fr.
+    Tres filas: el grabado en 1fr, el nombre y el texto con su tamano. El aire
+    que sobra se lo queda el grabado, que es justo lo que se pedia.
 
-    Las pistas 1fr NO sirvieron: cuando el texto es mas alto que el hueco
-    libre se colapsan a 0 px y el nombre queda pegado al parrafo. Es
-    exactamente lo que se midio. align-content: center es el mecanismo
-    correcto para cuando el contenido no cabe en las pistas: reparte el
-    sobrante por igual arriba y abajo, y si no hay sobrante, no hace nada.
+    La pista del grabado va con minmax(0, ...) a proposito: si el texto es mas
+    alto que el hueco libre, la pista se colapsa a 0 y el grabado desaparece.
+    Es lo pedido: un grabado que ocupa el aire, nunca uno que se sale. El
+    nombre y el texto van en filas auto, que nunca ceden su alto.
   */
-  grid-template-rows: auto auto;
+  grid-template-rows: minmax(0, 1fr) auto auto;
   /*
     La causa de que el texto se descolocara en pantallas altas.
 
@@ -240,15 +239,22 @@
     descuadra: medido a 844 px de alto, la caja daba 0 px de alto y el texto
     se dibujaba desde su origen natural en vez de desde el centro.
 
-    Con height: 100% la caja ocupa la tarjeta entera y align-content reparte
-    el aire dentro de ella, que es lo que hay que centering.
+    Con height: 100% la caja ocupa la tarjeta entera y las pistas reparten
+    el aire dentro de ella, que es lo que hay que centrar.
   */
   height: 100%;
   /*
-    row-gap, y no padding en el nombre. Con padding la fila mide justo el alto
-    del nombre y el hueco quedaba en 0: medido, el nombre pegado al parrafo.
-    El gap separa las filas sin ocupaar la fila.
+    El cero explicito es lo que impide el desborde. Medido en escritorio: la
+    tarjeta mide 488 px y el bloque de texto mas largo ocupa 306. Con la pista
+    en auto, el grabado empujaba los 10 px sobrantes por encima del marco, y
+    con minmax(0, auto) seguia empujandolos: esa forma deja encoger la pista
+    pero no la obliga, y el min del contenido la mantiene alta. Con 1fr la
+    pista mide el aire que queda de verdad, y si no queda nada vale 0: el
+    grabado desaparece en vez de salirse.
   */
+  /* El hueco entre las filas lo marca row-gap, y no padding en el nombre: con
+     padding la fila mide justo el alto del nombre y el hueco quedaba en 0,
+     medido, nombre pegado al parrafo. El gap separa sin ocupar la fila. */
   row-gap: clamp(0.5rem, 1.8svh, 1rem);
   justify-items: center;
   align-items: center;
@@ -261,21 +267,93 @@
   overflow-y: auto;
 }
 
-/* El hueco entre el nombre y el texto lo marca una fila propia, no un margin. */
+/* El hueco entre las filas lo marca row-gap, no un margin. */
+.grabado,
 .back-nombre,
 .back-que-es {
   margin: 0;
   padding: 0;
 }
 
-.back-nombre {
-  align-self: end;
+/*
+  EL GRABADO DE LA TRASERA.
+
+  Es la misma silueta de la cara de adelante, mas pequena y con menos peso: al
+  girar no aparece una imagen distinta, sino la misma con su nombre y su texto
+  debajo. Ocupa el aire que dejaba el texto solo en pantallas altas.
+
+  EL GRABADO SOLO APARECE DONDE HAY AIRE. Medido: en escritorio la tarjeta
+  mide 488 px y el bloque de texto mas largo ocupa 278 px. Con un grabado de
+  154 px no caben: el texto empuja el grabado 10 px fuera del marco.
+
+  Por eso el grabado vive en una pista 1fr: si el texto no deja sitio, la
+  pista se encoge a cero y el grabado no aparece, en vez de salirse. Donde hay
+  aire de sobra, ocupa el hueco. Es lo que pediste: que ocupen ese espacio.
+
+  El tope es 22vh, no svh: svh mide la pantalla entera y el hueco real de la
+  tarjeta es menor, asi que con svh el grabado se salia.
+*/
+.grabado {
   grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /*
+    align-self: stretch, y no el center que hereda de .back-cuerpo. Es lo que
+    faltaba para que no se saliera: con center el elemento mide su contenido
+    y no su pista. Medido, la pista daba 90 px y el grabado 154, por eso
+    desbordaba por arriba 9 px.
+  */
+  align-self: stretch;
+  /*
+    container-type: size para poder preguntarle al navegador cuanto alta tiene
+    esta caja. Sin esto no hay forma de saber desde CSS si el aire que ha
+    quedado es un hueco que merece un dibujo o una franja insuficiente.
+  */
+  container-type: size;
+  max-height: min(22vh, 11rem);
+  overflow: hidden;
 }
 
+/*
+  POR DEBAJO DE 5rem EL GRABADO NO SE MUESTRA. Medido a 1440x900: el texto
+  mas largo ocupa 489 px de una tarjeta de 610 y solo dejan 38 px de pista, con
+  lo que el grabado salia de 29x38: una mota, no un dibujo. Mejor sin el, que
+  vuelve al reparto limpio de nombre y texto. A 1000x700 la pista mide 90 px y
+  ahi si se ve.
+*/
+@container (max-height: 5rem) {
+  .grabado-img {
+    display: none;
+  }
+}
+
+.grabado-img {
+  /*
+    height: 100% para LLENAR la pista. Con height: auto la imagen se quedaba en
+    su alto minimo dentro de una pista alta y el aire que debia ocupar seguia
+    vacio. El tope de max-height evita que se vuelva enorme donde el texto es
+    corto; object-fit: contain la recorta sin deformarla.
+  */
+  max-width: 100%;
+  max-height: min(22vh, 11rem);
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.72;
+  filter: drop-shadow(0 0 18px rgba(79, 214, 201, 0.22));
+}
+
+.back-nombre {
+  align-self: end;
+  grid-row: 2;
+}
+
+/* El texto mide lo que mide: es lo que hay que leer. */
 .back-que-es {
   align-self: start;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 /* ------------------------------------------------ marco del retrato ---- */

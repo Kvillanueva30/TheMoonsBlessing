@@ -97,8 +97,19 @@
 
                 Los origenes tampoco: esta pantalla es sobre que criatura es
                 cada naturaleza, no sobre como se origino cada una.
+
+                El GRABADO va encima. Es la misma silueta de la cara de
+                adelante: al girar no aparece una imagen nueva, sino la misma
+                con su nombre y su texto debajo. Ademas ocupa el aire que
+                dejaba el texto solo en pantallas altas.
               -->
               <span class="back-cuerpo">
+                <span class="grabado">
+                  @if (retrato(n.id); as url) {
+                    <img class="grabado-img" [src]="url" [alt]="''" />
+                  }
+                </span>
+
                 <span class="back-nombre">{{ n.label }}</span>
 
                 @if (n.queEs; as queEs) {
