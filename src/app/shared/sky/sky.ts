@@ -43,9 +43,12 @@ export class SkyComponent implements OnDestroy {
 
     const pickColor = (): string => {
       const roll = Math.random();
-      // La mayoría blanco-azules, algunas cálidas, muy pocas anaranjadas.
-      if (roll < 0.62) return '#eef2ff';
-      if (roll < 0.88) return '#fff6e2';
+      // Las mas turquesa: es la luna la que las tiñe. Luego blanco-azules,
+      // algunas calidas y muy pocas anaranjadas.
+      if (roll < 0.34) return '#4fd6c9';
+      if (roll < 0.46) return '#a9ede6';
+      if (roll < 0.7) return '#eef2ff';
+      if (roll < 0.87) return '#fff6e2';
       if (roll < 0.93) return '#ffe2bd';
       if (roll < 0.98) return '#ffc79a';
       return '#d9ccff';

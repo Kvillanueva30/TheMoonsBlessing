@@ -1,10 +1,13 @@
 :host {
   display: block;
   /* min() con svh: en pantallas bajas la luna cede altura al contenido en vez
-     de empujar el botón fuera del pliegue. */
+     de empujar el boton fuera del pliegue. */
   width: min(52vmin, 38svh, 28rem);
   aspect-ratio: 1;
-  filter: drop-shadow(0 0 34px rgba(201, 146, 47, 0.14));
+  /* El halo es turquesa, no dorado: es la luna, y en la portada de Between
+     el brillo del disco es del color del cielo. */
+  filter: drop-shadow(0 0 40px rgba(79, 214, 201, 0.24))
+    drop-shadow(0 0 90px rgba(31, 125, 128, 0.18));
 }
 
 .moon-svg {
@@ -14,40 +17,41 @@
   overflow: visible;
 }
 
-/* El viewBox va de -50 a 50, así que un trazo de 0.7 es el 0,7% del diámetro:
-   a 170px de lado sale un poco más de 1px, que es el peso de un grabado. */
+/* El viewBox va de -50 a 50, asi que un trazo de 0.7 es el 0,7% del diametro:
+   a 170px de lado sale un poco mas de 1px, que es el peso de un grabado.
+   Los trazos son turquesa: el disco iluminado va en el color de la luna. */
 .limb {
   fill: none;
-  stroke: rgba(233, 224, 203, 0.5);
+  stroke: rgba(169, 237, 230, 0.55);
   stroke-width: 0.8;
 }
 
 .terminator {
-  fill: rgba(240, 233, 216, 0.045);
-  stroke: rgba(233, 224, 203, 0.55);
+  fill: rgba(79, 214, 201, 0.05);
+  stroke: rgba(169, 237, 230, 0.6);
   stroke-width: 0.7;
 }
 
 .hatch-line {
-  stroke: rgba(214, 200, 172, 0.26);
+  stroke: rgba(79, 214, 201, 0.24);
   stroke-width: 0.55;
 }
 
 .crater {
   fill: none;
-  stroke: rgba(226, 216, 194, 0.34);
+  stroke: rgba(120, 226, 217, 0.34);
   stroke-width: 0.6;
 }
 
 .crater-rim {
   fill: none;
-  stroke: rgba(240, 232, 210, 0.46);
+  stroke: rgba(169, 237, 230, 0.46);
   stroke-width: 0.45;
 }
 
 .maria ellipse {
   fill: none;
-  stroke: rgba(219, 208, 184, 0.2);
+  stroke: rgba(79, 214, 201, 0.2);
   stroke-width: 0.5;
   stroke-dasharray: 2.4 1.8;
 }

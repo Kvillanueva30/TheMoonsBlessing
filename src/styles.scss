@@ -4,14 +4,37 @@
 // tipografia son marcadores provisionales. Ver AGENTS.md, seccion de estetica:
 // dark fantasy, lunar, cinematografica, sobria. Nada de UI corporativa.
 
+/*
+  LA PALETA DE MADAR.
+
+  Negro, dorado y turquesa. El dorado y el turquesa son los dos colores de la
+  portada de Between, y conviven: el dorado es el marco y el adorno, el
+  turquesa es la luna, el cielo y el resplandor. No son alternativa: una
+  tarjeta tiene los dos.
+
+  El turquesa se declara aqui y NO se escribe suelto en los componentes. Asi
+  se cambia en un solo sitio, que es justo lo que se rompio cuando cada
+  pagina llevaba su propio color.
+*/
 :root {
-  // Marcadores provisionales. Reemplazar cuando se defina la identidad visual.
   --madar-bg: #05060a;
   --madar-bg-elevated: #0b0d14;
   --madar-text: #e8e6f0;
   --madar-text-dim: #9a96ad;
+
+  /* Dorado: el marco, los adornos, el borde de las cards. */
   --madar-accent: #d4c08a;
   --madar-accent-dim: #6e6242;
+
+  /*
+    Turquesa: la luna, el halo, los titulos y los brillos.
+    Del portada de Between. El brillo es el mismo color en canal alfa, para
+    que el resplandor nunca sea un color distinto del que emite.
+  */
+  --madar-turquoise: #4fd6c9;
+  --madar-turquoise-deep: #1f7d80;
+  --madar-turquoise-soft: #a9ede6;
+  --madar-turquoise-glow: rgba(79, 214, 201, 0.45);
 
   --madar-space-xs: 0.5rem;
   --madar-space-sm: 1rem;
@@ -40,24 +63,27 @@ body {
   color: var(--madar-text);
 }
 
-/* Cielo: no un negro plano. Nebulosas frías, la banda de la vía láctea en
-   diagonal y un claro hacia arriba.
-   El degradado vertical antes bajaba de 12,5 a 4,2 de luminancia y, justo
-   encima de la banda del pie, el fondo quedaba en 4,1: un salto de 98 contra
-   el dorado que se leía como un parche sucio. Ahora el recorrido es de 12,5 a
-   9,1, suave y sin franja. */
+/* Cielo: no un negro plano. Nebulosas, la banda de la via lactea en diagonal y
+   un claro hacia arriba.
+
+   El turquesa entra aqui como nebulosa fria y como banda de la via lactea: es
+   el color que la portada de Between lleva en el cielo, y sin el el fondo se
+   leia como cualquier azul oscuro. El dorado se queda en el marco de las
+   cards: el cielo es de la luna, y la luna es turquesa.
+
+   El recorrido vertical va de 12,5 a 9,1 de luminancia, suave y sin franja. */
 html {
   background:
-    radial-gradient(58% 42% at 76% 10%, rgba(66, 84, 152, 0.16), transparent 68%),
+    radial-gradient(58% 42% at 76% 10%, rgba(31, 125, 128, 0.22), transparent 68%),
     radial-gradient(46% 38% at 10% 80%, rgba(104, 60, 128, 0.14), transparent 70%),
-    radial-gradient(38% 30% at 92% 74%, rgba(48, 96, 112, 0.1), transparent 72%),
+    radial-gradient(38% 30% at 92% 74%, rgba(79, 214, 201, 0.14), transparent 72%),
     linear-gradient(
       114deg,
-      transparent 34%,
-      rgba(150, 162, 205, 0.05) 44%,
-      rgba(186, 180, 214, 0.075) 51%,
-      rgba(150, 162, 205, 0.05) 58%,
-      transparent 68%
+      transparent 32%,
+      rgba(79, 214, 201, 0.07) 43%,
+      rgba(169, 237, 230, 0.09) 51%,
+      rgba(79, 214, 201, 0.07) 59%,
+      transparent 70%
     ),
     radial-gradient(140% 120% at 50% 0%, #0a0c19 0%, #080a13 55%, #070910 100%);
   /* Fijo para que el cielo no se desplace al hacer scroll y no se repita. */
