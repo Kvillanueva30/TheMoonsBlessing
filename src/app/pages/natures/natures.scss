@@ -233,8 +233,23 @@
   /* Mas espacio arriba que abajo: medido, el texto quedaba a 21 px del borde
      superior y el nombre encima. Abajo sobraban mas de 190 px. */
   gap: clamp(0.6rem, 2svh, 1.1rem);
-  padding: clamp(1.1rem, 3.5svh, 2rem) clamp(1.15rem, 3vmin, 1.75rem)
+  /*
+    El relleno lateral es 1.6rem, medido contra los ADORNOS y no contra el
+    borde de la tarjeta. Los adornos llegan a 22 px del borde y el texto
+    estaba a 34: solo 12 px por delante de una esquina dibujada, y por eso se
+    leia pegado al marco aunque la medicion contra la tarjeta pareciera bien.
+
+    Con 1.6rem el texto queda a 48 px del borde, o sea 26 px por delante de la
+    esquina. A 2.5rem se probó y era demasiado: el bloque mas largo pasaba a
+    16 lineas y se salia de la tarjeta.
+
+    El vertical se queda como estaba: arriba y abajo solo hay linea de
+    moldura, no adornos.
+  */
+  padding: clamp(1.1rem, 3.5svh, 2rem) clamp(1.6rem, 4vmin, 2rem)
     clamp(0.7rem, 2.2svh, 1.2rem);
+  /* Red de seguridad en pantallas bajas: si el texto no cabe, se desliza
+     dentro de la tarjeta en vez de salirse del marco. */
   overflow-y: auto;
 }
 
