@@ -230,8 +230,6 @@
      vertical con el margin: auto de arriba. */
   align-items: center;
   justify-content: center;
-  /* Mas espacio arriba que abajo: medido, el texto quedaba a 21 px del borde
-     superior y el nombre encima. Abajo sobraban mas de 190 px. */
   gap: clamp(0.6rem, 2svh, 1.1rem);
   /*
     El relleno lateral es 1.6rem, medido contra los ADORNOS y no contra el
@@ -239,15 +237,19 @@
     estaba a 34: solo 12 px por delante de una esquina dibujada, y por eso se
     leia pegado al marco aunque la medicion contra la tarjeta pareciera bien.
 
-    Con 1.6rem el texto queda a 48 px del borde, o sea 26 px por delante de la
-    esquina. A 2.5rem se probó y era demasiado: el bloque mas largo pasaba a
-    16 lineas y se salia de la tarjeta.
+    A 2.5rem se probo y era demasiado: el bloque mas largo pasaba a 16 lineas
+    y se salia de la tarjeta.
 
-    El vertical se queda como estaba: arriba y abajo solo hay linea de
-    moldura, no adornos.
+    EL VERTICAL ES SIMETRICO A PROPOSITO. Antes llevaba mas arriba que abajo
+    (24.5 px contra 15.4 px) porque se Penso que el nombre necesitaba aire.
+    Eso descentraba el texto: medido, quedaba a 77 px del borde superior y a
+    68 px del inferior. La caja estaba centrada pero el texto no, y por eso se
+    veia pegado abajo con un hueco enorme arriba.
+
+    Arriba y abajo solo hay linea de moldura, no adornos, asi que el mismo
+    valor sirve para los dos lados.
   */
-  padding: clamp(1.1rem, 3.5svh, 2rem) clamp(1.6rem, 4vmin, 2rem)
-    clamp(0.7rem, 2.2svh, 1.2rem);
+  padding: clamp(1.1rem, 3.5svh, 2rem) clamp(1.6rem, 4vmin, 2rem);
   /* Red de seguridad en pantallas bajas: si el texto no cabe, se desliza
      dentro de la tarjeta en vez de salirse del marco. */
   overflow-y: auto;
