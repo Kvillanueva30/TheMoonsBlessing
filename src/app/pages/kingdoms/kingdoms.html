@@ -1,0 +1,98 @@
+<!--
+  Los seis reinos, antes de la fecha.
+
+  Cara frontal: silueta del fundador + nombre. Cara trasera: essence, values,
+  shadows y guardrail. Lo que no se muestra esta explicado en kingdoms.ts.
+
+  El boton NO es "elige tu reino": el visitante no elige, el motor decide.
+-->
+<main class="kingdoms">
+  <app-sky />
+
+  <section class="intro">
+    <h1 class="intro-title">Seis reinos</h1>
+    <p class="intro-sub">
+      Antes de tu luna, seis lugares te observan. Ninguno es el bueno.
+    </p>
+    <p class="intro-hint">Pasa el cursor sobre cada retrato. En el movil, tocalos.</p>
+  </section>
+
+  <ul class="grid">
+    @for (k of kingdoms(); track k.id; let i = $index) {
+      <li class="cell">
+        <button
+          type="button"
+          class="card"
+          [class.is-flipped]="isFlipped(i)"
+          (click)="toggle(i)"
+          [attr.aria-label]="'Ver ' + k.name + ', reino fundado por ' + (k.founder?.name ?? 'fundador sin nombre')"
+        >
+          <span class="card-inner">
+            <!-- CARA FRONTAL: la silueta. Es un hueco, no un retrato. -->
+            <span class="face face-front">
+              <svg class="silhouette" viewBox="0 0 100 110" aria-hidden="true" focusable="false">
+                <defs>
+                  <pattern
+                    [attr.id]="uid(i)"
+                    width="3"
+                    height="3"
+                    patternUnits="userSpaceOnUse"
+                    patternTransform="rotate(45)"
+                  >
+                    <line x1="0" y1="0" x2="0" y2="3" stroke="#d4af37" stroke-width="0.5" />
+                  </pattern>
+                </defs>
+                <path d="M50 16 a15 17 0 1 1 -0.1 0 Z" fill="none" stroke="#f3d28c" stroke-width="1.2" />
+                <path d="M50 33 L50 46" stroke="#9a8f74" stroke-width="1.1" />
+                <path d="M18 96 Q 26 58, 50 58 Q 74 58, 82 96 Z" fill="none" stroke="#f3d28c" stroke-width="1.3" />
+                <path d="M50 58 L50 96" stroke="#6a614c" stroke-width="0.9" />
+                <rect y="96" width="100" height="14" [attr.fill]="'url(#' + uid(i) + ')'" opacity="0.35" />
+              </svg>
+
+              <span class="founder">{{ k.founder?.name ?? '—' }}</span>
+              <span class="realm">{{ k.name }}</span>
+              <span class="hint">voltea</span>
+            </span>
+
+            <!-- CARA TRASERA: el reino, sin naturaleza ni maldicion. -->
+            <span class="face face-back">
+              <span class="back-essence">{{ k.essence?.es }}</span>
+
+              @if (k.values?.length) {
+                <span class="back-block">
+                  <span class="back-label">Lo que valora</span>
+                  <span class="back-values">
+                    @for (v of k.values; track v) {
+                      <span class="value">{{ v }}</span>
+                    }
+                  </span>
+                </span>
+              }
+
+              @if (k.shadows?.length) {
+                <span class="back-block">
+                  <span class="back-label">Y su precio</span>
+                  <span class="back-shadows">
+                    @for (s of k.shadows; track s.from) {
+                      <span class="shadow" [attr.aria-label]="s.from + ' se vuelve ' + s.to">
+                        <span class="from">{{ s.from }}</span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                        <span class="to">{{ s.to }}</span>
+                      </span>
+                    }
+                  </span>
+                </span>
+              }
+
+              @if (k.guardrail) {
+                <span class="guardrail">{{ k.guardrail }}</span>
+              }
+            </span>
+          </span>
+        </button>
+      </li>
+    }
+  </ul>
+
+  <a class="btn" routerLink="/birth-date">Continuar</a>
+</main>
