@@ -221,7 +221,7 @@
   box-sizing: border-box;
   display: grid;
   /*
-    Tres filas: el grabado en 1fr, el nombre y el texto con su tamano. El aire
+    Tres filas: el nombre y el texto con su tamano, el grabado en 1fr. El aire
     que sobra se lo queda el grabado, que es justo lo que se pedia.
 
     La pista del grabado va con minmax(0, ...) a proposito: si el texto es mas
@@ -229,7 +229,7 @@
     Es lo pedido: un grabado que ocupa el aire, nunca uno que se sale. El
     nombre y el texto van en filas auto, que nunca ceden su alto.
   */
-  grid-template-rows: minmax(0, 1fr) auto auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   /*
     La causa de que el texto se descolocara en pantallas altas.
 
@@ -294,7 +294,7 @@
   tarjeta es menor, asi que con svh el grabado se salia.
 */
 .grabado {
-  grid-row: 1;
+  grid-row: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -347,7 +347,7 @@
 
 .back-nombre {
   align-self: end;
-  grid-row: 2;
+  grid-row: 1;
 }
 
 /* El texto mide lo que mide: es lo que hay que leer. */

@@ -72,20 +72,13 @@
             </span>
 
             <!-- ============ CARA TRASERA: qué es ============ -->
+            <!--
+              SIN MARCO INTERIOR. La cara de adelante lo lleva porque rodea
+              al retrato. Aqui el retrato es pequeno y va en medio, y el marco
+              solo anadia una segunda caja dentro de la tarjeta. Decision de
+              la autora.
+            -->
             <span class="face face-back">
-              <!--
-                El mismo marco dorado que rodea al retrato en la cara de
-                adelante. Sin el, al girar la tarjeta el texto aparece pelado y
-                se pierde el lenguaje visual: la cara de atras parecia de otro
-                componente. Las dos caras comparten molduras y adornos.
-              -->
-              <span class="frame frame-back" aria-hidden="true">
-                <svg class="orn orn-tl"><use href="#madar-orn" /></svg>
-                <svg class="orn orn-tr"><use href="#madar-orn" /></svg>
-                <svg class="orn orn-bl"><use href="#madar-orn" /></svg>
-                <svg class="orn orn-br"><use href="#madar-orn" /></svg>
-              </span>
-
               <!--
                 QUE ES, y solo eso.
 
@@ -98,19 +91,19 @@
                 Los origenes tampoco: esta pantalla es sobre que criatura es
                 cada naturaleza, no sobre como se origino cada una.
 
-                El GRABADO va encima. Es la misma silueta de la cara de
-                adelante: al girar no aparece una imagen nueva, sino la misma
-                con su nombre y su texto debajo. Ademas ocupa el aire que
-                dejaba el texto solo en pantallas altas.
+                EL ORDEN ES NOMBRE, IMAGEN Y TEXTO. El grabado es la misma
+                silueta de la cara de adelante, en medio: al girar no aparece
+                una imagen nueva, sino la misma. Ocupa el aire que dejaba el
+                texto solo en pantallas altas.
               -->
               <span class="back-cuerpo">
+                <span class="back-nombre">{{ n.label }}</span>
+
                 <span class="grabado">
                   @if (retrato(n.id); as url) {
                     <img class="grabado-img" [src]="url" [alt]="''" />
                   }
                 </span>
-
-                <span class="back-nombre">{{ n.label }}</span>
 
                 @if (n.queEs; as queEs) {
                   <p class="back-que-es">{{ queEs }}</p>
