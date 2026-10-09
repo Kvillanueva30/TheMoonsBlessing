@@ -71,7 +71,7 @@
               <span class="hint">voltea</span>
             </span>
 
-            <!-- ============ CARA TRASERA: qué es y de dónde viene ============ -->
+            <!-- ============ CARA TRASERA: qué es ============ -->
             <span class="face face-back">
               <!--
                 El mismo marco dorado que rodea al retrato en la cara de
@@ -86,26 +86,21 @@
                 <svg class="orn orn-br"><use href="#madar-orn" /></svg>
               </span>
 
+              <!--
+                QUE ES y POR QUE. Los origenes NO van aqui: con el texto de
+                que es que dictó la autora, Diubak se salia 27 px por abajo del
+                marco. Esta pantalla es sobre que criatura es cada naturaleza,
+                no sobre como se origino cada una. Los origenes siguen en
+                results.json y los lee la pagina de resultado.
+              -->
               <span class="back-cuerpo">
                 <span class="back-nombre">{{ n.label }}</span>
 
-                <!-- QUE ES. Lo primero que se lee al girar: que criatura es. -->
                 @if (n.queEs; as queEs) {
                   <p class="back-que-es">{{ queEs }}</p>
                 }
 
                 <p class="back-meaning">{{ n.meaning }}</p>
-
-                @if (n.origen.length > 0) {
-                  <div class="origenes">
-                    @for (o of n.origen; track o.id) {
-                      <p class="origen">
-                        <span class="origen-label">{{ o.label }}</span>
-                        <span class="origen-rule">{{ o.rule }}</span>
-                      </p>
-                    }
-                  </div>
-                }
               </span>
             </span>
 

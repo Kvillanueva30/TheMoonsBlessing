@@ -68,27 +68,12 @@ export class NaturesPage {
           headline: n.headline,
           queEs: n.queEs,
           meaning: n.meaning,
-          origen: this.origenDe(id),
           archivo: `naturaleza/${id}.jpeg`,
         };
       });
   });
 
   readonly total = computed(() => this.naturalezas().length);
-
-  /**
-   * Los origenes que el dato declara para ESTA naturaleza.
-   *
-   * origins.json declara dos por naturaleza: como se puede haber llegado a
-   * ella. No se elige un origen aqui: se enseñan los que el canon permite para
-   * esa naturaleza. El visitante no ve puntuaciones ni decide nada.
-   */
-  private origenDe(id: NatureId): readonly OrigenView[] {
-    const origins = this.data()?.['origins'] ?? {};
-    return Object.values(origins)
-      .filter((o) => o.appliesTo.includes(id))
-      .map((o) => ({ id: o.id, label: o.label, rule: o.rule }));
-  }
 
   /**
    * Comprobacion de archivo, igual que en la pantalla de reinos.
@@ -246,15 +231,7 @@ interface NatureView {
   /** Que es esa criatura. Viene del dato; si no esta, se omite. */
   readonly queEs?: string;
   readonly meaning: string;
-  readonly origen: readonly OrigenView[];
   readonly archivo: string;
-}
-
-/** Un origen declarado por el dato, con la naturaleza a la que aplica. */
-interface OrigenView {
-  readonly id: string;
-  readonly label: string;
-  readonly rule: string;
 }
 
 /**

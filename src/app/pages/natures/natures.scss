@@ -397,40 +397,11 @@
   text-wrap: pretty;
 }
 
-.origenes {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: clamp(0.4rem, 1.2svh, 0.7rem);
-  width: 100%;
-  margin: 0;
-  padding-top: clamp(0.4rem, 1.2svh, 0.7rem);
-  border-top: 1px solid rgba(212, 175, 55, 0.24);
-}
-
-.origen {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  margin: 0;
-}
-
-.origen-label {
-  font-size: clamp(0.9rem, min(1.15vw, 1.45svh), 1rem);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #d4a63c;
-}
-
-.origen-rule {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-style: italic;
-  font-size: clamp(0.9rem, min(1.25vw, 1.6svh), 1.05rem);
-  line-height: 1.35;
-  color: #cbc5d6;
-  text-wrap: pretty;
-}
+/*
+  Los origenes ya NO se pintan en la cara de atras: con el texto de que es
+  que dictó la autora no cabian y Diubak se salia del marco. Sus reglas de
+  estilo quedan en results.json y las lee la pagina de resultado.
+*/
 
 /* -------------------------------------------------------- aviso ------- */
 
