@@ -387,36 +387,24 @@
   overflow lo resuelve el carrusel de mas abajo, no una letra mas pequena.
 */
 /*
-  QUE ES. Va antes que el significado: es lo primero que se pregunta al girar
-  una tarjeta, que criatura es esto. En roman, sin cursiva, para que se lea
-  distinto del significado que viene debajo en cursiva.
+  QUE ES. Lo unico que hay en la cara de atras, ademas del nombre.
+
+  En roman, sin cursiva. El significado (meaning) ya no va aqui: dice lo mismo
+  que este texto con otras palabras y en una tarjeta estrecha era lo que se
+  salia de los lados.
 */
 .back-que-es {
   flex: 0 0 auto;
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 600;
-  font-size: clamp(0.95rem, min(1.35vw, 1.85svh), 1.1rem);
-  line-height: 1.38;
+  font-size: clamp(1rem, min(1.35vw, 1.85svh), 1.1rem);
+  line-height: 1.42;
   color: #a9ede6;
   text-align: center;
   text-wrap: pretty;
-  /* Medida la palabra mas larga: "experimentar", 80 px a 360 de ancho. */
-  overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-.back-meaning {
-  flex: 0 0 auto;
-  margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(0.95rem, min(1.45vw, 2svh), 1.15rem);
-  line-height: 1.38;
-  color: #f2ece0;
-  text-align: center;
-  text-wrap: pretty;
+  /* Medida la palabra mas larga de Diubak: "experimentar", 80 px a 360 de
+     ancho. Con esto se parte en vez de empujar la caja. */
   overflow-wrap: break-word;
   hyphens: auto;
 }
@@ -426,18 +414,6 @@
   que dictó la autora no cabian y Diubak se salia del marco. Sus reglas de
   estilo quedan en results.json y las lee la pagina de resultado.
 */
-
-/* -------------------------------------------------------- aviso ------- */
-
-.hint-touch {
-  flex: 0 0 auto;
-  margin: clamp(0.6rem, 1.6svh, 1rem) 0 0;
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #8b7c55;
-  text-align: center;
-}
 
 /* -------------------------------------------------------- btn --------- */
 
@@ -600,10 +576,6 @@
   boton. El retrato es la pantalla; el boton es la salida.
 */
 @media (max-height: 34rem) {
-  .hint-touch {
-    display: none;
-  }
-
   .intro-sub {
     display: none;
   }

@@ -138,6 +138,11 @@
 
 /* ------------------------------------------------- responsive -------- */
 
+/*
+  En movil el boton es lo unico pulsable de la pantalla y la letra se quedaba
+  en 15.2 px: pequena para el dedo y para leer. Aqui sube a 1.05 rem, y el
+  relleno crece con ella para que el area tactil no se encoja.
+*/
 @media (max-width: 40rem) {
   .landing {
     padding: clamp(1rem, 3svh, 2rem) 0;
@@ -151,14 +156,23 @@
     font-size: clamp(1.7rem, 7vw, 2.6rem);
   }
 
-  .btn {
-    padding: 0.8rem 1.8rem;
-  }
-
   .trust {
     flex-direction: column;
     gap: 0.25rem 0;
     font-size: 0.85rem;
+  }
+
+  /*
+    El boton en movil: la letra se quedaba en 15.2 px y el relleno se
+    encogia a 0.8rem. Es lo unico pulsable de la pantalla, asi que sube a
+    1.05 rem con el relleno acorde. Va DENTRO de la media query de mas abajo:
+    puesta aparte, la segunda regla sobrescribia el padding y el cambio no
+    se veia.
+  */
+  .btn {
+    padding: 1rem 1.7rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
   }
 }
 

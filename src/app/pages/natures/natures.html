@@ -87,11 +87,16 @@
               </span>
 
               <!--
-                QUE ES y POR QUE. Los origenes NO van aqui: con el texto de
-                que es que dictó la autora, Diubak se salia 27 px por abajo del
-                marco. Esta pantalla es sobre que criatura es cada naturaleza,
-                no sobre como se origino cada una. Los origenes siguen en
-                results.json y los lee la pagina de resultado.
+                QUE ES, y solo eso.
+
+                No va el significado (meaning). Dice lo mismo que el texto de
+                que es, con otras palabras, y en una tarjeta estrecha eso es
+                justo el texto que se sale de los lados. Decision de la
+                autora. El significado sigue en results.json y lo usa la pagina
+                de resultado.
+
+                Los origenes tampoco: esta pantalla es sobre que criatura es
+                cada naturaleza, no sobre como se origino cada una.
               -->
               <span class="back-cuerpo">
                 <span class="back-nombre">{{ n.label }}</span>
@@ -99,8 +104,6 @@
                 @if (n.queEs; as queEs) {
                   <p class="back-que-es">{{ queEs }}</p>
                 }
-
-                <p class="back-meaning">{{ n.meaning }}</p>
               </span>
             </span>
 
@@ -138,8 +141,6 @@
       </li>
     }
   </ul>
-
-  <p class="hint-touch">En el móvil, desliza y toca la carta para girarla.</p>
 
   <a class="btn" routerLink="/birth-date">Continuar</a>
 </main>

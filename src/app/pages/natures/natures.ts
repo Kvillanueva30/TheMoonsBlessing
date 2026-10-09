@@ -67,7 +67,6 @@ export class NaturesPage {
           label: n.label,
           headline: n.headline,
           queEs: n.queEs,
-          meaning: n.meaning,
           archivo: `naturaleza/${id}.jpeg`,
         };
       });
@@ -230,7 +229,6 @@ interface NatureView {
   readonly headline: string;
   /** Que es esa criatura. Viene del dato; si no esta, se omite. */
   readonly queEs?: string;
-  readonly meaning: string;
   readonly archivo: string;
 }
 
