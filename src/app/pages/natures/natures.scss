@@ -1,0 +1,475 @@
+/*
+  LAS TRES NATURALEZAS.
+
+  Base copiada de la pantalla de los seis reinos, que sigue existiendo pero ya
+  no se muestra: mismo cielo, mismas cards con giro, mismo marco y mismo
+  lenguaje. Lo que cambia es el fondo, y lo que cambia por necessity:
+
+  - Sin carrusel. Las tres caben en fila; los seis reinos no cabian.
+  - Sin puntos ni flechas. No hay recorrido que avanzar: se ven las tres.
+  - La trasera lleva un texto largo (significado y origenes), asi que el
+    tamano NO crece con el viewport como en los reinos, sino con el ancho de
+    la caja. Un movil estrecho tiene menos ancho y el texto se lee entero.
+
+  RESTRICCION PRINCIPAL: esta pagina NO hace scroll vertical. Titulo, las tres
+  cartas y el boton tienen que caber en el viewport, y todo esta en unidades
+  de viewport para que en un movil pequeno siga cabiendo.
+*/
+
+:host {
+  display: block;
+  min-height: 100svh;
+}
+
+.natures {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 100svh y NO min-height: si sobra alto esta pagina no scrollea. */
+  height: 100svh;
+  padding: clamp(1rem, 3svh, 2.2rem) clamp(0.75rem, 2.5vw, 2rem) clamp(1rem, 3svh, 2rem);
+  color: #f2ece0;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------- intro -------- */
+
+.intro {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  text-align: center;
+  width: min(100%, 46rem);
+  margin-bottom: clamp(0.9rem, 2.6svh, 1.8rem);
+}
+
+.intro-title {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, min(5vw, 5.4svh), 2.7rem);
+  letter-spacing: 0.02em;
+  background: linear-gradient(178deg, #fffdf7 4%, #f0d9a8 44%, #c9922f 84%, #8a6220 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 8px 26px rgba(201, 146, 47, 0.16));
+}
+
+.intro-sub {
+  margin: clamp(0.35rem, 1.2svh, 0.8rem) 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(0.9rem, min(2vw, 2.1svh), 1.15rem);
+  color: #c8c3d6;
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------ las tres ------ */
+
+/*
+  Una fila de tres. El ancho maximo de la fila y el de cada celda se reparten
+  con el mismo factor, asi las tres quedan iguales y siempre caben: por
+  mucho que se estire el viewport, ninguna se sale.
+*/
+.fila {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: min(100%, 62rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.6vw, 1.4rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.celda {
+  min-height: 0;
+  perspective: 1400px;
+}
+
+.card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* En tactil el giro lo manda el componente. En escritorio, el hover de abajo. */
+.card.is-volteada .card-inner {
+  transform: rotateY(180deg);
+}
+
+/*
+  Las dos caras miden exactamente lo mismo. Si el texto de la trasera fuese
+  mas alto que la caja, al girar se veria el fondo pasar por debajo.
+*/
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.3rem, 1.2svh, 0.6rem);
+  padding: clamp(0.7rem, 1.8svh, 1.2rem);
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 2px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(38, 44, 74, 0.5), transparent 70%),
+    linear-gradient(170deg, #0d1019 0%, #0a0c14 60%, #080a11 100%);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+}
+
+.face-back {
+  transform: rotateY(180deg);
+  justify-content: flex-start;
+  gap: clamp(0.5rem, 1.6svh, 0.9rem);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* ------------------------------------------------ marco del retrato ---- */
+
+/*
+  Los adornos se dibujan con <use> sobre un simbolo definido al principio de
+  la plantilla. El SVG lleva dimension en CSS, no en el viewBox: si el viewBox
+  se estira con la caja, una esquina se deforma y el marco deja de parecer un
+  marco.
+*/
+.orn-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.portrait {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.4rem, 1.2svh, 0.7rem);
+}
+
+.lienzo {
+  position: relative;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Las dos molduras: la exterior y la interior, separadas por un hueco. */
+.frame {
+  position: absolute;
+  inset: clamp(0.2rem, 0.6svh, 0.35rem);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.frame::before,
+.frame::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+.frame::before {
+  inset: 0;
+}
+
+.frame::after {
+  inset: 2px;
+  border-color: rgba(212, 175, 55, 0.26);
+}
+
+.orn {
+  position: absolute;
+  width: clamp(1rem, 2.6vmin, 1.6rem);
+  height: clamp(1rem, 2.6vmin, 1.6rem);
+}
+
+.orn-tl { top: -1px; left: -1px; }
+.orn-tr { top: -1px; right: -1px; transform: scaleX(-1); }
+.orn-bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
+.orn-br { bottom: -1px; right: -1px; transform: scale(-1); }
+
+/*
+  El hueco que se ve cuando no hay archivo. Dice el nombre exacto que falta:
+  es mas util que un icono de error, porque la accion que hay que hacer es
+  dejar el archivo con ese nombre.
+*/
+.hueco {
+  position: absolute;
+  inset: clamp(0.75rem, 2svh, 1.1rem);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  border-radius: 1px;
+  text-align: center;
+  padding: 0.4rem;
+}
+
+.hueco-nombre {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: clamp(0.55rem, 1.5vmin, 0.68rem);
+  letter-spacing: 0.02em;
+  color: #d4c08a;
+  word-break: break-all;
+}
+
+.hueco-pista {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6e6242;
+}
+
+.retrato {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  /*
+    El recorte es el del marco, no un borde recto. Sin esto el retrato se ve
+    como una foto pegada encima de un marco dibujado.
+
+    object-position va arriba: los retratos son de cabeza y hombros y, al
+    recortar, el centro se come la cara.
+  */
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  filter: contrast(1.04) saturate(0.9);
+}
+
+/* ------------------------------------------------ cara frontal -------- */
+
+.nombre {
+  flex: 0 0 auto;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.95rem, min(2.6vw, 3svh), 1.45rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f0d9a8;
+  text-align: center;
+}
+
+.hint {
+  flex: 0 0 auto;
+  margin-top: clamp(0.2rem, 1svh, 0.5rem);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6e6242;
+}
+
+/* ------------------------------------------------ cara trasera -------- */
+
+/*
+  Aqui el texto es largo y no cabe en una sola frase. Por eso el tamano se
+  mide contra el ANCHO de la caja, no contra el viewport: en un movil estrecho
+  hay menos ancho disponible y el texto tiene que leerse entero, no enorme.
+*/
+.back-nombre {
+  flex: 0 0 auto;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(0.85rem, min(2.2vw, 2.6svh), 1.2rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f0d9a8;
+  text-align: center;
+}
+
+.back-meaning {
+  flex: 0 0 auto;
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(0.72rem, min(1.32vw, 1.7svh), 1rem);
+  line-height: 1.4;
+  color: #f2ece0;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.origenes {
+  flex: 0 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: clamp(0.35rem, 1.2svh, 0.7rem);
+  width: 100%;
+  padding-top: clamp(0.4rem, 1.2svh, 0.7rem);
+  border-top: 1px solid rgba(212, 175, 55, 0.24);
+  overflow-y: auto;
+}
+
+.origen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0;
+}
+
+.origen-label {
+  font-size: clamp(0.58rem, min(1.02vw, 1.3svh), 0.74rem);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: #c9922f;
+}
+
+.origen-rule {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(0.68rem, min(1.2vw, 1.55svh), 0.92rem);
+  line-height: 1.38;
+  color: #b9b3c6;
+  text-wrap: pretty;
+}
+
+/* -------------------------------------------------------- aviso ------- */
+
+.hint-touch {
+  flex: 0 0 auto;
+  margin: clamp(0.6rem, 1.6svh, 1rem) 0 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6e6242;
+  text-align: center;
+}
+
+/* -------------------------------------------------------- btn --------- */
+
+.btn {
+  flex: 0 0 auto;
+  margin-top: clamp(0.7rem, 2svh, 1.3rem);
+  padding: clamp(0.6rem, 1.6svh, 1rem) clamp(1.6rem, 5vw, 2.4rem);
+  display: inline-flex;
+  align-items: center;
+  font-size: clamp(0.8rem, min(1.9vw, 2svh), 0.95rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  border: 1px solid #c9922f;
+  color: #0a0a0a;
+  background: linear-gradient(100deg, #f3d28c, #d4af37);
+  box-shadow: 0 0 26px rgba(212, 175, 55, 0.34);
+  font-weight: 500;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0 60px rgba(212, 175, 55, 0.55);
+}
+
+/* ------------------------------------------------- responsive -------- */
+
+/*
+  El unico bloque del archivo donde se voltea en escritorio, y solo donde el
+  cursor existe de verdad.
+
+  :focus-visible va con :hover a proposito. El clic esta bloqueado en
+  escritorio a proposito, asi que sin esto quien navegue con teclado no
+  tendria forma de leer el significado: el giro de hover es el unico que hay.
+*/
+@media (hover: hover) {
+  .card:hover .card-inner,
+  .card:focus-visible .card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card:hover .retrato,
+  .card:focus-visible .retrato {
+    filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.35));
+  }
+}
+
+/* En vertical estrecho las tres en fila se aprijan demasiado: se apilan. */
+@media (max-width: 34rem) {
+  .fila {
+    max-width: 22rem;
+  }
+}
+
+/*
+  Pantallas muy bajas en horizontal (un movil tumbado, un portatil con la
+  mitad superior ocupada): se recorta el texto de apoyo, no los retratos ni el
+  boton. El retrato es la pantalla; el boton es la salida.
+*/
+@media (max-height: 34rem) {
+  .hint-touch {
+    display: none;
+  }
+
+  .intro-sub {
+    display: none;
+  }
+}
+
+/*
+  Sin giro: se cambia de cara sin rotar. El giro es decorativo; con movimiento
+  reducido lo que importa es que el significado se lea.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .card-inner {
+    transition: none;
+  }
+
+  .face {
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  .face-back {
+    display: none;
+    transform: none;
+  }
+
+  .card.is-volteada .face-front {
+    display: none;
+  }
+
+  .card.is-volteada .face-back {
+    display: flex;
+  }
+}

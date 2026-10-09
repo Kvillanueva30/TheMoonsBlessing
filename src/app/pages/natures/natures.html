@@ -1,0 +1,104 @@
+<!--
+  LAS TRES NATURALEZAS.
+
+  Enseña las tres a la vez, en horizontal. No es eleccion: la naturaleza la
+  calcula el motor despues de las preguntas. Aqui solo se explica que existen.
+
+  El giro de cada tarjeta muestra el significado y los origenes. Los textos
+  vienen de data/results/results.json: no hay ni una palabra de naturalezas
+  escrita en este archivo.
+-->
+<main class="natures">
+  <app-sky />
+
+  <section class="intro">
+    <h1 class="intro-title">Tres naturalezas</h1>
+    <p class="intro-sub">La luna no pregunta quién eres. Lo decide, y ninguna de las tres es la buena.</p>
+  </section>
+
+  <!--
+    Las tres en fila. No hay carrusel ni flechas: caben todas, y verlas juntas
+    es justamente lo que dice que el resultado no es una eleccion.
+  -->
+  <ul class="fila">
+    @for (n of naturalezas(); track n.id) {
+      <li class="celda">
+        <button
+          type="button"
+          class="card"
+          [class.is-volteada]="isVolteada(n.id)"
+          (click)="voltear(n.id)"
+          [attr.aria-label]="'Ver qué es ' + n.label + ' y cómo se origina'"
+        >
+          <span class="card-inner">
+
+            <!-- ============ CARA FRONTAL: el retrato y el nombre ============ -->
+            <span class="face face-front">
+              <span class="portrait">
+                <span class="lienzo">
+                  <span class="frame" aria-hidden="true">
+                    <svg class="orn orn-tl"><use href="#madar-orn" /></svg>
+                    <svg class="orn orn-tr"><use href="#madar-orn" /></svg>
+                    <svg class="orn orn-bl"><use href="#madar-orn" /></svg>
+                    <svg class="orn orn-br"><use href="#madar-orn" /></svg>
+                  </span>
+
+                  @if (retrato(n.id); as url) {
+                    <img class="retrato" [src]="url" [alt]="n.label" />
+                  } @else if (falta(n.id)) {
+                    <span class="hueco">
+                      <span class="hueco-nombre">{{ nombreArchivo(n.id) }}</span>
+                      <span class="hueco-pista">retrato de la naturaleza</span>
+                    </span>
+                  }
+                </span>
+              </span>
+
+              <span class="nombre">{{ n.label }}</span>
+              <span class="hint">voltea</span>
+            </span>
+
+            <!-- ============ CARA TRASERA: qué es y de dónde viene ============ -->
+            <span class="face face-back">
+              <span class="back-nombre">{{ n.label }}</span>
+
+              <p class="back-meaning">{{ n.meaning }}</p>
+
+              @if (n.origen.length > 0) {
+                <div class="origenes">
+                  @for (o of n.origen; track o.id) {
+                    <p class="origen">
+                      <span class="origen-label">{{ o.label }}</span>
+                      <span class="origen-rule">{{ o.rule }}</span>
+                    </p>
+                  }
+                </div>
+              }
+            </span>
+
+          </span>
+        </button>
+      </li>
+    }
+  </ul>
+
+  <p class="hint-touch">Pasa el cursor. En el móvil, toca la carta.</p>
+
+  <a class="btn" routerLink="/birth-date">Continuar</a>
+</main>
+
+<!--
+  El adorno de la esquina del marco. Es el mismo que usaba la pantalla de
+  reinos y se define aqui para que este componente no dependa de ella.
+-->
+<svg class="orn-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="madar-orn" viewBox="0 0 40 40">
+      <path d="M1 39 V15 A14 14 0 0 1 15 1 H39" fill="none" stroke="#d4af37" stroke-width="1.3" />
+      <path d="M7 39 C7 22 16 14 27 13" fill="none" stroke="#c9922f" stroke-width="1.1" />
+      <path d="M13 39 C13 28 20 22 30 21" fill="none" stroke="#6e6242" stroke-width="1" />
+      <circle cx="11" cy="11" r="2.6" fill="none" stroke="#f3d28c" stroke-width="1.2" />
+      <path d="M18 6 H30 M6 18 V30" fill="none" stroke="#6e6242" stroke-width="1" />
+    </symbol>
+  </defs>
+</svg>
