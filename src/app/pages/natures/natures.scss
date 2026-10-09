@@ -331,16 +331,16 @@
 
 .grabado-img {
   /*
-    height: 100% para LLENAR la pista. Con height: auto la imagen se quedaba en
-    su alto minimo dentro de una pista alta y el aire que debia ocupar seguia
-    vacio. El tope de max-height evita que se vuelva enorme donde el texto es
-    corto; object-fit: contain la recorta sin deformarla.
+    height: 100% para LLENAR la pista. Con height: auto el dibujo se quedaba
+    en su alto minimo dentro de una pista alta y el aire que debia ocupar
+    seguia vacio. El SVG es un elemento reemplazado con proporcion propia, del
+    viewBox, asi que el alto basta para que la anchura salga sola. El tope de
+    max-height evita que se vuelva enorme donde el texto es corto.
   */
   max-width: 100%;
   max-height: min(22vh, 11rem);
   width: auto;
   height: 100%;
-  object-fit: contain;
   opacity: 0.72;
   filter: drop-shadow(0 0 18px rgba(79, 214, 201, 0.22));
 }
