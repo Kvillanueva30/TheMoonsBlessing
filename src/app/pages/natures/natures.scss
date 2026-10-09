@@ -232,9 +232,22 @@
   */
   grid-template-rows: auto auto;
   /*
+    La causa de que el texto se descolocara en pantallas altas.
+
+    Este grid es hijo de .face-back, que es flex con justify-content: center.
+    Sin height: 100% la caja del grid se dimensiona al contenido, que a su vez
+    se ancla al centro de la cara, y al crecer la tarjeta el reparto se
+    descuadra: medido a 844 px de alto, la caja daba 0 px de alto y el texto
+    se dibujaba desde su origen natural en vez de desde el centro.
+
+    Con height: 100% la caja ocupa la tarjeta entera y align-content reparte
+    el aire dentro de ella, que es lo que hay que centering.
+  */
+  height: 100%;
+  /*
     row-gap, y no padding en el nombre. Con padding la fila mide justo el alto
     del nombre y el hueco quedaba en 0: medido, el nombre pegado al parrafo.
-    El gap separa las filas sinbiesn ocupar la fila.
+    El gap separa las filas sin ocupaar la fila.
   */
   row-gap: clamp(0.5rem, 1.8svh, 1rem);
   justify-items: center;
