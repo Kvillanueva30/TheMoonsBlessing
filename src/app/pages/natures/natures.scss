@@ -178,7 +178,11 @@
 
 .face-back {
   transform: rotateY(180deg);
-  justify-content: flex-start;
+  /*
+    El texto va centrado verticalmente. Antes iba pegado arriba (flex-start) y
+    con la letra grande dejaba 200 px de vacio debajo. Centrado se reparte.
+  */
+  justify-content: center;
   gap: clamp(0.5rem, 1.6svh, 0.9rem);
   border-color: rgba(212, 175, 55, 0.5);
 }
@@ -213,9 +217,15 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  /* Centrado en los dos ejes. El nombre y el texto van al centro de la
+     tarjeta, no pegados al borde superior. */
   align-items: center;
-  gap: clamp(0.5rem, 1.6svh, 0.9rem);
-  padding: clamp(0.55rem, 1.8svh, 1rem) clamp(1.15rem, 3vmin, 1.75rem);
+  justify-content: center;
+  /* Mas espacio arriba que abajo: medido, el texto quedaba a 21 px del borde
+     superior y el nombre encima. Abajo sobraban mas de 190 px. */
+  gap: clamp(0.6rem, 2svh, 1.1rem);
+  padding: clamp(1.1rem, 3.5svh, 2rem) clamp(1.15rem, 3vmin, 1.75rem)
+    clamp(0.7rem, 2.2svh, 1.2rem);
   overflow-y: auto;
 }
 
@@ -415,9 +425,15 @@
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 600;
-  font-size: clamp(1rem, min(1.35vw, 1.85svh), 1.1rem);
-  line-height: 1.42;
+  /*
+    Medido antes: la letra estaba en 16 px y el bloque mas largo ocupaba 227 px
+    de alto con 196 px de espacio libre debajo. Sobraba espacio de sobra, asi
+    que aqui sube a 1.2 rem de minimo (19.2 px) sin acercarse al borde.
+  */
+  font-size: clamp(1.2rem, min(1.9vw, 2.5svh), 1.45rem);
+  line-height: 1.45;
   color: #a9ede6;
+  /* Centrado en los dos ejes: el texto en su caja, la caja en la tarjeta. */
   text-align: center;
   text-wrap: pretty;
   /* Medida la palabra mas larga de Diubak: "experimentar", 80 px a 360 de
