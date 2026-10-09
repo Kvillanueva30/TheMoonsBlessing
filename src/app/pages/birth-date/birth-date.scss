@@ -1,114 +1,260 @@
+/*
+  LA FECHA DE NACIMIENTO, EN EL LENGUAJE DEL RESTO.
+
+  Esta pagina era la unica que se pintaba su propio fondo: un radial-gradient
+  opaco sobre .birth-date que tapaba el cielo de styles.scss, el mismo que ven
+  la portada, las tres naturalezas y las preguntas. Medido, era la pantalla que
+  mas se separaba del resto: al entrar en ella el fondo cambiaba de golpe.
+
+  Aqui se quita el fondo propio y el cielo comun vuelve a llegar. Y con el, la
+  tipografia Cormorant, el titulo en el degradado blanco-turquesa-dorado de las
+  otras pantallas, el resplandor de la luna en turquesa y el boton dorado con
+  relieve de la portada.
+
+  Los <select> se visten, no se sustituyen: el selector nativo es accesible con
+  teclado y con lector de pantalla, y un menu dibujado a mano habia que
+  rehacerlo entero, con su foco, su Escape y su navegacion con flechas.
+*/
+
 :host {
   display: block;
-  min-height: 100vh;
+  min-height: 100svh;
 }
 
 .birth-date {
   position: relative;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(ellipse at 50% -10%, #101421 0%, #05060a 70%);
-  color: #e8e6f0;
-  text-align: center;
-  padding: 2rem;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  /* Sin fondo propio: el cielo de styles.scss llega a traves. */
+  background: transparent;
+  color: #f2ece0;
+  padding: clamp(1.5rem, 4svh, 3rem) clamp(1rem, 4vw, 2rem);
+  overflow-x: hidden;
 }
 
+/* ------------------------------------------------ resplandor de luna ----- */
 
-@keyframes twinkle {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
+/*
+  Era dorado y ahora es turquesa. El dorado es el marco y el adorno; la luna es
+  turquesa, tambien en el halo: el resplandor es el mismo color en canal alfa
+  para que nunca sea un color distinto del que emite.
+*/
 .moon-glow {
   position: absolute;
-  top: 10%;
+  top: 12%;
   left: 50%;
   transform: translateX(-50%);
-  width: 260px;
-  height: 260px;
+  width: min(62vmin, 40svh, 22rem);
+  height: min(62vmin, 40svh, 22rem);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 199, 106, 0.15) 0%, transparent 70%);
-  filter: blur(8px);
-  animation: pulse 4s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(79, 214, 201, 0.16) 0%, transparent 70%);
+  filter: blur(10px);
+  animation: pulse 5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes pulse {
   0%, 100% { transform: translateX(-50%) scale(1); }
-  50% { transform: translateX(-50%) scale(1.1); }
+  50% { transform: translateX(-50%) scale(1.08); }
 }
+
+/* ------------------------------------------------------- contenido ------ */
 
 .content {
   position: relative;
   z-index: 1;
-  max-width: 520px;
-  width: 100%;
+  width: min(100%, 34rem);
+  text-align: center;
 }
 
 .eyebrow {
+  margin: 0 0 clamp(0.45rem, 1.4svh, 0.85rem);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  /* Medido en 0.95 rem daba 15.2 px en produccion: por debajo del minimo que
+     se fijo para el resto de pantallas. */
+  font-size: clamp(1rem, 2.4svh, 1.15rem);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  /* Medido en 0.75rem daba 12 px en produccion: pequeno de leer. */
-  font-size: 0.95rem;
-  color: #f5c76a;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.26em;
+  /* Oro: es el marco y el adorno, no la luna. */
+  color: var(--madar-accent);
 }
 
 h1 {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.7rem, min(5.6vw, 6.4svh), 3rem);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  text-wrap: balance;
+  /* El mismo degradado de la portada y de las naturalezas. */
+  background: linear-gradient(
+    178deg,
+    #fffdf7 4%,
+    #a9ede6 26%,
+    #4fd6c9 54%,
+    #c9922f 86%,
+    #8a6220 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 8px 26px rgba(79, 214, 201, 0.2));
 }
 
 .hint {
-  color: #b4b0c4;
-  margin-bottom: 2rem;
+  margin: clamp(0.6rem, 1.8svh, 1rem) 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.05rem, 2.4svh, 1.3rem);
+  line-height: 1.5;
+  color: #c8c3d6;
 }
 
+/* ---------------------------------------------------------- formulario --- */
+
 form {
+  margin-top: clamp(1.4rem, 3.6svh, 2.4rem);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  justify-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.8vw, 1rem);
+  justify-items: stretch;
 }
 
 label {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  color: #cfc9b8;
+  gap: 0.45rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1rem, 2.2svh, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #bfb9cd;
 }
 
 select {
-  background: rgba(11, 13, 20, 0.9);
-  border: 1px solid rgba(245, 199, 106, 0.3);
-  border-radius: 8px;
-  color: #e8e6f0;
-  padding: 0.5rem 0.7rem;
-  font-size: 1rem;
-  min-width: 100px;
-}
-
-.continue {
-  grid-column: span 3;
-  margin-top: 1rem;
-  padding: 0.8rem 2rem;
-  border-radius: 999px;
-  border: 1px solid rgba(245, 199, 106, 0.6);
-  background: transparent;
-  color: #f5c76a;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  /* Medido en 0.8rem daba 12.8 px en produccion. */
-  font-size: 1rem;
+  /* Sin la flecha del navegador: no se puede vestir, asi que se dibuja una en
+     SVG, con el mismo trazo fino que los grabados. */
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: clamp(0.6rem, 1.6svh, 0.85rem) 2.1rem clamp(0.6rem, 1.6svh, 0.85rem) 0.9rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.05rem, 2.4svh, 1.25rem);
+  color: #f2ece0;
+  background-color: rgba(8, 10, 17, 0.72);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23d4c08a' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 0.65rem 0.4rem;
+  border: 1px solid rgba(212, 192, 138, 0.32);
+  border-radius: 3px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    background: rgba(245, 199, 106, 0.12);
-    border-color: #f5c76a;
+    border-color: rgba(212, 192, 138, 0.62);
+  }
+
+  /* El foco es turquesa: es la luna, y es lo que el sitio marca al enfocar. */
+  &:focus-visible {
+    outline: none;
+    border-color: var(--madar-turquoise);
+    box-shadow:
+      0 0 0 1px rgba(79, 214, 201, 0.35),
+      0 0 22px rgba(79, 214, 201, 0.18);
+  }
+
+  /* La lista que se abre al pulsar: el fondo por defecto del navegador sale
+     blanco y rompe la pantalla entera. */
+  option {
+    background: #0b0d14;
+    color: #e8e6f0;
+  }
+}
+
+/* ---------------------------------------------------------- boton ------- */
+
+/*
+  Dorado con relieve, el de la portada. Antes era un boton fantasma con borde
+  y fondo transparente, que en una pantalla de elegir fecha se leia como otro control
+  mas y no como la salida.
+*/
+.continue {
+  grid-column: span 3;
+  justify-self: center;
+  margin-top: clamp(0.8rem, 2svh, 1.4rem);
+  padding: clamp(0.85rem, 2svh, 1.1rem) clamp(1.8rem, 5vw, 2.6rem);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1rem, 2.2svh, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #100d06;
+  border: 1px solid #c9922f;
+  border-radius: 3px;
+  background: linear-gradient(
+    180deg,
+    #f8e2a8 0%,
+    #e8c876 42%,
+    #d4af37 70%,
+    #b4882a 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 249, 227, 0.75),
+    inset 0 -1px 0 rgba(90, 63, 12, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(212, 175, 55, 0.34);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
     transform: translateY(-2px);
+    filter: brightness(1.07);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 249, 227, 0.85),
+      inset 0 -1px 0 rgba(90, 63, 12, 0.4),
+      0 4px 10px rgba(0, 0, 0, 0.5),
+      0 0 64px rgba(212, 175, 55, 0.6);
+  }
+}
+
+/* ----------------------------------------------------- responsive ------- */
+
+/*
+  En movil los tres selectores en fila se quedan sin ancho util: medido, a
+  390 px de ancho cada uno cae por debajo de 6rem y el ano no cabe con la
+  flecha al lado. Bajan el relleno y la flecha, que es lo que sobra.
+*/
+@media (max-width: 34rem) {
+  form {
+    gap: 0.5rem;
+  }
+
+  label {
+    letter-spacing: 0.12em;
+  }
+
+  select {
+    padding: 0.55rem 1.5rem 0.55rem 0.55rem;
+    background-position: right 0.5rem center;
+  }
+
+  .continue {
+    width: 100%;
+    padding: 0.95rem 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moon-glow {
+    animation: none;
   }
 }
