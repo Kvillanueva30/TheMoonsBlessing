@@ -1,14 +1,13 @@
 /*
-  Los seis reinos.
+  Los seis reinos. Un carrusel.
 
-  El giro usa preserve-3d con dos caras enfrentadas: la de atras se rota 180
-  grados, no se oculta con visibility. Es lo unico que hace que el giro se vea
-  como un giro y no como un cambio de texto.
+  RESTRICCION PRINCIPAL: esta pagina NO hace scroll vertical. Titulo, un
+  retrato, los puntos y el boton tienen que caber en el viewport. Todo lo que
+  sigue esta en unidades de viewport (svh/vmin) y no de pixels, para que en
+  un movil pequeno siga cabiendo igual.
 
-  El hover va DENTRO de `@media (hover: hover)`. Fuera de ese bloque no hay
-  ningun hover en todo el archivo: en tactil el giro lo decide la clase
-  `.is-flipped` que pone el componente al tocar. Sin esa separacion, en movil
-  la card se quedaria pegada en la ultima posicion del dedo.
+  El alto del .cell se calcula como el resto que sobra, no con un clamp fijo:
+  asi el boton nunca se sale por abajo por mucho que el titulo crezca.
 */
 
 :host {
@@ -21,10 +20,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100svh;
-  padding: clamp(2rem, 5svh, 4rem) 0 clamp(3rem, 7svh, 5rem);
+  /* 100svh y NO min-height: si sobra alto esta pagina no scrollea. */
+  height: 100svh;
+  padding: clamp(1rem, 3svh, 2.2rem) 0 clamp(1rem, 3svh, 2rem);
   color: #f2ece0;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* ------------------------------------------------------- intro -------- */
@@ -32,70 +32,77 @@
 .intro {
   position: relative;
   z-index: 2;
+  flex: 0 0 auto;
   text-align: center;
   width: min(100% - 2.5rem, 42rem);
-  margin: 0 auto clamp(1.6rem, 4svh, 2.6rem);
+  margin-bottom: clamp(0.8rem, 2.4svh, 1.6rem);
 }
 
 .intro-title {
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
-  font-size: clamp(1.9rem, min(5.4vw, 6.4svh), 3.1rem);
+  font-size: clamp(1.5rem, min(5vw, 5.4svh), 2.7rem);
   letter-spacing: 0.02em;
   background: linear-gradient(178deg, #fffdf7 4%, #f0d9a8 44%, #c9922f 84%, #8a6220 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 10px 30px rgba(201, 146, 47, 0.16));
+  filter: drop-shadow(0 8px 26px rgba(201, 146, 47, 0.16));
 }
 
 .intro-sub {
-  margin: clamp(0.7rem, 1.8svh, 1.1rem) 0 0;
+  margin: clamp(0.35rem, 1.2svh, 0.8rem) 0 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(1.05rem, min(2.2vw, 2.3svh), 1.3rem);
+  font-size: clamp(0.95rem, min(2.1vw, 2.2svh), 1.2rem);
   color: #c8c3d6;
+  text-wrap: balance;
 }
 
-.intro-hint {
-  margin: clamp(0.9rem, 2.2svh, 1.4rem) 0 0;
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #7f7a92;
-}
+/* ------------------------------------------------------- carrusel ----- */
 
-/* -------------------------------------------------------- grid -------- */
+/*
+  .reel es el contenedor con posicion: aloja la pista y las flechas.
+  Las flechas NO pueden vivir dentro de .stage, porque .stage necesita
+  overflow:hidden para recortar el carril y eso las recortaba a ellas:
+  medido, quedaban en 246-292 y 708-754 con la pista en 292-708.
 
-.grid {
+  flex: 1 y min-height: 0. El min-height:0 es lo que permite que la pista
+  encoja por debajo de su contenido en vez de empujar al resto fuera del
+  viewport: sin eso, el boton se sale por abajo en pantallas cortas.
+*/
+.reel {
   position: relative;
   z-index: 2;
-  list-style: none;
-  margin: 0;
-  padding: 0 clamp(1rem, 4vw, 2rem);
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.9rem, 2vw, 1.4rem);
-  width: min(100%, 68rem);
-  perspective: 1600px;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: min(100% - 5.5rem, 26rem);
 }
 
-/*
-  La altura es fija y no `auto`: las dos caras tienen que ocupar exactamente el
-  mismo hueco o al girar se ve el fondo pasar por debajo. La trasera lleva
-  scroll propio porque un reino con diez valores y ocho sombras no cabe.
-*/
-/*
-  La altura NO se ata al viewport a proposito. Las caras traseras necesitan
-  entre 420 y 520 px con los seis reinos completos, asi que una caja que
-  cupiera "en una pantalla" obligaria a hacer scroll dentro de la card
-  volteada. Prefiero que la pagina haga scroll: la card se lee entera de una
-  vez, que es lo que se pide al pasar el cursor.
-*/
+.stage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.track {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+  will-change: transform;
+}
+
 .cell {
-  height: clamp(26rem, 34rem, 34rem);
+  flex: 0 0 100%;
+  height: 100%;
+  padding: 0 0.25rem;
+  perspective: 1400px;
 }
 
 .card {
@@ -108,7 +115,6 @@
   font: inherit;
   color: inherit;
   cursor: pointer;
-  perspective: 1600px;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -126,6 +132,10 @@
   transform: rotateY(180deg);
 }
 
+/*
+  Las dos caras miden exactamente lo mismo. Si el texto de la traseraiese mas
+  alto que la caja, al girar se veria el fondo pasar por debajo.
+*/
 .face {
   position: absolute;
   inset: 0;
@@ -133,7 +143,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.9rem, 2vw, 1.3rem);
+  gap: clamp(0.3rem, 1.2svh, 0.6rem);
+  padding: clamp(0.9rem, 2.4svh, 1.4rem);
   border: 1px solid rgba(212, 175, 55, 0.34);
   border-radius: 2px;
   backface-visibility: hidden;
@@ -146,43 +157,39 @@
 
 .face-back {
   transform: rotateY(180deg);
-  align-items: stretch;
-  justify-content: flex-start;
-  text-align: left;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  justify-content: center;
   border-color: rgba(212, 175, 55, 0.5);
 }
 
 /* ------------------------------------------------ cara frontal -------- */
 
 .silhouette {
-  width: min(58%, 7.5rem);
+  width: min(46%, 7rem);
   height: auto;
-  margin-bottom: clamp(0.5rem, 1.4svh, 0.9rem);
   transition: filter 0.75s ease;
 }
 
 .founder {
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: clamp(1.05rem, min(3.4vw, 3.4svh), 1.5rem);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #f0d9a8;
+  text-align: center;
 }
 
-.realm {
-  margin-top: 0.15rem;
+.realm,
+.back-realm {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(0.9rem, 1.9vw, 1.05rem);
+  font-size: clamp(0.85rem, min(2.4vw, 2.4svh), 1.05rem);
   color: #9a96ad;
 }
 
 .hint {
-  margin-top: clamp(0.7rem, 1.8svh, 1.1rem);
-  font-size: 0.68rem;
+  margin-top: clamp(0.3rem, 1.2svh, 0.7rem);
+  font-size: 0.62rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #6e6242;
@@ -190,104 +197,112 @@
 
 /* ------------------------------------------------ cara trasera -------- */
 
+/*
+  Una sola frase. El tamano crece con la caja, no con el viewport, porque en
+  un movil en vertical esta es la unica pieza que puede leer.
+*/
 .back-essence {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(0.95rem, 2vw, 1.12rem);
-  line-height: 1.42;
+  font-size: clamp(1.05rem, min(4.4vw, 4.6svh), 1.6rem);
+  line-height: 1.4;
   color: #f2ece0;
+  text-align: center;
+  text-wrap: balance;
 }
 
-.back-block {
-  display: flex;
-  flex-direction: column;
-  margin-top: clamp(0.7rem, 1.6svh, 1rem);
-}
-
-.back-label {
-  font-size: 0.66rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #7f7a92;
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-.back-values {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-top: 0.5rem;
-}
-
-.value {
-  padding: 0.12rem 0.5rem;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 2px;
-  font-size: 0.76rem;
-  color: #d8d2e4;
-}
-
-.back-shadows {
-  display: block;
-  margin-top: 0.4rem;
-}
-
-/*
-  Cada sombra muestra SIEMPRE su valor de origen al lado. Poner solo el precio
-  ("resentimiento", "control") sin el valor que lo produce permitiria leer la
-  lista como una lista de defectos, y eso ya seria un juicio sobre el reino.
-
-  Fluyen como texto y no como etiquetas. Medido: con cada par en su propia
-  caja, las seis caras traseras ocupaban entre 421 y 516 px dentro de una caja
-  de 336, y habia que hacer scroll DENTRO de una card volteada.
-*/
-.shadow {
-  display: inline;
-  font-size: 0.74rem;
-  line-height: 1.6;
-}
-
-.shadow + .shadow::before {
-  content: " · ";
-  color: #6e6242;
-}
-
-.from {
-  color: #c8c3d6;
-}
+/* ------------------------------------------------------ flechas ------- */
 
 .arrow {
-  font-size: 0.7rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: clamp(2.1rem, 7vmin, 2.9rem);
+  height: clamp(2.1rem, 7vmin, 2.9rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 50%;
+  background: rgba(8, 10, 17, 0.72);
+  color: #f0d9a8;
+  font-size: clamp(1.1rem, 3.4vmin, 1.5rem);
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.arrow:hover,
+.arrow:focus-visible {
+  border-color: #c9922f;
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.36);
+}
+
+.arrow-prev {
+  left: clamp(-2.9rem, -7vmin, -2.1rem);
+}
+
+.arrow-next {
+  right: clamp(-2.9rem, -7vmin, -2.1rem);
+}
+
+/* -------------------------------------------------------- dots -------- */
+
+/*
+  Seis puntos de luz, sin numeros. AGENTS.md y designRules[0] prohiben los
+  contadores tipo "Pregunta 4 de 20", asi que el sitio se dice con la
+  intensidad del punto, no con una cifra. Es el mismo lenguaje que el
+  sendero de la pagina de preguntas.
+*/
+.dots {
+  flex: 0 0 auto;
+  list-style: none;
+  display: flex;
+  gap: 0.7rem;
+  margin: clamp(0.9rem, 2.4svh, 1.5rem) 0 0;
+  padding: 0;
+}
+
+.dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #4a4436;
+  cursor: pointer;
+  transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.dot.now {
+  background: #e8c76a;
+  box-shadow: 0 0 14px rgba(232, 199, 106, 0.75);
+  transform: scale(1.35);
+}
+
+.hint-touch {
+  flex: 0 0 auto;
+  margin: clamp(0.6rem, 1.6svh, 1rem) 0 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: #6e6242;
+  text-align: center;
 }
 
-.to {
-  color: #c9922f;
-  font-style: italic;
-}
-
-.guardrail {
-  margin-top: auto;
-  padding-top: clamp(0.7rem, 1.6svh, 1rem);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-style: italic;
-  font-size: 0.88rem;
-  line-height: 1.45;
-  color: #8a8299;
-}
-
-/* -------------------------------------------------------- btn -------- */
+/* -------------------------------------------------------- btn --------- */
 
 .btn {
-  position: relative;
-  z-index: 2;
-  margin-top: clamp(2rem, 5svh, 3.2rem);
-  padding: clamp(0.9rem, 2svh, 1.2rem) 2.4rem;
+  flex: 0 0 auto;
+  margin-top: clamp(0.8rem, 2.2svh, 1.4rem);
+  padding: clamp(0.6rem, 1.6svh, 1rem) clamp(1.6rem, 5vw, 2.4rem);
   display: inline-flex;
   align-items: center;
-  font-size: 0.95rem;
+  font-size: clamp(0.8rem, min(1.9vw, 2svh), 0.95rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
@@ -308,50 +323,60 @@
 
 /* ------------------------------------------------- responsive -------- */
 
+/*
+  El unico bloque del archivo donde se voltea en escritorio, y solo donde el
+  cursor existe de verdad.
+
+  :focus-visible va con :hover a proposito. El clic esta bloqueado en
+  escritorio a proposito, asi que sin esto quien navegue con teclado no
+  tendria forma de leer la esencia: el giro de hover es el unico que hay.
+*/
 @media (hover: hover) {
-  /* El unico hover del archivo. El escritorio ya tiene el cursor ahi. */
-  .card:hover .card-inner {
+  .card:hover .card-inner,
+  .card:focus-visible .card-inner {
     transform: rotateY(180deg);
   }
 
-  .card:hover .silhouette {
+  .card:hover .silhouette,
+  .card:focus-visible .silhouette {
     filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.35));
   }
 }
 
-@media (max-width: 58rem) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 34rem) {
-  .kingdoms {
-    padding-top: clamp(1.4rem, 3svh, 2rem);
+@media (max-width: 40rem) {
+  /* Las flechas se comen el ancho en movil y sobran: ahi se desliza. */
+  .arrow {
+    display: none;
   }
 
-  .grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.9rem;
-  }
-
-  .cell {
-    /* En una columna las cards se apilan: mas bajas, para no obligar a
-       atravesar seis pantallas de scroll. */
-    height: clamp(16rem, 38svh, 19rem);
-  }
-
-  .btn {
-    padding: 0.8rem 1.8rem;
+  .reel {
+    width: min(100% - 2.5rem, 24rem);
   }
 }
 
 /*
-  Sin giro: se cambia de una cara a otra sin rotar. El giro es decorativo, y
-  con movimiento reducido lo que importa es que se pueda leer la cara de atras.
+  Pantallas muy bajas en horizontal (un movil tumbado, un portatil con la
+  mitad superior ocupada): se recorta el texto de apoyo, no el retrato ni el
+  boton. El retrato es la pantalla; el boton es la salida.
+*/
+@media (max-height: 34rem) {
+  .hint-touch {
+    display: none;
+  }
+
+  .intro-sub {
+    display: none;
+  }
+}
+
+/*
+  Sin giro: se cambia de cara sin rotar. El giro es decorativo; con movimiento
+  reducido lo que importa es que la essence se lea.
 */
 @media (prefers-reduced-motion: reduce) {
-  .card-inner {
+  .card-inner,
+  .track,
+  .dot {
     transition: none;
   }
 

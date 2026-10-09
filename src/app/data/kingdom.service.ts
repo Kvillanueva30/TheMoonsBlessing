@@ -24,16 +24,6 @@ export interface KingdomData {
   readonly transformationNote?: string;
   readonly founder?: { readonly name: string; readonly title?: string };
   readonly essence?: { readonly en: string; readonly es: string };
-  /**
-   * Lo que el reino valora, y el precio de cada uno de esos valores.
-   *
-   * Las sombras van siempre pareadas con su valor de origen: mostrarlas
-   * sueltas permitiria leer un reino como el bueno.
-   */
-  readonly values?: readonly string[];
-  readonly shadows?: readonly { readonly from: string; readonly to: string }[];
-  /** El aviso que impide que el reino sea el bueno. No es decorativo. */
-  readonly guardrail?: string;
 }
 
 const KINGDOM_FILES = ['ederian', 'bastia', 'tralan', 'xorian', 'tradia', 'helia'] as const;

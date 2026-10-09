@@ -1,30 +1,33 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { KingdomService, type KingdomData } from '../../data/kingdom.service';
 import { SkyComponent } from '../../shared/sky/sky';
 
 /**
- * Los seis reinos, antes de la fecha de nacimiento.
+ * Los seis reinos, antes de la fecha de nacimiento. Un carrusel.
  *
- * No es una pantalla de eleccion: el visitante NO elige reino aqui, y el
- * boton no dice "elige". Es una pantalla de contexto, y por eso las seis
- * cards estan siempre a la vista, sin estadosselected ni llamada al motor.
+ * NO es una pantalla de eleccion: el visitante no elige reino aqui, el motor
+ * lo decide. El boton dice "Continuar" y no "elige". Esta pagina no toca el
+ * motor ni lee reglas.
  *
- * QUE SE VE Y QUE NO
+ * LA PANTALLA NO HACE SCROLL VERTICAL
  *
- * Cara frontal: la silueta del fundador y su nombre. No hay retrato porque
- * no existe arte de los fundadores en el proyecto, y AGENTS.md deja la
- * imagen por IA fuera de alcance. La silueta es un hueco honesto: cuando
- * llegue el arte, se cambia el fondo de la cara frontal y no el resto.
+ * Todo cabe en el viewport: titulo, un solo retrato, los puntos y el boton.
+ * Con scroll habia que bajar para ver el boton, y bajarse era el gesto que
+ * hace la gente cuando ya no le interesa. El carrusel obliga a recorrer los
+ * seis staying en el mismo sitio.
  *
- * Cara trasera: essence, values, shadows y guardrail. Solo eso.
+ * LA TRASERA ES UN ANZUELO, NO UNA FICHA
  *
- * NO se muestran `natureRule`, `natures`, `transformationNote` ni
- * `lightDarkness`. Los tres reinos malditos declaran ahi que TODOS sus
- * ciudadanos son Cazuts, y Bastia cuenta que Silas era el favorito de la
- * diosa. Enseñar eso aqui regalaria, antes del ritual, la revelacion que
- * despues descubre el visitante, y un spoiler de una generacion entera.
+ * Solo la esencia: una frase por reino. Ni `values`, ni `shadows`, ni
+ * `guardrail`, ni `natureRule`, ni `natures`, ni `transformationNote`, ni
+ * `lightDarkness`.
+ *
+ * Los tres reinos malditos declaran en esos campos que TODOS sus ciudadanos
+ * son Cazuts, y Bastia cuenta que Silas era el favorito de la diosa. Eso se
+ * revela durante el ritual, no antes. Y una lista de diez valores con sus
+ * sombras es una ficha, no un anzuelo: da todo y no deja nada que querer.
  */
 @Component({
   selector: 'app-kingdoms',
@@ -38,30 +41,71 @@ export class KingdomsPage {
     initialValue: [] as readonly KingdomData[],
   });
 
-  /** indice de la card volteada a mano, o null si ninguna. */
-  protected readonly flipped = signal<number | null>(null);
+  /** Reino que se esta viendo. El carrusel no tiene estado propio: es un indice. */
+  protected readonly index = signal(0);
+  protected readonly total = computed(() => this.kingdoms().length);
+  protected readonly current = computed(() => this.kingdoms()[this.index()] ?? null);
+
+  /** En tactil, que la card visible este volteada. En escritorio no se usa. */
+  protected readonly flipped = signal(false);
 
   /**
    * En escritorio el giro lo hace el CSS con `:hover`, porque el cursor ya
-   * esta ahi. En tactil no hay hover, asi que el unico gesto disponible es el
-   * toque: ahi si hace falta estado, y por eso existe `flipped`.
-   *
-   * Se comprueba con matchMedia y no con `hover: hover` en el SCSS porque la
-   * clase la decide Angular, no el navegador.
+   * esta ahi y no necesita un estado. En tactil no hay hover, asi que ahi el
+   * unico gesto disponible es el toque, y hace falta estado.
    */
   private readonly canHover =
     typeof window === 'undefined' || window.matchMedia('(hover: hover)').matches;
 
-  protected toggle(i: number): void {
+  /** Desplazamiento en pixeles del dedo o del raton, para el gesto de(arrastrar). */
+  private startX: number | null = null;
+
+  protected next(): void {
+    this.goTo(this.index() + 1);
+  }
+
+  protected prev(): void {
+    this.goTo(this.index() - 1);
+  }
+
+  /** Da la vuelta al final, no se frena: seis reinos son un circulo. */
+  protected goTo(i: number): void {
+    const n = this.total();
+    if (n === 0) return;
+    this.index.set(((i % n) + n) % n);
+    // Al cambiar de reino la card nueva viene de frente.
+    this.flipped.set(false);
+  }
+
+  protected isCurrent(i: number): boolean {
+    return i === this.index();
+  }
+
+  protected toggle(): void {
     if (this.canHover) return;
-    this.flipped.update((actual) => (actual === i ? null : i));
+    this.flipped.update((v) => !v);
   }
 
-  protected isFlipped(i: number): boolean {
-    return this.flipped() === i;
+  // ---------------------------------------------------------- arrastre --
+
+  protected onDown(event: PointerEvent): void {
+    this.startX = event.clientX;
   }
 
-  /** Un id por card, para que la silueta pueda referenciar su propio tramado. */
+  /**
+   * El umbral evita que un roce con el dedo voltee la card. 48 px es bastante
+   * mas que un toque, y bastante menos que un deslizamiento real.
+   */
+  protected onUp(event: PointerEvent): void {
+    if (this.startX === null) return;
+    const dx = event.clientX - this.startX;
+    this.startX = null;
+    if (Math.abs(dx) < 48) return;
+    if (dx < 0) this.next();
+    else this.prev();
+  }
+
+  /** Un id por posicion, para que la silueta referencie su propio tramado. */
   protected uid(i: number): string {
     return `kingdom-hatch-${i}`;
   }
