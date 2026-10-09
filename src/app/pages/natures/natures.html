@@ -49,13 +49,6 @@
             <span class="face face-front">
               <span class="portrait">
                 <span class="lienzo">
-                  <span class="frame" aria-hidden="true">
-                    <svg class="orn orn-tl"><use href="#madar-orn" /></svg>
-                    <svg class="orn orn-tr"><use href="#madar-orn" /></svg>
-                    <svg class="orn orn-bl"><use href="#madar-orn" /></svg>
-                    <svg class="orn orn-br"><use href="#madar-orn" /></svg>
-                  </span>
-
                   @if (retrato(n.id); as url) {
                     <img class="retrato" [src]="url" [alt]="n.label" />
                   } @else if (falta(n.id)) {
@@ -202,19 +195,3 @@
 
   <a class="btn" routerLink="/birth-date">Continuar</a>
 </main>
-
-<!--
-  El adorno de la esquina del marco. Es el mismo que usaba la pantalla de
-  reinos y se define aqui para que este componente no dependa de ella.
--->
-<svg class="orn-defs" aria-hidden="true" focusable="false">
-  <defs>
-    <symbol id="madar-orn" viewBox="0 0 40 40">
-      <path d="M1 39 V15 A14 14 0 0 1 15 1 H39" fill="none" stroke="#d4af37" stroke-width="1.3" />
-      <path d="M7 39 C7 22 16 14 27 13" fill="none" stroke="#c9922f" stroke-width="1.1" />
-      <path d="M13 39 C13 28 20 22 30 21" fill="none" stroke="#6e6242" stroke-width="1" />
-      <circle cx="11" cy="11" r="2.6" fill="none" stroke="#f3d28c" stroke-width="1.2" />
-      <path d="M18 6 H30 M6 18 V30" fill="none" stroke="#6e6242" stroke-width="1" />
-    </symbol>
-  </defs>
-</svg>

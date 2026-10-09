@@ -356,21 +356,6 @@
   grid-row: 3;
 }
 
-/* ------------------------------------------------ marco del retrato ---- */
-
-/*
-  Los adornos se dibujan con <use> sobre un simbolo definido al principio de
-  la plantilla. El SVG lleva dimension en CSS, no en el viewBox: si el viewBox
-  se estira con la caja, una esquina se deforma y el marco deja de parecer un
-  marco.
-*/
-.orn-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
 .portrait {
   position: relative;
   flex: 1 1 auto;
@@ -405,40 +390,6 @@
   justify-content: center;
 }
 
-/* Las dos molduras: la exterior y la interior, separadas por un hueco. */
-.frame {
-  position: absolute;
-  inset: clamp(0.2rem, 0.6svh, 0.35rem);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.frame::before,
-.frame::after {
-  content: "";
-  position: absolute;
-  border: 1px solid rgba(212, 175, 55, 0.5);
-}
-
-.frame::before {
-  inset: 0;
-}
-
-.frame::after {
-  inset: 2px;
-  border-color: rgba(212, 175, 55, 0.26);
-}
-
-.orn {
-  position: absolute;
-  width: clamp(1rem, 2.6vmin, 1.6rem);
-  height: clamp(1rem, 2.6vmin, 1.6rem);
-}
-
-.orn-tl { top: -1px; left: -1px; }
-.orn-tr { top: -1px; right: -1px; transform: scaleX(-1); }
-.orn-bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
-.orn-br { bottom: -1px; right: -1px; transform: scale(-1); }
 
 /*
   El hueco que se ve cuando no hay archivo. Dice el nombre exacto que falta:
@@ -483,13 +434,9 @@
   object-fit: cover;
   object-position: center 22%;
   /*
-    El recorte es el del marco, no un borde recto. Sin esto el retrato se ve
-    como una foto pegada encima de un marco dibujado.
-
     object-position va arriba: los retratos son de cabeza y hombros y, al
     recortar, el centro se come la cara.
   */
-  border: 1px solid rgba(212, 175, 55, 0.22);
   filter: contrast(1.04) saturate(0.9);
 }
 
