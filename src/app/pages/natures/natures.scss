@@ -179,10 +179,10 @@
 .face-back {
   transform: rotateY(180deg);
   /*
-    El texto va centrado verticalmente. Antes iba pegado arriba (flex-start) y
-    con la letra grande dejaba 200 px de vacio debajo. Centrado se reparte.
+    El centrado vertical lo hace .back-cuerpo con margin: auto, no esta cara.
+    Ponerlo aqui no hacia nada: el unico hijo es el cuerpo, que con
+    flex-grow ocupaba todo el alto.
   */
-  justify-content: center;
   gap: clamp(0.5rem, 1.6svh, 0.9rem);
   border-color: rgba(212, 175, 55, 0.5);
 }
@@ -203,8 +203,17 @@
 .back-cuerpo {
   position: relative;
   z-index: 1;
-  flex: 1 1 auto;
-  min-height: 0;
+  /*
+    flex: 0 0 auto, NO 1 1 auto. Medido: con flex-grow la caja se estiraba a
+    ocupar los 462 px de alto de la cara, sin dejar sitio libre, y entonces
+    justify-content no tenia con que centrar y el texto se quedaba pegado
+    abajo. Ahora la caja mide lo que mide el texto y se centra ella.
+  */
+  flex: 0 0 auto;
+  max-height: 100%;
+  /* Con la caja al tamano del contenido, margin auto es la que la centra en
+     los dos ejes dentro de la cara. justify-content ya no hace falta aqui. */
+  margin: auto;
   /*
     box-sizing, NO width. Con width:100% mas padding lateral la caja se salia
     de la tarjeta: medido, 279 px de caja sobre una tarjeta de 306, y los
@@ -217,8 +226,8 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /* Centrado en los dos ejes. El nombre y el texto van al centro de la
-     tarjeta, no pegados al borde superior. */
+  /* El nombre y el texto centrados: el horizontal con align-items, el
+     vertical con el margin: auto de arriba. */
   align-items: center;
   justify-content: center;
   /* Mas espacio arriba que abajo: medido, el texto quedaba a 21 px del borde
