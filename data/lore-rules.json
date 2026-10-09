@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "status": "DRAFT",
   "statusNote": "Contiene decisiones PENDIENTES de confirmacion por la autora. El motor debe respetar 'default' en las politicas no resueltas y NO debe inventar la regla que falta.",
+  "dataFiles": {
+    "$comment": "Indice de archivos de lore. El motor NO debe leer lore de otro sitio que de aqui.",
+    "lore-rules": "data/lore-rules.json, este archivo. Reglas del universo y decisiones pendientes.",
+    "politics": "data/politics.json. UNICA fuente sobre soberania: reinos, paises, imperios y reyes actuales. Los archivos de data/kingdoms/ NO declaran reyes actuales y no deben hacerlo.",
+    "kingdoms": "data/kingdoms/*.json. Naturaleza, founders, esencia y ceremonial de cada reino. Ningun reino es igual a otro.",
+    "moon": "data/moon/moon-phases.json",
+    "questions": "data/questions/questions.json. El banco esta vacio a proposito.",
+    "traits": "data/traits/traits.json",
+    "results": "data/results/results.json"
+  },
   "fundamentalPrinciple": {
     "id": "light-darkness-not-morality",
     "statement": {
@@ -45,6 +55,19 @@
     },
     "cazut": {
       "rule": "Los Cazuts NO se crean mediante la ceremonia de los 16 anos. Los primeros Cazuts surgieron como consecuencia de una maldicion. Posteriormente la condicion se transmitio mediante el linaje, asi que una persona puede ser Cazut por nacimiento."
+    },
+    "origenDeCadaGeneracion": {
+      "primera generacion": "Todos nacen Manskling. La diosa bendijo a los que ya existian y los convertio en Diubaks. Silas y Lucius eran Manskling antes de la bendicion.",
+      "generaciones siguientes": "Las que nacen DESPUES de la primera bendicion no la reciben al nacer. Tienen que esperar a cumplir 16. Ahi la diosa decide: si son bendecidos se transforman en Diubaks; si no, siguen Mansklings.",
+      "por-que-16": "La diosa les dijo que debian esperar a tener 16 para saber si serian bendecidos o no.",
+      "el-problema": "En Tradia, Helia y Bastia muy pocos se transformaban en Diubaks. En Ederian pasaban muchos mas. ESA diferencia fue lo que provoco la guerra.",
+      "la-guerra": "El documento de fundadores lo cuenta desde el otro lado: Silas, Halik y Tarik armaron un plan para disminuir la cantidad de Diubaks en Ederian, alegando que pronto los invadirian y el equilibrio se perderia.",
+      "despues-de-la-guerra": "La diosa transformo a TODOS los ciudadanos de esos tres reinos en Cazuts, sin importar si eran Mansklings o Diubaks.",
+      "regla-que-se-mantiene": "El Cazut NO se crea mediante la ceremonia de los 16. El que nace Cazut, nace Cazut. La transformacion de los tres reinos fue una imposicion, no un rito.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 8 de octubre de 2026"
+      }
     }
   },
   "ceremonyRules": {
@@ -229,12 +252,13 @@
       "id": "P-004",
       "title": "¿Cuantas preguntas tiene la experiencia?",
       "severity": "non-blocking",
-      "problem": "El brief no da un numero de preguntas y no define ninguna pregunta concreta.",
-      "instruction": "El banco de preguntas esta vacio a proposito. El motor debe aceptar cualquier numero. No mostrar barras de progreso tipo 'Pregunta 4 de 20' salvo necesidad.",
+      "problem": "El brief no daba un numero de preguntas. Ya esta decidido: la visita recibe 9, en el reparto 5 legado + 3 bendicion + 1 caracter. Ver selectionRules en este archivo.",
+      "instruction": "El numero vive en data/questions/questions.json -> selection. La pagina lo lee de ahi y no lo cuenta a mano. Se muestran puntos de luz sin numeros, nunca un contador de \"Pregunta 4 de 20\".",
       "affectedFiles": [
         "data/questions/questions.json"
       ],
-      "status": "OPEN"
+      "status": "RESOLVED",
+      "resolution": "9 preguntas por visita. q9 y q10 son obligatorias porque sin ellas el Diubak es inalcanzable. El resto se elige al azar dentro de cada grupo."
     },
     {
       "id": "P-005",
@@ -276,13 +300,17 @@
       "id": "P-008",
       "title": "¿Que reinos fueron maldecidos despues de la guerra?",
       "severity": "non-blocking",
-      "problem": "El brief dice que varios reinos fueron maldecidos pero no especifica cuales.",
-      "instruction": "No registrar maldiciones por reino hasta confirmacion. Bastia, Tradia y Helia tienen la pregunta abierta en su archivo.",
+      "problem": "No estaba declarado que reinos fueron maldecidos despues de la guerra. Ya esta decidido y esta escrito en el dato: Bastia, Helia y Tradia.",
+      "instruction": "El dato lo declara, no el motor: data/kingdoms/bastia.json, helia.json y tradia.json tienen transformedByCurse:true y natures:[\"cazut\"]. Ederian, Tralan y Xorian NO tienen el flag y conservan natures:[\"manskling\",\"diubak\"]. El motor lee el flag; no lo deduce de que el reino tenga una sola naturaleza.",
       "affectedFiles": [
         "data/kingdoms/*.json"
       ],
       "status": "RESOLVED",
-      "resolution": "Cerrada. Los tres reinos malditos son Tradia, Helia y Bastia."
+      "resolution": "Bastia, Helia y Tradia fueron transformados por la diosa: TODOS sus ciudadanos son Cazuts, sin importar si antes eran Mansklings o Diubaks. Ederian, Tralan y Xorian son reinos mixtos y mantienen Manskling y Diubak. Ver natureRules.origenDeCadaGeneracion y selectionRules.pesosDeReino.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 8 de octubre de 2026"
+      }
     },
     {
       "id": "P-009",
@@ -311,5 +339,47 @@
       "el papel de Alden mas alla de ser el ejemplo del principio de luz y oscuridad",
       "los poderes de Diubak y la naturaleza exacta de la maldicion de los Cazuts"
     ]
+  },
+  "selectionRules": {
+    "que-selecciona": "La visita recibe 9 preguntas, en este reparto: 5 de legado, 3 de bendicion y 1 de caracter.",
+    "declarado-en": "data/questions/questions.json -> selection. El motor lo lee de ahi: esta pagina no los cuenta a mano.",
+    "slots": {
+      "legado": "5 preguntas. Afinidad con los legados: deducen el reino.",
+      "bendicion": "3 preguntas. Deseo vs necesidad: deciden la naturaleza cuando el canon del reino no la impone.",
+      "caracter": "1 pregunta. Rasgo visible, canBless:false."
+    },
+    "obligatorias": {
+      "cuales": [
+        "q9",
+        "q10"
+      ],
+      "por_que": "El motor solo puede leer Diubak si hay necesidad interna con contenido Y pauta de remediacion Y al menos DOS evidencias que lo sostengan. q9 aporta el subtipo located_identity y q10 el misdirected_remedy: entre las dos cubren las dos condiciones y son dos evidencias de apoyo, que es lo que el umbral exige.",
+      "como_funciona": "Se sacan SIEMPRE y se sirven antes de completar el cupo. El tercer hueco de bendicion se elige al azar entre q5, q6 y q7.",
+      "por_que_no_al_azar": "Sin ellas hay combinaciones de preguntas en las que el motor no tiene por donde leer la necesidad interna, y la visita no puede Diubak en ningun caso. Es una unreachable, no una cuestion de frecuencia.",
+      "donde_se_declara": "questions.json -> selection.slots.blessing.required"
+    },
+    "pesosDeReino": {
+      "mezclados": {
+        "reinos": [
+          "ederian",
+          "tralan",
+          "xorian"
+        ],
+        "peso": 4
+      },
+      "soloCazut": {
+        "reinos": [
+          "bastia",
+          "helia",
+          "tradia"
+        ],
+        "peso": 3
+      },
+      "donde_se_declaran": "questions.json -> legacyAffinity de cada opcion de las preguntas de legado.",
+      "que-es-y-que-no": "Es una decision de BALANCE, no de lore. El peso no significa que un reino valga mas ni que el visitante se lo merezca: solo cambia la frecuencia con la que se llega a cada uno. El canon de un reino no se toca aqui.",
+      "reparto-medido": "Enumeracion exhaustiva de las 720.896 combinaciones de visita: los tres reinos mixtos suman 70.6% y los tres exclusivamente Cazut 29.4%. El mas bajo de los seis es Tradia, 9.6%.",
+      "cuando-hay-que-volver-a-medir": "Si cambia la seleccion de preguntas o las afinidades de legado, el reparto se mueve y hay que medirlo otra vez. El ajuste depende de cuantos huecos tiene cada reino, no solo del peso: anadir una pregunta de legado cambia el reparto sin tocar el peso.",
+      "no-hay-normalizacion": "Los puntos se comparan en crudo. No se normaliza por maximo posible ni se ponderan grupos: la unica regla extra es el desempate por semilla cuando hay empate."
+    }
   }
 }

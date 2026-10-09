@@ -4,6 +4,7 @@ import {
   GoddessResult,
   InnerProfile,
   Interpretation,
+  InferredNature,
   NatureId,
   OriginId,
   Revelation,
@@ -225,31 +226,37 @@ export function interpret(profile: InnerProfile): Interpretation {
  *   por este camino: la direccion no es necesidad. Es el caso abierto, y aqui
  *   cae como "no hay evidencia suficiente".
  */
-export function reveal(
+/**
+ * CLASIFICADOR. El veredicto que dan las respuestas del visitante.
+ *
+ * Es una extraccion literal de lo que ya hacia reveal(), sin cambiar ninguna
+ * regla ni ningun umbral. Lo unico que se ha movido es que esta funcion NO
+ * mira el canon: existe para poder saber como seria la naturaleza del
+ * visitante si el reino no hubiera impuesto nada.
+ *
+ * Consequences deliberadas:
+ *   - Solo devuelve 'manskling' o 'diubak'. No tiene rama 'cazut', porque
+ *     ninguna combinacion de respuestas significa maldicion.
+ *   - No toca la necesidad interior: la lee igual que antes, con los mismos
+ *     umbrales (innerNeedWithContent, remediationPattern y support >= 2).
+ */
+/**
+ * Lo que devuelve el clasificador, con nature YA NARROWED.
+ *
+ * El tipo `InferredNature` no admite 'cazut', asi que el compilador impide
+ * anadir una rama que devuelva cazut por inferencia. Si algum dia hiciera
+ * falta, habria que cambiar el tipo a proposito, no de paso.
+ */
+export type ClassifiedNature = Omit<Revelation, 'nature' | 'originalNature' | 'transformed'> & {
+  readonly nature: InferredNature;
+};
+
+export function classifyNature(
   profile: InnerProfile,
   reading: Interpretation,
-  canonicalNature: readonly NatureId[],
-): Revelation {
+): ClassifiedNature {
   const grounds = [...profile.blessingEvidence];
   const support = supportingEvidence(profile.blessingEvidence);
-
-  // --- El canon manda
-  if (canonicalNature.length === 1) {
-    const nature = canonicalNature[0];
-    const origin: OriginId = nature === 'cazut' ? 'curse' : 'lineage';
-    return {
-      nature,
-      origin,
-      believed: externalDesire(profile),
-      perceived: [],
-      reason:
-        nature === 'cazut'
-          ? 'Tu reino esta bajo la maldicion. Tu naturaleza viene de ahi, no de lo que hay en ti.'
-          : 'Tu naturaleza viene del linaje, no de una decision interior.',
-      grounds,
-      unsatisfied: false,
-    };
-  }
 
   // --- El canon no determina: decide la interpretacion del conjunto
   const perceived = innerEvidence(profile);
@@ -342,7 +349,7 @@ function singleEvidenceReveal(
   believed: readonly Evidence[],
   perceived: readonly Evidence[],
   grounds: readonly Evidence[],
-): Revelation {
+): ClassifiedNature {
   return {
     nature: 'manskling',
     origin: 'no_transformation_needed',
@@ -373,6 +380,58 @@ function innerEvidence(profile: InnerProfile): readonly Evidence[] {
 }
 
 // ---------------------------------------------------------------------------
+// Cortocircuito del canon
+// ---------------------------------------------------------------------------
+
+/**
+ * El canon manda sobre la naturaleza VIGENTE.
+ *
+ * Si el reino declara una sola naturaleza, esa es la de hoy. El clasificador
+ * se calcula IGUAL, para poder decir como era antes, pero no toca el
+ * resultado: exactamente igual que antes de este cambio.
+ *
+ * `historicalTransformation` lo declara el dato del reino
+ * (kingdoms/*.json -> transformedByCurse). No se deduce de que el reino tenga
+ * una sola naturaleza: son cosas distintas y un reino de naturaleza unica y no
+ * transformado no debe marcar nada.
+ */
+export function reveal(
+  profile: InnerProfile,
+  reading: Interpretation,
+  canonicalNature: readonly NatureId[],
+  historicalTransformation: boolean = false,
+): Revelation {
+  const classified = classifyNature(profile, reading);
+
+  const originalNature = {
+    value: classified.nature,
+    source: 'inferred' as const,
+  };
+
+  if (canonicalNature.length === 1) {
+    const nature = canonicalNature[0];
+    const origin: OriginId = nature === 'cazut' ? 'curse' : 'lineage';
+    return {
+      nature,
+      originalNature,
+      transformed: historicalTransformation && nature === 'cazut',
+      origin,
+      believed: externalDesire(profile),
+      perceived: [],
+      reason:
+        nature === 'cazut'
+          ? 'Tu reino esta bajo la maldicion. Tu naturaleza viene de ahi, no de lo que hay en ti.'
+          : 'Tu naturaleza viene del linaje, no de una decision interior.',
+      grounds: classified.grounds,
+      unsatisfied: false,
+    };
+  }
+
+  // El canon no determina: el veredicto del clasificador es el vigente.
+  return { ...classified, originalNature, transformed: false };
+}
+
+// ---------------------------------------------------------------------------
 // Entrada publica
 // ---------------------------------------------------------------------------
 
@@ -380,11 +439,29 @@ export interface GoddessInput {
   readonly evidence: readonly Evidence[];
   /** Lo que el canon dice de este reino. Vacio = el canon no decide. */
   readonly canonicalNature: readonly NatureId[];
+  /**
+   * El dato del reino declara una transformacion historica real.
+   * Viene de kingdoms/*.json -> transformedByCurse. No se infiere del canon.
+   */
+  readonly historicalTransformation?: boolean;
 }
 
 export function interpretGoddess(input: GoddessInput): GoddessResult {
   const profile = buildProfile(input.evidence);
   const interpretation = interpret(profile);
-  const revelation = reveal(profile, interpretation, input.canonicalNature);
-  return { nature: revelation.nature, origin: revelation.origin, profile, interpretation, revelation };
+  const revelation = reveal(
+    profile,
+    interpretation,
+    input.canonicalNature,
+    input.historicalTransformation ?? false,
+  );
+  return {
+    nature: revelation.nature,
+    originalNature: revelation.originalNature,
+    transformed: revelation.transformed,
+    origin: revelation.origin,
+    profile,
+    interpretation,
+    revelation,
+  };
 }

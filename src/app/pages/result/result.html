@@ -29,6 +29,22 @@
         <h1 class="nature">{{ natureLabel() }}</h1>
         <p class="reason">{{ reason() }}</p>
 
+        <!--
+          Transformacion historica. Solo aparece si el dato del reino declara
+          que la diosa transformo a todos sus ciudadanos. Explica el hecho, sin
+          valorar ninguna de las dos naturalezas.
+        -->
+        @if (originalNatureLabel(); as original) {
+          <div class="transform">
+            <p class="transform-label">Antes de la guerra eras {{ original }}</p>
+            <p class="transform-note">{{ transformationNote() }}</p>
+            <p class="transform-source">
+              Tu naturaleza anterior se deduce de tus respuestas. No es un dato
+              histórico: es lo que el clasificador leyó en ti.
+            </p>
+          </div>
+        }
+
         @if (perceived().length > 0) {
           <div class="grounds">
             <p class="grounds-label">Lo que viste en ti</p>

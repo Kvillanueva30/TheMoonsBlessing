@@ -18,6 +18,31 @@
 
 export type NatureId = 'manskling' | 'diubak' | 'cazut';
 
+/**
+ * Lo que el CLASIFICADOR puede devolver.
+ *
+ * Nunca 'cazut'. El clasificador lee respuestas del visitante, y ninguna
+ * combinacion de respuestas significa "maldicion". El cazut no se infiere:
+ * lo declara el canon del reino. Esa exclusion es deliberada y es lo que
+ * impide inventar una naturaleza original cazut.
+ */
+export type InferredNature = 'manskling' | 'diubak';
+
+/**
+ * Como era la persona ANTES de una transformacion historica.
+ *
+ * SIEMPRE es una INFERENCIA del clasificador, jamas un dato historico
+ * confirmado: el visitante no tiene un registro, solo unas respuestas. El
+ * marcador `source` existe para que nadie en el futuro lo lea como un hecho
+ * historico y lo use como base de otra regla.
+ */
+export interface OriginalNature {
+  /** Veredicto del clasificador. Nunca 'cazut'. */
+  readonly value: InferredNature;
+  /** Siempre 'inferred'. Existe para dejarlo explicito. */
+  readonly source: 'inferred';
+}
+
 export type OriginId = 'divine_blessing' | 'lineage' | 'curse' | 'no_transformation_needed';
 
 export type EvidenceFamily =
@@ -162,7 +187,16 @@ export interface Interpretation {
  * no puede afirmar nada especifico.
  */
 export interface Revelation {
+  /** Naturaleza VIGENTE: lo que la persona es hoy, ya con el canon aplicado. */
   readonly nature: NatureId;
+  /** Como era segun el clasificador, antes de cualquier transformacion. */
+  readonly originalNature: OriginalNature;
+  /**
+   * true SOLO si hubo una transformacion historica canonica real: el dato del
+   * reino lo declara y la naturaleza vigente es cazut. No significa "el reino
+   * tiene una sola naturaleza", ni nada sobre moralidad.
+   */
+  readonly transformed: boolean;
   readonly origin: OriginId;
 
   /** 1. Lo que la persona CREE querer. Evidencias de deseo externo. */
@@ -186,7 +220,12 @@ export interface Revelation {
 // ---------------------------------------------------------------------------
 
 export interface GoddessResult {
+  /** Naturaleza vigente. Es la que se muestra como resultado. */
   readonly nature: NatureId;
+  /** Como era segun el clasificador, antes de una transformacion canonica. */
+  readonly originalNature: OriginalNature;
+  /** true solo ante una transformacion historica canonica real. */
+  readonly transformed: boolean;
   readonly origin: OriginId;
   readonly profile: InnerProfile;
   readonly interpretation: Interpretation;

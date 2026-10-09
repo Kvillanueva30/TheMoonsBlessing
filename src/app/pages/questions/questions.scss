@@ -29,6 +29,61 @@
   50% { opacity: 0.95; }
 }
 
+/* --- Sendero ---
+   Puntos de luz, uno por pregunta. SIN numeros: la regla del proyecto
+   prohibe los contadores. Ver AGENTS.md y questions.json designRules[0].
+   No dice "3 de 8": dice que se avanza. */
+
+.trail {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 0.66rem;
+  /* Va dentro de .head-text, no sobre el escenario entero: el grabado ocupa la
+     columna izquierda y empuja el enunciado a la derecha. Centrado en el
+     escenario, el sendero se leia corrido. Aqui se centra solo con el texto. */
+  margin: 0 0 2.3rem;
+  padding: 0;
+}
+
+.trail li {
+  width: 0.34rem;
+  height: 0.34rem;
+  border: 1px solid rgba(245, 199, 106, 0.26);
+  border-radius: 50%;
+  background: transparent;
+  transition:
+    background 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+/* Recorrido: quedo dorado, apagado. */
+.trail li.done {
+  background: rgba(245, 199, 106, 0.42);
+  border-color: rgba(245, 199, 106, 0.34);
+}
+
+/* Aqui. El unico que brilla. */
+.trail li.now {
+  background: #f5c76a;
+  border-color: #f5c76a;
+  box-shadow:
+    0 0 0 3px rgba(245, 199, 106, 0.13),
+    0 0 0.9rem rgba(245, 199, 106, 0.5);
+}
+
+/* En la ultima pregunta el punto respira: el visitante tiene que notar
+   que se acaba, porque no hay numero que se lo diga. */
+.stage.last .trail li.now {
+  animation: lastPoint 3.2s ease-in-out infinite;
+}
+
+@keyframes lastPoint {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(245, 199, 106, 0.13), 0 0 0.9rem rgba(245, 199, 106, 0.5); }
+  50% { box-shadow: 0 0 0 4px rgba(245, 199, 106, 0.2), 0 0 1.6rem rgba(245, 199, 106, 0.85); }
+}
+
 /* --- Escena --- */
 .stage,
 .reveal {
@@ -339,6 +394,11 @@
 
 @media (prefers-reduced-motion: reduce) {
   .stage.alt {
+    animation: none;
+  }
+
+  /* El punto final deja de respirar, pero sigue siendo visible y claro. */
+  .stage.last .trail li.now {
     animation: none;
   }
 }

@@ -51,12 +51,15 @@ src/app/
 
 data/            (raíz del proyecto, configurado como asset en angular.json)
 ├── lore-rules.json
+├── politics.json  soberanía: 6 reinos, 4 países, emperadores y reyes actuales
 ├── kingdoms/    ederian, bastia, tralan, xorian, tradia, helia
 ├── questions/   questions.json
 ├── moon/        moon-phases.json
 ├── traits/      traits.json
 └── results/     results.json
 ```
+
+**Los reyes actuales solo viven en `data/politics.json`.** `kingdoms/*.json` declara *fundadores* (`founder`, título «Primer rey»), nunca al rey de hoy. Nadie añada un titular en un archivo de reino.
 
 ## Motor de resultados
 

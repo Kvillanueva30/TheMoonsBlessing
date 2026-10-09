@@ -90,21 +90,21 @@
           "id": "b",
           "text": "Mi mejor amigo.",
           "legacyAffinity": {
-            "xorian": 3
+            "xorian": 4
           }
         },
         {
           "id": "c",
           "text": "El soldado.",
           "legacyAffinity": {
-            "ederian": 3
+            "ederian": 4
           }
         },
         {
           "id": "d",
           "text": "No cruzo. Me quedo en la orilla.",
           "legacyAffinity": {
-            "tralan": 3
+            "tralan": 4
           }
         }
       ],
@@ -136,14 +136,14 @@
           "id": "c",
           "text": "Le abro y le doy cobijo.",
           "legacyAffinity": {
-            "xorian": 3
+            "xorian": 4
           }
         },
         {
           "id": "d",
           "text": "Cierro la puerta.",
           "legacyAffinity": {
-            "tralan": 3
+            "tralan": 4
           }
         }
       ],
@@ -175,14 +175,14 @@
           "id": "c",
           "text": "Miro a mi alrededor a ver si alguien más se mueve.",
           "legacyAffinity": {
-            "xorian": 3
+            "xorian": 4
           }
         },
         {
           "id": "d",
           "text": "Le hablo al juez en privado y le explico el daño que hace.",
           "legacyAffinity": {
-            "ederian": 3
+            "ederian": 4
           }
         }
       ],
@@ -207,14 +207,14 @@
           "id": "b",
           "text": "Lo escondo. El reino no merece derrumbarse hoy.",
           "legacyAffinity": {
-            "tralan": 3
+            "tralan": 4
           }
         },
         {
           "id": "c",
           "text": "Lo investigo a fondo antes de tocarlo.",
           "legacyAffinity": {
-            "ederian": 3
+            "ederian": 4
           }
         },
         {
@@ -639,6 +639,45 @@
         }
       ],
       "etching": "remedio"
+    },
+    {
+      "id": "q11",
+      "theme": "Lo que es tuyo",
+      "axis": "legacy",
+      "feedsProfile": false,
+      "canBless": false,
+      "text": "Reconoces tu capa en el hombro de alguien más. La perdiste hace años. Aquella persona no parece saber de quién es. ¿Qué haces?",
+      "choices": [
+        {
+          "id": "a",
+          "text": "Es mía. Me la llevo.",
+          "legacyAffinity": {
+            "helia": 3
+          }
+        },
+        {
+          "id": "b",
+          "text": "Le pregunto de dónde la sacó. Si no sabe, igualmente me la llevo.",
+          "legacyAffinity": {
+            "bastia": 3
+          }
+        },
+        {
+          "id": "c",
+          "text": "Se la dejo, ya me había olvidado de ella.",
+          "legacyAffinity": {
+            "tralan": 4
+          }
+        },
+        {
+          "id": "d",
+          "text": "Aunque me da miedo su respuesta, la reclamo.",
+          "legacyAffinity": {
+            "ederian": 4
+          }
+        }
+      ],
+      "etching": "proyeccion"
     }
   ],
   "todo": [
@@ -648,15 +687,16 @@
   ],
   "selection": {
     "decision": "Banco rediseñado el 7 de octubre de 2026. 8 preguntas nuevas, sin nombres de reinos ni de personajes, escenas gancho. canBless lo declara la pregunta.",
-    "perVisitor": 8,
+    "perVisitor": 9,
     "slots": {
       "kingdom": {
-        "count": 4,
+        "count": 5,
         "pool": [
           "q1",
           "q2",
           "q3",
-          "q4"
+          "q4",
+          "q11"
         ],
         "role": "Afinidad con los legados: deduce el reino."
       },
@@ -669,7 +709,12 @@
           "q9",
           "q10"
         ],
-        "role": "Deseo vs necesidad: decide Manskling o Diubak."
+        "role": "Deseo vs necesidad: decide Manskling o Diubak.",
+        "required": [
+          "q9",
+          "q10"
+        ],
+        "notaObligatorias": "q9 aporta located_identity y q10 aporta misdirected_remedy. Entre las dos dan innerNeedWithContent y remediationPattern, y ademas son DOS evidencias de apoyo: el motor exige support >= 2 para que una sola respuesta no pueda dar Diubak. q7 solo aporta inward_declared (remediacion sin contenido), asi que va bien como tercera pero nunca puede sustituir a ninguna de las dos."
       },
       "character": {
         "count": 1,
@@ -679,7 +724,12 @@
         "role": "Rasgo visible. canBless:false."
       }
     },
-    "frozenReplaced": "El banco viejo (b-001..b-005, l-001..l-010, i-001..i-005) y todas sus frozenNote quedan sustituidos."
+    "frozenReplaced": "El banco viejo (b-001..b-005, l-001..l-010, i-001..i-005) y todas sus frozenNote quedan sustituidos.",
+    "pesosDeReino": {
+      "mezclados": 4,
+      "soloCazut": 3,
+      "nota": "El peso va en legacyAffinity. Los reinos mixtos pesan 4 y los exclusivamente Cazut pesan 3. Asi se ajusta la probabilidad de llegada sin tocar el canon: la mezcla de reinos sigue siendo la que el peso dice, no una regla del clasificador. Medido por enumeracion exhaustiva: 70.6% mixtos / 29.4% solo Cazut."
+    }
   },
   "profileLayer": {
     "note": "El perfil interior se construye SOLO con las preguntas marcadas feedsProfile:true.",

@@ -1,0 +1,465 @@
+{
+  "$comment": "Capa politica de Madar: quien manda hoy y como se agrupan los seis reinos. Este archivo es la UNICA fuente de verdad sobre poder y soberania. Los archivos de data/kingdoms/ NO declaran reyes actuales: no los datos. Si se anade un rey actual, se anade aqui y en ningun otro sitio.",
+  "version": "0.1.0",
+  "status": "DRAFT",
+  "statusNote": "La estructura de cuatro paises esta confirmada por la autora. Varios titulares NO aparecen en el manuscrito y proceden solo de su dictado. Cada campo declara su fuente.",
+  "sources": {
+    "libro": {
+      "tipo": "libro",
+      "que-es": "El manuscrito de la novela, capitulos 1 a 22.",
+      "nota": "Fuente primaria. Si un dato aparece aqui, la novelista lo escribio."
+    },
+    "dictado": {
+      "tipo": "dictado",
+      "que-es": "Lo que la autora dicto directamente.",
+      "nota": "Fuente secundaria pero con autoridad de canon. No puede contradecir al manuscrito sin que la autora lo decida."
+    },
+    "documento": {
+      "tipo": "documento",
+      "que-es": "Los documentos de trabajo que escribe la autora (fichas de fundadores, listas de personajes)."
+    }
+  },
+  "principio": {
+    "id": "reinos-y-paises-son-distintos",
+    "regla": "Un REINO es el territorio con su rey. Un PAIS es lo que gobierna a uno o mas reinos.",
+    "reinos": 6,
+    "paises": 4,
+    "por-que-no-se-contradicen": "El profesor Einar dice que hoy hay cuatro paises. El mapa del aula tiene seis nombres. No hay contradiccion: los dos cuentan cosas distintas.",
+    "fuente": {
+      "tipo": "dictado",
+      "referencia": "dictado de la autora, 5 de octubre de 2026",
+      "manuscrito": "Cap. 11: 'tenemos el reino de Ederian, el imperio de Bastia, el imperio de Helia y, por supuesto, el reino de Xorian'."
+    }
+  },
+  "como-funciona-un-imperio": {
+    "regla": "El emperador es rey de uno de sus dos reinos. El otro reino conserva su rey, pero ese rey queda bajo el emperador.",
+    "regla-traditoria": "Un reino puede quedarse SIN rey propio si su dinastia se extingue. En ese caso el imperio lo absorbe: el reino conserva su nombre y su gente, pero su gobernante es el emperador.",
+    "ejemplos": [
+      "Imperio de Bastia: el emperador MOLDARK es rey de Bastia. Tradia se quedo sin rey y quedo dentro del imperio.",
+      "Imperio de Helia: el emperador DARUK es rey de Helia. Tralan conserva a su rey ENDER, bajo el emperador."
+    ],
+    "fuente": {
+      "tipo": "dictado",
+      "referencia": "dictado de la autora, 5 de octubre de 2026"
+    }
+  },
+  "paises": {
+    "imperio-de-bastia": {
+      "nombre": "Imperio de Bastia",
+      "tipo": "imperio",
+      "reinos": [
+        "bastia",
+        "tradia"
+      ],
+      "emperador": "moldark",
+      "linaje": "familia Moriarty",
+      "rey-de-bastia": "moldark",
+      "rey-de-tradia": null,
+      "como-se-formo": {
+        "que-paso": "Cuando Halik, primer rey de Tradia, murio en la guerra no quedo mas rey. Silas se hizo cargo. La union de Bastia y Tradia resulto en un solo territorio.",
+        "manuscrito": "Cap. 11: 'la union de Bastia y Tradia resulto en un solo territorio, actualmente gobernado por la familia Moriarty'.",
+        "fuente": {
+          "tipo": "dictado",
+          "referencia": "dictado de la autora, 5 de octubre de 2026",
+          "para-quien-se-hizo-cargo": "Silas. Confirmado por la autora cuando el documento de fundadores sugeria a Tarik."
+        }
+      },
+      "reino-sin-rey": "tradia",
+      "nota-sobre-tradia": "Tradia conserva su nombre y su gente, pero es parte de Bastia. No tiene rey propio.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      },
+      "descendiente-de-halik": {
+        "nombre": "varin",
+        "nota": "Varin es el descendiente directo de Halik y es de Tradia. Tradia no tiene rey, asi que Varin es un heredero sin trono.",
+        "fuente": {
+          "tipo": "dictado",
+          "referencia": "dictado de la autora, 5 de octubre de 2026"
+        }
+      }
+    },
+    "imperio-de-helia": {
+      "nombre": "Imperio de Helia",
+      "tipo": "imperio",
+      "reinos": [
+        "helia",
+        "tralan"
+      ],
+      "emperador": "daruk",
+      "rey-de-helia": "daruk",
+      "rey-de-tralan": "ender",
+      "como-se-formo": {
+        "que-paso": "El reino de Tralan decidio unirse a Helia.",
+        "sorpresa": "Nadie lo habia visto venir: era una alianza entre un reino gobernado por cazuts y otro por diubaks. Algo inaudito en cualquier parte del continente.",
+        "manuscrito": "Cap. 11: 'el reino de Tralan decidio unirse a Helia, formando el imperio de Helia, el cual es actualmente gobernado por el emperador Daruk'.",
+        "fuente": {
+          "tipo": "libro",
+          "referencia": "Cap. 11"
+        }
+      },
+      "tralan-dentro-del-imperio": {
+        "que": "Tralan ahora es un reino DENTRO de un imperio. El emperador Daruk es quien rige esas tierras.",
+        "matiz-del-manuscrito": "El profesor Einar y Shura discuten si Tralan sigue siendo una nacion de diubaks. El profesor responde que Anika tambien tiene razon, porque Tralan ya no es independiente. Y hay diubaks que lo celebraron y otros que tienen terror.",
+        "manuscrito": "Cap. 11: 'Tralan ahora es un reino dentro de un imperio, y se sabe que es el emperador Daruk quien rige esas tierras'.",
+        "fuente": {
+          "tipo": "libro",
+          "referencia": "Cap. 11"
+        }
+      },
+      "nota-importante": "El manuscrito llama a Daruk REGENTE de Tralan en un punto, no rey. Ver 'contradicciones' abajo.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      }
+    },
+    "reino-de-ederian": {
+      "nombre": "Reino de Ederian",
+      "tipo": "reino",
+      "rey": "darius",
+      "principe": "rayden",
+      "manuscrito": "Cap. 10: 'el rey Darius y el principe Ryden son una bendicion para Ederian' y 'Pronto sera el cumpleanos del principe, el rey Darius lo ha anunciado'.",
+      "fuente": {
+        "tipo": "libro",
+        "referencia": "Cap. 10"
+      }
+    },
+    "reino-de-xorian": {
+      "nombre": "Reino de Xorian",
+      "tipo": "reino",
+      "rey": "murad",
+      "manuscrito": "MURAD NO APARECE NI UNA SOLA VEZ en los 22 capitulos. Su existencia viene solo del dictado de la autora.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      }
+    }
+  },
+  "reyes-actuales": {
+    "darius": {
+      "de": "reino-de-ederian",
+      "titulo": "rey",
+      "padre-de": "rayden",
+      "en-el-manuscrito": "SI, dos veces",
+      "fuente": {
+        "tipo": "libro",
+        "referencia": "Cap. 10"
+      }
+    },
+    "murad": {
+      "de": "reino-de-xorian",
+      "titulo": "rey",
+      "en-el-manuscrito": "NO",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      }
+    },
+    "moldark": {
+      "de": "imperio-de-bastia",
+      "titulo": "emperador",
+      "ademas": "rey de Bastia",
+      "linaje": "Moriarty",
+      "padre-de": [
+        "alden",
+        "cedric"
+      ],
+      "en-el-manuscrito": "SI, una vez como 'Moldark Moriarty', padre de Cedric. Y como 'el emperador de Bastia, que en ese entonces era solo el rey' (cap. 16), lo que confirma que la union lo convertingio en emperador.",
+      "fuente": {
+        "tipo": "libro",
+        "referencia": "Cap. 11 y 16"
+      }
+    },
+    "daruk": {
+      "de": "imperio-de-helia",
+      "titulo": "emperador",
+      "ademas": "rey de Helia",
+      "en-el-manuscrito": "SI, ocho veces. Es quien recluta diubaks y quien rige Tralan.",
+      "fuente": {
+        "tipo": "libro",
+        "referencia": "Cap. 11"
+      }
+    },
+    "ender": {
+      "de": "reino-de-tralan",
+      "titulo": "rey, bajo el emperador Daruk",
+      "es-el-ultimo": "Es el UNICO sobreviviente de la familia real de Tralan. Todos los demas fueron muertos.",
+      "hijos": {
+        "cantidad": 7,
+        "muertos-por-daruk": 6,
+        "vivo": {
+          "nombre": "serkan",
+          "estado": "VIVO. Daruk lo tiene y lo TORTURA."
+        },
+        "la-hija-que-daruk-no-conoce": {
+          "nombre": "kira",
+          "que-es": "Hija de Ender, nacida FUERA del matrimonio.",
+          "por-que-vive": "Daruk no sabe que existe.",
+          "kira-lo-sabe": "SI. Kira sabe que Ender es su padre. Por que no lo dice: no definido, NO inventar."
+        }
+      },
+      "como": "Daruk uso a la familia real de Tralan en sus experimentos con los bakar.",
+      "lo-sabe-el-publico": false,
+      "lo-que-circula": "Gil dice la verdad. La gente 'finge demencia' y evita mencionar el detalle, porque la exterminacion de una familia real es la clase de cosa que un reino no reconoce en voz alta.",
+      "en-el-manuscrito": "SI. Gil (cap. 14) dice exactamente esto.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026",
+        "nota": "Resuelve la contradiccion que el manuscrito dejaba abierta: la Version de Gil es CIERTA. El manuscrito ya lo insinua con 'todos fingen demencia'."
+      }
+    },
+    "rey-de-tradia": {
+      "de": "reino-de-tradia",
+      "titulo": null,
+      "estado": "NO EXISTE. Tradia se quedo sin rey cuando murio Halik y quedo dentro del imperio de Bastia.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      }
+    }
+  },
+  "reyes-fundadores": {
+    "aviso": "NO son los reyes actuales. Viven en el pasado. Los archivos de data/kingdoms/ los declaran como 'Primer rey', lo cual es correcto.",
+    "son": [
+      {
+        "nombre": "lucius",
+        "fundo": "ederian"
+      },
+      {
+        "nombre": "silas",
+        "fundo": "bastia"
+      },
+      {
+        "nombre": "halik",
+        "fundo": "tradia"
+      },
+      {
+        "nombre": "tarik",
+        "fundo": "helia"
+      },
+      {
+        "nombre": "deron",
+        "fundo": "xorian"
+      },
+      {
+        "nombre": "ross",
+        "fundo": "tralan"
+      }
+    ],
+    "manuscrito": "Cap. 11: 'Estan el rey Lucius de Ederian, el rey Silas de Bastia, los hermanos Halik de Tradia, el rey Tarik de Helia, el rey Deron de Xorian y... y el rey Ross de Tralan'.",
+    "detalle": "Kira tiembla al recitarlos, sobre todo al ultimo, Ross de Tralan. Anika lo nota: 'Nadie parecio notar su nerviosismo, excepto yo'.",
+    "fuente": {
+      "tipo": "libro",
+      "referencia": "Cap. 11"
+    }
+  },
+  "historia-politica": {
+    "la-guerra-perpetua": {
+      "que": "Siempre ha existido guerra entre diubaks y cazuts. No es un episodio aislado: es el estado permanente del mundo.",
+      "cuando-empezo": "La Primera Guerra, la que creo a los cazuts. De ahi nacio la rivalidad. Antes no habia cazuts, asi que no habia guerra entre ellos.",
+      "en-el-manuscrito": "Cap. 14, Gil: 'Cuando el imperio de Bastia se formo, Tralan era uno de los reinos mas debiles. En ese momento, habia mas mansklings que diubaks debido a la guerra.' Y cap. 11: 'muchas familias de diubaks se vieron en la dificil tarea de abandonar sus hogares debido a las constantes desapariciones de los diubaks'.",
+      "conflicto-con-el-cap-11": "RESUELTO. El cap. 11 dice que la guerra 'trajo consigo el nacimiento de los cazuts'. Confirmado: la Primera Guerra los creo, y de ahi nacio la rivalidad. No hay guerra entre ambos antes de que existieran.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      }
+    },
+    "como-era-madar-al-principio": {
+      "que-habia": "Solo diubaks y mansklings. Ningun cazut.",
+      "fuente": {
+        "tipo": "libro",
+        "referencia": "Cap. 11"
+      }
+    },
+    "la-primera-guerra": {
+      "que-fue": "Una gran guerra. Trajo consigo el nacimiento de los cazuts.",
+      "como": "Asi surgieron TRES nuevas naciones, cuya especie gobernante era completamente nueva.",
+      "cuanto-durio": null,
+      "victima": "El rey Halik, primer rey de Tradia. Tras esa guerra, Tradia se quedo sin rey.",
+      "fin": {
+        "nombre": "el Tratado de Paz de los Reinos de Madar",
+        "quien-lo-escribio-y-propuso": "los nueve discipulos de la diosa Luna",
+        "clausula-relevante": "No interferir en los asuntos internos de otros reinos.",
+        "manuscrito": "Cap. 11, lo nombra Sigmund con fuerza, 'como si se hubiera despertado de un rayo'. Y cap. 14, Gil repite la clausula.",
+        "fuente": {
+          "tipo": "libro",
+          "referencia": "Cap. 11 y 14"
+        }
+      },
+      "fuente": {
+        "tipo": "libro",
+        "referencia": "Cap. 11"
+      }
+    }
+  },
+  "bakar": {
+    "$comment": "Experimentos con los bakar. Quien los creo y quien los uso son cosas distintas: Tarik y Silas lo intentaron y fracasaron; Daruk lo logro, con ayuda de Cedric y Moldark, y los uso sobre la familia real de Tralan.",
+    "quien-los-creo": {
+      "autores-iniciales": {
+        "nombres": [
+          "tarik",
+          "silas"
+        ],
+        "que-hicieron": "Experimentaron. No lograron nada.",
+        "fuente": {
+          "tipo": "documento",
+          "referencia": "ficha de fundadores escrita por la autora"
+        }
+      },
+      "quien-lo-logro": {
+        "nombre": "daruk",
+        "descendencia-de": "Tarik. Continua el trabajo de su antepasado.",
+        "con-ayuda-de": [
+          "cedric",
+          "moldark"
+        ],
+        "ayuda-de-moldark": "El padre de Cedric, emperador de Bastia. Por eso Daruk se alio con los reyes de Bastia: el proyecto de los bakar fue conjunto desde el principio.",
+        "por-que-ayuda-cedric": "NO por lealtad. Cedric ayuda a Daruk para ENGANARLO, por su propio beneficio. Esta de parte de su padre, pero su motivo es el suyo.",
+        "motivacion": {
+          "que": "Hay MAS diubaks que cazuts en el mundo. Los cazuts son minoria. Por eso quieren crear un ARMA para luchar contra ellos.",
+          "el-bakar-no-es-una-raza-por-si-sola": "Es un arma. El bakar no es un fin: son el medio.",
+          "fundamento": "Los reinos de cazut son Bastia, Tradia y Helia. Los reinos de diubak son Ederian y Tralan. Los mansklings estan repartidos. Si Bastia y Helia se unen, los diubaks quedan solos y ya no son la mayoria.",
+          "la-alianza-no-es-nueva": "La familia Moriarty ya estaba aliada con la familia de Daruk. La alianza de los imperios venia de antes.",
+          "fuente": {
+            "tipo": "dictado",
+            "referencia": "dictado de la autora, 5 de octubre de 2026"
+          }
+        },
+        "aviso-cedric": "Cedric es un cazut de linaje puro, hijo de Moldark Moriarty y Sigrid Nielsen, y Alden es su hermano. Sirve a nadie mas que a si mismo.",
+        "fuente": {
+          "tipo": "dictado",
+          "referencia": "dictado de la autora, 5 de octubre de 2026"
+        }
+      },
+      "cadena-completa": "Tarik y Silas experimentan y fracasan. Su descendiente Daruk lo consigue, con la ayuda de Cedric Moriarty y de su padre, Moldark Moriarty, el emperador de Bastia."
+    },
+    "quien-los-uso": {
+      "nombre": "daruk",
+      "sobre-quien": "la familia real de Tralan",
+      "que-hizo": "Daruk uso a la familia real de Tralan en sus experimentos con los bakar.",
+      "resultado": "De la familia solo sobrevive Ender.",
+      "es-publico": false,
+      "es-conocido-por": [
+        "daruk",
+        "ender"
+      ],
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      }
+    },
+    "que-se-sabe-publicamente": "Que existen los bakar y que Daruk los recreation. Que Daruk dirige el imperio de Helia. Que Tralan se quedo sin familia real, aunque nadie lo dice en voz alta. Que hubo experimentos con ellos es OTRA cosa: no circula.",
+    "capitulo-14": "Gil dice la exterminacion. Sigmund se escandaliza de que 'el pueblo' pueda vivir sabiendo eso. El pueblo, en realidad, no lo sabe: Gil lo cuenta como si fuera un rumor que todos evitan."
+  },
+  "la-gran-mentira": {
+    "version-oficial": "Que el rey de Tralan sigue vivo, y que sus principes y princesas tambien. Nadie lo discute en voz alta.",
+    "realidad": "Ender vive pero es figura de papel bajo Daruk. Seis de sus siete hijos estan muertos. Serkan vive y esta torturado. Kira vive y Daruk no sabe de ella.",
+    "quien-lo-sabe": [
+      "daruk",
+      "kira"
+    ],
+    "kira-no-sabe": "Kira NO sabe que Serkan sigue vivo. Se enterara mas adelante.",
+    "por-que-funciona": "Nadie conoce los planes de Daruk. Sin saber el objetivo, no hay forma de deducir que los muertos estan muertos.",
+    "funcional": "Gil dice la verdad en clase (cap. 14) y todos fingen demencia. La version aceptada es que la familia real sigue viva.",
+    "fuente": {
+      "tipo": "dictado",
+      "referencia": "dictado de la autora, 5 de octubre de 2026"
+    }
+  },
+  "venganza-de-daruk": {
+    "que-es": "Una venganza heredada, de generacion en generacion. No es el capricho de un hombre: es una politica familiar.",
+    "linaje": "Daruk desciende de Tarik.",
+    "origen": "Tarik perdio a su hermano Halik a manos de Lucius. Siempre quiso vengarse, pero los diubaks eran mas numerosos, en concreto los de Ederian.",
+    "obstaculo": "Ederian era mas fuerte. No se podia ganar a la fuerza.",
+    "solucion": "Creo los bakar. Y se alio con todos los reyes de Bastia para conseguir sus objetivos.",
+    "logica-de-la-alianza": "Si los dos imperios de cazut estan unidos, los diubaks de Ederian quedan solos: dejan de ser los mas numerosos frente a dos imperios simultaneamente.",
+    "relacion-con-bastia": "Los reinos de Bastia estan ALIADOS con el imperio de Helia. Los dos imperios cooperan.",
+    "fuente": {
+      "tipo": "dictado",
+      "referencia": "dictado de la autora, 5 de octubre de 2026"
+    }
+  },
+  "contradicciones-abiertas": [
+    {
+      "id": "quien-creo-los-bakar",
+      "dice-el-documento": "La ficha de fundadores: 'Tarik buscando mas poder comienza a realizar experimentos [...] crea la nueva raza bakar, pero no logra controlarlos'.",
+      "dice-la-autora": "Tarik y Silas experimentaron y no lograron nada. Fue su descendiente Daruk quien lo logro, con ayuda de Cedric y de su padre.",
+      "resolucion": "Cadena de tres tiempos: Tarik y Silas fracasan, Daruk lo consigue con la ayuda de Cedric Moriarty y Moldark Moriarty, el emperador de Bastia. Por eso la alianza entre Helia y Bastia no es solo politica: el proyecto de los bakar fue conjunto desde el principio.",
+      "estado": "RESUELTA por la autora, 5 de octubre de 2026",
+      "implicacion": "El emperador de Bastia, Moldark, es complice de la creacion de los bakar. Y su propio hijo Cedric participo. El padre de Alden fundo una raza junto al emperador que extermino a la familia real de Tralan."
+    },
+    {
+      "id": "estado-de-ender",
+      "dice-el-manuscrito": "Gil (cap. 14): 'la verdad es que el reino de Tralan dejo de existir hace anos. El rey y toda su familia fueron asesinados por orden del rey Daruk, pero todos fingen demencia y evitan mencionar ese detalle.'",
+      "dice-la-autora": "Ender sigue siendo el rey de Tralan, bajo el emperador Daruk.",
+      "resolucion": "El reino no desaparecio: Tralan sigue existiendo y sigue teniendo rey, Ender. Lo que se extermino fue la familia, menos un unico superviviente. Y 'todos fingen demencia' se refiere al pueblo: Tralan no reconoce en voz alta que su familia real fue aniquilada.",
+      "estado": "RESUELTA por la autora, 5 de octubre de 2026. El capitulo 14 esta bien tal cual: Gil dice la verdad y el pueblo finge no saberla. Lo unico que hay que matizar en el texto es el 'dejo de existir': lo que dejo de existir fue la dinastia, no el reino.",
+      "fuente": {
+        "tipo": "libro",
+        "referencia": "Cap. 14"
+      }
+    },
+    {
+      "id": "daruk-regente-o-emperador",
+      "dice-el-manuscrito": "Sigmund (cap. 14): 'Desde que Daruk es el regente de Tralan'. Un regente gobierna en nombre de otro, normalmente un menor o un ausente.",
+      "dice-la-autora": "Daruk es EMPERADOR y rey de Helia.",
+      "analisis": "No es necesariamente contradictorio: el emperador puede ser regente de un reino subordinado. El manuscrito nunca lo llama rey de Tralan, solo regente.",
+      "estado": "ABIERTA pero menor. Dejar 'regente de Tralan' como la palabra del manuscrito y 'emperador' como el titulo formal."
+    }
+  ],
+  "doNotInvent": [
+    "las capitales de los cuatro paises",
+    "el numero de miembros de las familias Moriarty y Nielsen",
+    "si Murad sigue vivo, y por que nunca aparece en el manuscrito",
+    "el titulo exacto del emperador (imperador, majestad, otro)",
+    "que paso con la familia de Halik despues de la muerte de Halik"
+  ],
+  "la-maldicion-definitiva": {
+    "que": "Despues de la maldicion, NINGUN descendiente de Silas, Halik o Tarik se salva. Y NADIE de sus reinos. Todos seran cazuts.",
+    "herederos": [
+      "silas",
+      "halik",
+      "tarik"
+    ],
+    "reinos": [
+      "bastia",
+      "tradia",
+      "helia"
+    ],
+    "alcance": "Toda la poblacion de esos tres reinos, y toda su descendencia, para siempre.",
+    "que-queda-para-los-tres-reinos": "Bastia, Tradia y Helia son cazuts de forma permanente y total. No queda nadie de otra naturaleza dentro de sus fronteras, y sus hijos tampoco lo seran.",
+    "consecuencia-politica": "El Imperio de Bastia y el Imperio de Helia son paises de cazuts por completo. Ederian, Xorian y Tralan son los unicos de diubaks y mansklings, y por eso la guerra de cazuts contra diubaks es una guerra de tres paises contra tres.",
+    "por-que-estos-tres": "Porque fueron los tres que se unieron para atacar Ederian. Lucius, Deron y Ross no Gains la guerra: solo fue posible por el lado de Silas, Halik y Tarik. El castigo cae sobre las tres casas que la provocaron.",
+    "los-descendientes-conocidos": {
+      "silas": "Moldark, emperador de Bastia. Y sus hijos Alden y Cedric, cazut de linaje puro.",
+      "halik": "Varin, cazut del pueblo de Tradia, huerfano, y no sabe su linaje.",
+      "tarik": "Daruk, emperador de Helia. El es descendiente de Tarik. Su hija Aom sera cazut, pero por su madre Kya, que ya es cazut: Aom no es de la linea de Tarik."
+    },
+    "lo-que-faltaba-antes": "El documento de origen decia que Tussem maldijo a Silas, Halik y Tarik, y que en menor medida a Ederian, Xorian y Tralan. Ahora se aclara que la maldicion de los tres primeros es TOTAL y permanente, y alcanza a toda su descendencia.",
+    "fuente": {
+      "tipo": "dictado",
+      "referencia": "dictado de la autora, 5 de octubre de 2026"
+    },
+    "el-hueco-kya": {
+      "dato": "Kya es cazut, es de Helia, y su sangre cazut viene de alguien que vivia en Helia cuando cayo la maldicion.",
+      "resolucion": "No es descendiente de Tarik. Es descendiente de alguien que ya estaba en Helia cuando la maldicion cayo, y que se volvio cazut por ella.",
+      "lo-que-eso-dice": "La maldicion no solo alcanzo a los descendientes de Silas, Halik y Tarik. Alcanzo a TODOS los que estaban dentro de los tres reinos cuando cayo. Helia tenia=gente antes de Tarik, o gente que venia de otra parte, y esos tambien se volvieron cazuts.",
+      "por-que-es-importante": "La regla de los tres maldecidos explica a Alden, a Varin y a Moldark. Esta explica a Kya. Las dos reglas juntas dicen que la maldicion fue por pais, no solo por familia.",
+      "lo-que-no-sabemos": "Quien era ese antepasado de Kya y de donde venia: si era de Helia de origen, o si habia llegado de Bastia o de Tradia. TODO: preguntar.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      },
+      "la-gente-sabe": "TODOS SABEN. No es un secreto: todo el mundo sabe de donde viene su sangre. No hay nada que ocultar."
+    },
+    "lo-que-todos-saben": {
+      "hecho": "Que la maldicion cayo sobre Bastia, Tradia y Helia, y que todos los que estaban ahi se volvieron cazuts, con sus descendientes.",
+      "alcance": "Es de conocimiento publico. No se oculta, no se finge demencia, no es un rumor.",
+      "por-que-eso-cambia-lo-que-sabia": "La gran mentira de Madar NO es la muerte de la familia real de Tralan. Eso es lo que se esconde. La maldicion, en cambio, es pública: forma parte de la historia que se enseña en Frelan.",
+      "fuente": {
+        "tipo": "dictado",
+        "referencia": "dictado de la autora, 5 de octubre de 2026"
+      }
+    }
+  }
+}

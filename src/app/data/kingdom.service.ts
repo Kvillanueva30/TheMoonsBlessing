@@ -15,6 +15,13 @@ export interface KingdomData {
   readonly id: KingdomId;
   readonly name: string;
   readonly natures: readonly NatureId[];
+  /**
+   * El dato declara una transformacion historica real de la diosa sobre TODOS
+   * los ciudadanos del reino. Es lo que habilita `transformed` en el resultado.
+   * No se deduce de que el reino tenga una sola naturaleza.
+   */
+  readonly transformedByCurse?: boolean;
+  readonly transformationNote?: string;
   readonly founder?: { readonly name: string; readonly title?: string };
   readonly essence?: { readonly en: string; readonly es: string };
 }

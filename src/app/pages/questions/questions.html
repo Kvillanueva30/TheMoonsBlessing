@@ -6,10 +6,16 @@
       <p class="breath">La noche está mirando.</p>
     </div>
   } @else if (current(); as question) {
-    <section class="stage" [class.alt]="index() % 2 === 1">
+    <section class="stage" [class.alt]="index() % 2 === 1" [class.last]="isLast()">
       <div class="head">
         <app-etching [theme]="etching()" />
         <div class="head-text">
+          <ol class="trail" aria-hidden="true">
+            @for (dot of dots(); track $index) {
+              <li [class.done]="dot.done" [class.now]="dot.now"></li>
+            }
+          </ol>
+
           <p class="eyebrow">{{ question.theme }}</p>
           <h1 class="dilemma">{{ question.text }}</h1>
         </div>

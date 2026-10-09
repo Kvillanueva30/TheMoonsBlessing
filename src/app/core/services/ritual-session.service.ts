@@ -83,16 +83,21 @@ export class RitualSessionService {
    * Interpretacion de la naturaleza.
    *
    * Solo intervienen las preguntas con canBless. El canon del reino se le pasa
-   * aparte y SIEMPRE gana: si el reino esta maldito, sale Cazut aunque el
-   * perfil diga otra cosa.
+   * aparte y SIEMPRE gana sobre la naturaleza VIGENTE: si el reino esta
+   * maldito, hoy eres Cazut aunque el perfil diga otra cosa.
+   *
+   * El clasificador corre igual y su veredicto queda en `originalNature`, que
+   * es una INFERENCIA de las respuestas, no un dato historico. Y `transformed`
+   * solo se activa si el dato del reino declara la transformacion historica.
    */
   getNature(
     questions: readonly BankQuestion[],
     canonicalNature: readonly NatureId[],
+    historicalTransformation: boolean = false,
   ): GoddessResult {
     const { evidence } = toEvidence(questions);
     const chosen = evidence.filter((e) => this.answers[e.questionId] === e.choiceId);
-    return interpretGoddess({ evidence: chosen, canonicalNature });
+    return interpretGoddess({ evidence: chosen, canonicalNature, historicalTransformation });
   }
 }
 

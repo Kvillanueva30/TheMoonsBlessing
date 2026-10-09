@@ -106,5 +106,7 @@
     "TODO: confirmar el tipo de Helia: mixto o Cazut exclusivo. Ver pendiente P-001 en lore-rules.json.",
     "TODO: definir la ceremonia de Helia.",
     "TODO: definir si Helia fue maldecida despues de la guerra."
-  ]
+  ],
+  "transformedByCurse": true,
+  "transformationNote": "La diosa transformo a TODOS los ciudadanos de Helia en Cazuts despues de la Primera Guerra, sin importar si eran Mansklings o Diubaks."
 }

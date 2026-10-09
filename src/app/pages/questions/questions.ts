@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionBankService } from '../../data/question-bank.service';
+import { QuestionBankService, BankSelection } from '../../data/question-bank.service';
 import { BankQuestion } from '../../core/engine/evidence.adapter';
 import { EtchingComponent, EtchingTheme } from '../../shared/etching/etching';
 import { SkyComponent } from '../../shared/sky/sky';
@@ -32,6 +32,21 @@ export class QuestionsPage {
 
   /** Preguntas en el orden del banco, barajadas al cargar. */
   readonly questions = signal<readonly BankQuestion[]>([]);
+
+  /**
+   * El reparto que declara el dato, no la pagina.
+   *
+   * questions.json -> selection dice cuantas preguntas se sirven por visita y
+   * de que grupo sale cada una. Sin esto la pagina se llevaba el banco entero
+   * (10) cuando el diseño dice 8: 4 de reino, 3 de bendicion y 1 de caracter.
+   *
+   * El barajado se queda DENTRO de cada grupo: asi el motor recibe la
+   * proporcion que espera y el visitante no ve dos veces la misma escena.
+   */
+  readonly selection = signal<BankSelection | null>(null);
+
+  /** El banco completo. Se guarda aparte para poder volver a servirlo. */
+  private readonly bank_ = signal<readonly BankQuestion[]>([]);
   readonly index = signal(0);
   readonly chosen = signal<string | null>(null);
 
@@ -40,12 +55,36 @@ export class QuestionsPage {
 
   readonly current = computed<BankQuestion | null>(() => this.questions()[this.index()] ?? null);
 
+  /**
+   * El sendero: un punto por pregunta, sin numeros.
+   *
+   * La regla del proyecto es que el visitante nunca ve contadores
+   * (questions.json, designRules[0], y AGENTS.md). Asi que esto NO dice
+   * "3 de 8": solo dice que se avanza. Un punto por pregunta es
+   * inevitablemente dice cuantas hay, pero no dice cual es la actual: no se
+   * lee "llevas tres", se lee "hay recorrido".
+   */
+  readonly dots = computed(() =>
+    this.questions().map((_, i) => ({ done: i < this.index(), now: i === this.index() })),
+  );
+
   readonly isLast = computed(
     () => this.questions().length > 0 && this.index() === this.questions().length - 1,
   );
 
   constructor() {
-    this.bank.questions.subscribe((qs) => this.questions.set(shuffle(qs)));
+    this.bank.questions.subscribe((qs) => {
+      this.bank_.set(qs);
+      this.bank.selection.subscribe((sel) => {
+        this.selection.set(sel);
+        this.questions.set(serve(qs, sel));
+      });
+    });
+  }
+
+  /** El banco entero, no lo servido. */
+  private all(): readonly BankQuestion[] {
+    return this.bank_();
   }
 
   /** Las opciones visibles: solo texto. Nada de etiquetas. */
@@ -115,7 +154,7 @@ export class QuestionsPage {
     this.index.set(0);
     this.chosen.set(null);
     this.answers.set({});
-    this.questions.set(shuffle(this.questions()));
+    this.questions.set(serve(this.all(), this.selection()));
   }
 }
 
@@ -135,4 +174,59 @@ export function shuffle<T>(items: readonly T[]): T[] {
     [out[i], out[j]] = [out[j], out[i]];
   }
   return out;
+}
+
+/**
+ * Sirve las preguntas de la visita: el reparto del dato, en su orden.
+ *
+ * Si el banco no declara `selection`, devuelve el banco entero barajado: es
+ * el comportamiento anterior y no se pierde nada.
+ *
+ * Dentro de cada grupo si se baraja, y el reparto tampoco se altera al
+ * recargar. Cambia QUE preguntas salen de cada grupo, no cuantas: por eso el
+ * numero total es estable y se puede pintar un punto por pregunta.
+ */
+export function serve(
+  bank: readonly BankQuestion[],
+  selection: BankSelection | null,
+): BankQuestion[] {
+  if (!selection || !selection.slots) return shuffle(bank);
+
+  const byId = new Map(bank.map((q) => [q.id, q]));
+  const out: BankQuestion[] = [];
+
+  for (const slot of Object.values(selection.slots)) {
+    // Las obligatorias salen siempre. Sin ellas el motor puede quedarse sin
+    // forma de leer la necesidad interna, y la visita no tendria ninguna
+    // salida. Ver selection.slots.blessing.required en el dato.
+    const obligatorias = (slot.required ?? [])
+      .map((id) => byId.get(id))
+      .filter((q): q is BankQuestion => !!q);
+    for (const q of obligatorias) {
+      if (!out.includes(q)) out.push(q);
+    }
+
+    // El resto del hueco se llena al azar entre las que no son obligatorias.
+    const huecos = Math.max(0, slot.count - obligatorias.length);
+    const disponibles = slot.pool
+      .filter((id) => !(slot.required ?? []).includes(id))
+      .map((id) => byId.get(id))
+      .filter((q): q is BankQuestion => !!q);
+    // Menos preguntas disponibles que las pedidas: se sirve lo que haya, sin
+    // inventar. El numero de puntos se lee de lo servido, no de slot.count.
+    for (const q of shuffle(disponibles).slice(0, huecos)) {
+      if (!out.includes(q)) out.push(q);
+    }
+  }
+
+  // Si el dato no cubre alguna pregunta, no se pierde: se anade al final.
+  for (const q of bank) {
+    if (!out.includes(q) && !reachedBySelection(selection, q.id)) out.push(q);
+  }
+
+  return out;
+}
+
+function reachedBySelection(selection: BankSelection, id: string): boolean {
+  return Object.values(selection.slots).some((s) => s.pool.includes(id));
 }

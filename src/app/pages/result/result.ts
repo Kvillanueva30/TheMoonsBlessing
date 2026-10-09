@@ -104,9 +104,12 @@ export class ResultPage {
         const kingdomData = kingdoms.find((k) => k.id === kingdomId) ?? null;
         this.kingdom.set(kingdomData);
 
-        // --- Naturaleza. El canon del reino se le pasa y SIEMPRE gana.
+        // --- Naturaleza. El canon del reino se le pasa y SIEMPRE gana sobre la
+        // naturaleza vigente. El clasificador corre igual y queda en
+        // originalNature; transformed solo lo declara el dato del reino.
         const canonical: readonly NatureId[] = kingdomData?.natures ?? [];
-        this.nature.set(this.session.getNature(questions, canonical));
+        const huboTransformacion = kingdomData?.transformedByCurse === true;
+        this.nature.set(this.session.getNature(questions, canonical, huboTransformacion));
         this.ready.set(true);
       });
     });
@@ -126,6 +129,35 @@ export class ResultPage {
   readonly founderName = computed(() => this.kingdom()?.founder?.name ?? null);
   readonly kingdomEssence = computed(() => this.kingdom()?.essence?.es ?? null);
   readonly phaseId = computed(() => this.moon()?.id ?? null);
+
+  /**
+   * Transformacion historica, si la hubo.
+   *
+   * Solo se muestra cuando el dato del reino declara la transformacion Y la
+   * naturaleza vigente es cazut. El texto explica el hecho: la diosa
+   * transformo a todos los ciudadanos del reino despues de la guerra, sin
+   * importar lo que fueran antes.
+   *
+   * No dice nada bueno ni malo de ninguna de las dos naturalezas. La
+   * original es una INFERENCIA de las respuestas, y se rotula como tal.
+   */
+  readonly wasTransformed = computed(() => {
+    const n = this.nature();
+    return !!n && n.transformed && n.originalNature.value !== n.nature;
+  });
+
+  readonly originalNatureLabel = computed(() => {
+    const n = this.nature();
+    if (!this.wasTransformed()) return null;
+    const v = n?.originalNature.value;
+    if (v === 'manskling') return 'Manskling';
+    if (v === 'diubak') return 'Diubak';
+    return null;
+  });
+
+  readonly transformationNote = computed(
+    () => this.kingdom()?.transformationNote ?? null,
+  );
 
   /** Frases que el visitante eligio y que sostienen la revelacion. */
   readonly perceived = computed(() => this.nature()?.revelation.perceived ?? []);
