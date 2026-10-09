@@ -1,14 +1,44 @@
 <!--
   Los seis reinos, antes de la fecha. Un carrusel, sin scroll vertical.
 
-  Cara frontal: silueta del fundador y su nombre. No hay retrato porque no
-  existe arte de los fundadores y AGENTS.md deja la imagen por IA fuera de
-  alcance. La silueta es un hueco honesto: cuando llegue el arte se cambia el
-  fondo de esta cara y no el resto.
+  Cara frontal: el rey de la guerra, en el marco.
+  Cara trasera: el rey joven cuando fue nombrado por primera vez.
+  El giro muestra el cambio.
 
-  Cara trasera: SOLO la esencia. Ni naturaleza, ni maldicion, ni lista de
-  valores. Es un anzuelo, no una ficha. El porque esta en kingdoms.ts.
+  Los retratos se leen del canon, no de aqui: el HTML solo pide la imagen por
+  su nombre y, si no existe, muestra el hueco con el nombre que falta.
+
+  NO se muestran ni la naturaleza, ni la maldicion, ni la luz del fundador.
+  Los tres reinos malditos declaran en sus datos que TODOS sus ciudadanos son
+  Cazuts, y Bastia cuenta que Silas era el favorito de la diosa. Eso lo
+  descubre el visitante durante el ritual, no antes.
 -->
+
+<!--
+  Adornos del marco, definidos una sola vez. Se usan con <use>, y no
+  repetidos dentro de cada card: son seis cards por dos caras, y escrito
+  inline eran 72 SVG identicos en el DOM.
+-->
+<svg class="orn-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Esquina del marco: moldura, dos volutas, una gema y dos muescas. -->
+    <symbol id="madar-orn" viewBox="0 0 40 40">
+      <path d="M1 39 V15 A14 14 0 0 1 15 1 H39" fill="none" stroke="#d4af37" stroke-width="1.3" />
+      <path d="M7 39 C7 22 16 14 27 13" fill="none" stroke="#c9922f" stroke-width="1.1" />
+      <path d="M13 39 C13 28 20 22 30 21" fill="none" stroke="#6e6242" stroke-width="1" />
+      <circle cx="11" cy="11" r="2.6" fill="none" stroke="#f3d28c" stroke-width="1.2" />
+      <path d="M18 6 H30 M6 18 V30" fill="none" stroke="#6e6242" stroke-width="1" />
+    </symbol>
+
+    <!-- Cresta del centro del borde: un rombo con una gema. -->
+    <symbol id="madar-crest" viewBox="0 0 40 24">
+      <path d="M20 3 L30 12 L20 21 L10 12 Z" fill="none" stroke="#d4af37" stroke-width="1.2" />
+      <circle cx="20" cy="12" r="2.4" fill="#f3d28c" />
+      <path d="M4 12 H12 M28 12 H36" fill="none" stroke="#6e6242" stroke-width="1" />
+    </symbol>
+  </defs>
+</svg>
+
 <main class="kingdoms">
   <app-sky />
 
@@ -20,8 +50,7 @@
   <!--
     El .reel envuelve a la pista y a las flechas. Las flechas NO pueden estar
     dentro de .stage: este tiene overflow:hidden para recortar el carril, y
-    eso las recortaba a ellas tambien. Medido: quedaban en 246-292 y 708-754
-    con la pista en 292-708, o sea enteras fuera.
+    eso las recortaba a ellas tambien.
   -->
   <div class="reel">
     <div
@@ -43,36 +72,73 @@
               [attr.aria-label]="'Ver ' + k.name + ', reino fundado por ' + (k.founder?.name ?? 'fundador sin nombre')"
             >
               <span class="card-inner">
-                <!-- CARA FRONTAL: la silueta. -->
+                <!-- ============ CARA FRONTAL: el rey de la guerra ============ -->
                 <span class="face face-front">
-                  <svg class="silhouette" viewBox="0 0 100 110" aria-hidden="true" focusable="false">
-                    <defs>
-                      <pattern
-                        [attr.id]="uid(i)"
-                        width="3"
-                        height="3"
-                        patternUnits="userSpaceOnUse"
-                        patternTransform="rotate(45)"
-                      >
-                        <line x1="0" y1="0" x2="0" y2="3" stroke="#d4af37" stroke-width="0.5" />
-                      </pattern>
-                    </defs>
-                    <path d="M50 16 a15 17 0 1 1 -0.1 0 Z" fill="none" stroke="#f3d28c" stroke-width="1.2" />
-                    <path d="M50 33 L50 46" stroke="#9a8f74" stroke-width="1.1" />
-                    <path d="M18 96 Q 26 58, 50 58 Q 74 58, 82 96 Z" fill="none" stroke="#f3d28c" stroke-width="1.3" />
-                    <path d="M50 58 L50 96" stroke="#6a614c" stroke-width="0.9" />
-                    <rect y="96" width="100" height="14" [attr.fill]="'url(#' + uid(i) + ')'" opacity="0.35" />
-                  </svg>
+                  <span class="portrait">
+                    <span class="lienzo">
+                      <span class="frame" aria-hidden="true">
+                        <svg class="orn orn-tl"><use href="#madar-orn" /></svg>
+                        <svg class="orn orn-tr"><use href="#madar-orn" /></svg>
+                        <svg class="orn orn-bl"><use href="#madar-orn" /></svg>
+                        <svg class="orn orn-br"><use href="#madar-orn" /></svg>
+                        <svg class="crest crest-top"><use href="#madar-crest" /></svg>
+                        <svg class="crest crest-bottom"><use href="#madar-crest" /></svg>
+                      </span>
+
+                      @if (retrato(k.id, 'guerra'); as url) {
+                        <img
+                          class="retrato"
+                          [src]="url"
+                          [alt]="(k.founder?.name ?? '') + ' durante la guerra'"
+                        />
+                      } @else if (falta(k.id, 'guerra')) {
+                        <span class="hueco">
+                          <span class="hueco-nombre">{{ nombreArchivo(k.id, 'guerra') }}</span>
+                          <span class="hueco-pista">retrato de la guerra</span>
+                        </span>
+                      }
+                    </span>
+                  </span>
 
                   <span class="founder">{{ k.founder?.name ?? '—' }}</span>
                   <span class="realm">{{ k.name }}</span>
                   <span class="hint">voltea</span>
                 </span>
 
-                <!-- CARA TRASERA: una frase. Nada mas. -->
+                <!-- ============ CARA TRASERA: el rey joven ============ -->
                 <span class="face face-back">
-                  <span class="back-essence">{{ k.essence?.es }}</span>
-                  <span class="back-realm">{{ k.name }}</span>
+                  <span class="portrait">
+                    <span class="lienzo">
+                      <span class="frame" aria-hidden="true">
+                        <svg class="orn orn-tl"><use href="#madar-orn" /></svg>
+                        <svg class="orn orn-tr"><use href="#madar-orn" /></svg>
+                        <svg class="orn orn-bl"><use href="#madar-orn" /></svg>
+                        <svg class="orn orn-br"><use href="#madar-orn" /></svg>
+                        <svg class="crest crest-top"><use href="#madar-crest" /></svg>
+                        <svg class="crest crest-bottom"><use href="#madar-crest" /></svg>
+                      </span>
+
+                      @if (retrato(k.id, 'joven'); as url) {
+                        <img
+                          class="retrato"
+                          [src]="url"
+                          [alt]="(k.founder?.name ?? '') + ' joven, al ser nombrado rey'"
+                        />
+                      } @else if (falta(k.id, 'joven')) {
+                        <span class="hueco">
+                          <span class="hueco-nombre">{{ nombreArchivo(k.id, 'joven') }}</span>
+                          <span class="hueco-pista">el joven nombrado rey</span>
+                        </span>
+                      }
+                    </span>
+                  </span>
+
+                  <!--
+                    La essence va en una banda encima del retrato. Es una
+                    decision provisional: la location no se ha cerrado, y esta
+                    es la que deja el giro util sin tapar la imagen.
+                  -->
+                  <span class="essence">{{ k.essence?.es }}</span>
                 </span>
               </span>
             </button>
