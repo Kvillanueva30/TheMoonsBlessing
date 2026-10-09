@@ -179,80 +179,90 @@
 .face-back {
   transform: rotateY(180deg);
   /*
-    El centrado vertical lo hace .back-cuerpo con margin: auto, no esta cara.
-    Ponerlo aqui no hacia nada: el unico hijo es el cuerpo, que con
-    flex-grow ocupaba todo el alto.
+    Sin gap y sin justify-content: el centrado lo hace el grid de
+    .back-cuerpo, que es el unico hijo de esta cara.
   */
-  gap: clamp(0.5rem, 1.6svh, 0.9rem);
   border-color: rgba(212, 175, 55, 0.5);
 }
 
 /*
-  El texto va en .back-cuerpo, que es lo unico que se dimensiona contra el
-  marco. Si los hijos cuelgan directamente de .face, el flex los alinearia al
-  borde de la tarjeta y el marco dorado los cortaria por encima.
+  LA TRASERA, CON GRID.
 
-  El padding lateral NO baja de 1.1rem: medido a 360 px, con 2vmin el
-  respiro era de 11.2 px y el texto llegaba prácticamente encima de la
-  moldura dorada interior (inset 2 px) y de los adornos de esquina, que
-  ocupan hasta 1.6rem. El texto se leia pegado al marco.
+  Seis commits seguidos intentando centrar esto con flex y con margin: auto.
+  El problema nunca era la falta de centrado, era que flex repartia de formas
+  distintas segun la altura del texto y el padding, y un Descriptor mio lo
+  compensaba a mano. Grid lo quita de raiz.
 
-  Los lados van con mas holgura que arriba y abajo porque ahi es donde esta la
-  moldura y los adornos; arriba y abajo solo hay linea.
+  Tres filas, y las tres se reparten IGUAL:
+
+    arriba    hueco automatico
+    nombre    su alto
+    texto     su alto
+    abajo     hueco automatico
+
+  Los dos huecos son la MISMA pista (1fr), asi que por construccion miden lo
+  mismo. No hay forma de que uno crezca y el otro no: si sobrara sitio, se
+  reparte mitad y mitad; si no, sobra por igual.
+
+  Es lo que hace auto-rows: 1fr auto auto 1fr, con las filas del medio al
+  tamano de su contenido y las de los huecos repartiendo lo que queda.
+
+  El relleno lateral es 1.6rem, medido contra los ADORNOS y no contra el borde
+  de la tarjeta: los adornos llegan a 22 px del borde y con menos el texto
+  pasaba rozando la esquina dibujada. A 2.5rem se probo y era demasiado: el
+  bloque mas largo pasaba a 16 lineas y se salia.
+
+  El relleno vertical lo pone el padding, simetrico, y las pistas 1fr se
+  calculan sobre lo que sobra DESPUES de el.
 */
 .back-cuerpo {
   position: relative;
   z-index: 1;
-  /*
-    flex: 0 0 auto, NO 1 1 auto. Medido: con flex-grow la caja se estiraba a
-    ocupar los 462 px de alto de la cara, sin dejar sitio libre, y entonces
-    justify-content no tenia con que centrar y el texto se quedaba pegado
-    abajo. Ahora la caja mide lo que mide el texto y se centra ella.
-  */
-  flex: 0 0 auto;
-  max-height: 100%;
-  /* Con la caja al tamano del contenido, margin auto es la que la centra en
-     los dos ejes dentro de la cara. justify-content ya no hace falta aqui. */
-  margin: auto;
-  /*
-    box-sizing, NO width. Con width:100% mas padding lateral la caja se salia
-    de la tarjeta: medido, 279 px de caja sobre una tarjeta de 306, y los
-    27 px sobrantes iban todos al mismo lado. Por eso el texto salia de los
-    lados y no se veia centrado: la caja no estaba centrada, el texto si.
-
-    Con box-sizing el relleno va para dentro y la caja ocupa exactamente el
-    ancho de la tarjeta.
-  */
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  /* El nombre y el texto centrados: el horizontal con align-items, el
-     vertical con el margin: auto de arriba. */
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.6rem, 2svh, 1.1rem);
+  display: grid;
   /*
-    El relleno lateral es 1.6rem, medido contra los ADORNOS y no contra el
-    borde de la tarjeta. Los adornos llegan a 22 px del borde y el texto
-    estaba a 34: solo 12 px por delante de una esquina dibujada, y por eso se
-    leia pegado al marco aunque la medicion contra la tarjeta pareciera bien.
+    Dos filas de contenido y el reparto del aire con align-content: center,
+    no con pistas 1fr.
 
-    A 2.5rem se probo y era demasiado: el bloque mas largo pasaba a 16 lineas
-    y se salia de la tarjeta.
-
-    EL VERTICAL ES SIMETRICO A PROPOSITO. Antes llevaba mas arriba que abajo
-    (24.5 px contra 15.4 px) porque se Penso que el nombre necesitaba aire.
-    Eso descentraba el texto: medido, quedaba a 77 px del borde superior y a
-    68 px del inferior. La caja estaba centrada pero el texto no, y por eso se
-    veia pegado abajo con un hueco enorme arriba.
-
-    Arriba y abajo solo hay linea de moldura, no adornos, asi que el mismo
-    valor sirve para los dos lados.
+    Las pistas 1fr NO sirvieron: cuando el texto es mas alto que el hueco
+    libre se colapsan a 0 px y el nombre queda pegado al parrafo. Es
+    exactamente lo que se midio. align-content: center es el mecanismo
+    correcto para cuando el contenido no cabe en las pistas: reparte el
+    sobrante por igual arriba y abajo, y si no hay sobrante, no hace nada.
   */
-  padding: clamp(1.1rem, 3.5svh, 2rem) clamp(1.6rem, 4vmin, 2rem);
+  grid-template-rows: auto auto;
+  /*
+    row-gap, y no padding en el nombre. Con padding la fila mide justo el alto
+    del nombre y el hueco quedaba en 0: medido, el nombre pegado al parrafo.
+    El gap separa las filas sinbiesn ocupar la fila.
+  */
+  row-gap: clamp(0.5rem, 1.8svh, 1rem);
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  min-height: 0;
+  padding: clamp(0.5rem, 1.4svh, 0.9rem) clamp(1.6rem, 4vmin, 2rem);
   /* Red de seguridad en pantallas bajas: si el texto no cabe, se desliza
      dentro de la tarjeta en vez de salirse del marco. */
   overflow-y: auto;
+}
+
+/* El hueco entre el nombre y el texto lo marca una fila propia, no un margin. */
+.back-nombre,
+.back-que-es {
+  margin: 0;
+  padding: 0;
+}
+
+.back-nombre {
+  align-self: end;
+  grid-row: 1;
+}
+
+.back-que-es {
+  align-self: start;
+  grid-row: 2;
 }
 
 /* ------------------------------------------------ marco del retrato ---- */
@@ -422,8 +432,6 @@
   hay menos ancho disponible y el texto tiene que leerse entero, no enorme.
 */
 .back-nombre {
-  flex: 0 0 auto;
-  margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(1.1rem, min(2.4vw, 2.8svh), 1.5rem);
   letter-spacing: 0.08em;
@@ -434,21 +442,16 @@
 }
 
 /*
-  Aqui el minimo NO baja de 1rem: medido, con unidades de viewport el texto
-  llegaba a 11.5 px a 800 de ancho y a menos todavia en un movil, y no se
-  leia. En una card estrecha no cabe mas texto, asi que el minimo manda y el
-  overflow lo resuelve el carrusel de mas abajo, no una letra mas pequena.
-*/
-/*
   QUE ES. Lo unico que hay en la cara de atras, ademas del nombre.
 
   En roman, sin cursiva. El significado (meaning) ya no va aqui: dice lo mismo
   que este texto con otras palabras y en una tarjeta estrecha era lo que se
   salia de los lados.
+
+  El tamaño minimo NO baja de 1.2 rem: con unidades de viewport el texto
+  llegaba a 11.5 px y no se leia.
 */
 .back-que-es {
-  flex: 0 0 auto;
-  margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 600;
   /*
@@ -459,7 +462,6 @@
   font-size: clamp(1.2rem, min(1.9vw, 2.5svh), 1.45rem);
   line-height: 1.45;
   color: #a9ede6;
-  /* Centrado en los dos ejes: el texto en su caja, la caja en la tarjeta. */
   text-align: center;
   text-wrap: pretty;
   /* Medida la palabra mas larga de Diubak: "experimentar", 80 px a 360 de
