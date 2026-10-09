@@ -134,7 +134,9 @@ label {
   flex-direction: column;
   gap: 0.45rem;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1rem, 2.2svh, 1.1rem);
+  /* Medido, la etiqueta se quedaba en 16 px y el valor del selector en 16.8,
+     mas pequenos que los tres textos de arriba. */
+  font-size: clamp(1.15rem, 2.9svh, 1.4rem);
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -149,7 +151,7 @@ select {
   width: 100%;
   padding: clamp(0.6rem, 1.6svh, 0.85rem) 2.1rem clamp(0.6rem, 1.6svh, 0.85rem) 0.9rem;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.05rem, 2.4svh, 1.25rem);
+  font-size: clamp(1.2rem, 3.2svh, 1.5rem);
   color: #f2ece0;
   background-color: rgba(8, 10, 17, 0.72);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23d4c08a' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -237,8 +239,18 @@ select {
   flecha al lado. Bajan el relleno y la flecha, que es lo que sobra.
 */
 @media (max-width: 34rem) {
+  /*
+    Con los textos mas grandes, el relleno de 1.5 rem hacia que la pantalla
+    scrolleara 25 px a 360x640. Se aprieta solo el relleno: los textos no.
+  */
+  .birth-date {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   form {
     gap: 0.5rem;
+    margin-top: 1rem;
   }
 
   label {
