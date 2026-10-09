@@ -245,23 +245,6 @@
 .orn-bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
 .orn-br { bottom: -1px; right: -1px; transform: scale(-1); }
 
-.crest {
-  position: absolute;
-  left: 50%;
-  width: clamp(1.6rem, 5vmin, 2.2rem);
-  height: auto;
-  margin-left: calc(clamp(1.6rem, 5vmin, 2.2rem) / -2);
-}
-
-.crest-top {
-  top: calc(clamp(0.2rem, 0.6svh, 0.35rem) - 9px);
-}
-
-.crest-bottom {
-  bottom: calc(clamp(0.2rem, 0.6svh, 0.35rem) - 9px);
-  transform: rotate(180deg);
-}
-
 /*
   El hueco que se ve cuando no hay archivo. Dice el nombre exacto que falta:
   es mas util que un icono de error, porque la accion que hay que hacer es
