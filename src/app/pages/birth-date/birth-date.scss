@@ -74,8 +74,9 @@
   margin: 0 0 clamp(0.45rem, 1.4svh, 0.85rem);
   font-family: "Cormorant Garamond", Georgia, serif;
   /* Medido en 0.95 rem daba 15.2 px en produccion: por debajo del minimo que
-     se fijo para el resto de pantallas. */
-  font-size: clamp(1rem, 2.4svh, 1.15rem);
+     se fijo para el resto de pantallas. Con estos valores daba 16.8 px a
+     1000x700, y tambien se pedia mas grande. */
+  font-size: clamp(1.1rem, 2.9svh, 1.4rem);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.26em;
@@ -87,8 +88,10 @@ h1 {
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
-  font-size: clamp(1.7rem, min(5.6vw, 6.4svh), 3rem);
-  line-height: 1.12;
+  /* Medido, daba 44.8 px a 1000x700 con el tope en 3 rem. Con estos valores
+     llega a 60.8 px en pantalla grande y no baja de 32 px en movil. */
+  font-size: clamp(2rem, min(7vw, 8svh), 3.8rem);
+  line-height: 1.1;
   letter-spacing: 0.02em;
   text-wrap: balance;
   /* El mismo degradado de la portada y de las naturalezas. */
@@ -111,7 +114,7 @@ h1 {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(1.05rem, 2.4svh, 1.3rem);
+  font-size: clamp(1.15rem, 2.9svh, 1.55rem);
   line-height: 1.5;
   color: #c8c3d6;
 }
