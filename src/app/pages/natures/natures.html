@@ -114,6 +114,13 @@
                   >
                     @switch (n.id) {
                       @case ('cazut') {
+                        <!--
+                          LA GOTA ES LA REFERENCIA. Su dibujo mide 84x134 y los
+                          otros dos se escalan para llegar a esa misma altura, en
+                          lugar de estirar los tres hasta que ocupen lo mismo.
+                          Asi los tres grabados miden lo mismo de alto sin que
+                          ninguna se deforme.
+                        -->
                         <g>
                           <path
                             d="M100 32 C100 32 58 92 58 124 a42 42 0 0 0 84 0 C142 92 100 32 100 32 Z"
@@ -124,7 +131,21 @@
                         </g>
                       }
                       @case ('diubak') {
-                        <g>
+                        <!--
+                          Escalado para igualar la altura del dibujo con el de
+                          la gota de Cazut, que es la referencia. El lobo se
+                          dibuja tumbado, de 120x110, y a la misma caja se leia
+                          mucho mas ancho que los otros dos.
+
+                          Medido: el dibujo ocupaba 92x84 px dentro de una caja
+                          de 153, contra 64x103 de la gota. Con esta escala los
+                          tres miden 103 px de alto.
+
+                          El centro del dibujo esta en (100, 75) y el de la
+                          caja en (100, 100): de ahi el.translate de despues.
+                          134/110 = 1.2182.
+                        -->
+                        <g transform="translate(100 100) scale(1.2182) translate(-100 -75)">
                           <path
                             d="M52 44 L64 20 L78 40 L100 34 L122 40 L136 20 L148 44 L146 84 a46 46 0 0 1 -92 0 Z"
                             fill="none" stroke="#c9922f" stroke-width="2.2"
@@ -137,7 +158,14 @@
                         </g>
                       }
                       @case ('manskling') {
-                        <g>
+                        <!--
+                          El humano se dibuja en 64x144, mas alto que la gota,
+                          y de tan fino se perdia. Se le lleva a la misma altura
+                          que ella. Su centro esta en (100, 112).
+
+                          134/144 = 0.9306.
+                        -->
+                        <g transform="translate(100 100) scale(0.9306) translate(-100 -112)">
                           <circle cx="100" cy="66" r="26" fill="none" stroke="#c9922f" stroke-width="2.2" />
                           <path d="M100 94 L100 142" fill="none" stroke="#c9922f" stroke-width="2.2" />
                           <path d="M100 108 L68 134 M100 108 L132 134" fill="none" stroke="#c9922f" stroke-width="2.2" />
