@@ -178,6 +178,9 @@
     radial-gradient(120% 90% at 50% 0%, rgba(38, 44, 74, 0.5), transparent 70%),
     linear-gradient(170deg, #0d1019 0%, #0a0c14 60%, #080a11 100%);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+  /* La niebla es mas grande que la cara y se desplaza: sin esto se saldria
+     por los bordes de la tarjeta. */
+  overflow: hidden;
 }
 
 .face-back {
@@ -187,6 +190,70 @@
     .back-cuerpo, que es el unico hijo de esta cara.
   */
   border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* --------------------------------------------------------------- niebla -- */
+
+/*
+  NIEBLA DENTRO DE LA TARJETA.
+
+  Dos capas de manchas difusas que se desplazan despacio y en sentidos
+  distintos. Eso es lo que hace que la tarjeta parezca tener fondo y no sea un
+  rectangulo pintado. Van en los pseudo-elementos de .face, asi que la
+  plantilla no cambia.
+
+  El z-index es lo delicate: la niebla va en 0 y el contenido en 1. Con lo
+  contrario, al ser posicionada, la niebla se dibujaria ENCIMA del retrato y
+  del texto.
+
+  El color es turquesa rebajado. El cielo es turquesa y el marco es oro, y
+  una nube de otro color abriria una tercera paleta que no existe.
+*/
+.face::before,
+.face::after {
+  content: "";
+  position: absolute;
+  /* Mas grande que la cara: al desplazarse no se ven los bordes. */
+  inset: -12%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(16px);
+  transition: opacity 0.7s ease;
+}
+
+.face::before {
+  opacity: 0.72;
+  background:
+    radial-gradient(38% 30% at 22% 28%, rgba(79, 214, 201, 0.17), transparent 70%),
+    radial-gradient(34% 26% at 78% 68%, rgba(169, 237, 230, 0.12), transparent 72%),
+    radial-gradient(40% 22% at 60% 12%, rgba(31, 125, 128, 0.22), transparent 70%);
+  animation: nieblaA 46s ease-in-out infinite alternate;
+}
+
+.face::after {
+  opacity: 0.5;
+  background:
+    radial-gradient(30% 24% at 70% 22%, rgba(169, 237, 230, 0.1), transparent 70%),
+    radial-gradient(36% 28% at 26% 76%, rgba(79, 214, 201, 0.1), transparent 72%);
+  animation: nieblaB 63s ease-in-out infinite alternate;
+}
+
+/*
+  La TRASERA lleva mas niebla que la delantera: es la cara que se lee al girar,
+  y es la que tiene que dar la sensacion de profundidad. El salto de 0.72 a 1
+  va con la transicion de arriba, asi que la niebla se espesa al girar.
+*/
+.face-back::before { opacity: 1; }
+.face-back::after { opacity: 0.78; }
+
+@keyframes nieblaA {
+  from { transform: translate3d(-2.5%, -1.5%, 0) scale(1); }
+  to { transform: translate3d(2.5%, 2%, 0) scale(1.08); }
+}
+
+@keyframes nieblaB {
+  from { transform: translate3d(2%, 2%, 0) scale(1.06); }
+  to { transform: translate3d(-2%, -2.5%, 0) scale(1); }
 }
 
 /*
@@ -362,6 +429,8 @@
 
 .portrait {
   position: relative;
+  /* Por encima de la niebla, que va en z-index 0. */
+  z-index: 1;
   flex: 1 1 auto;
   min-height: 0;
   width: 100%;
@@ -447,6 +516,8 @@
 /* ------------------------------------------------ cara frontal -------- */
 
 .nombre {
+  position: relative;
+  z-index: 1;
   flex: 0 0 auto;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(0.95rem, min(2.6vw, 3svh), 1.45rem);
@@ -458,6 +529,8 @@
 }
 
 .hint {
+  position: relative;
+  z-index: 1;
   flex: 0 0 auto;
   margin-top: clamp(0.2rem, 1svh, 0.5rem);
   font-size: 0.9rem;
@@ -690,6 +763,12 @@
   reducido lo que importa es que el significado se lea.
 */
 @media (prefers-reduced-motion: reduce) {
+  /* La niebla se queda, pero quieta: sin desplazamiento sigue estando ahi. */
+  .face::before,
+  .face::after {
+    animation: none;
+  }
+
   .card-inner,
   .fila,
   .dot {
