@@ -201,33 +201,36 @@ select {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #100d06;
-  border: 1px solid #c9922f;
+  color: #f0d9a8;
+  /* CRISTAL, igual que el boton del landing y el de las naturalezas: deja
+     ver el cielo y las estrellas, con un velo turquesa arriba que es el
+     reflejo del cielo en el vidrio. El borde sigue siendo dorado porque el
+     boton es el marco. */
+  border: 1px solid rgba(212, 192, 138, 0.45);
   border-radius: 3px;
-  background: linear-gradient(
-    180deg,
-    #f8e2a8 0%,
-    #e8c876 42%,
-    #d4af37 70%,
-    #b4882a 100%
-  );
+  background:
+    linear-gradient(180deg, rgba(169, 237, 230, 0.1) 0%, rgba(8, 10, 17, 0.52) 100%),
+    rgba(11, 13, 20, 0.22);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 249, 227, 0.75),
-    inset 0 -1px 0 rgba(90, 63, 12, 0.4),
-    0 2px 6px rgba(0, 0, 0, 0.45),
-    0 0 30px rgba(212, 175, 55, 0.34);
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    0 0 34px rgba(79, 214, 201, 0.14);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 
   &:hover,
   &:focus-visible {
     transform: translateY(-2px);
-    filter: brightness(1.07);
+    border-color: rgba(240, 217, 168, 0.82);
+    color: #f8e8c4;
     box-shadow:
-      inset 0 1px 0 rgba(255, 249, 227, 0.85),
-      inset 0 -1px 0 rgba(90, 63, 12, 0.4),
-      0 4px 10px rgba(0, 0, 0, 0.5),
-      0 0 64px rgba(212, 175, 55, 0.6);
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+      0 14px 38px rgba(0, 0, 0, 0.5),
+      0 0 58px rgba(79, 214, 201, 0.26);
   }
 }
 
