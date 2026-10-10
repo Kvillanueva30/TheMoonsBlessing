@@ -141,7 +141,7 @@
         },
         {
           "id": "d",
-          "text": "Cierro la puerta.",
+          "text": "Cierro la puerta con llave.",
           "legacyAffinity": {
             "tralan": 4
           }
@@ -409,7 +409,7 @@
         },
         {
           "id": "c",
-          "text": "No sé cuáles son cada una.",
+          "text": "Ninguna. No sabría decirte cuál de las dos es cuál.",
           "evidence": {
             "family": "inner_search",
             "subtype": "unformulable",
@@ -480,7 +480,7 @@
         },
         {
           "id": "d",
-          "text": "Miento solo si vale mucho.",
+          "text": "Miento solo si realmente vale mucho.",
           "evidence": {
             "family": "character_only",
             "subtype": "validation_needed",
@@ -671,7 +671,7 @@
         },
         {
           "id": "d",
-          "text": "Aunque me da miedo su respuesta, la reclamo.",
+          "text": "Aunque me da miedo su reacción, la reclamo.",
           "legacyAffinity": {
             "ederian": 4
           }
